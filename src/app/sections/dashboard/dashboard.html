@@ -1,0 +1,119 @@
+<section id="dashboard" class="dash-section">
+
+  <!-- ══ NAS logo shadow watermark ══ -->
+  <div class="dash-logo-shadow" aria-hidden="true">
+    <img src="logo-dark.svg" alt="">
+  </div>
+
+  <div class="container dash-inner">
+
+    <!-- ══ HEAD ══ -->
+    <div class="dash-head">
+      <span class="dash-eyebrow">{{ t('Powerful Dashboard', 'لوحة التحكم') }}</span>
+      <h2 class="dash-title">{{ t('Complete visibility. Total control.', 'رؤية كاملة. تحكم تام.') }}</h2>
+      <p class="dash-sub">
+        {{ t(
+          'Real-time data across your entire workforce — from payroll runs to open headcount, all on one screen.',
+          'بيانات فورية عبر قوتك العاملة بأكملها — من كشوف الرواتب إلى الشواغر، كل ذلك في شاشة واحدة.'
+        ) }}
+      </p>
+    </div>
+
+    <!-- ══ SLIDER ══ -->
+    <div class="dash-slider" (mouseenter)="pauseCycle()" (mouseleave)="resumeCycle()">
+
+      <!-- Prev arrow -->
+      <button class="ds-arrow ds-prev" (click)="prev()" aria-label="Previous slide">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="12 4 6 10 12 16"/>
+        </svg>
+      </button>
+
+      <!-- Viewport -->
+      <div class="ds-viewport">
+        @if (ready()) {
+          <div class="ds-slide" [class.from-right]="dir() === 'next'" [class.from-left]="dir() === 'prev'">
+
+            <!-- Browser chrome frame -->
+            <div class="ds-frame">
+
+              <!-- Top chrome bar -->
+              <div class="ds-chrome">
+                <div class="ds-chrome-dots">
+                  <span class="ds-dot r"></span>
+                  <span class="ds-dot y"></span>
+                  <span class="ds-dot g"></span>
+                </div>
+                <div class="ds-chrome-url">
+                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" aria-hidden="true">
+                    <circle cx="6" cy="6" r="4.5"/>
+                    <path d="M6 1.5C6 1.5 4 4 4 6s2 4.5 2 4.5"/>
+                    <path d="M6 1.5C6 1.5 8 4 8 6s-2 4.5-2 4.5"/>
+                    <line x1="1.5" y1="6" x2="10.5" y2="6"/>
+                  </svg>
+                  {{ slides[active()].url }}
+                </div>
+                <div class="ds-chrome-live">
+                  <span class="ds-live-dot"></span>
+                  {{ t('Live', 'مباشر') }}
+                </div>
+              </div>
+
+              <!-- Screenshot -->
+              <div class="ds-screen">
+                <img
+                  [src]="slides[active()].src"
+                  [alt]="t(slides[active()].label_en, slides[active()].label_ar)"
+                  class="ds-img"
+                  loading="lazy"
+                />
+              </div>
+
+            </div><!-- /ds-frame -->
+
+          </div>
+        }
+      </div><!-- /ds-viewport -->
+
+      <!-- Next arrow -->
+      <button class="ds-arrow ds-next" (click)="next()" aria-label="Next slide">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2"
+             stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="8 4 14 10 8 16"/>
+        </svg>
+      </button>
+
+    </div><!-- /dash-slider -->
+
+    <!-- ══ CAPTION + DOTS ══ -->
+    <div class="dash-footer">
+      <div class="dash-caption">
+        {{ t(slides[active()].label_en, slides[active()].label_ar) }}
+        <span class="dash-caption-count">{{ (active() + 1).toString().padStart(2,'0') }} / {{ slides.length.toString().padStart(2,'0') }}</span>
+      </div>
+
+      <div class="dash-dots">
+        @for (s of slides; track s.src; let i = $index) {
+          <button
+            class="dash-dot-btn"
+            [class.is-active]="active() === i"
+            (click)="goTo(i, i > active() ? 'next' : 'prev')"
+            [attr.aria-label]="'Slide ' + (i + 1)"
+          ></button>
+        }
+      </div>
+    </div>
+
+    <!-- ══ CTA ══ -->
+    <div class="dash-cta">
+      <a href="#contact" class="ds-cta-btn">
+        {{ t('See Full Demo', 'شاهد العرض الكامل') }}
+        <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="4 8 12 8"/><polyline points="8 4 12 8 8 12"/>
+        </svg>
+      </a>
+    </div>
+
+  </div>
+</section>

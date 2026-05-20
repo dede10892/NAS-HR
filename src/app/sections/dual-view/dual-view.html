@@ -1,0 +1,135 @@
+<section id="dual-view" class="dv-section">
+  <div class="dv-blob dv-blob-l"></div>
+  <div class="dv-blob dv-blob-r"></div>
+
+  <div class="container">
+
+    <!-- Header -->
+    <div class="dv-head reveal">
+      <span class="dv-eyebrow">{{ t('Built for Everyone', 'مبني للجميع') }}</span>
+      <h2 class="dv-title">
+        {{ t('One platform.', 'منصة واحدة.') }}<br>
+        <em>{{ t('Two powerful experiences.', 'تجربتان قويتان.') }}</em>
+      </h2>
+    </div>
+
+    <!-- Segmented switcher -->
+    <div class="dv-switcher reveal">
+      <button class="dv-sw-btn" [class.active]="tab() === 'hr'" (click)="tab.set('hr')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+        {{ t('For HR Teams', 'لفرق HR') }}
+      </button>
+      <button class="dv-sw-btn" [class.active]="tab() === 'agent'" (click)="tab.set('agent')">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a10 10 0 1 0 10 10"/><path d="M12 8v4l3 3"/><circle cx="18" cy="5" r="3"/></svg>
+        {{ t('For Every Employee', 'لكل موظف') }}
+      </button>
+    </div>
+
+    <!-- Panels -->
+    <div class="dv-panels">
+
+      @if (tab() === 'hr') {
+        <div class="dv-panel">
+          <div class="dv-panel-copy">
+            <span class="dv-tag">{{ t('For HR Teams', 'لفرق الموارد البشرية') }}</span>
+            <h3 class="dv-panel-title">{{ t('Total HR Control', 'تحكم كامل بالموارد البشرية') }}</h3>
+            <p class="dv-panel-desc">{{ t('A powerful admin console to manage your entire workforce — payroll, compliance, hiring, and analytics in one place.', 'لوحة إدارة قوية لإدارة قوتك العاملة بالكامل — الرواتب والامتثال والتوظيف والتحليلات.') }}</p>
+            <ul class="dv-feature-list">
+              @for (f of hrFeatures; track f.en) {
+                <li>
+                  <svg class="dv-check" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {{ t(f.en, f.ar) }}
+                </li>
+              }
+            </ul>
+            <a href="#contact" class="btn btn-primary dv-cta">{{ t('Request a Demo →', 'اطلب عرضاً ←') }}</a>
+          </div>
+          <div class="dv-panel-mockup">
+            <div class="dv-mock-shell">
+              <div class="dv-topbar">
+                <span class="dv-dot r"></span><span class="dv-dot y"></span><span class="dv-dot g"></span>
+                <span class="dv-url">nashr.app/admin</span>
+              </div>
+              <div class="dv-dash-body">
+                <div class="dv-dash-sidebar">
+                  <div class="dv-sidebar-logo">N</div>
+                  @for (item of ['Dashboard','Employees','Payroll','Attendance','Reports']; track item) {
+                    <div class="dv-sidebar-item" [class.active]="item === 'Dashboard'">{{ item }}</div>
+                  }
+                </div>
+                <div class="dv-dash-main">
+                  <div class="dv-greeting">Good morning, Sarah 👋</div>
+                  <div class="dv-kpi-row">
+                    <div class="dv-kpi"><div class="dv-kpi-v">1,248</div><div class="dv-kpi-l">{{ t('Employees','موظفون') }}</div></div>
+                    <div class="dv-kpi dv-kpi-sky"><div class="dv-kpi-v">98.2%</div><div class="dv-kpi-l">{{ t('Attendance','حضور') }}</div></div>
+                    <div class="dv-kpi dv-kpi-coral"><div class="dv-kpi-v">AED 2.4M</div><div class="dv-kpi-l">{{ t('Payroll','رواتب') }}</div></div>
+                  </div>
+                  <div class="dv-chart">
+                    <div class="dv-chart-label">{{ t('Headcount Trend','منحنى القوى العاملة') }}</div>
+                    <div class="dv-chart-bars">
+                      @for (h of [50,65,58,80,72,90,84]; track h) {
+                        <div class="dv-bar" [style.height.%]="h"></div>
+                      }
+                    </div>
+                  </div>
+                  <div class="dv-emp-list">
+                    @for (e of [{n:'Sarah Al-Mansouri',d:'HR Director',s:'Active'},{n:'Ahmed Al-Rashidi',d:'Operations',s:'On Leave'},{n:'Fatima Al-Zahrawi',d:'Finance',s:'Active'}]; track e.n) {
+                      <div class="dv-emp-row">
+                        <div class="dv-emp-av">{{ e.n[0] }}</div>
+                        <div class="dv-emp-info"><div class="dv-emp-name">{{ e.n }}</div><div class="dv-emp-dept">{{ e.d }}</div></div>
+                        <span class="dv-emp-status" [class.active]="e.s === 'Active'">{{ e.s }}</span>
+                      </div>
+                    }
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (tab() === 'agent') {
+        <div class="dv-panel">
+          <div class="dv-panel-copy">
+            <span class="dv-tag dv-tag-sky">{{ t('For Every Employee', 'لكل موظف') }}</span>
+            <h3 class="dv-panel-title">{{ t('Your AI-Powered HR Agent', 'مساعدك الذكي للموارد البشرية') }}</h3>
+            <p class="dv-panel-desc">{{ t('Every employee gets a smart, always-on HR assistant — ask questions, submit requests, and get instant answers in Arabic or English.', 'كل موظف يحصل على مساعد ذكاء اصطناعي — اسأل وقدّم الطلبات واحصل على إجابات فورية.') }}</p>
+            <ul class="dv-feature-list">
+              @for (f of agentFeatures; track f.en) {
+                <li>
+                  <svg class="dv-check dv-check-sky" width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                  {{ t(f.en, f.ar) }}
+                </li>
+              }
+            </ul>
+            <a href="#contact" class="btn btn-secondary dv-cta">{{ t('See Employee App →', 'شاهد تطبيق الموظف ←') }}</a>
+          </div>
+          <div class="dv-panel-mockup">
+            <div class="dv-mock-shell dv-mock-chat">
+              <div class="dv-chat-header">
+                <div class="dv-chat-avatar">AI</div>
+                <div>
+                  <div class="dv-chat-name">NAS HR Assistant</div>
+                  <div class="dv-chat-status"><span class="dv-live-dot"></span>{{ t('Online · Always On', 'متصل دائماً') }}</div>
+                </div>
+              </div>
+              <div class="dv-chat-messages">
+                @for (msg of chatMessages; track msg.en) {
+                  <div class="dv-msg" [class.dv-msg-user]="msg.role === 'user'" [class.dv-msg-agent]="msg.role === 'agent'">
+                    @if (msg.role === 'agent') { <div class="dv-msg-av">AI</div> }
+                    <div class="dv-msg-bubble">{{ t(msg.en, msg.ar) }}</div>
+                  </div>
+                }
+              </div>
+              <div class="dv-chat-input">
+                <div class="dv-input-bar">{{ t('Ask your HR assistant...', 'اسأل مساعدك...') }}</div>
+                <button class="dv-send-btn">↑</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      }
+
+    </div>
+  </div>
+</section>

@@ -1,0 +1,76 @@
+<section class="pc-section">
+  <div class="pc-wrap">
+
+    <!-- ── Section header ── -->
+    <div class="pc-head">
+      <span class="pc-eyebrow">{{ t('The NAS HR Difference', 'الفارق مع NAS HR') }}</span>
+      <h2 class="pc-title">
+        {{ t('From HR Chaos to', 'من فوضى الموارد البشرية إلى') }}
+        <em>{{ t('Intelligent People Operations', 'عمليات ذكية للأفراد') }}</em>
+      </h2>
+      <p class="pc-sub">
+        {{ t(
+          'Every request, approval, and record — seamlessly connected through one intelligent hub.',
+          'كل طلب وموافقة وسجل — مترابط بسلاسة عبر مركز ذكي واحد.'
+        ) }}
+      </p>
+    </div>
+
+    <!-- ── Diagram ── -->
+    <div class="pc-diagram" [class.is-connected]="connected()">
+
+      <!-- Column headers -->
+      <div class="pc-col-heads" aria-hidden="true">
+        <div class="pc-ch pc-ch--left">
+          <span class="pc-ch-icon">👥</span>
+          <span class="pc-ch-label">{{ t('HR Team', 'فريق الموارد البشرية') }}</span>
+        </div>
+        <div class="pc-ch pc-ch--hub">
+          <div class="pc-hub-badge">
+            <span class="pc-hub-dot"></span>
+            <span class="pc-hub-name">NAS HR</span>
+          </div>
+        </div>
+        <div class="pc-ch pc-ch--right">
+          <span class="pc-ch-icon">🙋</span>
+          <span class="pc-ch-label">{{ t('Employees', 'الموظفون') }}</span>
+        </div>
+      </div>
+
+      <!-- Data rows -->
+      @for (row of rows; track $index) {
+        <div class="pc-row" [style]="'--ri:' + $index">
+
+          <!-- Left card (HR Team action) -->
+          <div class="pc-card pc-card--left">{{ row.left }}</div>
+
+          <!-- Left connector line + state pill -->
+          <div class="pc-connector pc-connector--left">
+            <div class="pc-line"></div>
+            <div class="pc-state">
+              <span class="pc-before">{{ row.before }}</span>
+              <span class="pc-after">{{ row.after }}</span>
+            </div>
+            <div class="pc-line"></div>
+          </div>
+
+          <!-- Centre hub node -->
+          <div class="pc-hub-node" aria-hidden="true">
+            <div class="pc-hub-ring"></div>
+            <div class="pc-hub-core"></div>
+          </div>
+
+          <!-- Right connector line -->
+          <div class="pc-connector pc-connector--right">
+            <div class="pc-line"></div>
+          </div>
+
+          <!-- Right card (Employee action) -->
+          <div class="pc-card pc-card--right">{{ row.right }}</div>
+
+        </div>
+      }
+
+    </div><!-- /pc-diagram -->
+  </div>
+</section>

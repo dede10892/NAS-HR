@@ -1,0 +1,116 @@
+<main class="page-contact">
+
+  <section class="contact-section">
+    <div class="container contact-layout">
+
+      <!-- Left: copy + perks -->
+      <div class="contact-copy reveal-up">
+        <span class="eyebrow eyebrow-light">Contact / Request Demo</span>
+        <h1 class="contact-headline">Let's build a smarter<br><em>HR experience for your company.</em></h1>
+        <p class="contact-sub">Share your company details and our team will contact you to arrange a personalized NAS HR demo.</p>
+
+        <div class="contact-perks">
+          @for (p of perks; track p.label) {
+            <div class="contact-perk">
+              <div class="contact-perk-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true">
+                  <path [attr.d]="p.icon"/>
+                </svg>
+              </div>
+              <span>{{ p.label }}</span>
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- Right: form -->
+      <div class="contact-form-wrap reveal-up" style="--d:.1s">
+        @if (!submitted()) {
+          <form class="contact-form" (ngSubmit)="submit()" novalidate>
+
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-company">Company Name</label>
+                <input id="cf-company" type="text" placeholder="Your company name"
+                       [(ngModel)]="form.company" name="company" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-employees">Number of Employees</label>
+                <select id="cf-employees" [(ngModel)]="form.employees" name="employees">
+                  <option value="" disabled selected>Select size</option>
+                  @for (r of employeeRanges; track r) {
+                    <option [value]="r">{{ r }}</option>
+                  }
+                </select>
+              </div>
+            </div>
+
+            <div class="contact-field">
+              <label for="cf-industry">Industry</label>
+              <select id="cf-industry" [(ngModel)]="form.industry" name="industry">
+                <option value="" disabled selected>Select industry</option>
+                @for (ind of industries; track ind) {
+                  <option [value]="ind">{{ ind }}</option>
+                }
+              </select>
+            </div>
+
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-name">Contact Person Name</label>
+                <input id="cf-name" type="text" placeholder="Your full name"
+                       [(ngModel)]="form.name" name="name" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-title">Job Title</label>
+                <input id="cf-title" type="text" placeholder="e.g. HR Manager"
+                       [(ngModel)]="form.jobTitle" name="jobTitle" />
+              </div>
+            </div>
+
+            <div class="contact-form-row">
+              <div class="contact-field">
+                <label for="cf-email">Work Email</label>
+                <input id="cf-email" type="email" placeholder="you@company.com"
+                       [(ngModel)]="form.email" name="email" required />
+              </div>
+              <div class="contact-field">
+                <label for="cf-phone">Phone Number</label>
+                <input id="cf-phone" type="tel" placeholder="+971 50 000 0000"
+                       [(ngModel)]="form.phone" name="phone" />
+              </div>
+            </div>
+
+            <div class="contact-field">
+              <label for="cf-message">Message / Requirements</label>
+              <textarea id="cf-message" rows="4"
+                        placeholder="Tell us about your HR challenges or what you'd like to see in the demo..."
+                        [(ngModel)]="form.message" name="message"></textarea>
+            </div>
+
+            <button type="submit" class="btn btn-primary contact-submit">
+              Request a Demo
+            </button>
+            <p class="contact-privacy">We respect your privacy. No spam, ever.</p>
+          </form>
+        } @else {
+          <div class="contact-success">
+            <div class="contact-success-icon">
+              <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                <circle cx="12" cy="12" r="10" stroke="var(--nas-teal-400)" stroke-width="1.5"/>
+                <path d="M7 12l3.5 3.5L17 8" stroke="var(--nas-teal-400)" stroke-width="2"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h3>Thank you.</h3>
+            <p>Our team will contact you shortly to schedule your NAS HR demo.</p>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+</main>

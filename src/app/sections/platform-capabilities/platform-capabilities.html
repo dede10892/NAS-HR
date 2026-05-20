@@ -1,0 +1,28 @@
+<section class="pc-section">
+  <div class="container">
+
+    <!-- Head -->
+    <div class="pc-head reveal">
+      <span class="pc-eyebrow">{{ t('Platform', 'المنصة') }}</span>
+      <h2 class="pc-title">{{ t('Platform Capabilities', 'قدرات المنصة') }}</h2>
+      <p class="pc-sub">{{ t('Everything your HR team needs, connected in one platform.', 'كل ما يحتاجه فريق الموارد البشرية، مترابط في منصة واحدة.') }}</p>
+    </div>
+
+    <!-- Grid -->
+    <div class="pc-grid reveal-stagger">
+      @for (cap of capabilities; track cap.title) {
+        <div class="pc-card">
+          <span class="pc-icon-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="cap.icon"/>
+            </svg>
+          </span>
+          <h3 class="pc-card-title">{{ t(cap.title, cap.titleAr) }}</h3>
+          <p class="pc-card-desc">{{ t(cap.desc, cap.descAr) }}</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

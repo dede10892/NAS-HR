@@ -1,0 +1,76 @@
+<main class="page-lms">
+
+  <section class="mod-hero">
+    <div class="container mod-hero-inner">
+      <div class="mod-hero-copy reveal-up">
+        <span class="eyebrow">Learning Management</span>
+        <h1 class="mod-headline">Learning that connects<br><em>to employee growth.</em></h1>
+        <p class="mod-sub">Deliver training, track progress, assess employees, issue certificates, and connect learning to career development — all in one platform.</p>
+        <div class="mod-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Learning Flow ── -->
+  <section class="lms-flow-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Learning Journey</span>
+        <h2 class="section-title">From assignment to achievement.</h2>
+      </div>
+
+      <div class="lms-steps reveal-stagger">
+        @for (step of learningFlow; track step.label; let i = $index) {
+          <div class="lms-step"
+               [class.lms-step--active]="activeStep() === i"
+               (click)="activeStep.set(i)">
+            <div class="lms-step-num">{{ i + 1 }}</div>
+            <div class="lms-step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path [attr.d]="step.icon"/>
+              </svg>
+            </div>
+            <h3>{{ step.label }}</h3>
+            <p>{{ step.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Value ── -->
+  <section class="mgr-value-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Business Impact</span>
+        <h2 class="section-title">What NAS LMS delivers.</h2>
+      </div>
+      <div class="mgr-value-grid reveal-stagger">
+        @for (v of value; track v.label) {
+          <div class="mgr-value-card">
+            <div class="mgr-value-check">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>{{ v.label }}</h4>
+            <p>{{ v.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to build a learning culture in your company?</h2>
+      <p>See how NAS HR LMS delivers training, tracks progress, and connects learning to employee growth.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+</main>

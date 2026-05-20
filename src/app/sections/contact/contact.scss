@@ -1,0 +1,152 @@
+.contact-section {
+  background: #ffffff;
+  position: relative;
+  overflow: hidden;
+  padding-block: var(--sp-24);
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -160px;
+    transform: translateY(-50%);
+    width: 600px;
+    height: 600px;
+    background-image: url('/brand-mark.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    opacity: 0.04;
+    z-index: 0;
+  }
+
+  .contact-blob {
+    position: absolute;
+    border-radius: 50%;
+    pointer-events: none;
+    filter: blur(120px);
+  }
+  .contact-blob-tl {
+    width: 600px; height: 600px;
+    background: radial-gradient(circle, rgba(76,180,181,0.08) 0%, transparent 70%);
+    top: -200px; right: -150px;
+  }
+  .contact-blob-br {
+    width: 500px; height: 500px;
+    background: radial-gradient(circle, rgba(38,120,123,0.06) 0%, transparent 70%);
+    bottom: -150px; left: -100px;
+  }
+
+  .contact-inner {
+    position: relative;
+    z-index: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--sp-16);
+    align-items: center;
+    @media (max-width: 960px) { grid-template-columns: 1fr; }
+  }
+
+  .contact-head { display: flex; flex-direction: column; gap: var(--sp-5); }
+
+  .eyebrow-light { color: var(--nas-teal-600); }
+
+  .contact-headline {
+    color: var(--nas-cta);
+    em { font-style: italic; color: var(--nas-teal-600); }
+  }
+
+  .contact-sub {
+    font-size: 16px;
+    line-height: 1.7;
+    color: rgba(12, 36, 39, 0.60);
+    max-width: 480px;
+  }
+
+  .contact-perks {
+    display: flex;
+    flex-direction: column;
+    gap: var(--sp-3);
+    margin-top: var(--sp-2);
+  }
+
+  .contact-perk {
+    display: flex;
+    align-items: center;
+    gap: var(--sp-3);
+    font-size: 15px;
+    color: rgba(12, 36, 39, 0.78);
+  }
+
+  .perk-check {
+    color: var(--nas-teal-600);
+    flex-shrink: 0;
+    margin-top: 1px;
+  }
+
+  .contact-card {
+    background: #fff;
+    border-radius: var(--r-3xl);
+    padding: var(--sp-10);
+    box-shadow: 0 8px 48px rgba(12, 36, 39, 0.12), 0 0 0 1px rgba(12, 36, 39, 0.06);
+  }
+
+  .form-title {
+    font-family: var(--nas-font-display);
+    font-size: 22px;
+    font-weight: 700;
+    color: var(--nas-cta);
+    margin-bottom: var(--sp-6);
+  }
+
+  .form-inner { display: flex; flex-direction: column; gap: var(--sp-4); }
+
+  .form-row {
+    display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-4);
+    @media (max-width: 560px) { grid-template-columns: 1fr; }
+  }
+
+  .form-field {
+    display: flex; flex-direction: column; gap: var(--sp-2);
+
+    label { font-size: 12px; font-weight: 600; color: var(--nas-grey-800); letter-spacing: 0.04em; text-transform: uppercase; }
+
+    input, textarea {
+      font-family: var(--nas-font-en);
+      font-size: 14px;
+      padding: var(--sp-3) var(--sp-4);
+      border: 1.5px solid var(--nas-grey-400);
+      border-radius: var(--r-lg);
+      background: var(--nas-grey-100);
+      color: var(--nas-cta);
+      outline: none;
+      transition: border-color 150ms, box-shadow 150ms, background 150ms;
+      resize: vertical;
+      &::placeholder { color: var(--nas-grey-600); }
+      &:focus {
+        border-color: var(--nas-teal-500);
+        background: #fff;
+        box-shadow: 0 0 0 3px rgba(76,180,181,0.15);
+      }
+    }
+  }
+
+  .submit-btn { width: 100%; min-height: 52px; font-size: 15px; font-weight: 700; margin-top: var(--sp-2); }
+
+  .form-note { font-size: 12px; color: var(--nas-grey-600); text-align: center; margin-top: var(--sp-1); }
+
+  .form-success {
+    display: flex; flex-direction: column; align-items: center;
+    justify-content: center; gap: var(--sp-4); padding: var(--sp-12); text-align: center;
+  }
+
+  .success-icon {
+    color: var(--nas-teal-500);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .form-success h3 { font-family: var(--nas-font-display); font-size: 22px; font-weight: 700; color: var(--nas-cta); }
+  .form-success p  { font-size: 14px; color: var(--nas-grey-750); }
+}

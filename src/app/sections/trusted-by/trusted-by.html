@@ -1,0 +1,30 @@
+<section class="trusted-section">
+  <div class="container trusted-inner">
+
+    <!-- Centered title -->
+    <p class="trusted-title">
+      {{ t('Trusted by', 'موثوق من') }}
+      <span class="tl-num">3,000<span class="tl-plus">+</span></span>
+      {{ t('Employees across different industries', 'موظف في مختلف القطاعات') }}
+    </p>
+
+    <!-- Marquee logo strip -->
+    <div class="trusted-marquee">
+      <div class="marquee-track">
+        @for (c of track; track $index) {
+          <div class="logo-card">
+            <img
+              [src]="'logos/' + c.logo"
+              [alt]="c.name"
+              [style.width.px]="c.width"
+              class="logo-img"
+              loading="lazy"
+              (error)="onImgError($event, c.name)"
+            />
+          </div>
+        }
+      </div>
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,152 @@
+<section class="sbi-section reveal">
+  <div class="sbi-inner">
+
+    <!-- ── Head ── -->
+    <div class="sbi-head">
+      <span class="sbi-eyebrow">{{ t('Solutions', 'الحلول') }}</span>
+      <h2 class="sbi-title">{{ t('Solutions by Industry', 'حلول حسب القطاع') }}</h2>
+      <p class="sbi-sub">{{ t('Purpose-built for the industries that never stop.', 'مصمم للقطاعات التي لا تتوقف.') }}</p>
+    </div>
+
+    <!-- ── Industry Tabs ── -->
+    <div class="sbi-tabs" (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
+      @for (ind of industries; track ind.id; let i = $index) {
+        <button
+          class="sbi-tab"
+          [class.sbi-tab--active]="active() === i"
+          (click)="select(i)"
+          [attr.aria-selected]="active() === i"
+          [attr.aria-label]="t(ind.name, ind.nameAr)">
+
+          <span class="sbi-tab-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              @for (d of iconPaths[ind.id]; track d) {
+                <path [attr.d]="d"/>
+              }
+            </svg>
+          </span>
+
+          <span class="sbi-tab-label">{{ t(ind.shortName, ind.shortNameAr) }}</span>
+
+          <!-- Progress bar fills along the bottom of the active tab -->
+          @if (active() === i) {
+            <span class="sbi-tab-bar" [style.width.%]="progress()"></span>
+          }
+        </button>
+      }
+    </div>
+
+    <!-- ── Showcase Card ── -->
+    <div class="sbi-showcase" (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
+
+      <!-- Gradient hero banner -->
+      <div class="sbi-banner">
+        <div class="sbi-banner-bg"></div>
+        <div class="sbi-banner-num">{{ (active() + 1).toString().padStart(2,'0') }}</div>
+        <div class="sbi-banner-content">
+
+          <div class="sbi-banner-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
+              @for (d of iconPaths[current.id]; track d) {
+                <path [attr.d]="d"/>
+              }
+            </svg>
+          </div>
+
+          <div class="sbi-banner-text">
+            <h3 class="sbi-banner-name">{{ t(current.name, current.nameAr) }}</h3>
+            <p class="sbi-banner-tagline">{{ t(current.tagline, current.taglineAr) }}</p>
+          </div>
+
+          <div class="sbi-banner-metrics">
+            <div class="sbi-metric">
+              <span class="sbi-metric-n">{{ current.challenges.length }}</span>
+              <span class="sbi-metric-l">{{ t('Pain Points', 'تحديات') }}</span>
+            </div>
+            <div class="sbi-metric-sep"></div>
+            <div class="sbi-metric">
+              <span class="sbi-metric-n teal">{{ current.solutions.length }}</span>
+              <span class="sbi-metric-l">{{ t('Solutions', 'حلول') }}</span>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Content grid + CTA (fade in/out on industry switch) -->
+      @if (contentReady()) {
+        <div class="sbi-body">
+
+          <!-- Challenges column -->
+          <div class="sbi-column challenge-col">
+            <div class="sbi-col-header">
+              <div class="sbi-col-badge amber-badge">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round">
+                  <circle cx="7" cy="7" r="5.5"/>
+                  <line x1="7" y1="4.5" x2="7" y2="7.5"/>
+                  <circle cx="7" cy="9.5" r=".4" fill="currentColor"/>
+                </svg>
+              </div>
+              <span>{{ t('Challenges', 'التحديات') }}</span>
+            </div>
+            <div class="sbi-items">
+              @for (item of lang === 'ar' ? current.challengesAr : current.challenges; track $index; let i = $index) {
+                <div class="sbi-item ch-item" [style.animation-delay]="(i * 60) + 'ms'">
+                  <span class="sbi-item-n amber-n">{{ (i+1).toString().padStart(2,'0') }}</span>
+                  <p class="sbi-item-p">{{ item }}</p>
+                </div>
+              }
+            </div>
+          </div>
+
+          <!-- Column divider -->
+          <div class="sbi-divider" aria-hidden="true"></div>
+
+          <!-- Solutions column -->
+          <div class="sbi-column solution-col">
+            <div class="sbi-col-header">
+              <div class="sbi-col-badge teal-badge">
+                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round">
+                  <circle cx="7" cy="7" r="5.5"/>
+                  <polyline points="4.5 7 6 8.5 9.5 5"/>
+                </svg>
+              </div>
+              <span>{{ t('NAS HR Helps With', 'كيف تساعد NAS HR') }}</span>
+            </div>
+            <div class="sbi-items">
+              @for (item of lang === 'ar' ? current.solutionsAr : current.solutions; track $index; let i = $index) {
+                <div class="sbi-item sl-item" [style.animation-delay]="(i * 60 + 45) + 'ms'">
+                  <span class="sbi-check">
+                    <svg viewBox="0 0 10 10" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round">
+                      <polyline points="2 5 4 7.5 8 2.5"/>
+                    </svg>
+                  </span>
+                  <p class="sbi-item-p">{{ item }}</p>
+                </div>
+              }
+            </div>
+          </div>
+
+        </div>
+
+        <!-- CTA row -->
+        <div class="sbi-cta-row">
+          <a [routerLink]="current.route" class="sbi-cta-link">
+            <span>{{ t('Explore Full Solution', 'استكشاف الحل الكامل') }}</span>
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
+        </div>
+      }
+
+    </div><!-- /sbi-showcase -->
+
+  </div>
+</section>

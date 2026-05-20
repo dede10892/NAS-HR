@@ -1,0 +1,103 @@
+<main class="page-jobs">
+
+  <section class="mod-hero">
+    <div class="container mod-hero-inner">
+      <div class="mod-hero-copy reveal-up">
+        <span class="eyebrow">Internal Jobs</span>
+        <h1 class="mod-headline">Grow your people<br><em>from within.</em></h1>
+        <p class="mod-sub">Publish internal vacancies, give employees access to career opportunities, and manage internal applications from one connected platform.</p>
+        <div class="mod-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Flow ── -->
+  <section class="jobs-flow-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title">From vacancy to hire, inside your company.</h2>
+      </div>
+
+      <div class="jobs-steps reveal-stagger">
+        @for (step of flow; track step.label; let i = $index, last = $last) {
+          <div class="jobs-step"
+               [class.jobs-step--active]="activeStep() === i"
+               (click)="activeStep.set(i)">
+            <div class="jobs-step-num">{{ i + 1 }}</div>
+            <div class="jobs-step-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path [attr.d]="step.icon"/>
+              </svg>
+            </div>
+            <h3>{{ step.label }}</h3>
+            <p>{{ step.desc }}</p>
+          </div>
+          @if (!last) {
+            <div class="jobs-step-connector" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none"><path d="M5 12h14M12 5l7 7-7 7" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg>
+            </div>
+          }
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section class="jobs-features-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Features</span>
+        <h2 class="section-title">Everything you need for internal mobility.</h2>
+      </div>
+      <div class="jobs-feature-pills reveal-stagger">
+        @for (f of features; track f) {
+          <div class="jobs-feature-pill">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+              <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3"
+                    stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            {{ f }}
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Value ── -->
+  <section class="mgr-value-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Business Impact</span>
+        <h2 class="section-title">Why internal jobs matter.</h2>
+      </div>
+      <div class="mgr-value-grid reveal-stagger">
+        @for (v of value; track v.label) {
+          <div class="mgr-value-card">
+            <div class="mgr-value-check">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>{{ v.label }}</h4>
+            <p>{{ v.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to build internal career paths for your people?</h2>
+      <p>See how NAS HR helps companies grow talent from within and reduce external hiring dependency.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+</main>

@@ -1,0 +1,177 @@
+/* ═══════════════════════════════════════════════════
+   TRUSTED BY  —  centered title + marquee strip
+═══════════════════════════════════════════════════ */
+
+.trusted-section {
+  background: #ffffff;
+  border-top:    1px solid rgba(0,0,0,0.06);
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+  padding-block: 36px 32px;
+  overflow: hidden;
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    right: -160px;
+    transform: translateY(-50%);
+    width: 560px;
+    height: 560px;
+    background-image: url('/brand-mark.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    opacity: 0.04;
+    color: #0C2427;
+  }
+}
+
+/* ── Inner layout — vertical, centered ─────────── */
+.trusted-inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 24px;
+}
+
+/* ── Centered title ─────────────────────────────── */
+.trusted-title {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 18px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.48);
+  letter-spacing: 0.01em;
+  text-align: center;
+  margin: 0;
+  line-height: 1.5;
+}
+
+/* The "3,000" number — slightly heavier than surrounding text, not bold */
+.tl-num {
+  font-weight: 600;
+  color: var(--nas-teal-700, #26787B);
+  letter-spacing: -0.5px;
+}
+
+.tl-plus {
+  color: var(--nas-teal-700, #26787B);
+  font-weight: 600;
+}
+
+/* ── Marquee wrapper ────────────────────────────── */
+.trusted-marquee {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+  mask-image: linear-gradient(
+    to right,
+    transparent 0%,
+    #000 8%,
+    #000 92%,
+    transparent 100%
+  );
+}
+
+/* ── Scrolling track ────────────────────────────── */
+.marquee-track {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  width: max-content;
+  animation: marqueeScroll 28s linear infinite;
+}
+
+.trusted-marquee:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@keyframes marqueeScroll {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+/* ── Logo card ──────────────────────────────────── */
+.logo-card {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  border: 1px solid rgba(0,0,0,0.07);
+  border-radius: 14px;
+  padding: 14px 28px;
+  height: 68px;
+  flex-shrink: 0;
+  transition: border-color 200ms, box-shadow 200ms;
+
+  &:hover {
+    border-color: rgba(76,180,181,0.3);
+    box-shadow: 0 4px 16px rgba(76,180,181,0.08);
+  }
+}
+
+/* ── Logo image ─────────────────────────────────── */
+.logo-img {
+  height: 28px;
+  width: auto;
+  max-width: 140px;
+  object-fit: contain;
+  display: block;
+  opacity: 0.85;
+  transition: opacity 200ms;
+
+  .logo-card:hover & { opacity: 1; }
+}
+
+/* ── Text fallback ──────────────────────────────── */
+.logo-fallback {
+  font-family: var(--nas-font-display, 'Inter', sans-serif);
+  font-size: 15px;
+  font-weight: 700;
+  color: rgba(0,0,0,0.35);
+  letter-spacing: -0.3px;
+  white-space: nowrap;
+  transition: color 200ms;
+
+  .logo-card:hover & { color: var(--nas-cta, #0c2427); }
+}
+
+/* ── Mobile ─────────────────────────────────────── */
+@media (max-width: 720px) {
+  .trusted-title { font-size: 13px; }
+
+  .trusted-marquee {
+    -webkit-mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 5%,
+      #000 95%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to right,
+      transparent 0%,
+      #000 5%,
+      #000 95%,
+      transparent 100%
+    );
+  }
+
+  .logo-card {
+    height: 56px;
+    padding: 10px 20px;
+    border-radius: 10px;
+  }
+
+  .logo-img { height: 22px; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track { animation: none; }
+}

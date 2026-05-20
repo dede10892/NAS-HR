@@ -1,0 +1,103 @@
+<section class="modules-showcase" id="modules">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="msc-header reveal">
+      <span class="eyebrow teal">{{ t('Platform Overview', 'نظرة على المنصة') }}</span>
+      <h2 class="msc-title">{{ t('Explore NAS HR Modules', 'استكشف وحدات ناس HR') }}</h2>
+      <p class="msc-sub">
+        {{ t('10 integrated modules. One unified platform built for the modern workforce.',
+             '١٠ وحدات متكاملة. منصة واحدة موحدة لبيئة العمل الحديثة.') }}
+      </p>
+    </div>
+
+    <!-- Cards track -->
+    <div class="cards-track"
+         (mouseenter)="onTrackEnter()"
+         (mouseleave)="onTrackLeave()">
+
+      @for (mod of modules; track mod.en; let i = $index) {
+        <div
+          class="mc"
+          [class.active]="i === activeIndex"
+          (click)="setActive(i)"
+          [style.--mc-color]="mod.color"
+          [style.--mc-r]="'' + (mod.color | slice:1:3)"
+        >
+          <!-- Collapsed face (visible when NOT active) -->
+          <div class="mc-face">
+            <span class="mc-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <svg class="mc-icon-sm" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+              <path [attr.d]="mod.svgD"/>
+            </svg>
+            <span class="mc-title-vert">{{ t(mod.en, mod.ar) }}</span>
+          </div>
+
+          <!-- Expanded content (visible when active) -->
+          <div class="mc-content">
+            <!-- Decorative layers -->
+            <div class="mc-glow" [style.background]="mod.color"></div>
+            <div class="mc-grid"></div>
+
+            <!-- Inner content -->
+            <div class="mc-inner">
+              <div class="mc-top-row">
+                <span class="mc-badge"
+                      [style.color]="mod.color"
+                      [style.background]="rgba(mod.color, 0.1)"
+                      [style.border-color]="rgba(mod.color, 0.22)">
+                  {{ t(mod.tag_en, mod.tag_ar) }}
+                </span>
+                <svg class="mc-icon-lg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                  <path [attr.d]="mod.svgD"/>
+                </svg>
+              </div>
+
+              <h3 class="mc-name">{{ t(mod.en, mod.ar) }}</h3>
+              <p class="mc-desc">{{ t(mod.desc_en, mod.desc_ar) }}</p>
+
+              <ul class="mc-feats">
+                @for (f of mod.features_en; track f; let fi = $index) {
+                  <li>
+                    <span class="mc-dot" [style.background]="mod.color"></span>
+                    {{ t(f, mod.features_ar[fi]) }}
+                  </li>
+                }
+              </ul>
+
+              @if (mod.route) {
+                <a [routerLink]="mod.route" class="mc-cta"
+                   [style.color]="mod.color"
+                   [style.background]="rgba(mod.color, 0.1)"
+                   [style.border-color]="rgba(mod.color, 0.25)">
+                  {{ t('Explore Module', 'استكشف الوحدة') }}
+                  <svg width="12" height="12" viewBox="0 0 12 12" fill="none">
+                    <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </a>
+              } @else {
+                <span class="mc-cta mc-soon">{{ t('Coming Soon', 'قريباً') }}</span>
+              }
+            </div>
+          </div>
+        </div>
+      }
+    </div>
+
+    <!-- Progress dots -->
+    <div class="msc-dots">
+      @for (mod of modules; track mod.en; let i = $index) {
+        <button
+          class="msc-dot"
+          [class.active]="i === activeIndex"
+          (click)="setActive(i)"
+          [attr.aria-label]="mod.en">
+        </button>
+      }
+    </div>
+
+  </div>
+</section>

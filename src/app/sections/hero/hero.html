@@ -1,0 +1,84 @@
+<section class="hero">
+
+  <!-- ── Video background ── -->
+  <video #heroVideo class="hero-video" autoplay muted playsinline>
+    <source src="nas-logo.mp4" type="video/mp4">
+  </video>
+
+  <!-- ── Dark gradient overlay ── -->
+  <div class="hero-overlay" aria-hidden="true"></div>
+
+  <!-- ── Ambient glow blobs ── -->
+  <div class="hero-glow hero-glow--teal" aria-hidden="true"></div>
+  <div class="hero-glow hero-glow--sky"  aria-hidden="true"></div>
+
+  <!-- ══ HERO COPY ══════════════════════════════════════ -->
+  <div class="hero-content">
+
+    <!-- Badge pill — appears before headline draws -->
+    <div class="hero-badge">
+      <span class="hero-badge__dot"></span>
+      HRMS Built for the GCC
+    </div>
+
+    <!-- Write-on headline + pen cursor -->
+    <div class="hero-writeon">
+      <svg
+        class="hero-svg-title"
+        viewBox="0 0 1080 100"
+        xmlns="http://www.w3.org/2000/svg"
+        role="img"
+        aria-label="Intelligent People Systems">
+        <text
+          x="540" y="76"
+          text-anchor="middle"
+          class="svg-title-text">Intelligent People Systems</text>
+      </svg>
+      <span class="hero-pen-cursor" aria-hidden="true"></span>
+    </div>
+
+    <!-- Subtitle — fades in after headline finishes -->
+    <p class="hero-sub">
+      A new-age platform for growing businesses to scale HR processes,
+      manage talent and control spend.
+    </p>
+
+    <!-- CTA buttons — appear after subtitle -->
+    <div class="hero-ctas">
+      <a href="#contact" class="btn btn-primary hero-cta-glow">Request a Demo</a>
+      <a href="#features" class="btn hero-cta-ghost">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+          <path d="M10 8.5L15.5 12L10 15.5V8.5Z" fill="currentColor"/>
+        </svg>
+        Watch Overview
+      </a>
+    </div>
+
+    <!-- Social proof stats -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <span class="hero-stat__value">500<span class="hero-stat__sup">+</span></span>
+        <span class="hero-stat__label">Companies</span>
+      </div>
+      <div class="hero-stat-sep" aria-hidden="true"></div>
+      <div class="hero-stat">
+        <span class="hero-stat__value">50K<span class="hero-stat__sup">+</span></span>
+        <span class="hero-stat__label">Employees Managed</span>
+      </div>
+      <div class="hero-stat-sep" aria-hidden="true"></div>
+      <div class="hero-stat">
+        <span class="hero-stat__value">6</span>
+        <span class="hero-stat__label">GCC Countries</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Scroll indicator -->
+  <div class="hero-scroll" aria-hidden="true">
+    <span class="hero-scroll__label">Scroll</span>
+    <span class="hero-scroll__chevron"></span>
+  </div>
+
+</section>

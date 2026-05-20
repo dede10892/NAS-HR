@@ -1,0 +1,32 @@
+<section id="why" class="why-section section-py">
+  <div class="container">
+    <div class="section-head-center">
+      <span class="eyebrow">{{ t('Why NAS HR', 'لماذا NAS HR') }}</span>
+      <h2 class="section-title">{{ t('Built different. Built for you.', 'مبني بشكل مختلف. مبني لك.') }}</h2>
+      <p class="section-sub section-sub-center">
+        {{ t("We didn't adapt a generic HRMS. We built NAS HR from the ground up for modern, growing organizations.", 'لم نعدّل نظاماً عاماً. بنينا NAS HR من الصفر للمنظمات الحديثة والنامية.') }}
+      </p>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="stats-strip reveal-stagger">
+      @for (s of stats; track s.value) {
+        <div class="stat-item">
+          <div class="stat-value" [appCountUp]="s.value">{{ s.value }}</div>
+          <div class="stat-label">{{ t(s.en, s.ar) }}</div>
+        </div>
+      }
+    </div>
+
+    <!-- Reasons grid -->
+    <div class="reasons-grid reveal-stagger">
+      @for (r of reasons; track r.en; let i = $index) {
+        <div class="reason-card">
+          <span class="reason-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+          <h3 class="reason-title">{{ t(r.en, r.ar) }}</h3>
+          <p class="reason-desc">{{ t(r.desc_en, r.desc_ar) }}</p>
+        </div>
+      }
+    </div>
+  </div>
+</section>

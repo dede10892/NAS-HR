@@ -1,0 +1,346 @@
+/* ─── NAS Design Tokens ─────────────────────────────────── */
+:root {
+  --nas-bg:            #FFFFFF;
+  --nas-text:          #171819;
+  --nas-cta:           #0C2427;
+  --nas-additional:    #75DEFF;
+  --nas-cta-dashboard: #F96C4D;
+
+  /* Deep Teal */
+  --nas-teal-100: #F2FBFA; --nas-teal-200: #D5F2F0;
+  --nas-teal-300: #AAE5E1; --nas-teal-400: #78D0CE;
+  --nas-teal-500: #4CB4B5; --nas-teal-600: #339699;
+  --nas-teal-700: #26787B; --nas-teal-800: #225F63;
+  --nas-teal-900: #1F4C50; --nas-teal-950: #1E4043;
+  --nas-teal-1000: #0C2427;
+
+  /* Accent Sky */
+  --nas-sky-100: #F1FCFF; --nas-sky-200: #EAFAFF;
+  --nas-sky-300: #D4F5FF; --nas-sky-400: #75DEFF;
+  --nas-sky-500: #69C8E6; --nas-sky-600: #5EB2CC;
+  --nas-sky-700: #58A7BF; --nas-sky-800: #468599;
+  --nas-sky-900: #356473; --nas-sky-1000: #294E59;
+
+  /* Grey */
+  --nas-grey-0:    #FFFFFF; --nas-grey-50:   #FAFAFA;
+  --nas-grey-100:  #FFFFFF; --nas-grey-200:  #FCFCFC;
+  --nas-grey-300:  #F5F5F5; --nas-grey-400:  #E6E7E8;
+  --nas-grey-500:  #CFD0D1; --nas-grey-600:  #B8B9BA;
+  --nas-grey-700:  #8C8C8C; --nas-grey-750:  #676E76;
+  --nas-grey-800:  #595959; --nas-grey-900:  #454545;
+  --nas-grey-1000: #171819;
+
+  /* Status */
+  --nas-success-50:  #E7F8F0; --nas-success-500: #0FB86A;
+  --nas-warning-50:  #FEECEB; --nas-warning-500: #F14437;
+  --nas-hold-50:     #FEF4E6; --nas-hold-500:    #F79008;
+
+  /* Typography */
+  --nas-font-display: 'Playfair Display', Georgia, serif;
+  --nas-font-en:      'Fira Sans', sans-serif;
+  --nas-font-ar:      'Almarai', sans-serif;
+  --nas-font-mono:    'Fira Code', monospace;
+
+  /* Spacing */
+  --sp-1: 4px;  --sp-2: 8px;  --sp-3: 12px; --sp-4: 16px;
+  --sp-5: 20px; --sp-6: 24px; --sp-8: 32px; --sp-10: 40px;
+  --sp-12: 48px; --sp-16: 64px; --sp-20: 80px; --sp-24: 96px;
+
+  /* Border radius */
+  --r-xs: 4px; --r-sm: 8px; --r-md: 12px;
+  --r-lg: 16px; --r-xl: 20px; --r-2xl: 24px;
+  --r-3xl: 32px; --r-pill: 9999px;
+
+  /* Container */
+  --container: 1160px;
+  --section-py: 112px;
+}
+
+/* ─── Reset ─────────────────────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  font-family: var(--nas-font-en);
+  background: var(--nas-bg);
+  color: var(--nas-text);
+  line-height: 1.6;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+[dir="rtl"] { font-family: var(--nas-font-ar); }
+
+a { text-decoration: none; color: inherit; }
+img { max-width: 100%; display: block; }
+button { font-family: inherit; }
+ul { list-style: none; }
+
+/* ─── Container ─────────────────────────────────────────── */
+.container {
+  max-width: var(--container);
+  margin-inline: auto;
+  padding-inline: var(--sp-6);
+}
+
+/* ─── Section padding ───────────────────────────────────── */
+.section-py { padding-block: var(--section-py); }
+
+/* ─── Eyebrow ───────────────────────────────────────────── */
+.eyebrow {
+  display: inline-block;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--nas-teal-500);
+  margin-bottom: var(--sp-4);
+}
+.eyebrow-light { color: rgba(255,255,255,0.5); }
+
+/* ─── Display / Section headings ────────────────────────── */
+.display-title {
+  font-family: var(--nas-font-display);
+  font-size: clamp(40px, 6vw, 72px);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  line-height: 1.08;
+  color: #fff;
+}
+
+.section-title {
+  font-family: var(--nas-font-display);
+  font-size: clamp(32px, 4vw, 52px);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.15;
+  color: var(--nas-cta);
+}
+
+.section-title-light { color: #fff; }
+
+.section-sub {
+  font-size: 17px;
+  color: var(--nas-grey-750);
+  line-height: 1.7;
+  max-width: 540px;
+  margin-top: var(--sp-4);
+}
+.section-sub-light  { color: rgba(255,255,255,0.6); }
+.section-sub-center { margin-inline: auto; text-align: center; }
+
+/* ─── Centered section head ─────────────────────────────── */
+.section-head-center {
+  text-align: center;
+  margin-bottom: var(--sp-16);
+
+  .section-sub { margin-inline: auto; }
+}
+
+/* ─── Buttons ─────────────────────────────────────────────*/
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-2);
+  font-family: var(--nas-font-en);
+  font-weight: 600;
+  border-radius: var(--r-pill);     /* ← pill */
+  min-height: 48px;
+  border: none;
+  cursor: pointer;
+  transition: all 160ms ease-out;
+  letter-spacing: -0.01em;
+  white-space: nowrap;
+  text-decoration: none;
+  padding: 0 28px;
+  font-size: 15px;
+
+  &:focus-visible {
+    outline: 2px solid var(--nas-sky-400);
+    outline-offset: 3px;
+  }
+  &:active { transform: scale(0.97); }
+}
+
+.btn-primary {
+  background: var(--nas-teal-500);
+  color: #fff;
+  font-weight: 700;
+  &:hover { background: var(--nas-teal-600); }
+}
+
+.btn-secondary {
+  background: transparent;
+  color: #fff;
+  border: 1.5px solid rgba(255,255,255,0.3);
+  &:hover { background: rgba(255,255,255,0.08); }
+}
+
+.btn-tertiary {
+  background: #FFFFFF;
+  color: var(--nas-cta);
+  font-weight: 700;
+  &:hover { background: var(--nas-grey-300); }
+}
+
+.btn-dark {
+  background: var(--nas-cta);
+  color: #fff;
+  &:hover { background: var(--nas-teal-950); }
+}
+
+.btn-outline-dark {
+  background: transparent;
+  color: var(--nas-cta);
+  border: 1.5px solid var(--nas-grey-400);
+  &:hover { background: var(--nas-grey-300); }
+}
+
+/* ─── Card ───────────────────────────────────────────────── */
+.card {
+  background: var(--nas-grey-0);
+  border-radius: var(--r-2xl);
+  border: 1px solid var(--nas-grey-400);
+  box-shadow: 0 2px 8px rgba(0,0,0,.04);
+  overflow: hidden;
+}
+
+.card-dark {
+  background: #0F2B2F;
+  border-radius: var(--r-3xl);
+  border: 1px solid rgba(255,255,255,0.06);
+  overflow: hidden;
+  position: relative;
+}
+
+/* ─── Radial glow blob ──────────────────────────────────── */
+.glow-blob {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  filter: blur(80px);
+}
+.glow-blob-cyan {
+  background: rgba(117,222,255,0.18);
+}
+.glow-blob-teal {
+  background: rgba(76,180,181,0.14);
+}
+
+/* ─── RTL support ────────────────────────────────────────── */
+[dir="rtl"] .section-sub { margin-right: 0; }
+[dir="rtl"] .btn { font-family: var(--nas-font-ar); }
+
+/* ═══════════════════════════════════════════════════════════
+   ANIMATION SYSTEM
+   ═══════════════════════════════════════════════════════════ */
+
+/* ─── Keyframes ─────────────────────────────────────────── */
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(28px); }
+  to   { opacity: 1; transform: translateY(0);    }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+@keyframes slideLeft {
+  from { opacity: 0; transform: translateX(-36px); }
+  to   { opacity: 1; transform: translateX(0);     }
+}
+
+@keyframes slideRight {
+  from { opacity: 0; transform: translateX(36px); }
+  to   { opacity: 1; transform: translateX(0);    }
+}
+
+@keyframes scaleIn {
+  from { opacity: 0; transform: scale(0.88); }
+  to   { opacity: 1; transform: scale(1);    }
+}
+
+@keyframes floatBlob {
+  0%,100% { transform: translate(0, 0)    scale(1);    }
+  33%     { transform: translate(30px,-24px) scale(1.06); }
+  66%     { transform: translate(-18px,28px) scale(0.96); }
+}
+
+@keyframes floatBlobR {
+  0%,100% { transform: translate(0, 0)    scale(1);    }
+  33%     { transform: translate(-26px,20px) scale(1.04); }
+  66%     { transform: translate(22px,-30px) scale(0.97); }
+}
+
+@keyframes barGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+@keyframes shimmer {
+  from { background-position: -200% center; }
+  to   { background-position:  200% center; }
+}
+
+@keyframes pulseDot {
+  0%,100% { opacity: 1;   transform: scale(1);    }
+  50%     { opacity: 0.55; transform: scale(0.85); }
+}
+
+@keyframes rotateSlow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+/* ─── Scroll-reveal base states ─────────────────────────── */
+.reveal,
+.reveal-up    { opacity: 0; transform: translateY(30px); }
+.reveal-left  { opacity: 0; transform: translateX(-36px); }
+.reveal-right { opacity: 0; transform: translateX(36px); }
+.reveal-scale { opacity: 0; transform: scale(0.88); }
+
+.reveal,
+.reveal-up,
+.reveal-left,
+.reveal-right,
+.reveal-scale {
+  transition:
+    opacity  0.7s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.is-visible {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Stagger: direct children animate one by one */
+.reveal-stagger > * {
+  opacity: 0;
+  transform: translateY(24px);
+  transition:
+    opacity  0.6s cubic-bezier(0.16, 1, 0.3, 1),
+    transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+
+  &.is-visible { opacity: 1; transform: none; }
+
+  @for $i from 1 through 12 {
+    &:nth-child(#{$i}) { transition-delay: #{($i - 1) * 80}ms; }
+  }
+}
+
+/* ─── Improved card hover (global) ──────────────────────── */
+.card {
+  transition: transform 220ms cubic-bezier(0.16, 1, 0.3, 1),
+              box-shadow 220ms cubic-bezier(0.16, 1, 0.3, 1);
+  &:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 16px 40px rgba(0,0,0,0.1);
+  }
+}
+
+/* ─── Floating blob animation helper ────────────────────── */
+.blob-animate    { animation: floatBlob  14s ease-in-out infinite; }
+.blob-animate-r  { animation: floatBlobR 17s ease-in-out infinite; }

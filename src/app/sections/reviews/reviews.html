@@ -1,0 +1,89 @@
+<section class="rv-section">
+  <div class="container">
+
+    <!-- Header -->
+    <div class="rv-header">
+      <span class="eyebrow">{{ t('Trusted by Teams Across 5 Industries', 'موثوق من فرق عمل في ٥ قطاعات') }}</span>
+      <h2 class="rv-title">
+        {{ t('Hear why ', 'اسمع لماذا ') }}<span class="rv-title-accent">{{ t('3,000+ employees', '+٣٠٠٠ موظف') }}</span>
+        {{ t(' trust NAS HR', ' يثقون في NAS HR') }}
+      </h2>
+    </div>
+
+    <!-- Slider -->
+    <div class="rv-slider-wrap">
+      <div class="rv-track" [style.transform]="offset">
+        @for (r of reviews; track r.name) {
+
+          <div class="rv-card">
+            <div class="rv-inner">
+
+              <!-- Quote mark -->
+              <div class="rv-quote-mark" [style.color]="r.color">"</div>
+
+              <!-- Stars -->
+              <div class="rv-stars" aria-label="5 stars">
+                @for (s of [1,2,3,4,5]; track s) {
+                  <svg class="rv-star" viewBox="0 0 16 16" fill="currentColor" aria-hidden="true">
+                    <path d="M8 1.5l1.76 3.57 3.94.57-2.85 2.78.67 3.92L8 10.27l-3.52 1.07.67-3.92L2.3 5.64l3.94-.57L8 1.5z"/>
+                  </svg>
+                }
+              </div>
+
+              <!-- Review text -->
+              <p class="rv-text">{{ r.quote }}</p>
+
+              <!-- Author -->
+              <div class="rv-author">
+                <div class="rv-avatar" [style.background]="r.color + '22'" [style.color]="r.color">
+                  {{ r.initials }}
+                </div>
+                <div class="rv-author-info">
+                  <span class="rv-name">{{ r.name }}</span>
+                  <span class="rv-role">{{ r.role }}, {{ r.company }}</span>
+                </div>
+                <span class="rv-badge" [style.background]="r.color + '18'" [style.color]="r.color">
+                  {{ r.industry }}
+                </span>
+              </div>
+
+            </div>
+          </div>
+
+        }
+      </div>
+    </div>
+
+    <!-- Controls -->
+    <div class="rv-controls">
+
+      <button class="rv-arrow" (click)="prev()" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="15 18 9 12 15 6"/>
+        </svg>
+      </button>
+
+      <div class="rv-dots">
+        @for (r of reviews; track r.name; let i = $index) {
+          <button
+            class="rv-dot"
+            [class.rv-dot--active]="active() === i"
+            [style.background]="active() === i ? reviews[i].color : ''"
+            (click)="goTo(i)"
+            [attr.aria-label]="'Review ' + (i + 1)"
+          ></button>
+        }
+      </div>
+
+      <button class="rv-arrow" (click)="next()" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+             stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <polyline points="9 18 15 12 9 6"/>
+        </svg>
+      </button>
+
+    </div>
+
+  </div>
+</section>

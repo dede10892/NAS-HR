@@ -1,0 +1,32 @@
+<section id="faqs" class="section-py faqs-section">
+  <div class="container">
+    <div class="section-head-center">
+      <span class="eyebrow">{{ t('FAQ', 'الأسئلة الشائعة') }}</span>
+      <h2 class="section-title">{{ t('Common Questions', 'أسئلة شائعة') }}</h2>
+      <p class="section-sub section-sub-center">
+        {{ t("Everything you need to know about NAS HR. Can't find your answer?", 'كل ما تحتاج معرفته عن NAS HR. لم تجد إجابتك؟') }}
+        <a href="#contact" class="faqs-link">{{ t('Ask us anything.', 'اسألنا أي شيء.') }}</a>
+      </p>
+    </div>
+
+    <div class="faqs-list">
+      @for (faq of faqs; track faq.q_en; let i = $index) {
+        <div class="faq-item" [class.open]="openIndex === i" (click)="toggle(i)">
+          <div class="faq-q">
+            <span class="faq-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <span class="faq-text">{{ t(faq.q_en, faq.q_ar) }}</span>
+            <span class="faq-icon">{{ openIndex === i ? '−' : '+' }}</span>
+          </div>
+          @if (openIndex === i) {
+            <div class="faq-a">{{ t(faq.a_en, faq.a_ar) }}</div>
+          }
+        </div>
+      }
+    </div>
+
+    <div class="faqs-bottom">
+      <p>{{ t("Still have questions? We'd love to help.", 'لديك المزيد من الأسئلة؟ يسعدنا مساعدتك.') }}</p>
+      <a href="#contact" class="btn btn-dark">{{ t('Talk to Sales', 'تحدث إلى فريق المبيعات') }}</a>
+    </div>
+  </div>
+</section>

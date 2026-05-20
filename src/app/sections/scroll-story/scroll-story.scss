@@ -1,0 +1,907 @@
+// ══════════════════════════════════════════════════════
+//  SCROLL STORY  —  sticky scroll-interactive section
+// ══════════════════════════════════════════════════════
+
+$teal    : #4CB4B5;
+$orange  : #f47920;
+$purple  : #8b5cf6;
+$navy    : #060d1b;
+$card    : #0c1a2e;
+$border  : rgba(255,255,255,0.07);
+$muted   : rgba(255,255,255,0.45);
+$ease    : cubic-bezier(.22, 1, .36, 1);
+
+// ── Section shell ──────────────────────────────────────
+.ss-section {
+  background: $navy;
+  color: #fff;
+  position: relative;
+}
+
+// ── Header (above the sticky zone) ────────────────────
+.ss-header {
+  text-align: center;
+  padding: 64px 24px 44px;
+  max-width: 900px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 1;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 400px;
+    height: 180px;
+    background: radial-gradient(ellipse at center, rgba($teal, 0.10) 0%, transparent 70%);
+    pointer-events: none;
+  }
+}
+
+.ss-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $teal;
+  margin-bottom: 12px;
+  position: relative;
+}
+
+.ss-title {
+  font-size: clamp(20px, 2.4vw, 32px);
+  font-weight: 800;
+  line-height: 1.2;
+  letter-spacing: -0.6px;
+  color: #fff;
+  max-width: 480px;
+  margin: 0 auto;
+  position: relative;
+
+  em {
+    font-style: normal;
+    background: linear-gradient(90deg, $teal 0%, #7dd4d5 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+}
+
+// ── Scroll wrapper — creates 4 × 100vh scroll distance ─
+.ss-wrapper {
+  height: calc(4 * 100vh);
+  position: relative;
+}
+
+// ── Sticky pin — the visible UI stays here ─────────────
+.ss-pin {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+// ── Two-column layout ──────────────────────────────────
+.ss-layout {
+  display: flex;
+  align-items: center;
+  gap: 56px;
+  width: 100%;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+// ═══════════════════════════════════════
+// LEFT column — text
+// ═══════════════════════════════════════
+.ss-left {
+  flex: 0 0 300px;
+  display: flex;
+  flex-direction: column;
+  gap: 36px;
+}
+
+// Step text container — relative so absolute children stack
+.ss-steps-wrap {
+  position: relative;
+  height: 220px;
+}
+
+.ss-step {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  opacity: 0;
+  transform: translateY(30px);
+  transition:
+    opacity 0.6s $ease,
+    transform 0.6s $ease;
+  pointer-events: none;
+
+  &.is-active {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+  }
+}
+
+.ss-tag {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $teal;
+  margin-bottom: 16px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  &::after {
+    content: '';
+    flex: 1;
+    max-width: 40px;
+    height: 1px;
+    background: rgba($teal, 0.4);
+    display: block;
+  }
+}
+
+.ss-step-title {
+  font-size: clamp(18px, 1.8vw, 24px);
+  font-weight: 800;
+  line-height: 1.25;
+  letter-spacing: -0.3px;
+  color: #fff;
+  margin: 0 0 14px;
+}
+
+.ss-step-desc {
+  font-size: 15px;
+  line-height: 1.8;
+  color: $muted;
+  margin: 0;
+}
+
+// ── Dot navigation ─────────────────────────────────────
+.ss-dots {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: none;
+  background: none;
+}
+
+.ss-dot {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
+
+  // The visible track
+  &::before {
+    content: '';
+    flex-shrink: 0;
+    width: 32px;
+    height: 3px;
+    border-radius: 2px;
+    background: rgba(255,255,255,0.12);
+    transition: width 0.4s $ease, background 0.4s;
+  }
+
+  &.is-active::before {
+    width: 56px;
+    background: $teal;
+  }
+}
+
+.ss-dot-label {
+  font-size: 11px;
+  color: $muted;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 200px;
+  transition: color 0.3s;
+
+  .ss-dot.is-active & {
+    color: rgba(255,255,255,0.8);
+  }
+}
+
+// ═══════════════════════════════════════
+// RIGHT column — screens
+// ═══════════════════════════════════════
+.ss-right {
+  flex: 1;
+  min-width: 0;
+  position: relative;
+}
+
+// Ambient glow behind the screens
+.ss-glow {
+  position: absolute;
+  inset: -60px;
+  background: radial-gradient(ellipse at 50% 50%, rgba($teal, 0.08) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.ss-screen {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  transform: scale(0.97) translateY(14px);
+  transition:
+    opacity 0.6s $ease,
+    transform 0.6s $ease;
+  pointer-events: none;
+  z-index: 1;
+
+  &.is-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    pointer-events: auto;
+  }
+}
+
+// Container that gives the right side its height
+.ss-screens { position: relative; height: 440px; }
+// (ss-right wraps it, so set height here)
+.ss-right { height: 440px; }
+
+// ── Mock browser chrome ────────────────────────────────
+.mock-win {
+  width: 100%;
+  height: 100%;
+  background: $card;
+  border-radius: 14px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  box-shadow:
+    0 0 0 1px $border,
+    0 32px 80px rgba(0, 0, 0, 0.6),
+    inset 0 1px 0 rgba(255,255,255,0.04);
+}
+
+.mock-bar {
+  flex-shrink: 0;
+  background: #070f1e;
+  padding: 10px 16px;
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  border-bottom: 1px solid $border;
+}
+
+.mock-traffic {
+  display: flex;
+  gap: 6px;
+  i {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    display: block;
+    &:nth-child(1) { background: #ff5f57; }
+    &:nth-child(2) { background: #febc2e; }
+    &:nth-child(3) { background: #28c840; }
+  }
+}
+
+.mock-addr {
+  font-family: 'SFMono-Regular', 'Fira Mono', monospace;
+  font-size: 11px;
+  color: rgba(255,255,255,0.22);
+}
+
+.mock-body {
+  flex: 1;
+  padding: 18px 20px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+// ════════════════════════════════════════
+// SCREEN 1 — Employee Profile
+// ════════════════════════════════════════
+.profile-scr {
+
+  .ps-head {
+    display: flex;
+    align-items: flex-start;
+    gap: 13px;
+    padding-bottom: 14px;
+    border-bottom: 1px solid $border;
+  }
+
+  .ps-av {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, $teal 0%, #2563ab 100%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 13px;
+    font-weight: 800;
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .ps-meta { flex: 1; min-width: 0; }
+
+  .ps-name {
+    font-size: 14px;
+    font-weight: 700;
+    color: #fff;
+    margin-bottom: 2px;
+  }
+
+  .ps-role {
+    font-size: 11px;
+    color: $muted;
+    margin-bottom: 7px;
+  }
+
+  .ps-chips {
+    display: flex;
+    gap: 5px;
+    flex-wrap: wrap;
+    span {
+      font-size: 10px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 20px;
+      border: 1px solid rgba($teal, 0.3);
+      color: $teal;
+    }
+  }
+
+  .ps-pct {
+    text-align: right;
+    flex-shrink: 0;
+    strong { display: block; font-size: 17px; font-weight: 800; color: $teal; line-height: 1; }
+    small  { font-size: 10px; color: $muted; }
+  }
+
+  .ps-tabs {
+    display: flex;
+    border-bottom: 1px solid $border;
+  }
+
+  .ps-tab {
+    font-size: 11px;
+    color: $muted;
+    padding: 5px 10px;
+    cursor: pointer;
+    position: relative;
+    white-space: nowrap;
+
+    &.is-on {
+      color: $teal;
+      &::after {
+        content: '';
+        position: absolute;
+        bottom: -1px;
+        left: 0; right: 0;
+        height: 2px;
+        background: $teal;
+        border-radius: 1px;
+      }
+    }
+  }
+
+  .ps-stats {
+    display: flex;
+    border-bottom: 1px solid $border;
+    padding: 10px 0;
+    .ps-stat {
+      flex: 1;
+      text-align: center;
+      border-right: 1px solid $border;
+      &:last-child { border-right: none; }
+      strong { display: block; font-size: 14px; font-weight: 800; color: #fff; }
+      small  { font-size: 10px; color: $muted; }
+    }
+  }
+
+  .ps-feed-lbl {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: $muted;
+  }
+
+  .ps-feed { display: flex; flex-direction: column; gap: 9px; }
+
+  .ps-feed-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+  }
+
+  .fd {
+    width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; margin-top: 3px;
+    &.c-teal  { background: $teal; }
+    &.c-green { background: #4ade80; }
+    &.c-blue  { background: #60a5fa; }
+  }
+
+  .fd-ev { font-size: 12px; color: rgba(255,255,255,0.8); line-height: 1.3; }
+  .fd-ts { font-size: 10px; color: $muted; margin-top: 1px; }
+}
+
+// ════════════════════════════════════════
+// SCREEN 2 — Attendance
+// ════════════════════════════════════════
+.attend-scr {
+
+  .at-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .at-month { font-size: 13px; font-weight: 700; color: #fff; }
+
+  .at-ctrl {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    color: $muted;
+  }
+
+  .at-btn {
+    font-size: 10px;
+    font-weight: 600;
+    color: $teal;
+    border: 1px solid rgba($teal,0.3);
+    border-radius: 6px;
+    padding: 2px 9px;
+    cursor: pointer;
+  }
+
+  .at-cal-hd {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 2px;
+    margin-bottom: 3px;
+    div {
+      text-align: center;
+      font-size: 9px;
+      font-weight: 600;
+      color: $muted;
+    }
+  }
+
+  .at-cal-grid {
+    display: grid;
+    grid-template-columns: repeat(7,1fr);
+    gap: 2px;
+  }
+
+  .at-day {
+    text-align: center;
+    font-size: 9px;
+    padding: 3px 1px;
+    border-radius: 3px;
+    color: rgba(255,255,255,0.5);
+    &.present { background: rgba($teal,.18);   color: $teal; }
+    &.late    { background: rgba($orange,.2);  color: $orange; }
+    &.absent  { background: rgba(248,113,113,.15); color: #f87171; }
+    &.weekend { background: rgba(255,255,255,.03); color: rgba(255,255,255,.2); }
+    &.empty   { background: none; }
+  }
+
+  .at-legend {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    .leg {
+      display: flex;
+      align-items: center;
+      gap: 4px;
+      font-size: 10px;
+      color: $muted;
+    }
+    .ld {
+      width: 7px; height: 7px; border-radius: 2px;
+      &.present { background: rgba($teal,.5); }
+      &.late    { background: rgba($orange,.5); }
+      &.absent  { background: rgba(248,113,113,.5); }
+      &.weekend { background: rgba(255,255,255,.1); }
+    }
+  }
+
+  .at-bal {
+    display: flex;
+    flex-direction: column;
+    gap: 7px;
+    .bal-row { display: flex; align-items: center; gap: 8px; }
+    .bl { font-size: 10px; color: $muted; width: 82px; flex-shrink: 0; }
+    .bt {
+      flex: 1;
+      height: 5px;
+      border-radius: 3px;
+      background: rgba(255,255,255,.07);
+      overflow: hidden;
+    }
+    .bf {
+      height: 100%;
+      border-radius: 3px;
+      background: $teal;
+      &.orange { background: $orange; }
+      &.red    { background: #f87171; }
+    }
+    .bv { font-size: 10px; color: rgba(255,255,255,.65); width: 36px; text-align: right; flex-shrink: 0; }
+  }
+
+  .at-pending {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    .pend-badge {
+      font-size: 10px; font-weight: 600;
+      background: rgba($orange,.12); color: $orange;
+      border-radius: 20px; padding: 3px 10px;
+    }
+    .pend-link { font-size: 10px; color: $teal; cursor: pointer; }
+  }
+}
+
+// ════════════════════════════════════════
+// SCREEN 3 — Learning
+// ════════════════════════════════════════
+.learn-scr {
+
+  .ln-head {
+    padding-bottom: 10px;
+    border-bottom: 1px solid $border;
+    .ln-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .ln-sub   { font-size: 11px; color: $muted; }
+  }
+
+  .ln-courses {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .ln-course {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    background: rgba(255,255,255,.03);
+    border: 1px solid $border;
+    border-radius: 10px;
+    padding: 10px 12px;
+  }
+
+  .co-ic {
+    width: 34px;
+    height: 34px;
+    border-radius: 8px;
+    background: var(--bg, #1e3a52);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    font-weight: 800;
+    color: rgba(255,255,255,.7);
+    flex-shrink: 0;
+    letter-spacing: 0.5px;
+  }
+
+  .co-body { flex: 1; min-width: 0; }
+
+  .co-name {
+    font-size: 11px;
+    font-weight: 600;
+    color: rgba(255,255,255,.85);
+    margin-bottom: 5px;
+  }
+
+  .co-bar {
+    height: 4px;
+    border-radius: 2px;
+    background: rgba(255,255,255,.07);
+    overflow: hidden;
+    margin-bottom: 4px;
+  }
+
+  .co-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: $orange;
+    &.teal   { background: $teal; }
+    &.purple { background: $purple; }
+  }
+
+  .co-foot {
+    display: flex;
+    justify-content: space-between;
+    font-size: 10px;
+    color: $muted;
+    .cp { font-weight: 700; color: $orange; &.teal { color: $teal; } &.purple { color: $purple; } }
+  }
+
+  .ln-skills {
+    .sk-title {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: $muted;
+      margin-bottom: 9px;
+    }
+    .sk-row {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 11px;
+      color: $muted;
+      margin-bottom: 7px;
+      span { width: 110px; flex-shrink: 0; }
+    }
+    .sk-trk {
+      flex: 1;
+      height: 4px;
+      border-radius: 2px;
+      background: rgba(255,255,255,.07);
+      overflow: hidden;
+    }
+    .sk-fill {
+      height: 100%;
+      border-radius: 2px;
+      background: $orange;
+      &.teal   { background: $teal; }
+      &.orange { background: $orange; }
+    }
+    small { font-size: 10px; width: 28px; text-align: right; flex-shrink: 0; }
+  }
+}
+
+// ════════════════════════════════════════
+// SCREEN 4 — Performance
+// ════════════════════════════════════════
+.perf-scr {
+
+  .pf-head {
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    padding-bottom: 12px;
+    border-bottom: 1px solid $border;
+    .pf-title { font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 2px; }
+    .pf-sub   { font-size: 11px; color: $muted; }
+  }
+
+  .pf-badge {
+    font-size: 10px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    background: rgba($teal,.14);
+    color: $teal;
+    border-radius: 20px;
+    padding: 3px 10px;
+    flex-shrink: 0;
+  }
+
+  .pf-score-area {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    padding: 8px 0;
+    border-bottom: 1px solid $border;
+  }
+
+  .pf-ring {
+    position: relative;
+    flex-shrink: 0;
+  }
+
+  .pf-ring-val {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    strong { font-size: 18px; font-weight: 800; color: #fff; line-height: 1; }
+    small  { font-size: 10px; color: $muted; }
+  }
+
+  .pf-score-meta {
+    .pf-pct  { font-size: 28px; font-weight: 800; color: $teal; line-height: 1; }
+    .pf-lbl  { font-size: 11px; color: $muted; margin: 3px 0 7px; }
+    .pf-rank {
+      font-size: 10px;
+      color: rgba(255,255,255,.4);
+      background: rgba(255,255,255,.05);
+      border-radius: 4px;
+      padding: 2px 8px;
+      display: inline-block;
+    }
+  }
+
+  .pf-kpis {
+    flex: 1;
+
+    .pf-kpi-hd {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4px;
+      font-size: 9px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: $muted;
+      padding-bottom: 6px;
+      border-bottom: 1px solid $border;
+      margin-bottom: 2px;
+    }
+
+    .pf-kpi-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 4px;
+      font-size: 11px;
+      color: rgba(255,255,255,.7);
+      padding: 5px 0;
+      border-bottom: 1px solid rgba(255,255,255,.03);
+      align-items: center;
+
+      .ok   { color: #4ade80; font-weight: 700; font-size: 11px; }
+      .warn { color: $orange; font-weight: 700; font-size: 11px; }
+    }
+  }
+
+  .pf-payroll {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    color: $muted;
+    background: rgba($teal,.06);
+    border: 1px solid rgba($teal,.15);
+    border-radius: 8px;
+    padding: 9px 13px;
+
+    strong { color: #fff; }
+  }
+
+  .pay-pulse {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #4ade80;
+    flex-shrink: 0;
+    box-shadow: 0 0 0 0 rgba(74,222,128,.6);
+    animation: pulse 2s infinite;
+  }
+}
+
+@keyframes pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(74,222,128,.5); }
+  70%  { box-shadow: 0 0 0 7px rgba(74,222,128,0); }
+  100% { box-shadow: 0 0 0 0 rgba(74,222,128,0); }
+}
+
+// ═══════════════════════════════════════
+//  RESPONSIVE
+// ═══════════════════════════════════════
+
+// ── Tablet / small desktop ─────────────────────────────
+@media (max-width: 1180px) {
+  .ss-layout {
+    gap: 40px;
+    padding: 0 32px;
+  }
+  .ss-left { flex: 0 0 300px; }
+}
+
+// ── Mobile (≤ 1024px) — disable sticky, stack vertically ─
+@media (max-width: 1024px) {
+  // Header
+  .ss-header { padding: 72px 24px 48px; }
+
+  // Kill sticky
+  .ss-wrapper { height: auto; }
+  .ss-pin {
+    position: relative;
+    height: auto;
+    padding: 0 0 64px;
+  }
+
+  // Stack vertically
+  .ss-layout {
+    flex-direction: column;
+    gap: 0;
+    padding: 0 20px;
+  }
+
+  // Right (screen) comes first on mobile
+  .ss-right {
+    width: 100%;
+    height: 380px;
+    order: 1;
+    margin-bottom: 28px;
+  }
+
+  // Left text below
+  .ss-left {
+    flex: none;
+    width: 100%;
+    order: 2;
+    gap: 28px;
+  }
+
+  // Steps: only show active, no absolute positioning
+  .ss-steps-wrap {
+    height: auto;
+    min-height: 160px;
+  }
+
+  .ss-step {
+    position: relative;
+    top: auto; left: auto;
+    opacity: 0;
+    transform: translateY(16px);
+    display: none;
+    pointer-events: none;
+
+    &.is-active {
+      display: block;
+      opacity: 1;
+      transform: none;
+      pointer-events: auto;
+      animation: fadeUp 0.5s $ease forwards;
+    }
+  }
+
+  // Dots horizontal on mobile
+  .ss-dots {
+    flex-direction: row;
+    gap: 10px;
+  }
+  .ss-dot::before { width: 24px; }
+  .ss-dot.is-active::before { width: 40px; }
+  .ss-dot-label { display: none; } // too crowded on mobile
+}
+
+@media (max-width: 640px) {
+  .ss-header { padding: 56px 20px 36px; }
+  .ss-right  { height: 340px; }
+  .mock-body { padding: 13px 14px; gap: 9px; }
+  .ss-steps-wrap { min-height: 180px; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ss-step, .ss-screen { transition: none; animation: none; }
+  .pay-pulse { animation: none; }
+}

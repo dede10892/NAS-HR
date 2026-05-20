@@ -1,0 +1,422 @@
+/* ══════════════════════════════════════════════════════
+   PEOPLE CONNECT  —  HR Chaos → Intelligent Operations
+   Brand: #0C2427 dark · #75DEFF cyan · #4CB4B5 teal
+══════════════════════════════════════════════════════ */
+
+$spring:   cubic-bezier(0.16, 1, 0.3, 1);
+$ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+
+/* ── Colours ── */
+$before-color: #ff6b6b;
+$after-color:  #4CB4B5;
+$card-bg:      rgba(255, 255, 255, 0.04);
+$card-border:  rgba(255, 255, 255, 0.08);
+$line-off:     rgba(255, 255, 255, 0.10);
+$line-on:      #4CB4B5;
+
+
+/* ═══════════════════════════════════════════════════
+   1 · SECTION SHELL
+═══════════════════════════════════════════════════ */
+
+.pc-section {
+  background: #071619;
+  padding: 80px 24px 96px;
+  overflow: hidden;
+}
+
+.pc-wrap {
+  max-width: 960px;
+  margin-inline: auto;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   2 · HEADER
+═══════════════════════════════════════════════════ */
+
+.pc-head {
+  text-align: center;
+  margin-bottom: 56px;
+}
+
+.pc-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: #4CB4B5;
+  margin-bottom: 16px;
+}
+
+.pc-title {
+  font-size: clamp(26px, 3.5vw, 40px);
+  font-weight: 800;
+  color: #fff;
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  margin: 0 0 16px;
+
+  em {
+    font-style: normal;
+    color: #75DEFF;
+  }
+}
+
+.pc-sub {
+  font-size: clamp(14px, 1.4vw, 16px);
+  color: rgba(255, 255, 255, 0.42);
+  line-height: 1.7;
+  max-width: 520px;
+  margin-inline: auto;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   3 · DIAGRAM SHELL
+═══════════════════════════════════════════════════ */
+
+.pc-diagram {
+  position: relative;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   4 · COLUMN HEADERS
+═══════════════════════════════════════════════════ */
+
+.pc-col-heads {
+  display: grid;
+  grid-template-columns: 1fr 220px 1fr;
+  gap: 0;
+  margin-bottom: 12px;
+  align-items: center;
+}
+
+.pc-ch {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.pc-ch--left  { justify-content: flex-end;  padding-right: 16px; }
+.pc-ch--right { justify-content: flex-start; padding-left: 16px;  }
+.pc-ch--hub   { justify-content: center; }
+
+.pc-ch-icon { font-size: 16px; }
+
+/* NAS HR hub badge in header */
+.pc-hub-badge {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: rgba(76, 180, 181, 0.10);
+  border: 1px solid rgba(76, 180, 181, 0.25);
+  border-radius: 100px;
+  padding: 6px 14px;
+}
+
+.pc-hub-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #4CB4B5;
+  box-shadow: 0 0 8px #4CB4B5;
+  animation: pcHubPulse 2s ease-in-out infinite;
+}
+
+@keyframes pcHubPulse {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50%       { opacity: 0.5; transform: scale(0.7); }
+}
+
+.pc-hub-name {
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.10em;
+  color: #4CB4B5;
+  text-transform: uppercase;
+}
+
+
+/* ═══════════════════════════════════════════════════
+   5 · ROWS
+═══════════════════════════════════════════════════ */
+
+.pc-row {
+  display: grid;
+  grid-template-columns: 1fr auto auto auto 1fr;
+  align-items: center;
+  gap: 0;
+  margin-bottom: 10px;
+
+  &:last-child { margin-bottom: 0; }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   6 · CARDS
+═══════════════════════════════════════════════════ */
+
+.pc-card {
+  background: $card-bg;
+  border: 1px solid $card-border;
+  border-radius: 10px;
+  padding: 11px 16px;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.70);
+  line-height: 1.35;
+  transition:
+    border-color 0.5s $ease-out,
+    background   0.5s $ease-out,
+    color        0.5s $ease-out,
+    transform    0.6s $spring,
+    opacity      0.5s $ease-out;
+
+  /* start offset */
+  opacity: 0;
+  transform: translateX(var(--card-dx, 0));
+}
+
+.pc-card--left  {
+  --card-dx: -28px;
+  text-align: right;
+  transition-delay: calc(var(--ri) * 60ms);
+}
+
+.pc-card--right {
+  --card-dx: 28px;
+  text-align: left;
+  transition-delay: calc(var(--ri) * 60ms + 80ms);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   7 · CONNECTOR (line + state pill)
+═══════════════════════════════════════════════════ */
+
+.pc-connector {
+  display: flex;
+  align-items: center;
+  width: 100px;
+}
+
+.pc-line {
+  flex: 1;
+  height: 1.5px;
+  background: $line-off;
+  transition: background 0.55s $ease-out;
+  transition-delay: calc(var(--ri) * 60ms + 120ms);
+  transform-origin: left center;
+}
+
+.pc-connector--right .pc-line {
+  transition-delay: calc(var(--ri) * 60ms + 160ms);
+}
+
+
+/* ── State pill (before / after) ── */
+.pc-state {
+  position: relative;
+  flex-shrink: 0;
+  width: 90px;
+  height: 26px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.pc-before,
+.pc-after {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 100px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  white-space: nowrap;
+  transition:
+    opacity   0.4s $ease-out,
+    transform 0.5s $spring;
+}
+
+/* BEFORE — red warning pill */
+.pc-before {
+  background: rgba(255, 107, 107, 0.12);
+  border: 1px solid rgba(255, 107, 107, 0.30);
+  color: $before-color;
+  opacity: 1;
+  transform: scale(1);
+  transition-delay: 0ms;
+}
+
+/* AFTER — teal success pill */
+.pc-after {
+  background: rgba(76, 180, 181, 0.12);
+  border: 1px solid rgba(76, 180, 181, 0.30);
+  color: $after-color;
+  opacity: 0;
+  transform: scale(0.75);
+  transition-delay: calc(var(--ri) * 60ms + 200ms);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   8 · HUB NODE (centre dot per row)
+═══════════════════════════════════════════════════ */
+
+.pc-hub-node {
+  position: relative;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.pc-hub-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px solid $line-off;
+  transition:
+    border-color 0.5s $ease-out,
+    box-shadow   0.5s $ease-out;
+  transition-delay: calc(var(--ri) * 60ms + 140ms);
+}
+
+.pc-hub-core {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.20);
+  transition:
+    background   0.5s $ease-out,
+    box-shadow   0.5s $ease-out;
+  transition-delay: calc(var(--ri) * 60ms + 140ms);
+}
+
+
+/* ═══════════════════════════════════════════════════
+   9 · CONNECTED STATE  (.is-connected)
+═══════════════════════════════════════════════════ */
+
+.is-connected {
+
+  /* Cards slide in & brighten */
+  .pc-card {
+    opacity: 1;
+    transform: translateX(0);
+  }
+
+  .pc-card--left {
+    border-color: rgba(76, 180, 181, 0.25);
+    background: rgba(76, 180, 181, 0.06);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  .pc-card--right {
+    border-color: rgba(117, 222, 255, 0.20);
+    background: rgba(117, 222, 255, 0.04);
+    color: rgba(255, 255, 255, 0.85);
+  }
+
+  /* Lines turn teal */
+  .pc-line {
+    background: $line-on;
+  }
+
+  /* Hub nodes glow */
+  .pc-hub-ring {
+    border-color: $line-on;
+    box-shadow: 0 0 6px rgba(76, 180, 181, 0.50);
+  }
+
+  .pc-hub-core {
+    background: $line-on;
+    box-shadow: 0 0 8px rgba(76, 180, 181, 0.70);
+  }
+
+  /* Before hides, after reveals */
+  .pc-before {
+    opacity: 0;
+    transform: scale(0.75);
+    transition-delay: calc(var(--ri) * 60ms);
+  }
+
+  .pc-after {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+
+/* ═══════════════════════════════════════════════════
+   10 · RESPONSIVE
+═══════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+  .pc-section { padding: 60px 16px 72px; }
+  .pc-head { margin-bottom: 40px; }
+
+  .pc-col-heads {
+    grid-template-columns: 1fr 120px 1fr;
+  }
+
+  .pc-row {
+    grid-template-columns: 1fr auto auto auto 1fr;
+  }
+
+  .pc-connector { width: 40px; }
+  .pc-state { width: 68px; }
+
+  .pc-before,
+  .pc-after { font-size: 9px; }
+
+  .pc-card {
+    padding: 9px 10px;
+    font-size: 11.5px;
+  }
+
+  .pc-hub-badge { padding: 5px 10px; }
+  .pc-hub-name  { font-size: 10px; }
+}
+
+@media (max-width: 460px) {
+  .pc-ch--left,
+  .pc-ch--right { display: none; }
+
+  .pc-col-heads { grid-template-columns: 1fr; }
+  .pc-col-heads > .pc-ch--hub { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pc-card,
+  .pc-line,
+  .pc-hub-ring,
+  .pc-hub-core,
+  .pc-before,
+  .pc-after {
+    transition: none !important;
+  }
+
+  .pc-hub-dot { animation: none; }
+
+  /* Show connected state immediately */
+  .pc-card    { opacity: 1; transform: translateX(0); }
+  .pc-before  { opacity: 0; }
+  .pc-after   { opacity: 1; transform: scale(1); }
+  .pc-line    { background: $line-on; }
+}

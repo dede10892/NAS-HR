@@ -1,0 +1,309 @@
+<section class="ss-section">
+
+  <!-- ── Section header ──────────────────────────────── -->
+  <div class="ss-header">
+    <span class="ss-eyebrow">{{ t('How It Works', 'كيف يعمل') }}</span>
+    <h2 class="ss-title">
+      {{ t('One Platform. Every HR Moment', 'منصة واحدة. كل لحظة') }}
+      <em>{{ t('Connected.', 'مترابطة.') }}</em>
+    </h2>
+  </div>
+
+  <!-- ── Sticky scroll wrapper (4 × 100vh) ──────────── -->
+  <div class="ss-wrapper">
+    <div class="ss-pin">
+      <div class="ss-layout">
+
+        <!-- ─────────────── LEFT: text ─────────────── -->
+        <aside class="ss-left">
+
+          <div class="ss-steps-wrap">
+            @for (step of steps; track $index) {
+              <div class="ss-step" [class.is-active]="activeStep() === $index">
+                <div class="ss-tag">{{ step.tag }}</div>
+                <h3 class="ss-step-title">{{ step.title }}</h3>
+                <p class="ss-step-desc">{{ step.description }}</p>
+              </div>
+            }
+          </div>
+
+          <!-- Dot nav (clickable — main control on mobile) -->
+          <nav class="ss-dots" aria-label="Story steps">
+            @for (step of steps; track $index) {
+              <button
+                class="ss-dot"
+                [class.is-active]="activeStep() === $index"
+                (click)="goTo($index)"
+                [attr.aria-label]="step.title"
+              >
+                <span class="ss-dot-label">{{ step.tag }} — {{ step.title }}</span>
+              </button>
+            }
+          </nav>
+
+        </aside>
+
+        <!-- ─────────────── RIGHT: screens ─────────── -->
+        <div class="ss-right" aria-hidden="true">
+          <div class="ss-glow"></div>
+
+          <!-- ── Screen 1: Employee Profile ── -->
+          <div class="ss-screen" [class.is-active]="activeStep() === 0">
+            <div class="mock-win">
+              <div class="mock-bar">
+                <div class="mock-traffic"><i></i><i></i><i></i></div>
+                <span class="mock-addr">nas-hr.com / people / profile</span>
+              </div>
+              <div class="mock-body profile-scr">
+
+                <div class="ps-head">
+                  <div class="ps-av">AK</div>
+                  <div class="ps-meta">
+                    <div class="ps-name">Ahmed Al-Khalidi</div>
+                    <div class="ps-role">Senior Product Manager · Engineering</div>
+                    <div class="ps-chips">
+                      <span>Dubai HQ</span><span>Full Time</span><span>Level 7</span>
+                    </div>
+                  </div>
+                  <div class="ps-pct"><strong>98%</strong><small>Profile</small></div>
+                </div>
+
+                <div class="ps-tabs">
+                  <div class="ps-tab is-on">Overview</div>
+                  <div class="ps-tab">Job Info</div>
+                  <div class="ps-tab">Documents</div>
+                  <div class="ps-tab">Timeline</div>
+                </div>
+
+                <div class="ps-stats">
+                  <div class="ps-stat"><strong>5.3 yrs</strong><small>Tenure</small></div>
+                  <div class="ps-stat"><strong>12</strong><small>Reports</small></div>
+                  <div class="ps-stat"><strong>8</strong><small>Docs</small></div>
+                  <div class="ps-stat"><strong>B2</strong><small>Pay Band</small></div>
+                </div>
+
+                <div class="ps-feed-lbl">Recent Activity</div>
+                <div class="ps-feed">
+                  <div class="ps-feed-row">
+                    <span class="fd c-teal"></span>
+                    <div><div class="fd-ev">Contract renewed</div><div class="fd-ts">Today, 09:14</div></div>
+                  </div>
+                  <div class="ps-feed-row">
+                    <span class="fd c-green"></span>
+                    <div><div class="fd-ev">Annual leave approved — 5 days</div><div class="fd-ts">Yesterday</div></div>
+                  </div>
+                  <div class="ps-feed-row">
+                    <span class="fd c-blue"></span>
+                    <div><div class="fd-ev">Reporting line updated</div><div class="fd-ts">May 13</div></div>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Screen 2: Attendance ── -->
+          <div class="ss-screen" [class.is-active]="activeStep() === 1">
+            <div class="mock-win">
+              <div class="mock-bar">
+                <div class="mock-traffic"><i></i><i></i><i></i></div>
+                <span class="mock-addr">nas-hr.com / attendance</span>
+              </div>
+              <div class="mock-body attend-scr">
+
+                <div class="at-head">
+                  <div class="at-month">May 2026</div>
+                  <div class="at-ctrl">
+                    <span>&#8249;</span><span>&#8250;</span>
+                    <span class="at-btn">Export</span>
+                  </div>
+                </div>
+
+                <div class="at-cal">
+                  <div class="at-cal-hd">
+                    @for (d of days; track $index) { <div>{{ d }}</div> }
+                  </div>
+                  <div class="at-cal-grid">
+                    @for (day of calDays; track $index) {
+                      <div class="at-day" [ngClass]="day.type">{{ day.n }}</div>
+                    }
+                  </div>
+                </div>
+
+                <div class="at-legend">
+                  <div class="leg"><span class="ld present"></span>Present</div>
+                  <div class="leg"><span class="ld late"></span>Late</div>
+                  <div class="leg"><span class="ld absent"></span>Absent</div>
+                  <div class="leg"><span class="ld weekend"></span>Off</div>
+                </div>
+
+                <div class="at-bal">
+                  <div class="bal-row">
+                    <span class="bl">Annual Leave</span>
+                    <div class="bt"><div class="bf" style="width:82%"></div></div>
+                    <span class="bv">18 / 22</span>
+                  </div>
+                  <div class="bal-row">
+                    <span class="bl">Sick Leave</span>
+                    <div class="bt"><div class="bf orange" style="width:53%"></div></div>
+                    <span class="bv">8 / 15</span>
+                  </div>
+                  <div class="bal-row">
+                    <span class="bl">Emergency</span>
+                    <div class="bt"><div class="bf red" style="width:20%"></div></div>
+                    <span class="bv">1 / 5</span>
+                  </div>
+                </div>
+
+                <div class="at-pending">
+                  <span class="pend-badge">2 pending requests</span>
+                  <span class="pend-link">View all</span>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Screen 3: Learning ── -->
+          <div class="ss-screen" [class.is-active]="activeStep() === 2">
+            <div class="mock-win">
+              <div class="mock-bar">
+                <div class="mock-traffic"><i></i><i></i><i></i></div>
+                <span class="mock-addr">nas-hr.com / learning</span>
+              </div>
+              <div class="mock-body learn-scr">
+
+                <div class="ln-head">
+                  <div class="ln-title">My Learning Path</div>
+                  <div class="ln-sub">3 courses in progress · Q2 2026</div>
+                </div>
+
+                <div class="ln-courses">
+                  <div class="ln-course">
+                    <div class="co-ic" style="--bg:#1e3a52">LE</div>
+                    <div class="co-body">
+                      <div class="co-name">Leadership Essentials</div>
+                      <div class="co-bar"><div class="co-fill" style="width:72%"></div></div>
+                      <div class="co-foot"><span class="cp">72%</span><span>4 h remaining</span></div>
+                    </div>
+                  </div>
+                  <div class="ln-course">
+                    <div class="co-ic" style="--bg:#1c3b30">DH</div>
+                    <div class="co-body">
+                      <div class="co-name">Data-Driven HR</div>
+                      <div class="co-bar"><div class="co-fill teal" style="width:45%"></div></div>
+                      <div class="co-foot"><span class="cp teal">45%</span><span>9 h remaining</span></div>
+                    </div>
+                  </div>
+                  <div class="ln-course">
+                    <div class="co-ic" style="--bg:#2a1f3d">CS</div>
+                    <div class="co-body">
+                      <div class="co-name">Communication Skills</div>
+                      <div class="co-bar"><div class="co-fill purple" style="width:90%"></div></div>
+                      <div class="co-foot"><span class="cp purple">90%</span><span>Almost done!</span></div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="ln-skills">
+                  <div class="sk-title">Skill Development</div>
+                  <div class="sk-row">
+                    <span>Strategic Thinking</span>
+                    <div class="sk-trk"><div class="sk-fill" style="width:85%"></div></div>
+                    <small>85%</small>
+                  </div>
+                  <div class="sk-row">
+                    <span>Team Leadership</span>
+                    <div class="sk-trk"><div class="sk-fill teal" style="width:68%"></div></div>
+                    <small>68%</small>
+                  </div>
+                  <div class="sk-row">
+                    <span>HR Analytics</span>
+                    <div class="sk-trk"><div class="sk-fill orange" style="width:74%"></div></div>
+                    <small>74%</small>
+                  </div>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- ── Screen 4: Performance ── -->
+          <div class="ss-screen" [class.is-active]="activeStep() === 3">
+            <div class="mock-win">
+              <div class="mock-bar">
+                <div class="mock-traffic"><i></i><i></i><i></i></div>
+                <span class="mock-addr">nas-hr.com / performance</span>
+              </div>
+              <div class="mock-body perf-scr">
+
+                <div class="pf-head">
+                  <div>
+                    <div class="pf-title">Performance Review · Q2 2026</div>
+                    <div class="pf-sub">Ahmed Al-Khalidi · Engineering</div>
+                  </div>
+                  <span class="pf-badge">Final</span>
+                </div>
+
+                <div class="pf-score-area">
+                  <div class="pf-ring">
+                    <svg viewBox="0 0 90 90" width="90" height="90">
+                      <circle cx="45" cy="45" r="34" fill="none"
+                              stroke="rgba(255,255,255,0.06)" stroke-width="8"/>
+                      <circle cx="45" cy="45" r="34" fill="none"
+                              stroke="#4CB4B5" stroke-width="8"
+                              stroke-dasharray="213.6" stroke-dashoffset="34"
+                              stroke-linecap="round"
+                              transform="rotate(-90 45 45)"/>
+                    </svg>
+                    <div class="pf-ring-val">
+                      <strong>4.2</strong><small>/5</small>
+                    </div>
+                  </div>
+                  <div class="pf-score-meta">
+                    <div class="pf-pct">84%</div>
+                    <div class="pf-lbl">Overall Score</div>
+                    <div class="pf-rank">Top 15% of team</div>
+                  </div>
+                </div>
+
+                <div class="pf-kpis">
+                  <div class="pf-kpi-hd">
+                    <span>KPI</span><span>Target</span><span>Actual</span><span>Status</span>
+                  </div>
+                  <div class="pf-kpi-row">
+                    <span>Revenue Growth</span><span>100K</span><span>112K</span>
+                    <span class="ok">+12%</span>
+                  </div>
+                  <div class="pf-kpi-row">
+                    <span>Client Retention</span><span>90%</span><span>94%</span>
+                    <span class="ok">Met</span>
+                  </div>
+                  <div class="pf-kpi-row">
+                    <span>NPS Score</span><span>80</span><span>88</span>
+                    <span class="ok">+10%</span>
+                  </div>
+                  <div class="pf-kpi-row">
+                    <span>Team Hiring</span><span>50</span><span>47</span>
+                    <span class="warn">94%</span>
+                  </div>
+                </div>
+
+                <div class="pf-payroll">
+                  <span class="pay-pulse"></span>
+                  Payroll status: <strong>Ready to process</strong>
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+        <!-- /ss-right -->
+
+      </div>
+    </div>
+  </div>
+  <!-- /ss-wrapper -->
+
+</section>

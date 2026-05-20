@@ -1,0 +1,100 @@
+<main class="page-reports">
+
+  <section class="mod-hero">
+    <div class="container mod-hero-inner">
+      <div class="mod-hero-copy reveal-up">
+        <span class="eyebrow">Reports & Salary</span>
+        <h1 class="mod-headline">Turn HR data into<br><em>salary-ready insights.</em></h1>
+        <p class="mod-sub">Connect attendance, requests, employee records, and salary-related data into clear reports that support faster, more accurate HR and finance decisions.</p>
+        <div class="mod-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Report tabs ── -->
+  <section class="reports-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Report Categories</span>
+        <h2 class="section-title">Reports That Connect HR and Finance</h2>
+      </div>
+
+      <!-- Tab bar -->
+      <div class="reports-tabs reveal-up">
+        @for (tab of tabs; track tab.label; let i = $index) {
+          <button class="reports-tab"
+                  [class.reports-tab--active]="activeTab() === i"
+                  (click)="activeTab.set(i)">
+            {{ tab.label }}
+          </button>
+        }
+      </div>
+
+      <!-- Active tab content -->
+      <div class="reports-panel reveal-up" style="--d:.1s">
+        <div class="reports-panel-copy">
+          <h3>{{ tabs[activeTab()].label }}</h3>
+          <p>{{ tabs[activeTab()].desc }}</p>
+          <ul class="reports-metrics">
+            @for (m of tabs[activeTab()].metrics; track m) {
+              <li>
+                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+                  <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
+                  <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3"
+                        stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+                {{ m }}
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="reports-panel-visual">
+          <!-- Chart placeholder -->
+          <div class="rp-chart">
+            <div class="rp-chart-bars">
+              @for (h of [60,80,45,90,70,55,85]; track h) {
+                <div class="rp-bar" [style.height.%]="h"></div>
+              }
+            </div>
+            <div class="rp-chart-label">{{ tabs[activeTab()].label }}</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Value ── -->
+  <section class="mgr-value-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Business Impact</span>
+        <h2 class="section-title">What your HR and finance teams gain.</h2>
+      </div>
+      <div class="mgr-value-grid reveal-stagger">
+        @for (v of value; track v.label) {
+          <div class="mgr-value-card">
+            <div class="mgr-value-check">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>{{ v.label }}</h4>
+            <p>{{ v.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to connect your HR data with salary insights?</h2>
+      <p>See how NAS HR reports give HR and finance teams the clarity they need.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+</main>

@@ -1,0 +1,76 @@
+<section id="contact" class="contact-section">
+  <div class="contact-blob contact-blob-tl"></div>
+  <div class="contact-blob contact-blob-br"></div>
+
+  <div class="container contact-inner">
+
+    <div class="contact-head">
+      <span class="eyebrow eyebrow-light">{{ t('Book a Demo', 'احجز عرضاً') }}</span>
+      <h2 class="display-title contact-headline">
+        {{ t('Make HR effortless.', 'اجعل الموارد البشرية') }}<br>
+        <em>{{ t('Start today.', 'سهلة. ابدأ اليوم.') }}</em>
+      </h2>
+      <p class="contact-sub">
+        {{ t('Join the companies running smarter HR with NAS. Book a live 30-minute demo — no commitment required.', 'انضم إلى الشركات التي تدير مواردها البشرية بذكاء مع NAS. احجز عرضاً مباشراً لمدة 30 دقيقة — بدون أي التزام.') }}
+      </p>
+      <div class="contact-perks">
+        @for (perk of perks; track perk.en) {
+          <div class="contact-perk">
+            <svg class="perk-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
+              <path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+            <span>{{ t(perk.en, perk.ar) }}</span>
+          </div>
+        }
+      </div>
+    </div>
+
+    <div class="contact-card">
+      @if (!submitted) {
+        <form (ngSubmit)="submit()" class="form-inner">
+          <h3 class="form-title">{{ t('Get in touch', 'تواصل معنا') }}</h3>
+          <div class="form-row">
+            <div class="form-field">
+              <label>{{ t('Full Name', 'الاسم الكامل') }}</label>
+              <input type="text" [(ngModel)]="form.name" name="name" [placeholder]="t('Your name', 'اسمك')" required />
+            </div>
+            <div class="form-field">
+              <label>{{ t('Work Email', 'البريد الإلكتروني') }}</label>
+              <input type="email" [(ngModel)]="form.email" name="email" [placeholder]="t('you@company.com', 'you@company.com')" required />
+            </div>
+          </div>
+          <div class="form-row">
+            <div class="form-field">
+              <label>{{ t('Company', 'الشركة') }}</label>
+              <input type="text" [(ngModel)]="form.company" name="company" [placeholder]="t('Your company', 'شركتك')" />
+            </div>
+            <div class="form-field">
+              <label>{{ t('Phone', 'الهاتف') }}</label>
+              <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="+971 50 000 0000" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label>{{ t('Message', 'الرسالة') }}</label>
+            <textarea [(ngModel)]="form.message" name="message" rows="3" [placeholder]="t('Tell us about your team size and HR needs...', 'أخبرنا عن حجم فريقك واحتياجاتك...')"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary submit-btn">
+            {{ t('Book My Demo →', 'احجز عرضي ←') }}
+          </button>
+          <p class="form-note">{{ t('No spam. We respond within 24 hours.', 'لا بريد مزعج. نرد خلال 24 ساعة.') }}</p>
+        </form>
+      } @else {
+        <div class="form-success">
+          <div class="success-icon">
+            <svg width="36" height="36" viewBox="0 0 36 36" fill="none" aria-hidden="true">
+              <circle cx="18" cy="18" r="16.5" stroke="currentColor" stroke-width="1.5"/>
+              <path d="M11 18l5 5 9-10" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <h3>{{ t("You're on the list!", 'تم التسجيل!') }}</h3>
+          <p>{{ t("Our team will reach out within 24 hours to schedule your demo.", 'سيتواصل فريقنا معك خلال 24 ساعة لتحديد موعد العرض.') }}</p>
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,0 +1,178 @@
+<section id="features" class="features-section section-py">
+  <div class="container">
+
+    <!-- Section head -->
+    <div class="section-head-center reveal">
+      <span class="eyebrow">{{ t('Platform Modules', 'وحدات المنصة') }}</span>
+      <h2 class="section-title">{{ t('Everything HR in one place', 'كل الموارد البشرية في مكان واحد') }}</h2>
+      <p class="section-sub section-sub-center">
+        {{ t('From hire to retire — every module connected, every process streamlined.', 'من التوظيف إلى التقاعد — كل وحدة مترابطة وكل عملية مبسّطة.') }}
+      </p>
+    </div>
+
+    <!-- Module cards grid -->
+    <div class="modules-grid" [class.animate]="visible">
+      @for (m of modules; track m.en; let i = $index) {
+        <div class="module-card" [style.--i]="i">
+
+          <!-- Illustration area -->
+          <div class="card-art" [style.background]="m.color">
+
+            <!-- PAYROLL -->
+            @if (m.art === 'payroll') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="20" width="160" height="90" rx="10" fill="rgba(255,255,255,0.08)"/>
+                <rect x="32" y="32" width="80" height="8" rx="4" fill="rgba(255,255,255,0.5)"/>
+                <rect x="32" y="48" width="50" height="6" rx="3" fill="rgba(255,255,255,0.25)"/>
+                <rect x="32" y="64" width="136" height="1" fill="rgba(255,255,255,0.1)"/>
+                <rect x="32" y="74" width="40" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+                <rect x="80" y="74" width="40" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+                <rect x="128" y="74" width="40" height="6" rx="3" fill="rgba(255,255,255,0.35)"/>
+                <rect x="32" y="88" width="40" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+                <rect x="80" y="88" width="40" height="6" rx="3" fill="rgba(255,255,255,0.2)"/>
+                <rect x="128" y="88" width="40" height="6" rx="3" fill="rgba(255,255,255,0.55)"/>
+                <circle cx="168" cy="35" r="12" fill="rgba(255,255,255,0.15)"/>
+                <text x="164" y="40" font-size="12" fill="white" font-weight="bold">$</text>
+              </svg>
+            }
+
+            <!-- ATTENDANCE -->
+            @if (m.art === 'attendance') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="30" y="15" width="140" height="100" rx="10" fill="rgba(255,255,255,0.08)"/>
+                <rect x="30" y="15" width="140" height="28" rx="10" fill="rgba(255,255,255,0.12)"/>
+                <rect x="30" y="30" width="140" height="13" fill="rgba(255,255,255,0.12)"/>
+                <rect x="45" y="21" width="30" height="6" rx="3" fill="rgba(255,255,255,0.5)"/>
+                @for (col of [0,1,2,3,4,5,6]; track col) {
+                  <rect [attr.x]="42 + col*19" y="50" width="13" height="6" rx="2" fill="rgba(255,255,255,0.2)"/>
+                }
+                @for (row of [0,1,2,3]; track row) {
+                  @for (col of [0,1,2,3,4,5,6]; track col) {
+                    <rect
+                      [attr.x]="42 + col*19"
+                      [attr.y]="62 + row*14"
+                      width="13" height="10" rx="2"
+                      [attr.fill]="(row===1 && col===2) || (row===2 && col===4) || (row===0 && col===5) ? 'rgba(255,255,255,0.55)' : 'rgba(255,255,255,0.08)'"
+                    />
+                  }
+                }
+              </svg>
+            }
+
+            <!-- RECRUITMENT -->
+            @if (m.art === 'recruitment') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="20" width="52" height="90" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <rect x="74" y="20" width="52" height="90" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <rect x="133" y="20" width="52" height="90" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <rect x="22" y="28" width="38" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="81" y="28" width="38" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="140" y="28" width="38" height="5" rx="2" fill="rgba(255,255,255,0.4)"/>
+                @for (r of [0,1,2]; track r) {
+                  <rect [attr.x]="22" [attr.y]="40 + r*22" width="38" height="16" rx="4" fill="rgba(255,255,255,0.15)"/>
+                  <rect [attr.x]="81" [attr.y]="40 + r*22" width="38" height="16" rx="4" fill="rgba(255,255,255,0.15)"/>
+                }
+                <rect x="140" y="40" width="38" height="16" rx="4" fill="rgba(255,255,255,0.3)"/>
+                <rect x="140" y="62" width="38" height="16" rx="4" fill="rgba(255,255,255,0.15)"/>
+              </svg>
+            }
+
+            <!-- PERFORMANCE -->
+            @if (m.art === 'performance') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="20" y="80" width="20" height="35" rx="3" fill="rgba(255,255,255,0.2)"/>
+                <rect x="48" y="60" width="20" height="55" rx="3" fill="rgba(255,255,255,0.3)"/>
+                <rect x="76" y="45" width="20" height="70" rx="3" fill="rgba(255,255,255,0.4)"/>
+                <rect x="104" y="30" width="20" height="85" rx="3" fill="rgba(255,255,255,0.55)"/>
+                <rect x="132" y="18" width="20" height="97" rx="3" fill="rgba(255,255,255,0.7)"/>
+                <rect x="160" y="10" width="20" height="105" rx="3" fill="rgba(255,255,255,0.9)"/>
+                <path d="M20 75 L58 55 L86 42 L114 27 L142 15 L170 8" stroke="rgba(255,255,255,0.5)" stroke-width="2" stroke-dasharray="4 3"/>
+              </svg>
+            }
+
+            <!-- MOBILE -->
+            @if (m.art === 'mobile') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="70" y="8" width="60" height="114" rx="14" fill="rgba(255,255,255,0.12)"/>
+                <rect x="76" y="18" width="48" height="80" rx="6" fill="rgba(255,255,255,0.1)"/>
+                <rect x="84" y="24" width="32" height="5" rx="2" fill="rgba(255,255,255,0.5)"/>
+                <rect x="84" y="34" width="22" height="4" rx="2" fill="rgba(255,255,255,0.25)"/>
+                <rect x="84" y="44" width="32" height="10" rx="4" fill="rgba(255,255,255,0.15)"/>
+                <rect x="84" y="60" width="32" height="10" rx="4" fill="rgba(255,255,255,0.15)"/>
+                <rect x="84" y="76" width="32" height="10" rx="4" fill="rgba(255,255,255,0.25)"/>
+                <rect x="88" y="104" width="24" height="5" rx="2" fill="rgba(255,255,255,0.3)"/>
+              </svg>
+            }
+
+            <!-- ANALYTICS -->
+            @if (m.art === 'analytics') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <rect x="15" y="15" width="80" height="55" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <rect x="105" y="15" width="80" height="55" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <rect x="15" y="78" width="170" height="37" rx="8" fill="rgba(255,255,255,0.08)"/>
+                <path d="M25 55 Q45 30 65 42 Q80 50 95 25" stroke="rgba(255,255,255,0.6)" stroke-width="2" fill="none"/>
+                <circle cx="65" cy="42" r="4" fill="rgba(255,255,255,0.9)"/>
+                <circle cx="95" cy="25" r="3" fill="rgba(255,255,255,0.6)"/>
+                <circle cx="155" cy="35" r="20" stroke="rgba(255,255,255,0.3)" stroke-width="8"/>
+                <path d="M155 35 L155 15 A20 20 0 0 1 172 45 Z" fill="rgba(255,255,255,0.6)"/>
+                <rect x="25" y="86" width="50" height="4" rx="2" fill="rgba(255,255,255,0.4)"/>
+                <rect x="25" y="96" width="140" height="3" rx="1" fill="rgba(255,255,255,0.1)"/>
+                <rect x="25" y="96" width="90" height="3" rx="1" fill="rgba(255,255,255,0.4)"/>
+                <rect x="25" y="105" width="140" height="3" rx="1" fill="rgba(255,255,255,0.1)"/>
+                <rect x="25" y="105" width="60" height="3" rx="1" fill="rgba(255,255,255,0.25)"/>
+              </svg>
+            }
+
+            <!-- ONBOARDING -->
+            @if (m.art === 'onboarding') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <!-- Step track line -->
+                <line x1="50" y1="35" x2="50" y2="105" stroke="rgba(255,255,255,0.1)" stroke-width="2"/>
+                <!-- Step 1 — complete -->
+                <circle cx="50" cy="35" r="9" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <path d="M46 35l3 3 5-5" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="68" y="31" width="76" height="4" rx="2" fill="rgba(255,255,255,0.45)"/>
+                <rect x="68" y="39" width="48" height="3" rx="1.5" fill="rgba(255,255,255,0.18)"/>
+                <!-- Step 2 — complete -->
+                <circle cx="50" cy="65" r="9" fill="rgba(255,255,255,0.18)" stroke="rgba(255,255,255,0.5)" stroke-width="1.5"/>
+                <path d="M46 65l3 3 5-5" stroke="rgba(255,255,255,0.9)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <rect x="68" y="61" width="60" height="4" rx="2" fill="rgba(255,255,255,0.45)"/>
+                <rect x="68" y="69" width="36" height="3" rx="1.5" fill="rgba(255,255,255,0.18)"/>
+                <!-- Step 3 — active -->
+                <circle cx="50" cy="95" r="9" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.35)" stroke-width="1.5" stroke-dasharray="3 2"/>
+                <circle cx="50" cy="95" r="3" fill="rgba(255,255,255,0.6)"/>
+                <rect x="68" y="91" width="70" height="4" rx="2" fill="rgba(255,255,255,0.22)"/>
+                <rect x="68" y="99" width="44" height="3" rx="1.5" fill="rgba(255,255,255,0.1)"/>
+              </svg>
+            }
+
+            <!-- COMPLIANCE -->
+            @if (m.art === 'compliance') {
+              <svg viewBox="0 0 200 130" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M100 15 L155 35 L155 75 C155 100 130 118 100 125 C70 118 45 100 45 75 L45 35 Z" fill="rgba(255,255,255,0.08)" stroke="rgba(255,255,255,0.2)" stroke-width="1.5"/>
+                <path d="M100 22 L148 39 L148 75 C148 96 126 112 100 119 C74 112 52 96 52 75 L52 39 Z" fill="rgba(255,255,255,0.06)"/>
+                <path d="M78 72 L90 84 L122 56" stroke="rgba(255,255,255,0.9)" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/>
+                <circle cx="100" cy="72" r="22" stroke="rgba(255,255,255,0.15)" stroke-width="1"/>
+              </svg>
+            }
+
+          </div>
+
+          <!-- Card content -->
+          <div class="card-body">
+            <span class="card-tag" [style.background]="m.light" [style.color]="m.color">
+              {{ t(m.tag_en, m.tag_ar) }}
+            </span>
+            <h3 class="card-title">{{ t(m.en, m.ar) }}</h3>
+            <p class="card-desc">{{ t(m.desc_en, m.desc_ar) }}</p>
+            <a href="#contact" class="card-link" [style.color]="m.color">
+              {{ t('Learn more', 'اعرف أكثر') }} →
+            </a>
+          </div>
+
+        </div>
+      }
+    </div>
+
+  </div>
+</section>

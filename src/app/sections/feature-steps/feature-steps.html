@@ -1,0 +1,301 @@
+<section class="fs-section reveal">
+<div class="fs-card">
+
+  <!-- ══ Desktop: sticky scroll zone ══ -->
+  <div class="fs-scroll-zone">
+    <div class="fs-sticky">
+      <div class="fs-inner">
+
+        <!-- Header -->
+        <div class="fs-sticky-hd">
+          <span class="fs-eyebrow">{{ t('Platform Capabilities', 'إمكانيات المنصة') }}</span>
+          <h2 class="fs-hl">
+            {{ t('Everything your HR team needs, ', 'كل ما يحتاجه فريق الموارد البشرية، ') }}<em>{{ t('connected in one platform.', 'في منصة واحدة متكاملة.') }}</em>
+          </h2>
+        </div>
+
+        <!-- Step content: nums + main -->
+        <div class="fs-content">
+
+          <!-- Number column -->
+          <nav class="fs-nums" aria-label="Feature steps">
+            @for (step of steps; track $index) {
+              <button
+                class="fs-num"
+                [class.is-active]="active() === $index"
+                (click)="goTo($index)"
+                [attr.aria-label]="'Step ' + step.num + ': ' + step.title"
+              >{{ step.num }}</button>
+            }
+          </nav>
+
+          <!-- Main: copy + preview -->
+          <div class="fs-main">
+
+            <!-- Step copy -->
+            <div class="fs-copy-wrap">
+              @for (step of steps; track $index) {
+                <div class="fs-copy" [class.is-active]="active() === $index">
+                  <div class="fs-step-counter">{{ step.num }} <span>/ 06</span></div>
+                  <h3 class="fs-step-title">{{ step.title }}</h3>
+                  <p class="fs-step-desc">{{ step.desc }}</p>
+                  <div class="fs-tags">
+                    @for (tag of step.tags; track $index) {
+                      <span class="fs-tag">{{ tag }}</span>
+                    }
+                  </div>
+                </div>
+              }
+            </div>
+
+            <!-- Preview box -->
+            <div class="fs-box">
+
+              <!-- Screen 01: HRIS Dashboard -->
+              <div class="fs-screen" [class.is-active]="active() === 0">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / dashboard</span>
+                </div>
+                <div class="mock-content">
+                  <div class="sc01-stats">
+                    <div class="stat-card"><strong>3,284</strong><small>Total Employees</small></div>
+                    <div class="stat-card"><strong>14</strong><small>Departments</small></div>
+                    <div class="stat-card"><strong>6</strong><small>Locations</small></div>
+                    <div class="stat-card teal"><strong>98.2%</strong><small>Profile Completion</small></div>
+                  </div>
+                  <div class="sc01-list">
+                    <div class="list-hd">
+                      <span>Employee</span><span>Department</span><span>Location</span><span>Status</span>
+                    </div>
+                    <div class="list-row">
+                      <div class="emp-cell"><div class="av" style="--c:#4CB4B5">SR</div><div><div class="en">Sara Al-Rashidi</div><div class="er">Head of HR</div></div></div>
+                      <span>Human Resources</span><span>Dubai</span><span class="badge active">Active</span>
+                    </div>
+                    <div class="list-row">
+                      <div class="emp-cell"><div class="av" style="--c:#6366f1">KM</div><div><div class="en">Khalid Mansouri</div><div class="er">Senior Engineer</div></div></div>
+                      <span>Engineering</span><span>Riyadh</span><span class="badge active">Active</span>
+                    </div>
+                    <div class="list-row">
+                      <div class="emp-cell"><div class="av" style="--c:#f47920">NA</div><div><div class="en">Nora Al-Amri</div><div class="er">Finance Analyst</div></div></div>
+                      <span>Finance</span><span>Abu Dhabi</span><span class="badge active">Active</span>
+                    </div>
+                    <div class="list-row">
+                      <div class="emp-cell"><div class="av" style="--c:#8b5cf6">FA</div><div><div class="en">Faisal Al-Otaibi</div><div class="er">Sales Manager</div></div></div>
+                      <span>Sales</span><span>Doha</span><span class="badge onleave">On Leave</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 02: Self-Service -->
+              <div class="fs-screen" [class.is-active]="active() === 1">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / my-requests</span>
+                </div>
+                <div class="mock-content">
+                  <div class="sc02-head">
+                    <div class="sc02-title">My Requests</div>
+                    <button class="sc02-btn">+ New Request</button>
+                  </div>
+                  <div class="sc02-list">
+                    <div class="req-card">
+                      <div class="req-type leave">Annual Leave</div>
+                      <div class="req-detail"><div class="rd-label">May 20 – May 27, 2026</div><div class="rd-sub">8 working days · Manager: Sara Al-R.</div></div>
+                      <span class="req-badge approved">Approved</span>
+                    </div>
+                    <div class="req-card">
+                      <div class="req-type doc">Document</div>
+                      <div class="req-detail"><div class="rd-label">Employment Letter — English</div><div class="rd-sub">Requested May 15, 2026</div></div>
+                      <span class="req-badge processing">Processing</span>
+                    </div>
+                    <div class="req-card">
+                      <div class="req-type wfh">Remote Work</div>
+                      <div class="req-detail"><div class="rd-label">Work from Home — 3 days/week</div><div class="rd-sub">May 18 – June 18</div></div>
+                      <span class="req-badge pending">Pending</span>
+                    </div>
+                    <div class="req-card">
+                      <div class="req-type expense">Expense</div>
+                      <div class="req-detail"><div class="rd-label">Travel Reimbursement — LE 1,240</div><div class="rd-sub">Business trip Dubai → Riyadh</div></div>
+                      <span class="req-badge approved">Approved</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 03: Attendance -->
+              <div class="fs-screen" [class.is-active]="active() === 2">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / attendance</span>
+                </div>
+                <div class="mock-content">
+                  <div class="sc03-head">
+                    <div class="sc03-title">This Week <span>May 12 – 16, 2026</span></div>
+                    <div class="sc03-summary">
+                      <span class="su-item"><b>22</b> Present</span>
+                      <span class="su-item warn"><b>3</b> Late</span>
+                      <span class="su-item red"><b>1</b> Absent</span>
+                    </div>
+                  </div>
+                  <div class="sc03-week">
+                    <div class="week-row hd"><span>Day</span><span>Check In</span><span>Check Out</span><span>Hours</span><span>Status</span></div>
+                    <div class="week-row"><span class="wd">Mon 12</span><span>08:57</span><span>17:04</span><span>8h 07m</span><span class="ws on-time">On Time</span></div>
+                    <div class="week-row"><span class="wd">Tue 13</span><span>09:14</span><span>17:31</span><span>8h 17m</span><span class="ws on-time">On Time</span></div>
+                    <div class="week-row"><span class="wd">Wed 14</span><span>09:43</span><span>17:00</span><span>7h 17m</span><span class="ws late">Late</span></div>
+                    <div class="week-row"><span class="wd">Thu 15</span><span>08:51</span><span>17:10</span><span>8h 19m</span><span class="ws on-time">On Time</span></div>
+                    <div class="week-row today"><span class="wd">Fri 16</span><span>08:44</span><span>—</span><span>In Progress</span><span class="ws in-progress">Active</span></div>
+                  </div>
+                  <div class="sc03-bal">
+                    <div class="bal-item">
+                      <div class="bi-label">Annual Leave</div>
+                      <div class="bi-track"><div class="bi-fill" style="width:82%"></div></div>
+                      <div class="bi-val">18 / 22 days</div>
+                    </div>
+                    <div class="bal-item">
+                      <div class="bi-label">Sick Leave</div>
+                      <div class="bi-track"><div class="bi-fill orange" style="width:53%"></div></div>
+                      <div class="bi-val">8 / 15 days</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 04: Learning -->
+              <div class="fs-screen" [class.is-active]="active() === 3">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / learning</span>
+                </div>
+                <div class="mock-content">
+                  <div class="sc04-head">
+                    <div class="sc04-title">My Learning Path</div>
+                    <div class="sc04-meta">Q2 2026 · 3 Active Courses · 2 Completed</div>
+                  </div>
+                  <div class="sc04-courses">
+                    <div class="course-card">
+                      <div class="cc-ic" style="--bg:#e8f7f7;--c:#4CB4B5">LE</div>
+                      <div class="cc-body">
+                        <div class="cc-name">Leadership Essentials</div>
+                        <div class="cc-meta">Module 6 of 9 · 4h remaining</div>
+                        <div class="cc-bar"><div class="cc-fill" style="width:72%"></div></div>
+                      </div>
+                      <div class="cc-pct">72%</div>
+                    </div>
+                    <div class="course-card">
+                      <div class="cc-ic" style="--bg:#eef2ff;--c:#6366f1">DH</div>
+                      <div class="cc-body">
+                        <div class="cc-name">Data-Driven HR</div>
+                        <div class="cc-meta">Module 3 of 7 · 9h remaining</div>
+                        <div class="cc-bar"><div class="cc-fill indigo" style="width:45%"></div></div>
+                      </div>
+                      <div class="cc-pct indigo">45%</div>
+                    </div>
+                    <div class="course-card">
+                      <div class="cc-ic" style="--bg:#fff7ed;--c:#f47920">CS</div>
+                      <div class="cc-body">
+                        <div class="cc-name">Communication Skills</div>
+                        <div class="cc-meta">Module 8 of 9 · Almost done!</div>
+                        <div class="cc-bar"><div class="cc-fill orange" style="width:90%"></div></div>
+                      </div>
+                      <div class="cc-pct orange">90%</div>
+                    </div>
+                  </div>
+                  <div class="sc04-skills">
+                    <div class="sk-row"><span>Strategic Thinking</span><div class="sk-t"><div class="sk-f" style="width:85%"></div></div><b>85</b></div>
+                    <div class="sk-row"><span>Team Leadership</span><div class="sk-t"><div class="sk-f teal" style="width:68%"></div></div><b>68</b></div>
+                    <div class="sk-row"><span>HR Analytics</span><div class="sk-t"><div class="sk-f orange" style="width:74%"></div></div><b>74</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 05: Performance -->
+              <div class="fs-screen" [class.is-active]="active() === 4">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / performance</span>
+                </div>
+                <div class="mock-content sc05">
+                  <div class="sc05-top">
+                    <div class="sc05-score-card">
+                      <div class="sc05-label">Overall Score · Q2 2026</div>
+                      <div class="sc05-score">4.2<span>/5</span></div>
+                      <div class="sc05-bar"><div class="sc05-fill" style="width:84%"></div></div>
+                      <div class="sc05-sub">84% · Top 15% of team</div>
+                    </div>
+                    <div class="sc05-breakdown">
+                      <div class="bd-row"><span>Goal Achievement</span><b class="ok">92%</b></div>
+                      <div class="bd-row"><span>Collaboration</span><b class="ok">88%</b></div>
+                      <div class="bd-row"><span>Innovation</span><b class="warn">76%</b></div>
+                      <div class="bd-row"><span>Leadership</span><b class="ok">81%</b></div>
+                    </div>
+                  </div>
+                  <div class="sc05-kpis">
+                    <div class="kpi-hd"><span>KPI</span><span>Target</span><span>Actual</span><span>Status</span></div>
+                    <div class="kpi-row"><span>Revenue Growth</span><span>100K</span><span>112K</span><b class="ok">+12%</b></div>
+                    <div class="kpi-row"><span>Client Retention</span><span>90%</span><span>94%</span><b class="ok">Met</b></div>
+                    <div class="kpi-row"><span>NPS Score</span><span>80</span><span>88</span><b class="ok">+10%</b></div>
+                    <div class="kpi-row"><span>Team Hiring</span><span>50</span><span>47</span><b class="warn">94%</b></div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Screen 06: Payroll -->
+              <div class="fs-screen" [class.is-active]="active() === 5">
+                <div class="mock-bar">
+                  <div class="mock-dots"><i></i><i></i><i></i></div>
+                  <span>nas-hr.com / payroll</span>
+                </div>
+                <div class="mock-content">
+                  <div class="sc06-summary">
+                    <div class="pay-card"><div class="pc-label">Gross Salary</div><div class="pc-val">LE 4,820,000</div><div class="pc-delta up">+3.2%</div></div>
+                    <div class="pay-card"><div class="pc-label">Deductions</div><div class="pc-val">LE 482,000</div><div class="pc-delta down">-1.1%</div></div>
+                    <div class="pay-card teal"><div class="pc-label">Net Payroll</div><div class="pc-val">LE 4,338,000</div><div class="pc-delta up">+3.5%</div></div>
+                    <div class="pay-card"><div class="pc-label">Employees Paid</div><div class="pc-val">3,241 / 3,284</div><div class="pc-delta neutral">98.7%</div></div>
+                  </div>
+                  <div class="sc06-chart">
+                    <div class="chart-title">Payroll by Department</div>
+                    <div class="chart-bars">
+                      <div class="cb-row"><span>Engineering</span><div class="cb-track"><div class="cb-fill" style="width:88%"></div></div><b>LE 1.2M</b></div>
+                      <div class="cb-row"><span>Operations</span><div class="cb-track"><div class="cb-fill teal" style="width:72%"></div></div><b>LE 980K</b></div>
+                      <div class="cb-row"><span>Sales</span><div class="cb-track"><div class="cb-fill orange" style="width:58%"></div></div><b>LE 790K</b></div>
+                      <div class="cb-row"><span>Finance</span><div class="cb-track"><div class="cb-fill purple" style="width:44%"></div></div><b>LE 600K</b></div>
+                      <div class="cb-row"><span>HR</span><div class="cb-track"><div class="cb-fill" style="width:28%"></div></div><b>LE 385K</b></div>
+                    </div>
+                  </div>
+                  <div class="sc06-status">
+                    <span class="pay-dot"></span>
+                    Payroll cycle closed · <strong>All 3,241 transfers processed</strong>
+                  </div>
+                </div>
+              </div>
+
+            </div><!-- /fs-box -->
+          </div><!-- /fs-main -->
+        </div><!-- /fs-content -->
+
+      </div><!-- /fs-inner -->
+    </div><!-- /fs-sticky -->
+  </div><!-- /fs-scroll-zone -->
+
+  <!-- ══ Mobile: scrollable step cards ══ -->
+  <div class="fs-mobile">
+    @for (step of steps; track $index) {
+      <div class="fs-mob-card" [class.is-active]="active() === $index" (click)="goTo($index)">
+        <div class="mob-num">{{ step.num }}</div>
+        <div class="mob-body">
+          <h3 class="mob-title">{{ step.title }}</h3>
+          <p class="mob-desc">{{ step.desc }}</p>
+          <div class="mob-tags">
+            @for (tag of step.tags; track $index) {
+              <span>{{ tag }}</span>
+            }
+          </div>
+        </div>
+      </div>
+    }
+  </div>
+
+</div><!-- /fs-card -->
+</section>

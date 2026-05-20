@@ -1,0 +1,67 @@
+<main class="page-faqs">
+
+  <!-- ── Hero ── -->
+  <section class="faqs-hero">
+    <div class="container faqs-hero-inner">
+      <div class="faqs-hero-copy reveal-up">
+        <span class="eyebrow eyebrow-light">FAQs</span>
+        <h1 class="faqs-headline">Answers to your<br><em>most common questions.</em></h1>
+        <p class="faqs-sub">Can't find what you're looking for? Reach out to our team directly.</p>
+        <a routerLink="/contact" class="btn btn-primary">Contact Us</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FAQ Content ── -->
+  <section class="faqs-section">
+    <div class="container faqs-layout">
+
+      <!-- Left: category nav -->
+      <nav class="faqs-nav reveal-up">
+        @for (cat of categories; track cat.label; let i = $index) {
+          <button class="faqs-nav-item"
+                  [class.faqs-nav-item--active]="openCategory() === i"
+                  (click)="toggleCategory(i)">
+            {{ cat.label }}
+          </button>
+        }
+      </nav>
+
+      <!-- Right: questions -->
+      <div class="faqs-content reveal-up" style="--d:.1s">
+        <h3 class="faqs-cat-title">{{ categories[openCategory()].label }}</h3>
+        <div class="faqs-list">
+          @for (faq of categories[openCategory()].faqs; track faq.q; let i = $index) {
+            <div class="faqs-item"
+                 [class.faqs-item--open]="activeFaq() === openCategory() + '-' + i">
+              <button class="faqs-q"
+                      (click)="toggleQuestion(openCategory() + '-' + i)">
+                {{ faq.q }}
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" aria-hidden="true">
+                  <path d="M19 9l-7 7-7-7"/>
+                </svg>
+              </button>
+              @if (activeFaq() === openCategory() + '-' + i) {
+                <div class="faqs-a">{{ faq.a }}</div>
+              }
+            </div>
+          }
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Still have questions ── -->
+  <section class="faqs-contact-band">
+    <div class="container faqs-contact-inner reveal-up">
+      <div class="faqs-contact-copy">
+        <h2>Still have questions?</h2>
+        <p>Our team is happy to answer anything about the platform, pricing, or implementation.</p>
+      </div>
+      <a routerLink="/contact" class="btn btn-primary">Get in Touch</a>
+    </div>
+  </section>
+
+</main>

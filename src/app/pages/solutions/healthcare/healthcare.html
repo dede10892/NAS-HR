@@ -1,0 +1,78 @@
+<main class="page-solution page-healthcare">
+  <section class="sol-hero">
+    <div class="container sol-hero-inner">
+      <div class="sol-hero-copy">
+        <span class="eyebrow eyebrow-light">Healthcare</span>
+        <h1 class="sol-headline">HR that keeps up with<br><em>clinical operations.</em></h1>
+        <p class="sol-sub">NAS HR helps hospitals, clinics, and healthcare groups manage credentialed staff, shift coverage, training compliance, and employee services — with the accuracy clinical environments demand.</p>
+        <div class="sol-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/modules/all-features" class="btn btn-secondary">Explore Modules</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-ch-section">
+    <div class="container">
+      <p class="sol-overline">Industry Challenges</p>
+      <h2 class="sol-section-title">What healthcare HR teams face.</h2>
+      <div class="sol-ch-layout">
+        <nav class="sol-ch-nav" aria-label="Challenges">
+          @for (c of challenges; track c.label; let i = $index) {
+            <button class="sol-ch-btn" [class.sol-ch-btn--active]="activeChallenge() === i" (click)="activeChallenge.set(i)">
+              <span class="sol-ch-idx">{{ (i + 1).toString().padStart(2, '0') }}</span>
+              <span class="sol-ch-lbl">{{ c.label }}</span>
+            </button>
+          }
+        </nav>
+        <div class="sol-ch-detail">
+          <span class="sol-ch-big-num">{{ (activeChallenge() + 1).toString().padStart(2, '0') }}</span>
+          <h3 class="sol-ch-detail-title">{{ challenges[activeChallenge()].label }}</h3>
+          <p class="sol-ch-detail-desc">{{ challenges[activeChallenge()].desc }}</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-helps-section">
+    <div class="container">
+      <p class="sol-overline">How NAS HR Helps</p>
+      <h2 class="sol-section-title">Capabilities built for healthcare HR.</h2>
+      <div class="sol-helps-rows">
+        @for (h of helps; track h.label; let i = $index) {
+          <div class="sol-helps-row" [style.--i]="i">
+            <span class="sol-helps-n">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <div class="sol-helps-body">
+              <h3>{{ h.label }}</h3>
+              <p>{{ h.desc }}</p>
+            </div>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <section class="sol-mods-section">
+    <div class="container">
+      <p class="sol-overline">Modules Used</p>
+      <h2 class="sol-section-title">The NAS HR modules healthcare teams use most.</h2>
+      <div class="sol-mods-grid">
+        @for (m of modules; track m; let i = $index) {
+          <div class="sol-mod-tile" [style.--i]="i">{{ m }}</div>
+        }
+      </div>
+      <div class="sol-mods-cta">
+        <a routerLink="/modules/all-features" class="btn btn-outline-dark">View All Modules</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner">
+      <h2>Ready to bring precision HR to your healthcare organization?</h2>
+      <p>See how NAS HR handles credentialing, shift management, training, and end-of-service with clinical-grade accuracy.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+</main>

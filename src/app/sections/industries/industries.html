@@ -1,0 +1,167 @@
+<section id="solutions-by-industry" class="ind-section">
+  <div class="ind-outer">
+
+    <!-- ── Section header ── -->
+    <div class="ind-head">
+      <span class="ind-eyebrow">{{ t('Solutions by Industry', 'حلول حسب القطاع') }}</span>
+      <h2 class="ind-title">
+        {{ t('One intelligent people system,', 'نظام ذكي واحد للأفراد،') }}<br>
+        <em>{{ t('adapted to the way your industry works.', 'يتكيّف مع طريقة عمل قطاعك.') }}</em>
+      </h2>
+      <p class="ind-sub">
+        {{ t(
+          'NAS HR adapts to every workforce model — helping teams manage people, attendance, approvals, learning, and payroll-ready data with ease.',
+          'يتكيّف NAS HR مع كل نموذج عمل — لمساعدة الفرق في إدارة الأفراد والحضور والموافقات والتعلم والبيانات الجاهزة للرواتب بسهولة.'
+        ) }}
+      </p>
+    </div>
+
+    <!-- ── Tabs ── -->
+    <div class="ind-tabs" role="tablist">
+      @for (item of industries; track item.key; let i = $index) {
+        <button
+          class="ind-tab"
+          role="tab"
+          [class.is-active]="active() === i"
+          [attr.aria-selected]="active() === i"
+          (click)="switchTo(i)"
+        >
+          {{ t(item.en, item.ar) }}
+        </button>
+      }
+    </div>
+
+    <!-- ── Main card ── -->
+    <div class="ind-card" [class.is-switching]="animating()">
+
+      <!-- Left: numbered list -->
+      <div class="ind-left">
+        @for (item of industries; track item.key; let i = $index) {
+          <button
+            class="ind-list-item"
+            [class.is-active]="active() === i"
+            (click)="switchTo(i)"
+          >
+            <span class="ind-list-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
+            <span class="ind-list-label">{{ t(item.en, item.ar) }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Centre: diagram -->
+      <div class="ind-center">
+        <!-- Industry name + description -->
+        <div class="ind-center-hd">
+          <h3 class="ind-center-name">{{ t(ind.en, ind.ar) }}</h3>
+          <p class="ind-center-desc">{{ t(ind.desc_en, ind.desc_ar) }}</p>
+        </div>
+
+        <!-- Diagram -->
+        <div class="ind-diagram">
+
+          <!-- Top: workforce cards -->
+          <div class="ind-workforce">
+            @for (wf of ind.workforce; track wf.label_en) {
+              <div class="ind-wf-card">
+                <span class="ind-wf-label">{{ t(wf.label_en, wf.label_ar) }}</span>
+              </div>
+            }
+          </div>
+
+          <!-- Connecting lines (top) -->
+          <div class="ind-lines ind-lines--top" aria-hidden="true">
+            <div class="ind-line-group">
+              @for (wf of ind.workforce; track wf.label_en) {
+                <div class="ind-line-v"></div>
+              }
+            </div>
+            <div class="ind-line-h"></div>
+            <div class="ind-line-drop"></div>
+          </div>
+
+          <!-- NAS HR hub card -->
+          <div class="ind-hub">
+            <div class="ind-hub-inner">
+              <img src="logo-light.svg" alt="NAS HR" class="ind-hub-logo" />
+              <span class="ind-hub-sub">Intelligent People Systems</span>
+            </div>
+          </div>
+
+          <!-- Connecting lines (bottom) -->
+          <div class="ind-lines ind-lines--bottom" aria-hidden="true">
+            <div class="ind-line-drop"></div>
+            <div class="ind-line-h"></div>
+            <div class="ind-line-group">
+              @for (mod of ind.modules; track mod.label_en) {
+                <div class="ind-line-v"></div>
+              }
+            </div>
+          </div>
+
+          <!-- Bottom: module cards -->
+          <div class="ind-modules">
+            @for (mod of ind.modules; track mod.label_en) {
+              <div class="ind-mod-card">
+                <span class="ind-mod-label">{{ t(mod.label_en, mod.label_ar) }}</span>
+              </div>
+            }
+          </div>
+
+        </div><!-- /ind-diagram -->
+      </div>
+
+      <!-- Right: challenges, helps, outcome -->
+      <div class="ind-right">
+
+        <div class="ind-right-block">
+          <p class="ind-right-heading ind-right-heading--red">
+            {{ t('Challenges', 'التحديات') }}
+          </p>
+          <ul class="ind-right-list">
+            @for (c of ind.challenges; track c.en) {
+              <li class="ind-right-item ind-right-item--red">
+                <span class="ind-right-dot ind-right-dot--red" aria-hidden="true">✕</span>
+                {{ t(c.en, c.ar) }}
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div class="ind-right-block">
+          <p class="ind-right-heading ind-right-heading--teal">
+            {{ t('NAS HR Helps With', 'NAS HR يساعد في') }}
+          </p>
+          <ul class="ind-right-list">
+            @for (h of ind.helps; track h.en) {
+              <li class="ind-right-item ind-right-item--teal">
+                <span class="ind-right-dot ind-right-dot--teal" aria-hidden="true">✓</span>
+                {{ t(h.en, h.ar) }}
+              </li>
+            }
+          </ul>
+        </div>
+
+        <div class="ind-outcome">
+          <div>
+            <p class="ind-outcome-label">{{ t('Outcome', 'النتيجة') }}</p>
+            <p class="ind-outcome-text">{{ t(ind.outcome_en, ind.outcome_ar) }}</p>
+          </div>
+        </div>
+
+      </div><!-- /ind-right -->
+    </div><!-- /ind-card -->
+
+    <!-- ── Benefit strip ── -->
+    <div class="ind-benefits">
+      @for (b of benefits; track b.en) {
+        <div class="ind-benefit">
+          <div>
+            <p class="ind-benefit-title">{{ t(b.en, b.ar) }}</p>
+            <p class="ind-benefit-sub">{{ t(b.sub_en, b.sub_ar) }}</p>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div><!-- /ind-outer -->
+</section>

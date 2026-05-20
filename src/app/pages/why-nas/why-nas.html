@@ -1,0 +1,211 @@
+<main class="page-why-nas">
+
+  <!-- ══ HERO ══ -->
+  <section class="why-hero">
+    <div class="container why-hero-inner">
+
+      <div class="why-hero-copy">
+        <span class="wn-eyebrow">Why NAS HR</span>
+        <h1 class="why-headline">
+          Simple to use.<br>
+          Smart by design.<br>
+          <em>Complete in one platform.</em>
+        </h1>
+        <p class="why-sub">NAS HR brings every essential HR capability into one connected experience — helping companies manage people, requests, attendance, reports, learning, and more with ease.</p>
+        <div class="why-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/modules/all-features" class="btn btn-secondary">Explore Platform</a>
+        </div>
+      </div>
+
+      <!-- Stats strip -->
+      <div class="wn-stats-strip">
+        @for (s of stats; track s.label) {
+          <div class="wn-stat">
+            <span class="wn-stat-val">{{ s.value }}</span>
+            <span class="wn-stat-lbl">{{ s.label }}</span>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ══ THREE PILLARS ══ -->
+  <section class="wn-pillars-section">
+    <div class="container">
+      <div class="section-head-center">
+        <span class="eyebrow">What Makes NAS HR Different</span>
+        <h2 class="section-title">Easy. Smart. Complete.</h2>
+        <p class="section-sub section-sub-center">Three principles behind every decision we make.</p>
+      </div>
+
+      <div class="wn-switcher">
+
+        <!-- Tabs -->
+        <div class="wn-tabs">
+          @for (p of pillars; track p.label; let i = $index) {
+            <button
+              class="wn-tab"
+              [class.wn-tab--active]="activePillar() === i"
+              (click)="activePillar.set(i)"
+            >
+              <div class="wn-tab-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path [attr.d]="p.icon"/>
+                </svg>
+              </div>
+              <div class="wn-tab-text">
+                <span class="wn-tab-label">{{ p.label }}</span>
+                <span class="wn-tab-hint">{{ p.tagline }}</span>
+              </div>
+              <div class="wn-tab-chevron" aria-hidden="true">
+                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <polyline points="4 8 12 8"/><polyline points="8 4 12 8 8 12"/>
+                </svg>
+              </div>
+            </button>
+          }
+        </div>
+
+        <!-- Content panel -->
+        <div class="wn-panel">
+          <span class="wn-panel-badge">{{ pillars[activePillar()].label }}</span>
+          <h3 class="wn-panel-title">{{ pillars[activePillar()].headline }}</h3>
+          <p class="wn-panel-desc">{{ pillars[activePillar()].desc }}</p>
+          <ul class="wn-panel-points">
+            @for (pt of pillars[activePillar()].points; track pt) {
+              <li>
+                <span class="wn-pt-check" aria-hidden="true">
+                  <svg viewBox="0 0 16 16" fill="none">
+                    <circle cx="8" cy="8" r="7" stroke="#4CB4B5" stroke-width="1.2"/>
+                    <path d="M5 8l2.5 2.5 3.5-4" stroke="#4CB4B5" stroke-width="1.5"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+                {{ pt }}
+              </li>
+            }
+          </ul>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ COMPARE TABLE ══ -->
+  <section class="wn-compare-section">
+    <div class="container">
+      <div class="section-head-center">
+        <span class="eyebrow">Side by Side</span>
+        <h2 class="section-title">NAS HR vs. Traditional HR</h2>
+        <p class="section-sub section-sub-center">See why modern companies choose a connected HR platform.</p>
+      </div>
+
+      <div class="wn-compare-table">
+
+        <div class="wn-compare-head">
+          <div class="wn-cmp-feat">Feature</div>
+          <div class="wn-cmp-col wn-cmp-col--nas">NAS HR</div>
+          <div class="wn-cmp-col">Traditional</div>
+        </div>
+
+        @for (row of compareRows; track row.feature) {
+          <div class="wn-compare-row">
+            <div class="wn-cmp-feat">{{ row.feature }}</div>
+
+            <div class="wn-cmp-col">
+              @if (row.nas) {
+                <span class="wn-check wn-check--yes" aria-label="Yes">
+                  <svg viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="8" fill="#4CB4B5" fill-opacity="0.15"
+                            stroke="#4CB4B5" stroke-width="1.2"/>
+                    <path d="M5.5 9l2.5 2.5 4-4.5" stroke="#4CB4B5" stroke-width="1.6"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              } @else {
+                <span class="wn-check wn-check--no" aria-label="No">
+                  <svg viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="8" stroke="#ddd" stroke-width="1.2"/>
+                    <path d="M6 12l6-6M12 12L6 6" stroke="#ccc" stroke-width="1.6"
+                          stroke-linecap="round"/>
+                  </svg>
+                </span>
+              }
+            </div>
+
+            <div class="wn-cmp-col">
+              @if (row.trad) {
+                <span class="wn-check wn-check--yes" aria-label="Yes">
+                  <svg viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="8" fill="#4CB4B5" fill-opacity="0.15"
+                            stroke="#4CB4B5" stroke-width="1.2"/>
+                    <path d="M5.5 9l2.5 2.5 4-4.5" stroke="#4CB4B5" stroke-width="1.6"
+                          stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </span>
+              } @else {
+                <span class="wn-check wn-check--no" aria-label="No">
+                  <svg viewBox="0 0 18 18" fill="none">
+                    <circle cx="9" cy="9" r="8" stroke="#ddd" stroke-width="1.2"/>
+                    <path d="M6 12l6-6M12 12L6 6" stroke="#ccc" stroke-width="1.6"
+                          stroke-linecap="round"/>
+                  </svg>
+                </span>
+              }
+            </div>
+          </div>
+        }
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ FEATURE SECTIONS ══ -->
+  <section class="wn-feats-section">
+    <div class="container">
+      @for (sec of sections; track sec.eyebrow; let i = $index) {
+        <div class="wn-feat" [class.wn-feat--alt]="i % 2 !== 0">
+
+          <div class="wn-feat-visual">
+            <div class="wn-feat-icon-bg">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <path [attr.d]="pillars[i].icon"/>
+              </svg>
+            </div>
+            <span class="wn-feat-num">0{{ i + 1 }}</span>
+          </div>
+
+          <div class="wn-feat-copy">
+            <span class="eyebrow">{{ sec.eyebrow }}</span>
+            <h2>{{ sec.headline }}</h2>
+            <p>{{ sec.desc }}</p>
+            <ul class="wn-feat-pills">
+              @for (pt of pillars[i].points.slice(0,3); track pt) {
+                <li>{{ pt }}</li>
+              }
+            </ul>
+          </div>
+
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ══ CTA BAND ══ -->
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner">
+      <h2>See how NAS HR can simplify your HR operations.</h2>
+      <p>Request a demo and we'll walk you through the full platform tailored to your company needs.</p>
+      <div class="mod-cta-btns">
+        <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        <a routerLink="/modules/all-features" class="btn btn-outline-dark">Explore All Modules</a>
+      </div>
+    </div>
+  </section>
+
+</main>

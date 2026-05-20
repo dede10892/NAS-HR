@@ -1,0 +1,537 @@
+/* ═══════════════════════════════════════════════════
+   SOLUTIONS BY INDUSTRY
+   Tab selector · Auto-cycle · Dark showcase card
+   Font: Fira Sans · #0C2427 · #26787B · #4CB4B5
+═══════════════════════════════════════════════════ */
+
+$dark    : #0C2427;
+$teal    : #4CB4B5;
+$teal-dk : #26787B;
+$ease    : cubic-bezier(.22, 1, .36, 1);
+
+// ── Section ───────────────────────────────────────
+.sbi-section {
+  background: #ffffff;
+  padding-block: 80px 88px;
+  font-family: 'Fira Sans', sans-serif;
+  position: relative;
+  overflow: hidden;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 50%; right: -160px;
+    transform: translateY(-50%);
+    width: 580px; height: 580px;
+    background-image: url('/brand-mark.svg');
+    background-repeat: no-repeat;
+    background-size: contain;
+    pointer-events: none;
+    opacity: 0.04;
+  }
+}
+
+.sbi-inner {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px;
+}
+
+// ── Head ──────────────────────────────────────────
+.sbi-head {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.sbi-eyebrow {
+  display: inline-block;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: $teal-dk;
+  margin-bottom: 10px;
+}
+
+.sbi-title {
+  font-size: clamp(24px, 2.6vw, 36px);
+  font-weight: 700;
+  color: $dark;
+  letter-spacing: -0.5px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+}
+
+.sbi-sub {
+  font-size: 15px;
+  color: rgba(0,0,0,0.42);
+  line-height: 1.65;
+  margin: 0 auto;
+  max-width: 420px;
+}
+
+// ══ INDUSTRY TABS ═════════════════════════════════
+.sbi-tabs {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 8px;
+  margin-bottom: 28px;
+}
+
+.sbi-tab {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 13px 16px;
+  border-radius: 12px;
+  border: 1.5px solid rgba(0,0,0,0.07);
+  background: #fff;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.48);
+  cursor: pointer;
+  overflow: hidden;
+  transition:
+    background 0.22s $ease,
+    border-color 0.22s $ease,
+    color 0.22s $ease,
+    box-shadow 0.22s $ease,
+    transform 0.18s $ease;
+
+  &:hover {
+    border-color: rgba($teal, 0.35);
+    color: $dark;
+    background: rgba($teal, 0.04);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba($teal, 0.10);
+  }
+
+  &--active {
+    background: $dark;
+    border-color: $dark;
+    color: #fff;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba($dark, 0.18);
+    transform: translateY(-2px);
+
+    .sbi-tab-icon { color: $teal; }
+  }
+}
+
+.sbi-tab-icon {
+  display: flex;
+  align-items: center;
+  color: rgba(0,0,0,0.30);
+  transition: color 0.22s;
+  flex-shrink: 0;
+
+  svg { width: 16px; height: 16px; }
+}
+
+.sbi-tab-label {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Progress fill along the bottom of the active tab
+.sbi-tab-bar {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  height: 3px;
+  background: $teal;
+  border-radius: 2px 2px 0 0;
+  transition: width 80ms linear;
+  min-width: 0;
+  pointer-events: none;
+}
+
+[dir="rtl"] .sbi-tab-bar {
+  left: auto;
+  right: 0;
+}
+
+// ══ SHOWCASE CARD ═════════════════════════════════
+.sbi-showcase {
+  background: #fff;
+  border-radius: 20px;
+  border: 1px solid rgba(0,0,0,0.07);
+  overflow: hidden;
+  box-shadow:
+    0 2px 4px rgba(0,0,0,0.04),
+    0 12px 40px rgba(0,0,0,0.08);
+  transition: box-shadow 0.22s $ease;
+
+  &:hover {
+    box-shadow:
+      0 2px 4px rgba(0,0,0,0.04),
+      0 20px 60px rgba(0,0,0,0.12);
+  }
+}
+
+// ── Banner ────────────────────────────────────────
+.sbi-banner {
+  position: relative;
+  overflow: hidden;
+  padding: 32px 36px;
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  min-height: 120px;
+}
+
+.sbi-banner-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, $dark 0%, #143338 55%, #1a4548 100%);
+
+  &::after {
+    content: '';
+    position: absolute;
+    top: -40%; right: -5%;
+    width: 340px; height: 340px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba($teal, 0.20) 0%, transparent 65%);
+  }
+}
+
+.sbi-banner-num {
+  position: absolute;
+  right: 28px; bottom: -16px;
+  font-size: 110px;
+  font-weight: 900;
+  color: rgba(255,255,255,0.04);
+  line-height: 1;
+  letter-spacing: -4px;
+  pointer-events: none;
+  user-select: none;
+}
+
+.sbi-banner-content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  width: 100%;
+}
+
+.sbi-banner-icon {
+  width: 52px; height: 52px;
+  border-radius: 14px;
+  background: rgba($teal, 0.16);
+  border: 1px solid rgba($teal, 0.28);
+  color: $teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+
+  svg { width: 24px; height: 24px; }
+}
+
+.sbi-banner-text { flex: 1; min-width: 0; }
+
+.sbi-banner-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.3px;
+  margin: 0 0 4px;
+}
+
+.sbi-banner-tagline {
+  font-size: 13px;
+  color: rgba(255,255,255,0.45);
+  margin: 0;
+  line-height: 1.5;
+}
+
+.sbi-banner-metrics {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.10);
+  border-radius: 14px;
+  padding: 14px 20px;
+}
+
+.sbi-metric {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+}
+
+.sbi-metric-n {
+  font-size: 26px;
+  font-weight: 800;
+  color: rgba(255,255,255,0.75);
+  line-height: 1;
+
+  &.teal { color: $teal; }
+}
+
+.sbi-metric-l {
+  font-size: 9px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.30);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  white-space: nowrap;
+}
+
+.sbi-metric-sep {
+  width: 1px; height: 30px;
+  background: rgba(255,255,255,0.12);
+}
+
+// ── Body grid ─────────────────────────────────────
+.sbi-body {
+  display: grid;
+  grid-template-columns: 1fr 1px 1fr;
+  align-items: start;
+  animation: sbiBodyIn 0.28s $ease both;
+}
+
+@keyframes sbiBodyIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sbi-divider {
+  background: rgba(0,0,0,0.06);
+  align-self: stretch;
+}
+
+// ── Column ────────────────────────────────────────
+.sbi-column { padding: 24px 28px 28px; }
+
+.challenge-col { background: #fdfefe; }
+.solution-col  { background: #f9fefe; }
+
+.sbi-col-header {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  margin-bottom: 16px;
+  padding-bottom: 14px;
+  border-bottom: 1px solid rgba(0,0,0,0.06);
+}
+
+.sbi-col-badge {
+  width: 22px; height: 22px;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  svg { width: 13px; height: 13px; }
+
+  &.amber-badge {
+    background: rgba(245,158,11,0.12);
+    color: #d97706;
+    ~ span { color: #b45309; }
+  }
+
+  &.teal-badge {
+    background: rgba($teal, 0.10);
+    color: $teal-dk;
+    ~ span { color: $teal-dk; }
+  }
+}
+
+// ── Items ─────────────────────────────────────────
+.sbi-items {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+}
+
+@keyframes slideUp {
+  from { opacity: 0; transform: translateY(12px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.sbi-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  padding: 11px 13px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  animation: slideUp 0.38s $ease both;
+  transition: background 0.18s $ease, border-color 0.18s, transform 0.18s $ease;
+  cursor: default;
+
+  &:hover { transform: translateX(3px); }
+}
+
+.ch-item {
+  background: rgba(0,0,0,0.02);
+  border-color: rgba(0,0,0,0.04);
+
+  &:hover {
+    background: rgba(245,158,11,0.05);
+    border-color: rgba(245,158,11,0.18);
+  }
+}
+
+.sbi-item-n {
+  font-size: 10px;
+  font-weight: 800;
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+  padding-top: 3px;
+  min-width: 18px;
+
+  &.amber-n { color: #d97706; }
+}
+
+.sl-item {
+  background: rgba($teal, 0.03);
+  border-color: rgba($teal, 0.06);
+
+  &:hover {
+    background: rgba($teal, 0.08);
+    border-color: rgba($teal, 0.20);
+  }
+}
+
+.sbi-check {
+  flex-shrink: 0;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: rgba($teal, 0.12);
+  border: 1px solid rgba($teal, 0.22);
+  color: $teal-dk;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 1px;
+
+  svg { width: 9px; height: 9px; }
+}
+
+.sbi-item-p {
+  font-size: 12.5px;
+  color: rgba(0,0,0,0.60);
+  line-height: 1.6;
+  margin: 0;
+}
+
+// ── CTA row ───────────────────────────────────────
+.sbi-cta-row {
+  padding: 14px 24px 18px;
+  border-top: 1px solid rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: flex-end;
+  background: #fff;
+  animation: sbiBodyIn 0.28s $ease both;
+  animation-delay: 0.12s;
+}
+
+.sbi-cta-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  color: $teal-dk;
+  text-decoration: none;
+  padding: 9px 18px;
+  border-radius: 8px;
+  border: 1.5px solid rgba($teal, 0.30);
+  transition: all 0.22s $ease;
+
+  svg {
+    width: 14px; height: 14px;
+    transition: transform 0.22s $ease;
+  }
+
+  &:hover {
+    background: $dark;
+    border-color: $dark;
+    color: #fff;
+
+    svg { transform: translateX(3px); }
+  }
+}
+
+// ══ RESPONSIVE ════════════════════════════════════
+@media (max-width: 860px) {
+  .sbi-banner-metrics { display: none; }
+  .sbi-banner-num     { display: none; }
+  .sbi-banner         { padding: 24px 24px; }
+}
+
+@media (max-width: 720px) {
+  // Switch to horizontal scroll on narrow viewports
+  .sbi-tabs {
+    grid-template-columns: repeat(5, auto);
+    overflow-x: auto;
+    padding-bottom: 4px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar { display: none; }
+  }
+
+  .sbi-tab {
+    padding: 10px 14px;
+    font-size: 12px;
+    min-width: 88px;
+  }
+}
+
+@media (max-width: 680px) {
+  .sbi-body {
+    grid-template-columns: 1fr;
+  }
+
+  .sbi-divider {
+    height: 1px;
+    width: auto;
+    background: rgba(0,0,0,0.06);
+  }
+
+  .sbi-column { padding: 20px 20px 24px; }
+}
+
+@media (max-width: 480px) {
+  .sbi-section { padding-block: 56px 64px; }
+
+  .sbi-tab {
+    min-width: 64px;
+    padding: 10px 12px;
+    gap: 0;
+  }
+
+  // Icon only on very small screens
+  .sbi-tab-label {
+    display: none;
+  }
+
+  .sbi-tab-icon svg {
+    width: 20px;
+    height: 20px;
+  }
+
+  .sbi-cta-row { justify-content: center; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .sbi-item, .sbi-body, .sbi-cta-row { animation: none; transition: none; }
+  .sbi-tab, .sbi-tab-bar, .sbi-cta-link { transition: none; }
+}

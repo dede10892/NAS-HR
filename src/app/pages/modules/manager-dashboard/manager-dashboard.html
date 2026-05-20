@@ -1,0 +1,134 @@
+<main class="page-mgr">
+
+  <!-- ── Hero ── -->
+  <section class="mod-hero">
+    <div class="container mod-hero-inner">
+      <div class="mod-hero-copy reveal-up">
+        <span class="eyebrow">Manager Dashboard</span>
+        <h1 class="mod-headline">A smarter dashboard<br><em>for every manager.</em></h1>
+        <p class="mod-sub">Give managers the visibility they need to approve faster, monitor team activity, track attendance, and support employees with confidence.</p>
+        <div class="mod-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Features ── -->
+  <section class="mgr-features-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Manager Command Center</span>
+        <h2 class="section-title">Everything a manager needs in one view.</h2>
+      </div>
+
+      <div class="mgr-layout">
+
+        <!-- Feature list -->
+        <div class="mgr-feature-list">
+          @for (f of features; track f.label; let i = $index) {
+            <div class="mgr-feature-item"
+                 [class.mgr-feature-item--active]="activeFeature() === i"
+                 (click)="activeFeature.set(i)">
+              <div class="mgr-feature-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                     aria-hidden="true">
+                  <path [attr.d]="f.icon"/>
+                </svg>
+              </div>
+              <div class="mgr-feature-text">
+                <h3>{{ f.label }}</h3>
+                <p>{{ f.desc }}</p>
+              </div>
+              <span class="mgr-feature-stat">{{ f.stat }}</span>
+            </div>
+          }
+        </div>
+
+        <!-- Dashboard preview panel -->
+        <div class="mgr-preview reveal-right">
+          <div class="mgr-preview-chrome">
+            <span class="hv-dot" style="background:#F14437"></span>
+            <span class="hv-dot" style="background:#F79008"></span>
+            <span class="hv-dot" style="background:#0FB86A"></span>
+            <span class="mgr-preview-title">NAS HR — Manager View</span>
+          </div>
+          <div class="mgr-preview-screen">
+            <img src="screenshots/desktop-employees.png"
+                 alt="Manager dashboard preview"
+                 class="mgr-screenshot" />
+            <!-- Placeholder -->
+            <div class="mgr-placeholder">
+              <div class="mgp-header">
+                <div class="mgp-bar mgp-w50"></div>
+                <div class="mgp-bar mgp-w20"></div>
+              </div>
+              <div class="mgp-row">
+                @for (c of [1,2,3]; track c) {
+                  <div class="mgp-stat-card"></div>
+                }
+              </div>
+              <div class="mgp-table">
+                @for (r of [1,2,3,4]; track r) {
+                  <div class="mgp-table-row">
+                    <div class="mgp-bar mgp-w30"></div>
+                    <div class="mgp-bar mgp-w40"></div>
+                    <div class="mgp-badge"></div>
+                  </div>
+                }
+              </div>
+            </div>
+          </div>
+          <!-- Active feature floating card -->
+          <div class="mgr-active-card">
+            <svg class="mgr-active-icon" viewBox="0 0 24 24" fill="none"
+                 stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
+                 stroke-linejoin="round" aria-hidden="true">
+              <path [attr.d]="features[activeFeature()].icon"/>
+            </svg>
+            <div>
+              <div class="mgr-active-label">{{ features[activeFeature()].label }}</div>
+              <div class="mgr-active-stat">{{ features[activeFeature()].stat }}</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Business value ── -->
+  <section class="mgr-value-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Business Impact</span>
+        <h2 class="section-title">What managers gain.</h2>
+      </div>
+      <div class="mgr-value-grid reveal-stagger">
+        @for (v of businessValue; track v.label) {
+          <div class="mgr-value-card">
+            <div class="mgr-value-check">
+              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
+                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+            <h4>{{ v.label }}</h4>
+            <p>{{ v.desc }}</p>
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to give your managers better visibility?</h2>
+      <p>See the Manager Dashboard live in a personalized demo with your own team structure and workflows.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+</main>

@@ -1,0 +1,144 @@
+<main class="page-ai">
+
+  <!-- ── Hero ── -->
+  <section class="ai-hero">
+    <div class="container ai-hero-inner">
+      <div class="ai-hero-copy reveal-up">
+        <span class="eyebrow eyebrow-light">Ask NAS AI</span>
+        <h1 class="ai-headline">Your HR assistant,<br>built into the flow of work.</h1>
+        <p class="ai-sub">Ask NAS AI about requests, policies, attendance, courses, internal jobs, and HR services — and turn everyday employee questions into faster answers and smarter actions.</p>
+        <div class="ai-actions">
+          <a href="#ai-demo" (click)="selectCase(0)" class="btn btn-primary">See AI in Action</a>
+          <a routerLink="/contact" class="btn btn-secondary">Request a Demo</a>
+        </div>
+      </div>
+      <!-- AI workflow strip -->
+      <div class="ai-flow reveal-up" style="--d:.15s">
+        @for (s of ['Employee asks','NAS AI understands','Suggests action','Creates request','Sends for approval']; track s; let last = $last) {
+          <span class="ai-flow-step">{{ s }}</span>
+          @if (!last) { <span class="ai-flow-arrow" aria-hidden="true">→</span> }
+        }
+      </div>
+    </div>
+    <div class="ai-bg-grid" aria-hidden="true"></div>
+  </section>
+
+  <!-- ── AI Demo ── -->
+  <section class="ai-demo-section" id="ai-demo">
+    <div class="container">
+
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Interactive Demo</span>
+        <h2 class="section-title">See NAS AI in Action</h2>
+        <p class="section-sub section-sub-center">Click any use case below to start a live conversation.</p>
+      </div>
+
+      <div class="ai-demo-layout">
+        <div class="ai-chat reveal-up" style="--d:.1s">
+
+          <!-- Window chrome -->
+          <div class="ai-chat-header">
+            <div class="ai-chat-dot" style="background:#F14437"></div>
+            <div class="ai-chat-dot" style="background:#F79008"></div>
+            <div class="ai-chat-dot" style="background:#0FB86A"></div>
+            <span class="ai-chat-title">Ask NAS AI</span>
+          </div>
+
+          <!-- Conversation body -->
+          <div class="ai-chat-body" #chatBody>
+
+            <!-- ── Played messages ── -->
+            @for (msg of playedMsgs(); track $index) {
+              <div class="ai-msg" [class.ai-msg--user]="msg.role === 'user'" [class.ai-msg--ai]="msg.role === 'ai'">
+                @if (msg.role === 'ai') {
+                  <div class="ai-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".12"/>
+                      <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                }
+                <div class="ai-bubble"
+                     [class.ai-bubble--user]="msg.role === 'user'"
+                     [class.ai-bubble--ai]="msg.role === 'ai'">
+                  {{ msg.text }}
+                </div>
+              </div>
+
+              @if (msg.role === 'ai' && msg.actions?.length) {
+                <div class="ai-action-row">
+                  @for (a of msg.actions!; track a) {
+                    <button class="ai-action-btn">{{ a }}</button>
+                  }
+                </div>
+              }
+            }
+
+            <!-- ── Currently typing ── -->
+            @if (currentTyping(); as typing) {
+              <div class="ai-msg"
+                   [class.ai-msg--user]="typing.role === 'user'"
+                   [class.ai-msg--ai]="typing.role === 'ai'">
+                @if (typing.role === 'ai') {
+                  <div class="ai-avatar">
+                    <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                      <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".12"/>
+                      <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                            stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                    </svg>
+                  </div>
+                }
+                <div class="ai-bubble"
+                     [class.ai-bubble--user]="typing.role === 'user'"
+                     [class.ai-bubble--ai]="typing.role === 'ai'">
+                  {{ typing.text }}<span class="ai-cursor ai-cursor--on"></span>
+                </div>
+              </div>
+            }
+
+            <!-- ── AI thinking dots ── -->
+            @if (showDots()) {
+              <div class="ai-msg ai-msg--ai">
+                <div class="ai-avatar">
+                  <svg viewBox="0 0 24 24" fill="none" aria-hidden="true">
+                    <circle cx="12" cy="12" r="10" fill="currentColor" opacity=".12"/>
+                    <path d="M8 10h.01M12 10h.01M16 10h.01M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"
+                          stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+                  </svg>
+                </div>
+                <div class="ai-bubble ai-bubble--ai">
+                  <span class="ai-typing"><span></span><span></span><span></span></span>
+                </div>
+              </div>
+            }
+
+          </div><!-- /ai-chat-body -->
+
+          <!-- Use-case chips at bottom -->
+          <div class="ai-chat-chips">
+            @for (c of useCases; track c.label; let i = $index) {
+              <button class="ai-prompt-chip"
+                      [class.ai-prompt-chip--active]="activeCase() === i"
+                      (click)="selectCase(i)">
+                {{ c.label }}
+              </button>
+            }
+          </div>
+
+        </div><!-- /ai-chat -->
+      </div><!-- /ai-demo-layout -->
+
+    </div>
+  </section>
+
+  <!-- ── CTA ── -->
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to see NAS AI in action?</h2>
+      <p>See how NAS AI can speed up requests, reduce HR follow-up, and give every employee smarter answers.</p>
+      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+    </div>
+  </section>
+
+</main>

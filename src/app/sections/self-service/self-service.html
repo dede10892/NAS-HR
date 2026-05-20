@@ -1,0 +1,419 @@
+<section class="ess-section" id="self-service">
+  <div class="container">
+
+    <!-- Section header -->
+    <div class="ess-header reveal">
+      <span class="eyebrow">{{ t('Employee Self-Service', 'الخدمة الذاتية للموظفين') }}</span>
+      <h2 class="section-title">{{ t('Everything at your fingertips', 'كل شيء في متناول يدك') }}</h2>
+      <p class="section-sub">
+        {{ t(
+          '13 self-service actions — requests, history, career tools — all accessible from mobile, 24/7.',
+          '١٣ إجراءً ذاتياً — طلبات، سجلات، أدوات مهنية — متاحة من الجوال على مدار الساعة.'
+        ) }}
+      </p>
+    </div>
+
+    <!-- Sticky scroll body -->
+    <div class="ess-body">
+
+      <!-- ── LEFT: Sticky mockup ─────────────────── -->
+      <div class="ess-sticky">
+        <div class="mockup-frame">
+          <div class="mockup-notch"></div>
+          <div class="mockup-screen">
+
+            <!-- Top bar -->
+            <div class="ms-topbar">
+              <div class="ms-back">
+                <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
+                  <path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+              </div>
+              <span class="ms-title">{{ t(services[activeIndex].en, services[activeIndex].ar) }}</span>
+              <div class="ms-tag"
+                   [style.background]="services[activeIndex].color + '22'"
+                   [style.color]="services[activeIndex].color">
+                {{ t(services[activeIndex].tag_en, services[activeIndex].tag_ar) }}
+              </div>
+            </div>
+
+            <!-- Dynamic art -->
+            <div class="ms-art" [style.--art-color]="services[activeIndex].color">
+
+              @if (services[activeIndex].screenshot) {
+                <img
+                  class="ms-screenshot"
+                  [src]="services[activeIndex].screenshot"
+                  [alt]="services[activeIndex].en"
+                />
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'permission') {
+                <div class="art-form">
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Date', 'التاريخ') }}</span>
+                    <div class="af-input">{{ t('Today, May 14', 'اليوم، ١٤ مايو') }}</div>
+                  </div>
+                  <div class="art-row">
+                    <div class="art-field">
+                      <span class="af-label">{{ t('From', 'من') }}</span>
+                      <div class="af-input">11:00 AM</div>
+                    </div>
+                    <div class="art-field">
+                      <span class="af-label">{{ t('To', 'إلى') }}</span>
+                      <div class="af-input">01:00 PM</div>
+                    </div>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Reason', 'السبب') }}</span>
+                    <div class="af-textarea">{{ t('Medical appointment', 'موعد طبي') }}</div>
+                  </div>
+                  <div class="art-submit" [style.background]="services[activeIndex].color">
+                    {{ t('Submit Request', 'إرسال الطلب') }}
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'offsite') {
+                <div class="art-form">
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Work Location', 'موقع العمل') }}</span>
+                    <div class="af-input">📍 {{ t('Home Office', 'المنزل') }}</div>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Duration', 'المدة') }}</span>
+                    <div class="af-chips">
+                      <span class="af-chip active">{{ t('1 Day', 'يوم') }}</span>
+                      <span class="af-chip">{{ t('2 Days', 'يومان') }}</span>
+                      <span class="af-chip">{{ t('Week', 'أسبوع') }}</span>
+                    </div>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Reason', 'السبب') }}</span>
+                    <div class="af-textarea">{{ t('Project deadline', 'موعد تسليم المشروع') }}</div>
+                  </div>
+                  <div class="art-submit" [style.background]="services[activeIndex].color">
+                    {{ t('Submit Request', 'إرسال الطلب') }}
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'vacation') {
+                <div class="art-form">
+                  <div class="art-balance-row">
+                    <div class="art-balance-chip">
+                      <span class="ab-num" [style.color]="services[activeIndex].color">18</span>
+                      <span class="ab-lbl">{{ t('Days left', 'أيام متبقية') }}</span>
+                    </div>
+                    <div class="art-balance-chip">
+                      <span class="ab-num muted">12</span>
+                      <span class="ab-lbl">{{ t('Used', 'مستخدمة') }}</span>
+                    </div>
+                  </div>
+                  <div class="art-calendar-mini">
+                    <div class="acm-row header">
+                      <span>S</span><span>M</span><span>T</span><span>W</span><span>T</span><span>F</span><span>S</span>
+                    </div>
+                    <div class="acm-row"><span></span><span></span><span>1</span><span>2</span><span>3</span><span>4</span><span>5</span></div>
+                    <div class="acm-row"><span>6</span><span>7</span><span class="sel start">8</span><span class="sel">9</span><span class="sel">10</span><span class="sel">11</span><span class="sel end">12</span></div>
+                    <div class="acm-row"><span>13</span><span>14</span><span>15</span><span>16</span><span>17</span><span>18</span><span>19</span></div>
+                  </div>
+                  <div class="art-submit" [style.background]="services[activeIndex].color">
+                    {{ t('Request 5 Days', 'طلب ٥ أيام') }}
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'hr-letter') {
+                <div class="art-form">
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Letter Type', 'نوع الخطاب') }}</span>
+                    <div class="af-chips wrap">
+                      <span class="af-chip active">{{ t('Salary', 'الراتب') }}</span>
+                      <span class="af-chip">{{ t('Experience', 'الخبرة') }}</span>
+                      <span class="af-chip">NOC</span>
+                      <span class="af-chip">{{ t('Bank', 'البنك') }}</span>
+                    </div>
+                  </div>
+                  <div class="art-doc-preview">
+                    <div class="adp-header">
+                      <div class="adp-logo-bar" [style.background]="services[activeIndex].color"></div>
+                      <div class="adp-lines">
+                        <div class="adp-line long"></div>
+                        <div class="adp-line short"></div>
+                      </div>
+                    </div>
+                    <div class="adp-body">
+                      <div class="adp-line med"></div>
+                      <div class="adp-line long"></div>
+                      <div class="adp-line med"></div>
+                      <div class="adp-line short"></div>
+                    </div>
+                    <div class="adp-stamp"
+                         [style.border-color]="services[activeIndex].color"
+                         [style.color]="services[activeIndex].color">
+                      <svg width="18" height="18" viewBox="0 0 18 18" fill="none" aria-hidden="true">
+                        <path d="M4 9l4 4 6-7" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                      </svg>
+                    </div>
+                  </div>
+                  <div class="art-submit" [style.background]="services[activeIndex].color">
+                    {{ t('Request Letter', 'طلب الخطاب') }}
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'loan') {
+                <div class="art-form">
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Loan Amount', 'مبلغ السلفة') }}</span>
+                    <div class="af-input big-amount">AED 5,000</div>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Repayment', 'الاستحقاق') }}</span>
+                    <div class="af-chips">
+                      <span class="af-chip">3 {{ t('mo', 'أشهر') }}</span>
+                      <span class="af-chip active">6 {{ t('mo', 'أشهر') }}</span>
+                      <span class="af-chip">12 {{ t('mo', 'شهراً') }}</span>
+                    </div>
+                  </div>
+                  <div class="art-loan-calc">
+                    <span>{{ t('Monthly deduction', 'الاستقطاع الشهري') }}</span>
+                    <span class="alc-val" [style.color]="services[activeIndex].color">AED 833</span>
+                  </div>
+                  <div class="art-submit" [style.background]="services[activeIndex].color">
+                    {{ t('Apply for Loan', 'تقديم طلب السلفة') }}
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'resignation') {
+                <div class="art-form">
+                  <div class="art-alert">
+                    <span>⚠️</span>
+                    <span>{{ t('This action will begin your offboarding process.', 'سيبدأ هذا الإجراء عملية إنهاء خدمتك.') }}</span>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Last Working Day', 'آخر يوم عمل') }}</span>
+                    <div class="af-input">{{ t('June 14, 2025', '١٤ يونيو ٢٠٢٥') }}</div>
+                  </div>
+                  <div class="art-field">
+                    <span class="af-label">{{ t('Reason', 'السبب') }}</span>
+                    <div class="af-textarea">{{ t('Personal reasons', 'أسباب شخصية') }}</div>
+                  </div>
+                  <div class="art-submit danger">{{ t('Submit Resignation', 'تقديم الاستقالة') }}</div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'eos') {
+                <div class="art-form">
+                  <div class="art-checklist">
+                    <div class="acl-item done"><div class="acl-dot done"></div>{{ t('IT Equipment Returned', 'تسليم معدات IT') }}</div>
+                    <div class="acl-item done"><div class="acl-dot done"></div>{{ t('Access Revoked', 'إلغاء الصلاحيات') }}</div>
+                    <div class="acl-item active"><div class="acl-dot active"></div>{{ t('Finance Clearance', 'تخليص مالي') }}</div>
+                    <div class="acl-item"><div class="acl-dot"></div>{{ t('HR Final Review', 'مراجعة HR النهائية') }}</div>
+                    <div class="acl-item"><div class="acl-dot"></div>{{ t('Certificate Issued', 'إصدار الشهادة') }}</div>
+                  </div>
+                  <div class="art-gratuity">
+                    <span>{{ t('Estimated Gratuity', 'مكافأة نهاية الخدمة') }}</span>
+                    <span class="ag-val" [style.color]="services[activeIndex].color">AED 18,500</span>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'fingerprint') {
+                <div class="art-form">
+                  <div class="art-timeline">
+                    <div class="atl-item">
+                      <div class="atl-date">Mon 12</div>
+                      <div class="atl-times"><span class="atl-in">IN 08:57</span><span class="atl-out">OUT 17:02</span></div>
+                      <div class="atl-badge">{{ t('On time', 'في الوقت') }}</div>
+                    </div>
+                    <div class="atl-item">
+                      <div class="atl-date">Tue 13</div>
+                      <div class="atl-times"><span class="atl-in">IN 09:14</span><span class="atl-out">OUT 17:30</span></div>
+                      <div class="atl-badge late">{{ t('Late', 'متأخر') }}</div>
+                    </div>
+                    <div class="atl-item">
+                      <div class="atl-date">Wed 14</div>
+                      <div class="atl-times"><span class="atl-in">IN 08:48</span><span class="atl-out">OUT 17:05</span></div>
+                      <div class="atl-badge">{{ t('On time', 'في الوقت') }}</div>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'penalty') {
+                <div class="art-form">
+                  <div class="art-penalty-list">
+                    <div class="apl-item">
+                      <span class="apl-icon">⚠️</span>
+                      <div class="apl-info">
+                        <span class="apl-title">{{ t('Late Arrival', 'تأخر عن العمل') }}</span>
+                        <span class="apl-date">Mar 5, 2025</span>
+                      </div>
+                      <span class="apl-val" style="color:#F14437">-AED 50</span>
+                    </div>
+                    <div class="apl-item">
+                      <span class="apl-icon">📋</span>
+                      <div class="apl-info">
+                        <span class="apl-title">{{ t('Written Warning', 'إنذار كتابي') }}</span>
+                        <span class="apl-date">Jan 12, 2025</span>
+                      </div>
+                      <span class="apl-val" style="color:#F79008">{{ t('Warning', 'تحذير') }}</span>
+                    </div>
+                    <div class="apl-item">
+                      <span class="apl-icon">⚠️</span>
+                      <div class="apl-info">
+                        <span class="apl-title">{{ t('Absence', 'غياب') }}</span>
+                        <span class="apl-date">Dec 3, 2024</span>
+                      </div>
+                      <span class="apl-val" style="color:#F14437">-AED 200</span>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'kpi') {
+                <div class="art-form">
+                  <div class="art-kpi-list">
+                    <div class="akl-item">
+                      <div class="akl-top"><span>{{ t('Attendance', 'الحضور') }}</span><span style="color:#0FB86A">98%</span></div>
+                      <div class="akl-bar"><div class="akl-fill" style="width:98%;background:#0FB86A"></div></div>
+                    </div>
+                    <div class="akl-item">
+                      <div class="akl-top"><span>{{ t('Task Completion', 'إتمام المهام') }}</span><span style="color:#4CB4B5">84%</span></div>
+                      <div class="akl-bar"><div class="akl-fill" style="width:84%;background:#4CB4B5"></div></div>
+                    </div>
+                    <div class="akl-item">
+                      <div class="akl-top"><span>{{ t('Customer Score', 'رضا العملاء') }}</span><span style="color:#F79008">91%</span></div>
+                      <div class="akl-bar"><div class="akl-fill" style="width:91%;background:#F79008"></div></div>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'holidays') {
+                <div class="art-form">
+                  <div class="art-holiday-list">
+                    <div class="ahl-item">
+                      <div class="ahl-icon">🎉</div>
+                      <div class="ahl-info"><span class="ahl-name">{{ t('New Year', 'رأس السنة') }}</span><span class="ahl-date">Jan 1</span></div>
+                      <div class="ahl-days" [style.color]="services[activeIndex].color">1d</div>
+                    </div>
+                    <div class="ahl-item">
+                      <div class="ahl-icon">🌙</div>
+                      <div class="ahl-info"><span class="ahl-name">{{ t('Eid Al Fitr', 'عيد الفطر') }}</span><span class="ahl-date">Mar 30–31</span></div>
+                      <div class="ahl-days" [style.color]="services[activeIndex].color">2d</div>
+                    </div>
+                    <div class="ahl-item">
+                      <div class="ahl-icon">🕌</div>
+                      <div class="ahl-info"><span class="ahl-name">{{ t('Eid Al Adha', 'عيد الأضحى') }}</span><span class="ahl-date">Jun 6–9</span></div>
+                      <div class="ahl-days" [style.color]="services[activeIndex].color">4d</div>
+                    </div>
+                    <div class="ahl-item">
+                      <div class="ahl-icon">🇦🇪</div>
+                      <div class="ahl-info"><span class="ahl-name">{{ t('National Day', 'اليوم الوطني') }}</span><span class="ahl-date">Dec 2–3</span></div>
+                      <div class="ahl-days" [style.color]="services[activeIndex].color">2d</div>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'jobs') {
+                <div class="art-form">
+                  <div class="art-job-list">
+                    <div class="ajl-item">
+                      <div class="ajl-icon">HR</div>
+                      <div class="ajl-info">
+                        <span class="ajl-title">{{ t('Senior HR Specialist', 'أخصائي موارد بشرية أول') }}</span>
+                        <span class="ajl-meta">HR · Full-time</span>
+                      </div>
+                      <div class="ajl-apply" [style.color]="services[activeIndex].color">{{ t('Apply', 'تقدم') }} →</div>
+                    </div>
+                    <div class="ajl-item">
+                      <div class="ajl-icon">OPS</div>
+                      <div class="ajl-info">
+                        <span class="ajl-title">{{ t('Operations Analyst', 'محلل عمليات') }}</span>
+                        <span class="ajl-meta">Ops · Full-time</span>
+                      </div>
+                      <div class="ajl-apply" [style.color]="services[activeIndex].color">{{ t('Apply', 'تقدم') }} →</div>
+                    </div>
+                    <div class="ajl-item">
+                      <div class="ajl-icon">FIN</div>
+                      <div class="ajl-info">
+                        <span class="ajl-title">{{ t('Finance Controller', 'مراقب مالي') }}</span>
+                        <span class="ajl-meta">Finance · Full-time</span>
+                      </div>
+                      <div class="ajl-apply" [style.color]="services[activeIndex].color">{{ t('Apply', 'تقدم') }} →</div>
+                    </div>
+                  </div>
+                </div>
+              }
+
+              @if (!services[activeIndex].screenshot && services[activeIndex].art === 'assets') {
+                <div class="art-form">
+                  <div class="art-asset-list">
+                    <div class="aal-item">
+                      <span class="aal-icon">💻</span>
+                      <div class="aal-info">
+                        <span class="aal-name">MacBook Pro 14"</span>
+                        <span class="aal-sn">SN-2024-0041</span>
+                      </div>
+                      <span class="aal-status" [style.color]="services[activeIndex].color">{{ t('Good', 'جيد') }}</span>
+                    </div>
+                    <div class="aal-item">
+                      <span class="aal-icon">📱</span>
+                      <div class="aal-info">
+                        <span class="aal-name">iPhone 14 Pro</span>
+                        <span class="aal-sn">SN-2024-0088</span>
+                      </div>
+                      <span class="aal-status" [style.color]="services[activeIndex].color">{{ t('Good', 'جيد') }}</span>
+                    </div>
+                    <div class="aal-item">
+                      <span class="aal-icon">🖥️</span>
+                      <div class="aal-info">
+                        <span class="aal-name">Monitor 27"</span>
+                        <span class="aal-sn">SN-2023-0312</span>
+                      </div>
+                      <span class="aal-status" [style.color]="services[activeIndex].color">{{ t('Good', 'جيد') }}</span>
+                    </div>
+                  </div>
+                </div>
+              }
+
+            </div><!-- /ms-art -->
+          </div><!-- /mockup-screen -->
+          <div class="mockup-home-bar"></div>
+        </div><!-- /mockup-frame -->
+      </div><!-- /ess-sticky -->
+
+      <!-- ── RIGHT: Scrollable list ──────────────── -->
+      <div class="ess-list">
+        @for (svc of services; track svc.en; let i = $index) {
+          <div class="service-item" [class.active]="i === activeIndex" [attr.data-index]="i">
+            <div class="si-number">{{ (i + 1).toString().padStart(2, '0') }}</div>
+            <div class="si-body">
+              <div class="si-head">
+                <svg class="si-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                     [style.color]="svc.color">
+                  <path [attr.d]="svc.svgD"/>
+                </svg>
+                <div class="si-title-wrap">
+                  <span class="si-tag" [style.color]="svc.color">
+                    {{ t(svc.tag_en, svc.tag_ar) }}
+                  </span>
+                  <h3 class="si-title">{{ t(svc.en, svc.ar) }}</h3>
+                </div>
+              </div>
+              <p class="si-desc">{{ t(svc.desc_en, svc.desc_ar) }}</p>
+              <div class="si-bar" [style.background]="svc.color"></div>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div><!-- /ess-body -->
+  </div>
+</section>

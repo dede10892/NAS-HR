@@ -1,0 +1,101 @@
+<main class="page-services">
+
+  <section class="svc-hero">
+    <div class="container svc-hero-inner">
+      <!-- Logo watermark -->
+      <img src="logo-light.svg" alt="" class="svc-logo-wm" aria-hidden="true" />
+      <div class="svc-hero-copy reveal-up">
+        <span class="eyebrow eyebrow-light">Employee Services</span>
+        <h1 class="svc-headline">HR Services That Move<br><em>as Fast as Your People</em></h1>
+        <p class="svc-sub">Give every employee instant access to daily HR services — from attendance and vacation requests to HR letters, assets, internal jobs, and end-of-service workflows — all from one smart mobile app.</p>
+        <div class="svc-actions">
+          <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/modules/ask-nas-ai" class="btn btn-secondary">Explore Mobile App</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── Sticky scroll services ── -->
+  <section class="svc-scroll-section">
+    <div class="container svc-scroll-inner">
+
+      <!-- Left: sticky phone -->
+      <div class="svc-sticky-phone">
+        <div class="svc-phone">
+          <div class="svc-phone-notch"></div>
+          <div class="svc-phone-screen">
+            @if (services[activeService()].screenshot) {
+              <img [src]="services[activeService()].screenshot"
+                   [alt]="services[activeService()].label + ' screen'"
+                   class="svc-phone-img" />
+            }
+            <!-- Placeholder (shown when no screenshot) -->
+            <div class="svc-phone-placeholder" [class.svc-phone-placeholder--hidden]="services[activeService()].screenshot">
+              <div class="spp-header">
+                <div class="spp-bar spp-w60"></div>
+              </div>
+              <div class="spp-title">{{ services[activeService()].label }}</div>
+              <div class="spp-sub">{{ services[activeService()].value }}</div>
+              <div class="spp-card"></div>
+              <div class="spp-card"></div>
+              <div class="spp-card spp-card--accent"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Right: scrolling services -->
+      <div class="svc-list">
+        @for (svc of services; track svc.label; let i = $index) {
+          <div class="svc-item"
+               [class.svc-item--active]="activeService() === i"
+               (mouseenter)="activeService.set(i)"
+               (click)="activeService.set(i)">
+            <div class="svc-item-num">{{ (i + 1).toString().padStart(2, '0') }}</div>
+            <div class="svc-item-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                   aria-hidden="true">
+                <path [attr.d]="svc.icon"/>
+              </svg>
+            </div>
+            <div class="svc-item-body">
+              <h3>{{ svc.label }}</h3>
+              <p class="svc-item-desc">{{ svc.desc }}</p>
+              <p class="svc-item-value">{{ svc.value }}</p>
+            </div>
+          </div>
+        }
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ── Secondary message ── -->
+  <section class="svc-impact-section">
+    <div class="container svc-impact-inner reveal-up">
+      <div class="svc-impact-stat">
+        <span class="svc-impact-num">13</span>
+        <span class="svc-impact-label">Employee Services</span>
+      </div>
+      <div class="svc-impact-divider"></div>
+      <div class="svc-impact-copy">
+        <h2>Less manual work. Faster HR response.<br>Better employee experience.</h2>
+        <p>Every service in NAS HR is connected — employee submits, manager approves, HR acts, employee is notified.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="mod-cta-band">
+    <div class="container mod-cta-inner reveal-up">
+      <h2>Ready to simplify employee HR services?</h2>
+      <p>See all 13 services working together in a live 30-minute product demo.</p>
+      <div class="mod-cta-btns">
+        <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        <a routerLink="/modules/ask-nas-ai" class="btn btn-outline-dark">Explore Mobile App</a>
+      </div>
+    </div>
+  </section>
+
+</main>
