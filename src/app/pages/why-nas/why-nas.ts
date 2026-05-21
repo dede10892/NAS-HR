@@ -9,6 +9,7 @@ import { RouterLink } from '@angular/router';
 })
 export class WhyNasPage {
   activePillar = signal(0);
+  hoveredStat  = signal<number | null>(null);
 
   pillars = [
     {
@@ -92,5 +93,23 @@ export class WhyNasPage {
       headline: 'Every essential HR capability, connected.',
       desc: 'Employee records, attendance, leave, services, manager dashboard, reports, salary data, internal jobs, LMS, and Ask NAS AI — all in one platform that shares data across every workflow.',
     },
+  ];
+
+  impactMetrics = [
+    { num: '70%',    label: 'Less time on HR admin',       icon: '⏱' },
+    { num: '3×',     label: 'Faster approval cycles',      icon: '⚡' },
+    { num: '100%',   label: 'Paperless HR operations',     icon: '☁' },
+    { num: '1',      label: 'Platform for everything HR',  icon: '🔗' },
+  ];
+
+  modules = [
+    { name: 'Smart Attendance', icon: '📍' },
+    { name: 'Leave & Requests', icon: '📋' },
+    { name: 'Payroll Reports',  icon: '💰' },
+    { name: 'Manager Dashboard',icon: '📊' },
+    { name: 'Ask NAS AI',       icon: '✦',  sky: true },
+    { name: 'Internal Jobs',    icon: '💼' },
+    { name: 'Learning (LMS)',   icon: '🎓' },
+    { name: 'HR Services',      icon: '🛎' },
   ];
 }

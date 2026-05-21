@@ -8,7 +8,13 @@ import { RouterLink } from '@angular/router';
   styleUrl: './internal-jobs.scss',
 })
 export class InternalJobsPage {
-  activeStep = signal(0);
+  activeStep   = signal(0);
+  activeFilter = signal('All');
+  activeChip   = signal('All Employees');
+  hoveredJob   = signal<number | null>(null);
+
+  filters = ['All', 'Design', 'HR', 'Engineering'];
+  chips   = ['All Employees', 'Design Only', 'Managers'];
 
   flow = [
     {
@@ -54,4 +60,10 @@ export class InternalJobsPage {
     { label: 'Gives employees visibility', desc: 'Everyone sees what opportunities are available to them.' },
     { label: 'Helps HR organise internal applications', desc: 'Track and manage all internal applications in one place.' },
   ];
+
+  goStep(n: number) {
+    this.activeStep.set(n);
+    this.activeFilter.set('All');
+    this.activeChip.set('All Employees');
+  }
 }

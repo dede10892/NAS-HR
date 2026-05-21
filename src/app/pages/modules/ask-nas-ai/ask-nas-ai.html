@@ -3,22 +3,64 @@
   <!-- ── Hero ── -->
   <section class="ai-hero">
     <div class="container ai-hero-inner">
-      <div class="ai-hero-copy reveal-up">
-        <span class="eyebrow eyebrow-light">Ask NAS AI</span>
-        <h1 class="ai-headline">Your HR assistant,<br>built into the flow of work.</h1>
-        <p class="ai-sub">Ask NAS AI about requests, policies, attendance, courses, internal jobs, and HR services — and turn everyday employee questions into faster answers and smarter actions.</p>
-        <div class="ai-actions">
-          <a href="#ai-demo" (click)="selectCase(0)" class="btn btn-primary">See AI in Action</a>
-          <a routerLink="/contact" class="btn btn-secondary">Request a Demo</a>
+
+      <!-- Left: copy -->
+      <div class="ai-hero-left">
+        <div class="ai-hero-copy reveal-stagger">
+          <span class="eyebrow eyebrow-light">Ask NAS AI</span>
+          <h1 class="ai-headline">Your HR assistant,<br>built into the flow of work.</h1>
+          <p class="ai-sub">Ask NAS AI about requests, policies, attendance, courses, internal jobs, and HR services — and turn everyday employee questions into faster answers and smarter actions.</p>
+          <div class="ai-actions">
+            <a href="#ai-demo" (click)="selectCase(0)" class="btn btn-primary">See AI in Action</a>
+            <a routerLink="/contact" class="btn btn-secondary">Request a Demo</a>
+          </div>
+        </div>
+        <!-- AI workflow strip -->
+        <div class="ai-flow reveal-up" style="--d:.18s">
+          @for (s of ['Employee asks','NAS AI understands','Suggests action','Creates request','Sends for approval']; track s; let last = $last) {
+            <span class="ai-flow-step">{{ s }}</span>
+            @if (!last) { <span class="ai-flow-arrow" aria-hidden="true">→</span> }
+          }
         </div>
       </div>
-      <!-- AI workflow strip -->
-      <div class="ai-flow reveal-up" style="--d:.15s">
-        @for (s of ['Employee asks','NAS AI understands','Suggests action','Creates request','Sends for approval']; track s; let last = $last) {
-          <span class="ai-flow-step">{{ s }}</span>
-          @if (!last) { <span class="ai-flow-arrow" aria-hidden="true">→</span> }
-        }
+
+      <!-- Right: AI visual panel -->
+      <div class="ai-hero-visual reveal-scale" style="--d:.22s">
+        <div class="aiv-header">
+          <span class="aiv-status-dot"></span>
+          <span class="aiv-label">NAS AI &mdash; Active</span>
+          <span class="aiv-version">v2.1</span>
+        </div>
+
+        <div class="aiv-stats">
+          <div class="aiv-stat">
+            <span class="aiv-num">94%</span>
+            <span class="aiv-desc">Request accuracy</span>
+          </div>
+          <div class="aiv-stat">
+            <span class="aiv-num">&lt;3s</span>
+            <span class="aiv-desc">Avg response time</span>
+          </div>
+          <div class="aiv-stat">
+            <span class="aiv-num">8+</span>
+            <span class="aiv-desc">HR use cases</span>
+          </div>
+          <div class="aiv-stat">
+            <span class="aiv-num">24/7</span>
+            <span class="aiv-desc">Always available</span>
+          </div>
+        </div>
+
+        <!-- Mini chat preview -->
+        <div class="aiv-preview">
+          <div class="aiv-msg aiv-msg--user">How many vacation days do I have left?</div>
+          <div class="aiv-msg aiv-msg--ai">
+            You have <strong>9 annual leave</strong> days remaining out of 22 this year.
+            <span class="aiv-tag">View Balance</span>
+          </div>
+        </div>
       </div>
+
     </div>
     <div class="ai-bg-grid" aria-hidden="true"></div>
   </section>
@@ -42,6 +84,10 @@
             <div class="ai-chat-dot" style="background:#F79008"></div>
             <div class="ai-chat-dot" style="background:#0FB86A"></div>
             <span class="ai-chat-title">Ask NAS AI</span>
+            <div class="ai-chat-online">
+              <span class="ai-online-dot"></span>
+              <span>Online</span>
+            </div>
           </div>
 
           <!-- Conversation body -->
@@ -117,6 +163,7 @@
 
           <!-- Use-case chips at bottom -->
           <div class="ai-chat-chips">
+            <span class="ai-chips-label">Try a use case</span>
             @for (c of useCases; track c.label; let i = $index) {
               <button class="ai-prompt-chip"
                       [class.ai-prompt-chip--active]="activeCase() === i"

@@ -75,7 +75,6 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب سلفة',
       desc_en: 'Apply for a company loan or salary advance. Set your repayment schedule and track monthly deductions directly from your payslip.',
       desc_ar: 'تقدم بطلب سلفة أو تسبق راتب. حدد خطة السداد وتابع الاستقطاعات الشهرية من كشف راتبك.',
-      screenshot: 'assets/app-screens/screen-loan.png',
     },
     {
       svgD: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9',
@@ -103,7 +102,6 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'سجل الحضور والبصمة',
       desc_en: 'Review your complete daily check-in and check-out history, late arrivals, and location-verified attendance records.',
       desc_ar: 'راجع سجل دخولك وخروجك اليومي الكامل، والتأخيرات، وسجلات الحضور المحققة بالموقع.',
-      screenshot: 'assets/app-screens/screen-shift.png',
     },
     {
       svgD: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h.01',
@@ -140,7 +138,6 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'الوظائف الداخلية',
       desc_en: 'Explore open positions within your organization. Apply for internal transfers and career growth opportunities without leaving the platform.',
       desc_ar: 'استكشف الوظائف الشاغرة داخل مؤسستك. قدّم للانتقال الداخلي وفرص النمو المهني.',
-      screenshot: 'assets/app-screens/screen-jobs.png',
     },
     {
       svgD: 'M2 3h20v14H2z M8 21h8 M12 17v4',
@@ -170,6 +167,11 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       { rootMargin: '-35% 0px -55% 0px', threshold: 0 }
     );
     items.forEach((item: Element) => this.observer!.observe(item));
+  }
+
+  setActive(i: number) {
+    this.activeIndex = i;
+    this.cdr.detectChanges();
   }
 
   ngOnDestroy() {

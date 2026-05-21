@@ -1,42 +1,51 @@
 @use '../../shared-pages' as *;
 
 /* ══════════════════════════════════════════════════════
-   ASK NAS AI PAGE  —  spacing + Fira Sans overrides
+   ASK NAS AI PAGE  —  modern, interactive, responsive
 ══════════════════════════════════════════════════════ */
 
-$fira: 'Fira Sans', sans-serif;
+$fira:   'Fira Sans', sans-serif;
+$spring: cubic-bezier(0.16, 1, 0.3, 1);
 
 /* ── Force Fira Sans across the whole page ── */
 .page-ai {
   font-family: $fira;
 
-  h1, h2, h3, h4, p, span, button, a {
-    font-family: $fira;
-  }
+  h1, h2, h3, h4, p, span, button, a { font-family: $fira; }
 
-  /* section-title globally uses Playfair Display — override it here */
-  .section-title {
-    font-family: $fira;
-    font-weight: 700;
-    letter-spacing: -0.02em;
-  }
+  .section-title  { font-family: $fira; font-weight: 700; letter-spacing: -0.02em; }
+  .eyebrow        { font-family: $fira; }
+  .section-sub    { font-family: $fira; }
+}
 
-  .eyebrow {
-    font-family: $fira;
-  }
+/* ══════════════════════════════════════════════════════
+   HERO — 2-column layout
+══════════════════════════════════════════════════════ */
 
-  .section-sub {
-    font-family: $fira;
+.ai-hero {
+  padding-block: 100px 72px !important;
+
+  /* override shared-pages single-column cap */
+  .ai-hero-inner {
+    display: grid !important;
+    grid-template-columns: 1.1fr 0.9fr !important;
+    gap: 56px !important;
+    max-width: 1140px !important;
+    align-items: center !important;
   }
 }
 
-/* ── Hero: tighter vertical padding ── */
-.ai-hero {
-  padding-block: 100px 56px !important;
+/* Left column wrapper — copy + flow strip */
+.ai-hero-left {
+  display: flex;
+  flex-direction: column;
+  gap: 28px;
+}
 
-  .ai-hero-inner {
-    gap: 32px;
-  }
+.ai-hero-copy {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
 }
 
 .ai-headline {
@@ -44,26 +53,186 @@ $fira: 'Fira Sans', sans-serif;
   font-size: clamp(28px, 3.8vw, 46px);
   font-weight: 700;
   letter-spacing: -0.02em;
+  margin-bottom: 0;
 }
 
 .ai-sub {
   font-family: $fira !important;
   font-size: clamp(14px, 1.3vw, 16px);
   line-height: 1.75;
+  margin-bottom: 0;
+}
+
+.ai-actions { margin-top: 4px; }
+
+/* Flow strip */
+.ai-flow {
+  flex-wrap: wrap;
 }
 
 .ai-flow-step,
-.ai-flow-arrow {
-  font-family: $fira !important;
+.ai-flow-arrow { font-family: $fira !important; }
+
+/* ── Right column: AI stats panel ── */
+.ai-hero-visual {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 20px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  position: relative;
+  overflow: hidden;
+
+  /* subtle inner glow */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -60px;
+    right: -60px;
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    background: radial-gradient(circle, rgba(117,222,255,0.12) 0%, transparent 70%);
+    pointer-events: none;
+  }
 }
 
-/* ── Demo section: balanced spacing ── */
+.aiv-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.aiv-status-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #0FB86A;
+  flex-shrink: 0;
+  animation: aivPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes aivPulse {
+  0%, 100% { box-shadow: 0 0 0 0   rgba(15,184,106,0.5); }
+  50%       { box-shadow: 0 0 0 5px rgba(15,184,106,0); }
+}
+
+.aiv-label {
+  font-size: 12px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.5);
+  letter-spacing: 0.02em;
+  flex: 1;
+}
+
+.aiv-version {
+  font-size: 10px;
+  font-weight: 700;
+  color: rgba(117,222,255,0.55);
+  background: rgba(117,222,255,0.1);
+  border: 1px solid rgba(117,222,255,0.18);
+  border-radius: 99px;
+  padding: 2px 8px;
+  letter-spacing: 0.04em;
+}
+
+/* 2×2 stat grid */
+.aiv-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+
+.aiv-stat {
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 12px;
+  padding: 14px 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  transition: background 220ms, border-color 220ms, transform 220ms $spring;
+
+  &:hover {
+    background: rgba(117,222,255,0.09);
+    border-color: rgba(117,222,255,0.18);
+    transform: translateY(-2px);
+  }
+}
+
+.aiv-num {
+  font-size: clamp(20px, 2.2vw, 26px);
+  font-weight: 800;
+  color: var(--nas-sky-400);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.aiv-desc {
+  font-size: 11px;
+  color: rgba(255,255,255,0.38);
+  font-weight: 500;
+}
+
+/* Mini chat preview inside hero visual */
+.aiv-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 14px;
+  background: rgba(0,0,0,0.22);
+  border-radius: 12px;
+  border: 1px solid rgba(255,255,255,0.05);
+}
+
+.aiv-msg {
+  font-size: 12px;
+  line-height: 1.5;
+  padding: 8px 12px;
+  border-radius: 10px;
+  max-width: 88%;
+
+  &--user {
+    background: var(--nas-sky-400);
+    color: var(--nas-cta);
+    font-weight: 500;
+    align-self: flex-end;
+    border-radius: 10px 10px 3px 10px;
+  }
+
+  &--ai {
+    background: rgba(255,255,255,0.08);
+    color: rgba(255,255,255,0.8);
+    border: 1px solid rgba(255,255,255,0.07);
+    border-radius: 10px 10px 10px 3px;
+  }
+}
+
+.aiv-tag {
+  display: inline-block;
+  background: rgba(117,222,255,0.15);
+  color: var(--nas-sky-400);
+  border: 1px solid rgba(117,222,255,0.28);
+  border-radius: 99px;
+  font-size: 10px;
+  font-weight: 700;
+  padding: 2px 8px;
+  margin-top: 5px;
+  letter-spacing: 0.02em;
+}
+
+/* ══════════════════════════════════════════════════════
+   DEMO SECTION
+══════════════════════════════════════════════════════ */
+
 .ai-demo-section {
-  padding-block: 72px 80px !important;
+  padding-block: 72px 88px !important;
 }
 
 .section-head-center {
-  margin-bottom: 40px !important;
+  margin-bottom: 44px !important;
 
   .section-title {
     margin-top: 8px;
@@ -71,12 +240,23 @@ $fira: 'Fira Sans', sans-serif;
   }
 }
 
-/* ── Chat window: Fira Sans throughout ── */
+/* ── Chat window ── */
 .ai-chat {
   font-family: $fira;
   min-height: 480px;
+
+  /* entrance: slide up + fade */
+  &.is-visible {
+    animation: chatSlideIn 0.5s $spring both;
+  }
 }
 
+@keyframes chatSlideIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Header */
 .ai-chat-title {
   font-family: $fira !important;
   font-size: 12.5px;
@@ -84,27 +264,160 @@ $fira: 'Fira Sans', sans-serif;
   letter-spacing: 0.02em;
 }
 
+.ai-chat-online {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  margin-left: auto;
+  font-size: 10.5px;
+  font-weight: 500;
+  color: rgba(255,255,255,0.3);
+  letter-spacing: 0.02em;
+}
+
+.ai-online-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #0FB86A;
+  flex-shrink: 0;
+  animation: aivPulse 2.2s ease-in-out infinite;
+}
+
+/* Bubble entrance animation */
 .ai-bubble {
   font-family: $fira !important;
   font-size: 14px;
   line-height: 1.65;
+  animation: bubbleIn 0.28s $spring both;
+}
+
+@keyframes bubbleIn {
+  from { opacity: 0; transform: translateY(5px) scale(0.97); }
+  to   { opacity: 1; transform: none; }
+}
+
+/* Action buttons */
+.ai-action-row {
+  animation: bubbleIn 0.3s $spring 0.1s both;
 }
 
 .ai-action-btn {
   font-family: $fira !important;
   font-size: 12px;
   font-weight: 600;
+  transition: background 160ms, transform 180ms $spring, box-shadow 180ms;
+
+  &:hover {
+    background: rgba(117,222,255,0.22);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(117,222,255,0.12);
+  }
+
+  &:active { transform: translateY(0); }
+}
+
+/* ── Chips strip ── */
+.ai-chat-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  padding: 12px 16px 14px;
+  border-top: 1px solid rgba(255,255,255,0.06);
+  background: #0C2427;
+  align-items: center;
+}
+
+.ai-chips-label {
+  font-size: 9.5px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.22);
+  text-transform: uppercase;
+  letter-spacing: 0.09em;
+  width: 100%;
+  margin-bottom: 2px;
 }
 
 .ai-prompt-chip {
   font-family: $fira !important;
-  font-size: 12px;
+  font-size: 11.5px;
   font-weight: 500;
+  transition: all 180ms $spring;
+
+  &:hover {
+    background: rgba(117,222,255,0.12);
+    color: var(--nas-sky-400);
+    border-color: rgba(117,222,255,0.22);
+    transform: translateY(-1px);
+  }
+
+  &--active {
+    transform: none !important;
+    box-shadow: 0 0 0 1px rgba(117,222,255,0.2);
+  }
 }
 
 /* ── CTA band ── */
 .mod-cta-band {
-  h2, p, a {
-    font-family: $fira !important;
+  h2, p, a { font-family: $fira !important; }
+}
+
+/* ══════════════════════════════════════════════════════
+   RESPONSIVE
+══════════════════════════════════════════════════════ */
+
+@media (max-width: 960px) {
+  .ai-hero .ai-hero-inner {
+    grid-template-columns: 1fr !important;
+    max-width: 700px !important;
+    gap: 40px !important;
+  }
+
+  .ai-hero-visual {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+
+    &::before { display: none; }
+  }
+
+  .aiv-stats {
+    grid-template-columns: repeat(4, 1fr);
+  }
+
+  .aiv-preview {
+    grid-column: 1 / -1;
+  }
+}
+
+@media (max-width: 640px) {
+  .ai-hero .ai-hero-inner {
+    gap: 28px !important;
+  }
+
+  .ai-hero-visual {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+    padding: 18px;
+  }
+
+  .aiv-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .aiv-preview { display: none; }
+
+  .ai-demo-section {
+    padding-block: 56px 64px !important;
+  }
+
+  .ai-chat-chips {
+    gap: 5px;
+  }
+
+  .ai-prompt-chip {
+    font-size: 11px;
+    padding: 5px 10px;
   }
 }

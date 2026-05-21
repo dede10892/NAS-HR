@@ -167,7 +167,7 @@
                 <div class="art-form">
                   <div class="art-field">
                     <span class="af-label">{{ t('Loan Amount', 'مبلغ السلفة') }}</span>
-                    <div class="af-input big-amount">AED 5,000</div>
+                    <div class="af-input big-amount" [style.color]="services[activeIndex].color">LE 5,000</div>
                   </div>
                   <div class="art-field">
                     <span class="af-label">{{ t('Repayment', 'الاستحقاق') }}</span>
@@ -179,7 +179,7 @@
                   </div>
                   <div class="art-loan-calc">
                     <span>{{ t('Monthly deduction', 'الاستقطاع الشهري') }}</span>
-                    <span class="alc-val" [style.color]="services[activeIndex].color">AED 833</span>
+                    <span class="alc-val" [style.color]="services[activeIndex].color">LE 833</span>
                   </div>
                   <div class="art-submit" [style.background]="services[activeIndex].color">
                     {{ t('Apply for Loan', 'تقديم طلب السلفة') }}
@@ -216,7 +216,7 @@
                   </div>
                   <div class="art-gratuity">
                     <span>{{ t('Estimated Gratuity', 'مكافأة نهاية الخدمة') }}</span>
-                    <span class="ag-val" [style.color]="services[activeIndex].color">AED 18,500</span>
+                    <span class="ag-val" [style.color]="services[activeIndex].color">LE 18,500</span>
                   </div>
                 </div>
               }
@@ -252,7 +252,7 @@
                         <span class="apl-title">{{ t('Late Arrival', 'تأخر عن العمل') }}</span>
                         <span class="apl-date">Mar 5, 2025</span>
                       </div>
-                      <span class="apl-val" style="color:#F14437">-AED 50</span>
+                      <span class="apl-val" style="color:#F14437">-LE 50</span>
                     </div>
                     <div class="apl-item">
                       <span class="apl-icon">📋</span>
@@ -268,7 +268,7 @@
                         <span class="apl-title">{{ t('Absence', 'غياب') }}</span>
                         <span class="apl-date">Dec 3, 2024</span>
                       </div>
-                      <span class="apl-val" style="color:#F14437">-AED 200</span>
+                      <span class="apl-val" style="color:#F14437">-LE 200</span>
                     </div>
                   </div>
                 </div>
@@ -391,7 +391,7 @@
       <!-- ── RIGHT: Scrollable list ──────────────── -->
       <div class="ess-list">
         @for (svc of services; track svc.en; let i = $index) {
-          <div class="service-item" [class.active]="i === activeIndex" [attr.data-index]="i">
+          <div class="service-item" [class.active]="i === activeIndex" [attr.data-index]="i" (click)="setActive(i)">
             <div class="si-number">{{ (i + 1).toString().padStart(2, '0') }}</div>
             <div class="si-body">
               <div class="si-head">

@@ -112,7 +112,6 @@
 .ms-art {
   flex: 1;
   overflow: hidden;
-  animation: artFadeIn 0.35s cubic-bezier(0.16,1,0.3,1) both;
 }
 
 .ms-screenshot {
@@ -125,7 +124,7 @@
 }
 
 @keyframes artFadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(8px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
@@ -134,6 +133,7 @@
   display: flex;
   flex-direction: column;
   gap: 10px;
+  animation: artFadeIn 0.3s cubic-bezier(0.16,1,0.3,1) both;
 }
 
 .art-field {
@@ -159,7 +159,7 @@
   color: rgba(255,255,255,0.85);
   font-weight: 500;
 
-  &.big-amount { font-size: 18px; font-weight: 700; color: #fff; text-align: center; padding: 12px; }
+  &.big-amount { font-size: 18px; font-weight: 700; text-align: center; padding: 12px; }
 }
 
 .af-textarea {
@@ -336,11 +336,13 @@
 }
 .atl-date { font-size: 10px; font-weight: 700; color: rgba(255,255,255,0.5); min-width: 42px; }
 .atl-times { flex: 1; display: flex; flex-direction: column; gap: 2px; }
-.atl-in  { font-size: 10px; color: #0FB86A; font-weight: 600; }
+.atl-in  { font-size: 10px; color: var(--art-color, #4CB4B5); font-weight: 600; }
 .atl-out { font-size: 10px; color: rgba(255,255,255,0.4); font-weight: 600; }
 .atl-badge {
   font-size: 9px; font-weight: 700; padding: 3px 7px;
-  border-radius: 9999px; background: rgba(15,184,106,0.15); color: #0FB86A;
+  border-radius: 9999px;
+  background: color-mix(in srgb, var(--art-color, #4CB4B5) 18%, transparent);
+  color: var(--art-color, #4CB4B5);
   &.late { background: rgba(241,68,55,0.15); color: #F14437; }
 }
 
@@ -379,9 +381,9 @@
   font-size: 8px;
   font-weight: 800;
   letter-spacing: 0.04em;
-  color: rgba(255,255,255,0.5);
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.1);
+  color: var(--art-color, #75DEFF);
+  background: color-mix(in srgb, var(--art-color, #75DEFF) 14%, transparent);
+  border: 1px solid color-mix(in srgb, var(--art-color, #75DEFF) 30%, transparent);
   border-radius: 5px;
   padding: 4px 5px;
   flex-shrink: 0;
@@ -407,6 +409,7 @@
   display: flex;
   flex-direction: column;
   padding-top: 8px;
+  padding-bottom: 50vh;
 }
 
 .service-item {
@@ -414,7 +417,7 @@
   gap: 20px;
   padding: 28px 0;
   border-bottom: 1px solid var(--nas-grey-400);
-  cursor: default;
+  cursor: pointer;
 
   &:first-child { padding-top: 0; }
   &:last-child  { border-bottom: none; }
