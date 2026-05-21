@@ -140,161 +140,22 @@
 
               <!-- ════ GPS CHECK-IN SCREEN ════ -->
               @if (activeScreen() === 0) {
-                <div class="sa-view sa-gps-view">
-
-                  <!-- App header -->
-                  <div class="sa-appbar">
-                    <div class="sa-appbar-back">
-                      <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                        <path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </div>
-                    <span class="sa-appbar-title">{{ t('Check In', 'تسجيل الحضور') }}</span>
-                    <div class="sa-appbar-badge">GPS ✓</div>
-                  </div>
-
-                  <!-- Map -->
-                  <div class="sa-map">
-                    <div class="sa-map-grid"></div>
-                    <div class="sa-map-block b1"></div>
-                    <div class="sa-map-block b2"></div>
-                    <div class="sa-map-block b3"></div>
-                    <div class="sa-road sa-road-h"></div>
-                    <div class="sa-road sa-road-v"></div>
-                    <div class="sa-pin-wrap">
-                      <div class="sa-ring r1"></div>
-                      <div class="sa-ring r2"></div>
-                      <div class="sa-ring r3"></div>
-                      <div class="sa-pin-dot"></div>
-                    </div>
-                  </div>
-
-                  <!-- Bottom card -->
-                  <div class="sa-bottom-card">
-                    <div class="sa-user-row">
-                      <div class="sa-avatar" style="background:#4CB4B5">SA</div>
-                      <div class="sa-user-info">
-                        <span class="sa-user-name">Sara Al-Mansoori</span>
-                        <span class="sa-user-loc">NAS HQ, Dubai Media City</span>
-                      </div>
-                    </div>
-                    <button class="sa-btn-checkin">{{ t('Check In Now', 'سجّل حضوري الآن') }}</button>
-                  </div>
-
+                <div class="sa-view">
+                  <img class="sa-screen-img" src="/attendence-reports/Add visit.png" alt="GPS Check-in" />
                 </div>
               }
 
               <!-- ════ FINGERPRINT SCREEN ════ -->
               @if (activeScreen() === 1) {
-                <div class="sa-view sa-fp-view">
-
-                  <div class="sa-appbar">
-                    <div class="sa-appbar-back">
-                      <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                        <path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </div>
-                    <span class="sa-appbar-title">{{ t('Verify Identity', 'التحقق من الهوية') }}</span>
-                    <div style="width:40px"></div>
-                  </div>
-
-                  <div class="sa-fp-body">
-                    <p class="sa-fp-instruction">
-                      {{ fpState() === 'done'
-                        ? t('Identity Verified ✓', 'تم التحقق ✓')
-                        : fpState() === 'scanning'
-                          ? t('Scanning…', 'جارٍ المسح…')
-                          : t('Place finger on sensor', 'ضع إصبعك على الحساس') }}
-                    </p>
-
-                    <div class="sa-fp-circle"
-                         [class.scanning]="fpState() === 'scanning'"
-                         [class.done]="fpState() === 'done'">
-                      <div class="sa-fp-ripple r1"></div>
-                      <div class="sa-fp-ripple r2"></div>
-
-                      <!-- Fingerprint SVG -->
-                      <svg class="sa-fp-icon" viewBox="0 0 80 80" fill="none"
-                           stroke="currentColor" stroke-linecap="round" stroke-width="2.2">
-                        <path d="M15,58 C10,40 14,20 32,14 C50,8 68,20 70,40 C71,52 66,64 56,70"/>
-                        <path d="M20,56 C16,40 20,24 34,19 C48,14 63,26 64,44 C65,55 60,65 51,69"/>
-                        <path d="M25,54 C22,40 26,28 36,24 C46,20 58,32 58,46 C58,56 53,63 45,67"/>
-                        <path d="M30,52 C28,41 32,33 40,30 C48,27 55,36 54,48 C53,57 48,62 41,64"/>
-                        <path d="M35,50 C34,43 37,38 40,37 C43,36 47,40 46,48 C45,54 42,57 40,58"/>
-                      </svg>
-
-                      <!-- Scan line -->
-                      <div class="sa-fp-scanline"></div>
-
-                      <!-- Done checkmark -->
-                      @if (fpState() === 'done') {
-                        <div class="sa-fp-check">
-                          <svg width="30" height="30" viewBox="0 0 24 24" fill="none"
-                               stroke="#0FB86A" stroke-width="2.5" stroke-linecap="round">
-                            <path d="M5 13l4 4L19 7"/>
-                          </svg>
-                        </div>
-                      }
-                    </div>
-
-                    <!-- Progress dots -->
-                    <div class="sa-fp-dots">
-                      <div class="sa-fp-dot" [class.active]="fpState() !== 'idle'"></div>
-                      <div class="sa-fp-dot" [class.active]="fpState() === 'scanning' || fpState() === 'done'"></div>
-                      <div class="sa-fp-dot" [class.active]="fpState() === 'done'"></div>
-                    </div>
-                  </div>
-
+                <div class="sa-view">
+                  <img class="sa-screen-img" src="/attendence-reports/Fingerprint (3).png" alt="Fingerprint Scan" />
                 </div>
               }
 
               <!-- ════ ATTENDANCE HISTORY SCREEN ════ -->
               @if (activeScreen() === 2) {
-                <div class="sa-view sa-hist-view">
-
-                  <div class="sa-appbar">
-                    <div class="sa-appbar-back">
-                      <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                        <path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </div>
-                    <span class="sa-appbar-title">{{ t("Today's Attendance", 'حضور اليوم') }}</span>
-                    <span class="sa-hist-live">
-                      <span class="sa-hist-dot"></span>
-                      {{ checkedIn() }}
-                    </span>
-                  </div>
-
-                  <div class="sa-hist-summary">
-                    <div class="sa-hsum-chip" style="color:#0FB86A;background:rgba(15,184,106,0.1)">
-                      <span class="sa-hsum-n">{{ checkedIn() }}</span>
-                      <span class="sa-hsum-l">{{ t('On Time', 'في الوقت') }}</span>
-                    </div>
-                    <div class="sa-hsum-chip" style="color:#F14437;background:rgba(241,68,55,0.1)">
-                      <span class="sa-hsum-n">12</span>
-                      <span class="sa-hsum-l">{{ t('Late', 'متأخر') }}</span>
-                    </div>
-                    <div class="sa-hsum-chip" style="color:#F79008;background:rgba(247,144,8,0.1)">
-                      <span class="sa-hsum-n">3</span>
-                      <span class="sa-hsum-l">{{ t('Absent', 'غائب') }}</span>
-                    </div>
-                  </div>
-
-                  <div class="sa-hist-list">
-                    @for (a of attendees; track a.name; let i = $index) {
-                      <div class="sa-att-row" [style.animation-delay]="(i * 70) + 'ms'">
-                        <div class="sa-avatar" [style.background]="a.color">{{ a.initials }}</div>
-                        <div class="sa-att-info">
-                          <span class="sa-att-name">{{ a.name }}</span>
-                          <span class="sa-att-time">{{ a.time }}</span>
-                        </div>
-                        <div class="sa-att-badge" [class.late]="a.status === 'late'">
-                          {{ a.status === 'late' ? t('Late', 'متأخر') : t('On time', 'في الوقت') }}
-                        </div>
-                      </div>
-                    }
-                  </div>
-
+                <div class="sa-view">
+                  <img class="sa-screen-img" src="/attendence-reports/attendance report .jpeg" alt="Attendance Report" />
                 </div>
               }
 

@@ -45,13 +45,6 @@ export class NavbarComponent {
       route: '/modules/smart-attendance',
     },
     {
-      svgD: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2 M9 5a2 2 0 012-2h2a2 2 0 012 2 M9 12h6 M9 16h4',
-      en: 'Employee Services', ar: 'خدمات الموظفين',
-      desc_en: 'Mobile HR services for every employee',
-      desc_ar: 'خدمات الموارد البشرية على الجوال',
-      route: '/modules/services',
-    },
-    {
       svgD: 'M13 2L3 14h9l-1 8 10-12h-9l1-8z',
       en: 'Ask NAS AI',            ar: 'اسأل ناس AI',
       desc_en: 'Intelligent HR assistant powered by AI',

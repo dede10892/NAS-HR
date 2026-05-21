@@ -39,6 +39,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب إذن',
       desc_en: 'Step out during work hours for personal or official matters. Submit a request in seconds and get instant manager approval through automated workflows.',
       desc_ar: 'غادر خلال ساعات العمل للأمور الشخصية أو الرسمية. أرسل طلبك في ثوانٍ واحصل على موافقة المدير فوراً.',
+      screenshot: '/attendence-reports/Request Permission (close) (1).png',
     },
     {
       svgD: 'M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z M9 22V12h6v10',
@@ -48,6 +49,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب عمل خارج المقر',
       desc_en: 'Submit requests to work remotely or from a different location. Include your reason, location, and expected duration for seamless approvals.',
       desc_ar: 'أرسل طلباً للعمل عن بُعد أو من موقع مختلف مع ذكر السبب والموقع والمدة المتوقعة.',
+      screenshot: '/attendence-reports/Add visit.png',
     },
     {
       svgD: 'M8 7V3 M16 7V3 M3 11h18 M5 7h14a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2z M9 16l2 2 4-4',
@@ -57,6 +59,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب إجازة',
       desc_en: 'Plan and request annual leave in advance. View your balance, pick dates on the calendar, and track approval status in real time.',
       desc_ar: 'خطط لإجازتك السنوية مسبقاً. اعرض رصيدك، اختر التواريخ، وتابع حالة الموافقة لحظةً بلحظة.',
+      screenshot: '/attendence-reports/Vacation Request.jpeg',
     },
     {
       svgD: 'M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z M14 2v6h6 M16 13H8 M16 17H8 M10 9H8',
@@ -66,6 +69,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب خطاب HR',
       desc_en: 'Request official HR letters — salary certificates, experience letters, NOC and more — delivered digitally with company stamp.',
       desc_ar: 'اطلب خطابات الموارد البشرية الرسمية — شهادات الراتب، خطابات الخبرة، عدم الممانعة — وتسلمها رقمياً.',
+      screenshot: '/attendence-reports/Hr.jpeg',
     },
     {
       svgD: 'M1 4h22v16H1z M1 10h22',
@@ -75,6 +79,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب سلفة',
       desc_en: 'Apply for a company loan or salary advance. Set your repayment schedule and track monthly deductions directly from your payslip.',
       desc_ar: 'تقدم بطلب سلفة أو تسبق راتب. حدد خطة السداد وتابع الاستقطاعات الشهرية من كشف راتبك.',
+      screenshot: '/attendence-reports/Request Loan (2).png',
     },
     {
       svgD: 'M9 21H5a2 2 0 01-2-2V5a2 2 0 012-2h4 M16 17l5-5-5-5 M21 12H9',
@@ -84,24 +89,27 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'طلب استقالة',
       desc_en: 'Initiate your resignation formally through the system. Trigger automated handover workflows, notice period tracking, and exit interviews.',
       desc_ar: 'قدّم استقالتك رسمياً عبر النظام مع تشغيل تلقائي لإجراءات التسليم وتتبع فترة الإشعار.',
+      screenshot: '/attendence-reports/Resignation Request.jpeg',
     },
     {
-      svgD: 'M9 11l3 3L22 4 M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11',
-      art: 'eos', color: '#339699',
-      tag_en: 'Offboarding', tag_ar: 'إنهاء خدمة',
-      en: 'End of Service Request',
-      ar: 'طلب نهاية الخدمة',
-      desc_en: 'Manage final settlements, gratuity calculations, and multi-department clearance all in one streamlined digital process.',
-      desc_ar: 'أدر المستحقات النهائية وحساب المكافأة والتخليص من جميع الأقسام في عملية رقمية واحدة.',
+      svgD: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
+      art: 'bonus', color: '#339699',
+      tag_en: 'Finance', tag_ar: 'مالية',
+      en: 'Bonus History',
+      ar: 'سجل المكافآت',
+      desc_en: 'View your complete bonus and incentive history, including performance bonuses, annual rewards, and special recognition payments.',
+      desc_ar: 'اعرض سجل مكافآتك وحوافزك الكاملة، بما في ذلك المكافآت الأدائية والمكافآت السنوية.',
+      screenshot: '/attendence-reports/Bonus History .jpeg',
     },
     {
       svgD: 'M21 21l-4.35-4.35 M11 18a7 7 0 100-14 7 7 0 000 14z',
-      art: 'fingerprint', color: '#4CB4B5',
+      art: 'attendance', color: '#4CB4B5',
       tag_en: 'Insights', tag_ar: 'تقارير',
-      en: 'View Fingerprint History',
-      ar: 'سجل الحضور والبصمة',
+      en: 'Attendance Report',
+      ar: 'تقرير الحضور',
       desc_en: 'Review your complete daily check-in and check-out history, late arrivals, and location-verified attendance records.',
       desc_ar: 'راجع سجل دخولك وخروجك اليومي الكامل، والتأخيرات، وسجلات الحضور المحققة بالموقع.',
+      screenshot: '/attendence-reports/Fingerprint (3).png',
     },
     {
       svgD: 'M10.29 3.86L1.82 18a2 2 0 001.71 3h16.94a2 2 0 001.71-3L13.71 3.86a2 2 0 00-3.42 0z M12 9v4 M12 17h.01',
@@ -111,6 +119,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'سجل الجزاءات',
       desc_en: 'Review any deductions, warnings, or disciplinary actions applied to your record with full details and dates.',
       desc_ar: 'راجع أي استقطاعات أو إنذارات أو إجراءات تأديبية مطبقة على سجلك مع التفاصيل الكاملة.',
+      screenshot: '/attendence-reports/Visits.png',
     },
     {
       svgD: 'M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z',
@@ -120,6 +129,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'مؤشرات الأداء المحققة',
       desc_en: 'Monitor your performance metrics, goal completion rates, and earned achievements — updated in real time by your manager.',
       desc_ar: 'تابع مؤشرات أدائك ومعدلات إنجاز الأهداف والإنجازات المحققة — تُحدَّث فورياً من مديرك.',
+      screenshot: '/attendence-reports/Appraisal Empty State.png',
     },
     {
       svgD: 'M8 7V3 M16 7V3 M3 11h18 M5 7h14a2 2 0 012 2v11a2 2 0 01-2 2H5a2 2 0 01-2-2V9a2 2 0 012-2z M8 14h.01 M12 14h.01 M16 14h.01',
@@ -129,6 +139,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'العطل الرسمية',
       desc_en: 'Browse the full company holiday calendar, upcoming long weekends, and official public holidays.',
       desc_ar: 'تصفح تقويم العطل الرسمي للشركة وعطل نهاية الأسبوع الطويلة والأعياد الرسمية.',
+      screenshot: '/attendence-reports/View Official Holidays.png',
     },
     {
       svgD: 'M20 7H4a2 2 0 00-2 2v10a2 2 0 002 2h16a2 2 0 002-2V9a2 2 0 00-2-2z M16 7V5a2 2 0 00-2-2h-4a2 2 0 00-2 2v2',
@@ -138,6 +149,7 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'الوظائف الداخلية',
       desc_en: 'Explore open positions within your organization. Apply for internal transfers and career growth opportunities without leaving the platform.',
       desc_ar: 'استكشف الوظائف الشاغرة داخل مؤسستك. قدّم للانتقال الداخلي وفرص النمو المهني.',
+      screenshot: '/attendence-reports/intenal Jobs.jpeg',
     },
     {
       svgD: 'M2 3h20v14H2z M8 21h8 M12 17v4',
@@ -147,6 +159,17 @@ export class SelfServiceComponent implements AfterViewInit, OnDestroy {
       ar: 'أصول الشركة',
       desc_en: 'View all equipment, devices, and company property assigned to you — with serial numbers, hand-over dates, and condition status.',
       desc_ar: 'اعرض جميع المعدات والأجهزة وممتلكات الشركة المخصصة لك مع الأرقام التسلسلية وتواريخ الاستلام.',
+      screenshot: '/attendence-reports/Asset Owners.png',
+    },
+    {
+      svgD: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
+      art: 'nasbot', color: '#4CB4B5',
+      tag_en: 'AI Assistant', tag_ar: 'مساعد ذكي',
+      en: 'NAS BOT',
+      ar: 'بوت NAS',
+      desc_en: 'Get instant answers to your HR questions, check policies, and complete requests with the help of the NAS AI assistant — available 24/7.',
+      desc_ar: 'احصل على إجابات فورية لأسئلتك في الموارد البشرية، تحقق من السياسات، وأكمل طلباتك بمساعدة مساعد NAS الذكي.',
+      screenshot: '/attendence-reports/2B Bot (3).png',
     },
   ];
 

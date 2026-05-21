@@ -43,12 +43,6 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/modules/lms/lms').then(m => m.LmsPage),
   },
-  {
-    path: 'modules/services',
-    loadComponent: () =>
-      import('./pages/modules/services/services').then(m => m.ServicesPage),
-  },
-
   // ── Solution pages ──
   {
     path: 'solutions/aviation',
