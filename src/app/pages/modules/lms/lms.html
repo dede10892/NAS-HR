@@ -1,60 +1,138 @@
 <main class="page-lms">
 
+  <!-- ══ HERO ══════════════════════════════════════════════ -->
   <section class="mod-hero">
     <div class="container mod-hero-inner">
       <div class="mod-hero-copy reveal-up">
-        <span class="eyebrow">Learning Management</span>
-        <h1 class="mod-headline">Learning that connects<br><em>to employee growth.</em></h1>
-        <p class="mod-sub">Deliver training, track progress, assess employees, issue certificates, and connect learning to career development — all in one platform.</p>
+        <span class="eyebrow">Role-Based Learning</span>
+        <h1 class="mod-headline">A course for every role.<br><em>A path to the next one.</em></h1>
+        <p class="mod-sub">NAS HR delivers training courses tailored to each job title in your organization — and builds the learning path that prepares every employee for their next position.</p>
         <div class="mod-actions">
           <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/pricing" class="btn btn-ghost-light">See Pricing</a>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- ── Learning Flow ── -->
-  <section class="lms-flow-section">
+  <!-- ══ STATS BAND ════════════════════════════════════════ -->
+  <section class="lms-stats-band">
+    <div class="container lms-stats-inner">
+      @for (s of stats; track s.lbl; let i = $index) {
+        <div class="lms-stat-item">
+          <span class="lms-stat-val">{{ s.val }}</span>
+          <span class="lms-stat-lbl">{{ s.lbl }}</span>
+        </div>
+        @if (i < stats.length - 1) {
+          <div class="lms-stat-sep" aria-hidden="true"></div>
+        }
+      }
+    </div>
+  </section>
+
+  <!-- ══ ROLE CARDS ════════════════════════════════════════ -->
+  <section class="lms-roles-section">
     <div class="container">
       <div class="section-head-center reveal-up">
-        <span class="eyebrow">Learning Journey</span>
-        <h2 class="section-title">From assignment to achievement.</h2>
+        <span class="eyebrow">Built Per Role</span>
+        <h2 class="section-title">Courses that match the job — every job.</h2>
+        <p class="section-sub section-sub-center">Whether your team works in hospitality, aviation, healthcare, or retail — every employee gets a learning path designed around their specific role and what they need to reach the next one.</p>
       </div>
 
-      <div class="lms-steps reveal-stagger">
-        @for (step of learningFlow; track step.label; let i = $index) {
-          <div class="lms-step"
-               [class.lms-step--active]="activeStep() === i"
-               (click)="activeStep.set(i)">
-            <div class="lms-step-num">{{ i + 1 }}</div>
-            <div class="lms-step-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true">
-                <path [attr.d]="step.icon"/>
-              </svg>
+      <div class="lms-roles-grid reveal-stagger">
+        @for (role of roles; track role.title; let i = $index) {
+          <div class="lms-role-card" [style.--rc]="role.color"
+               [class.lms-role-card--active]="activeRole() === i"
+               (click)="activeRole.set(i)">
+            <div class="lms-role-top">
+              <div class="lms-role-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                     width="20" height="20" aria-hidden="true">
+                  <path [attr.d]="role.icon"/>
+                </svg>
+              </div>
+              <span class="lms-role-dept">{{ role.dept }}</span>
             </div>
-            <h3>{{ step.label }}</h3>
-            <p>{{ step.desc }}</p>
+            <h3 class="lms-role-title">{{ role.title }}</h3>
+            <div class="lms-role-courses">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                   stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                <path d="M12 6.253v13m0-13C10.832 5.477 9.246 5 7.5 5S4.168 5.477 3 6.253v13C4.168 18.477 5.754 18 7.5 18s3.332.477 4.5 1.253m0-13C13.168 5.477 14.754 5 16.5 5c1.747 0 3.332.477 4.5 1.253v13C19.832 18.477 18.247 18 16.5 18c-1.746 0-3.332.477-4.5 1.253"/>
+              </svg>
+              {{ role.courses }} courses
+            </div>
+            <div class="lms-role-next">
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" width="12" height="12">
+                <path d="M4 8h8M9 5l3 3-3 3"/>
+              </svg>
+              Next: {{ role.nextRole }}
+            </div>
           </div>
         }
       </div>
     </div>
   </section>
 
-  <!-- ── Value ── -->
-  <section class="mgr-value-section">
+  <!-- ══ CAREER PATH ═══════════════════════════════════════ -->
+  <section class="lms-path-section">
     <div class="container">
       <div class="section-head-center reveal-up">
-        <span class="eyebrow">Business Impact</span>
-        <h2 class="section-title">What NAS LMS delivers.</h2>
+        <span class="eyebrow">Career Development</span>
+        <h2 class="section-title">Your next position starts here.</h2>
+        <p class="section-sub section-sub-center">We don't just train employees for the role they're in — we invest in the role they're going to. Every learning path is built to qualify each employee for what comes next.</p>
       </div>
-      <div class="mgr-value-grid reveal-stagger">
+
+      <div class="lms-path-steps reveal-stagger">
+        @for (step of pathSteps; track step.label; let i = $index) {
+          <div class="lms-path-step">
+            <div class="lms-path-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="22" height="22" aria-hidden="true">
+                <path [attr.d]="step.icon"/>
+              </svg>
+            </div>
+            <div class="lms-path-step-num">{{ i + 1 }}</div>
+            <h4>{{ step.label }}</h4>
+            <p>{{ step.sub }}</p>
+          </div>
+          @if (i < pathSteps.length - 1) {
+            <div class="lms-path-connector" aria-hidden="true">
+              <svg viewBox="0 0 40 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 8h32M28 4l8 4-8 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </div>
+          }
+        }
+      </div>
+
+      <div class="lms-path-note reveal-up">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+             stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+          <path d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+        </svg>
+        Courses and paths are configurable per industry, department, and role. HR teams control what each employee sees.
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ VALUE ═════════════════════════════════════════════ -->
+  <section class="lms-value-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">Why It Works</span>
+        <h2 class="section-title">Designed around people, not just processes.</h2>
+      </div>
+      <div class="lms-value-grid reveal-stagger">
         @for (v of value; track v.label) {
-          <div class="mgr-value-card">
-            <div class="mgr-value-check">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          <div class="lms-value-card">
+            <div class="lms-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="20" height="20" aria-hidden="true">
+                <path [attr.d]="v.icon"/>
               </svg>
             </div>
             <h4>{{ v.label }}</h4>
@@ -65,11 +143,15 @@
     </div>
   </section>
 
+  <!-- ══ CTA ═══════════════════════════════════════════════ -->
   <section class="mod-cta-band">
     <div class="container mod-cta-inner reveal-up">
-      <h2>Ready to build a learning culture in your company?</h2>
-      <p>See how NAS HR LMS delivers training, tracks progress, and connects learning to employee growth.</p>
-      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+      <h2>Ready to invest in every employee's growth?</h2>
+      <p>See how NAS HR builds role-specific learning paths that take every employee from where they are to where they want to be.</p>
+      <div class="mod-cta-btns">
+        <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        <a routerLink="/pricing" class="btn btn-secondary">See Pricing</a>
+      </div>
     </div>
   </section>
 

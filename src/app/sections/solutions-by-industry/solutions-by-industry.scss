@@ -410,17 +410,10 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
 
 .sbi-check {
   flex-shrink: 0;
-  width: 18px; height: 18px;
+  width: 6px; height: 6px;
   border-radius: 50%;
-  background: rgba($teal, 0.12);
-  border: 1px solid rgba($teal, 0.22);
-  color: $teal-dk;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-top: 1px;
-
-  svg { width: 9px; height: 9px; }
+  background: $teal;
+  margin-top: 6px;
 }
 
 .sbi-item-p {

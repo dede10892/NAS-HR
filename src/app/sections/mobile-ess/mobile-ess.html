@@ -2,375 +2,195 @@
   <div class="ess-blob ess-blob-tr" aria-hidden="true"></div>
   <div class="ess-blob ess-blob-bl" aria-hidden="true"></div>
 
-  <div class="container ess-inner">
+  <div class="container">
 
-    <!-- ══ LEFT: Copy ══ -->
-    <div class="ess-copy">
-      <span class="ess-eyebrow">{{ t('Mobile ESS App', 'تطبيق الخدمة الذاتية') }}</span>
-      <h2 class="ess-title">{{ t('HR in your pocket', 'الموارد البشرية في جيبك') }}</h2>
-      <p class="ess-sub">
-        {{ t('Give every employee instant access to their HR data — anywhere, anytime, in English or Arabic.',
-             'امنح كل موظف وصولاً فورياً لبياناته — في أي مكان وأي وقت، بالعربية أو الإنجليزية.') }}
-      </p>
+    <!-- ══ SHARED HEADER + TAB SWITCHER ══ -->
+    <div class="ess-head reveal">
+      <span class="ess-eyebrow">Mobile & Platform</span>
+      <h2 class="ess-title">
+        HR in your pocket.
+        <em>Power in one platform.</em>
+      </h2>
 
-      <!-- Feature list -->
-      <ul class="ess-features">
-        @for (f of features; track f.en; let i = $index) {
-          <li class="ess-feat" [style.animation-delay]="(i * 80) + 'ms'">
-            <span class="ess-feat-check">
-              <svg viewBox="0 0 10 10" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                <polyline points="2 5 4 7.5 8 2.5"/>
-              </svg>
-            </span>
-            {{ t(f.en, f.ar) }}
-          </li>
-        }
-      </ul>
-
-      <!-- Store buttons -->
-      <div class="ess-stores">
-        <a class="store-btn" href="#" aria-label="Download on App Store">
-          <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+      <div class="ess-switcher">
+        <button class="ess-sw-btn" [class.active]="activeTab() === 'mobile'" (click)="activeTab.set('mobile')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="5" y="2" width="14" height="20" rx="2" ry="2"/>
+            <line x1="12" y1="18" x2="12.01" y2="18"/>
           </svg>
-          <div class="store-btn-text">
-            <span class="store-btn-sub">{{ t('Download on', 'حمّل من') }}</span>
-            <span class="store-btn-name">App Store</span>
-          </div>
-        </a>
-
-        <a class="store-btn" href="#" aria-label="Get it on Google Play">
-          <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M3.18 23.76c.3.17.64.24.99.2l12.4-12.4L12.8 7.8 3.18 23.76zM20.7 10.6l-2.4-1.38-3.07 3.07 3.07 3.07 2.43-1.4c.69-.4.69-1.47-.03-1.86zM3 1.1C2.64.86 2.2.88 1.88 1.1L13.6 12.83l3.77-3.77L3 1.1zM1.5 2.02A1 1 0 001 2.9v18.14c0 .37.2.7.5.88l11.6-11.6L1.5 2.02z"/>
+          Mobile App
+        </button>
+        <button class="ess-sw-btn" [class.active]="activeTab() === 'platform'" (click)="activeTab.set('platform')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/>
+            <rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>
           </svg>
-          <div class="store-btn-text">
-            <span class="store-btn-sub">{{ t('Get it on', 'احصل من') }}</span>
-            <span class="store-btn-name">Google Play</span>
-          </div>
-        </a>
-
-        <a class="store-btn" href="#" aria-label="Explore on Huawei AppGallery">
-          <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
-            <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-2.5 4v8h1.75v-3.25H12v2h.75V18h1.75v-8H12.75v2.75H11.25V10H9.5z"/>
-          </svg>
-          <div class="store-btn-text">
-            <span class="store-btn-sub">{{ t('Explore on', 'متاح في') }}</span>
-            <span class="store-btn-name">AppGallery</span>
-          </div>
-        </a>
+          Platform Capabilities
+        </button>
       </div>
     </div>
 
-    <!-- ══ RIGHT: Phone showcase ══ -->
-    <div class="ess-phone-area">
+    <!-- ══ PANEL 1: Mobile ESS ══ -->
+    @if (activeTab() === 'mobile') {
+      <div class="ess-inner">
 
-      <!-- Floating: location verified -->
-      <div class="ess-float ess-float-top">
-        <span class="ess-float-icon ok">
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="5" r="2"/><path d="M6 1C3.8 1 2 2.8 2 5c0 3 4 7 4 7s4-4 4-7c0-2.2-1.8-4-4-4z"/></svg>
-        </span>
-        <div>
-          <div class="ess-float-title">{{ t('In office reach', 'في نطاق المكتب') }}</div>
-          <div class="ess-float-sub">{{ t('Serag Mall · GPS verified', 'سيراج مول · تحقق GPS') }}</div>
-        </div>
-      </div>
+        <!-- Left: Copy -->
+        <div class="ess-copy">
+          <p class="ess-sub">
+            Give every employee instant access to their HR data — anywhere, anytime.
+          </p>
 
-      <!-- Floating: shift today -->
-      <div class="ess-float ess-float-bot">
-        <span class="ess-float-icon teal">
-          <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="6" r="4.5"/><polyline points="6 3.5 6 6 7.8 6"/></svg>
-        </span>
-        <div>
-          <div class="ess-float-title">{{ t('Shift: Today', 'مناوبة اليوم') }}</div>
-          <div class="ess-float-sub">09:00am – 05:00pm</div>
-        </div>
-      </div>
-
-      <!-- Phone frame -->
-      <div class="ess-phone">
-        <!-- Dynamic island / notch -->
-        <div class="phone-island"></div>
-
-        <!-- Screen tabs -->
-        <div class="phone-tabs">
-          @for (s of screens; track s.label; let i = $index) {
-            <button
-              class="phone-tab"
-              [class.is-active]="activeScreen() === i"
-              (click)="switchTo(i)"
-              [attr.aria-label]="t(s.label, s.labelAr)"
-            >{{ t(s.label, s.labelAr) }}</button>
-          }
-        </div>
-
-        <!-- Screen content -->
-        <div class="phone-screen">
-          @if (screenReady()) {
-
-            <!-- ─── Screen 0: Home (Attendance) ─── -->
-            @if (activeScreen() === 0) {
-              <div class="ps ps-home">
-
-                <!-- Time card -->
-                <div class="ps-time-card">
-                  <span class="ps-tc-icon">
-                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                      <circle cx="7" cy="7" r="5.5"/>
-                      <polyline points="7 4 7 7 9 7"/>
-                    </svg>
-                  </span>
-                  <span class="ps-tc-time">09:00am</span>
-                  <span class="ps-tc-date">{{ t('Thursday, Aug 1', 'الخميس ١ أغسطس') }}</span>
-                </div>
-
-                <!-- Greeting -->
-                <div class="ps-hello">{{ t('Hello Hussein! 👋', 'أهلاً حسين! 👋') }}</div>
-
-                <!-- Location selector -->
-                <div class="ps-loc-sel">
-                  <span>{{ t('Serag Mall', 'سيراج مول') }}</span>
-                  <svg viewBox="0 0 10 7" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><polyline points="1 1 5 5.5 9 1"/></svg>
-                </div>
-
-                <!-- Location status -->
-                <div class="ps-loc-status">
-                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round">
-                    <circle cx="7" cy="7" r="5.5"/>
-                    <polyline points="4 7 6 9 10 5"/>
-                  </svg>
-                  {{ t('In office reach', 'في نطاق المكتب') }}
-                </div>
-
-                <!-- Working hours card -->
-                <div class="ps-wh-card">
-                  <div class="ps-wh-hd">
-                    <span class="ps-wh-ttl">{{ t("Today's Working hours", 'ساعات العمل اليوم') }}</span>
-                    <span class="ps-wh-link">{{ t('View all', 'الكل') }}</span>
-                  </div>
-                  <div class="ps-wh-cols">
-                    <div class="ps-wh-col">
-                      <svg class="ps-wh-ico green" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><polyline points="7 4.5 7 7 9 7"/></svg>
-                      <div class="ps-wh-val ok">09:00am</div>
-                      <div class="ps-wh-lbl">{{ t('Check in', 'دخول') }}</div>
-                    </div>
-                    <div class="ps-wh-sep"></div>
-                    <div class="ps-wh-col">
-                      <svg class="ps-wh-ico amber" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><polyline points="7 4.5 7 7 9 7"/></svg>
-                      <div class="ps-wh-val muted">---:---</div>
-                      <div class="ps-wh-lbl">{{ t('Check out', 'خروج') }}</div>
-                    </div>
-                    <div class="ps-wh-sep"></div>
-                    <div class="ps-wh-col">
-                      <svg class="ps-wh-ico" viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="7" cy="7" r="5"/><polyline points="7 4.5 7 7 9 7"/></svg>
-                      <div class="ps-wh-val">00:00h</div>
-                      <div class="ps-wh-lbl">{{ t('Worktime', 'وقت العمل') }}</div>
-                    </div>
-                  </div>
-                </div>
-
-                <!-- Saved + fingerprint -->
-                <div class="ps-saved">
-                  <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="6" r="4.5"/><polyline points="4 6 5.5 7.5 8.5 4.5"/></svg>
-                  {{ t('Saved successfully', 'تم الحفظ بنجاح') }}
-                </div>
-                <div class="ps-fp">
-                  <svg class="ps-fp-svg" viewBox="0 0 52 52" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round">
-                    <path d="M19 9C21.2 7.7 23.5 7 26 7c10.5 0 19 8.5 19 19 0 5.2-1.4 9-3 12.5"/>
-                    <path d="M9 17C11 13 14.5 10 19 9"/>
-                    <path d="M14 46C11 41 9 35 9 26c0-4.2 1-8 3-11"/>
-                    <path d="M38 40c-1.5 3-3.5 4.8-5 6"/>
-                    <path d="M26 18.5c3.5 0 7 3.2 7 8.5 0 5.8-1.5 10-3.5 14"/>
-                    <path d="M19.5 46c0-2.5.5-5.5 1.5-9"/>
-                    <path d="M19.5 27c0-3.5 3-8 6.5-8"/>
-                    <path d="M26 27c0 4.8-1 9.5-3 13.5"/>
-                    <path d="M12 30c.5 5 3 10 6 13"/>
-                    <path d="M40 26c0 4.5-1 8.5-3 12"/>
-                  </svg>
-                </div>
-
-              </div>
+          <ul class="ess-features">
+            @for (f of features; track f.en; let i = $index) {
+              <li class="ess-feat" [style.animation-delay]="(i * 80) + 'ms'">
+                <span class="ess-feat-check"></span>
+                {{ f.en }}
+              </li>
             }
+          </ul>
 
-            <!-- ─── Screen 1: Requests (Field Workforce) ─── -->
-            @if (activeScreen() === 1) {
-              <div class="ps ps-req">
-
-                <div class="ps-req-title">{{ t('Field Workforce', 'طلبات القوى العاملة') }}</div>
-
-                <!-- Status tabs -->
-                <div class="ps-req-tabs">
-                  <button class="ps-req-tab is-active">{{ t('All', 'الكل') }}</button>
-                  <button class="ps-req-tab">{{ t('Pending', 'معلّق') }}</button>
-                  <button class="ps-req-tab">{{ t('Accepted', 'مقبول') }}</button>
-                </div>
-
-                <!-- Filter bar -->
-                <div class="ps-filt-hd">
-                  <span class="ps-filt-lbl">{{ t('Filter by date', 'تصفية بالتاريخ') }}</span>
-                  <span class="ps-filt-reset">{{ t('Reset', 'إعادة') }}</span>
-                </div>
-
-                <!-- From / To toggle -->
-                <div class="ps-fromto">
-                  <button class="ps-ft active">{{ t('From', 'من') }}</button>
-                  <button class="ps-ft">{{ t('To', 'إلى') }}</button>
-                </div>
-
-                <!-- Calendar -->
-                <div class="ps-cal">
-                  <div class="ps-cal-nav">
-                    <span class="ps-cal-arr">‹</span>
-                    <span class="ps-cal-mo">August</span>
-                    <span class="ps-cal-arr">›</span>
-                  </div>
-                  <div class="ps-cal-grid">
-                    <!-- weekday headers -->
-                    <span class="ps-wd">S</span><span class="ps-wd">M</span><span class="ps-wd">T</span><span class="ps-wd">W</span><span class="ps-wd">T</span><span class="ps-wd">F</span><span class="ps-wd">S</span>
-                    <!-- week 1: Jul 27–31, Aug 1–2 -->
-                    <span class="ps-cd dim">27</span><span class="ps-cd dim">28</span><span class="ps-cd dim">29</span><span class="ps-cd dim">30</span><span class="ps-cd dim">31</span><span class="ps-cd">1</span><span class="ps-cd">2</span>
-                    <!-- week 2: Aug 3–9 (3 = today) -->
-                    <span class="ps-cd today">3</span><span class="ps-cd">4</span><span class="ps-cd">5</span><span class="ps-cd">6</span><span class="ps-cd">7</span><span class="ps-cd">8</span><span class="ps-cd">9</span>
-                    <!-- week 3 -->
-                    <span class="ps-cd">10</span><span class="ps-cd">11</span><span class="ps-cd">12</span><span class="ps-cd">13</span><span class="ps-cd">14</span><span class="ps-cd">15</span><span class="ps-cd">16</span>
-                    <!-- week 4 -->
-                    <span class="ps-cd">17</span><span class="ps-cd">18</span><span class="ps-cd">19</span><span class="ps-cd">20</span><span class="ps-cd">21</span><span class="ps-cd">22</span><span class="ps-cd">23</span>
-                    <!-- week 5 -->
-                    <span class="ps-cd">24</span><span class="ps-cd">25</span><span class="ps-cd">26</span><span class="ps-cd">27</span><span class="ps-cd">28</span><span class="ps-cd">29</span><span class="ps-cd">30</span>
-                  </div>
-                </div>
-
-                <!-- Footer buttons -->
-                <div class="ps-cal-footer">
-                  <button class="ps-cal-cancel">{{ t('Cancel', 'إلغاء') }}</button>
-                  <button class="ps-cal-apply">{{ t('Apply', 'تطبيق') }}</button>
-                </div>
-
+          <div class="ess-stores">
+            <a class="store-btn" href="#" aria-label="Download on App Store">
+              <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/>
+              </svg>
+              <div class="store-btn-text">
+                <span class="store-btn-sub">Download on</span>
+                <span class="store-btn-name">App Store</span>
               </div>
-            }
+            </a>
 
-            <!-- ─── Screen 2: Payslip ─── -->
-            @if (activeScreen() === 2) {
-              <div class="ps ps-pay">
-                <div class="ps-screen-title">{{ t('Payslip · April 2026', 'الراتب · أبريل ٢٠٢٦') }}</div>
-                <div class="ps-pay-row">
-                  <span>{{ t('Basic Salary', 'الراتب الأساسي') }}</span>
-                  <span class="ps-pay-amt">LE 8,500</span>
-                </div>
-                <div class="ps-pay-bar"><div class="ps-pay-fill" style="width:88%"></div></div>
-                <div class="ps-pay-row">
-                  <span>{{ t('Allowances', 'البدلات') }}</span>
-                  <span class="ps-pay-amt">LE 1,200</span>
-                </div>
-                <div class="ps-pay-bar"><div class="ps-pay-fill sky" style="width:56%"></div></div>
-                <div class="ps-pay-row">
-                  <span>{{ t('Deductions', 'الخصومات') }}</span>
-                  <span class="ps-pay-amt red-amt">– LE 450</span>
-                </div>
-                <div class="ps-pay-bar"><div class="ps-pay-fill red" style="width:24%"></div></div>
-                <div class="ps-pay-divider"></div>
-                <div class="ps-net-row">
-                  <span>{{ t('Net Pay', 'صافي الراتب') }}</span>
-                  <span class="ps-net-amt">LE 9,250</span>
-                </div>
-                <button class="ps-dl-btn">
-                  <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M7 2v7M4.5 6.5L7 9l2.5-2.5"/><path d="M2 11h10"/></svg>
-                  {{ t('Download PDF', 'تحميل PDF') }}
-                </button>
+            <a class="store-btn" href="#" aria-label="Get it on Google Play">
+              <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M3.18 23.76c.3.17.64.24.99.2l12.4-12.4L12.8 7.8 3.18 23.76zM20.7 10.6l-2.4-1.38-3.07 3.07 3.07 3.07 2.43-1.4c.69-.4.69-1.47-.03-1.86zM3 1.1C2.64.86 2.2.88 1.88 1.1L13.6 12.83l3.77-3.77L3 1.1zM1.5 2.02A1 1 0 001 2.9v18.14c0 .37.2.7.5.88l11.6-11.6L1.5 2.02z"/>
+              </svg>
+              <div class="store-btn-text">
+                <span class="store-btn-sub">Get it on</span>
+                <span class="store-btn-name">Google Play</span>
               </div>
-            }
+            </a>
 
-            <!-- ─── Screen 3: Shifts (Shift & Time Off) ─── -->
-            @if (activeScreen() === 3) {
-              <div class="ps ps-shift">
+            <a class="store-btn" href="#" aria-label="Explore on Huawei AppGallery">
+              <svg class="store-btn-icon" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+                <path d="M12 2C6.477 2 2 6.477 2 12s4.477 10 10 10 10-4.477 10-10S17.523 2 12 2zm0 2c4.418 0 8 3.582 8 8s-3.582 8-8 8-8-3.582-8-8 3.582-8 8-8zm-2.5 4v8h1.75v-3.25H12v2h.75V18h1.75v-8H12.75v2.75H11.25V10H9.5z"/>
+              </svg>
+              <div class="store-btn-text">
+                <span class="store-btn-sub">Explore on</span>
+                <span class="store-btn-name">AppGallery</span>
+              </div>
+            </a>
+          </div>
+        </div>
 
-                <div class="ps-screen-title">{{ t('Shift & Time Off', 'المناوبات والإجازات') }}</div>
+        <!-- Right: Phone showcase -->
+        <div class="ess-phone-area">
 
-                <!-- Schedule card -->
-                <div class="ps-sched-card">
-                  <div class="ps-sched-hd">
-                    <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                      <circle cx="7" cy="7" r="5.5"/>
-                      <polyline points="7 4 7 7 9 7"/>
-                      <path d="M5 1.5C3 2.5 1.5 4.5 1.5 7"/>
-                    </svg>
-                    {{ t('Your Schedule', 'جدولك') }}
+          <div class="ess-float ess-float-top">
+            <span class="ess-float-icon ok">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="6" cy="5" r="2"/><path d="M6 1C3.8 1 2 2.8 2 5c0 3 4 7 4 7s4-4 4-7c0-2.2-1.8-4-4-4z"/></svg>
+            </span>
+            <div>
+              <div class="ess-float-title">In office reach</div>
+              <div class="ess-float-sub">Serag Mall · GPS verified</div>
+            </div>
+          </div>
+
+          <div class="ess-float ess-float-bot">
+            <span class="ess-float-icon teal">
+              <svg viewBox="0 0 12 12" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="6" cy="6" r="4.5"/><polyline points="6 3.5 6 6 7.8 6"/></svg>
+            </span>
+            <div>
+              <div class="ess-float-title">Shift: Today</div>
+              <div class="ess-float-sub">09:00am – 05:00pm</div>
+            </div>
+          </div>
+
+          <div class="ess-phone">
+
+            <div class="phone-display">
+
+              <!-- App screen (screenshots swap here) -->
+              <div class="phone-screen">
+                <img src="/attendence-reports/Fingerprint (3).png"
+                     alt="NAS HR Home" class="ps-screenshot" [class.ps-active]="activeScreen() === 0"/>
+                <img src="/attendence-reports/Request Permission (close) (1).png"
+                     alt="NAS HR Requests" class="ps-screenshot" [class.ps-active]="activeScreen() === 1"/>
+                <img src="/attendence-reports/attendance report .jpeg"
+                     alt="NAS HR Attendance" class="ps-screenshot" [class.ps-active]="activeScreen() === 2"/>
+              </div>
+
+              <!-- Home gesture bar -->
+              <div class="phone-home-bar"></div>
+
+            </div><!-- /phone-display -->
+
+          </div><!-- /ess-phone -->
+
+        </div><!-- /ess-phone-area -->
+      </div><!-- /ess-inner -->
+    }
+
+    <!-- ══ PANEL 2: HR Admin Dashboard ══ -->
+    @if (activeTab() === 'platform') {
+      <div class="dv-panels">
+        <div class="dv-panel">
+          <div class="dv-panel-copy">
+            <span class="dv-tag">For HR Teams</span>
+            <h3 class="dv-panel-title">Total HR Control</h3>
+            <p class="dv-panel-desc">A powerful admin console to manage your entire workforce — payroll, compliance, hiring, and analytics in one place.</p>
+            <ul class="dv-feature-list">
+              @for (f of hrFeatures; track f.en) {
+                <li>{{ f.en }}</li>
+              }
+            </ul>
+            <a href="#contact" class="btn btn-primary dv-cta">Request a Demo →</a>
+          </div>
+          <div class="dv-panel-mockup">
+            <div class="dv-mock-shell">
+              <div class="dv-topbar">
+                <span class="dv-dot r"></span><span class="dv-dot y"></span><span class="dv-dot g"></span>
+                <span class="dv-url">nashr.app/admin</span>
+              </div>
+              <div class="dv-dash-body">
+                <div class="dv-dash-sidebar">
+                  <div class="dv-sidebar-logo">N</div>
+                  @for (item of ['Dashboard','Employees','Payroll','Attendance','Reports']; track item) {
+                    <div class="dv-sidebar-item" [class.active]="item === 'Dashboard'">{{ item }}</div>
+                  }
+                </div>
+                <div class="dv-dash-main">
+                  <div class="dv-greeting">Good morning, Sarah 👋</div>
+                  <div class="dv-kpi-row">
+                    <div class="dv-kpi"><div class="dv-kpi-v">1,248</div><div class="dv-kpi-l">Employees</div></div>
+                    <div class="dv-kpi dv-kpi-sky"><div class="dv-kpi-v">98.2%</div><div class="dv-kpi-l">Attendance</div></div>
+                    <div class="dv-kpi dv-kpi-coral"><div class="dv-kpi-v">2.4M</div><div class="dv-kpi-l">Payroll</div></div>
                   </div>
-
-                  <!-- Timeline -->
-                  <div class="ps-timeline">
-                    <span class="ps-tl-time">09:00am</span>
-                    <div class="ps-tl-track">
-                      <div class="ps-tl-dot"></div>
-                      <div class="ps-tl-line"></div>
-                      <div class="ps-tl-mid">
-                        <svg viewBox="0 0 14 14" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
-                          <circle cx="7" cy="7" r="5"/>
-                          <polyline points="7 4.5 7 7 9 7"/>
-                        </svg>
+                  <div class="dv-chart">
+                    <div class="dv-chart-label">Headcount Trend</div>
+                    <div class="dv-chart-bars">
+                      @for (h of [50,65,58,80,72,90,84]; track h) {
+                        <div class="dv-bar" [style.height.%]="h"></div>
+                      }
+                    </div>
+                  </div>
+                  <div class="dv-emp-list">
+                    @for (e of [{n:'Sarah Al-Mansouri',d:'HR Director',s:'Active'},{n:'Ahmed Al-Rashidi',d:'Operations',s:'On Leave'},{n:'Fatima Al-Zahrawi',d:'Finance',s:'Active'}]; track e.n) {
+                      <div class="dv-emp-row">
+                        <div class="dv-emp-av">{{ e.n[0] }}</div>
+                        <div class="dv-emp-info"><div class="dv-emp-name">{{ e.n }}</div><div class="dv-emp-dept">{{ e.d }}</div></div>
+                        <span class="dv-emp-status" [class.active]="e.s === 'Active'">{{ e.s }}</span>
                       </div>
-                      <div class="ps-tl-line"></div>
-                      <div class="ps-tl-dot"></div>
-                    </div>
-                    <span class="ps-tl-time">05:00pm</span>
+                    }
                   </div>
                 </div>
-
-                <!-- This week label -->
-                <div class="ps-shift-week-lbl">{{ t('This Week', 'هذا الأسبوع') }}</div>
-
-                <!-- Shift rows -->
-                <div class="ps-shift-list">
-                  <div class="ps-shift-row active-row">
-                    <div class="ps-sr-day">
-                      <div class="ps-sr-d">{{ t('Thu', 'خميس') }}</div>
-                      <div class="ps-sr-n today-n">1</div>
-                    </div>
-                    <div class="ps-sr-info">
-                      <div class="ps-sr-name">{{ t('Morning Shift', 'مناوبة صباحية') }}</div>
-                      <div class="ps-sr-time">09:00am – 05:00pm</div>
-                    </div>
-                    <div class="ps-sr-badge ok-badge">{{ t('Active', 'نشطة') }}</div>
-                  </div>
-
-                  <div class="ps-shift-row">
-                    <div class="ps-sr-day">
-                      <div class="ps-sr-d">{{ t('Fri', 'جمعة') }}</div>
-                      <div class="ps-sr-n">2</div>
-                    </div>
-                    <div class="ps-sr-info">
-                      <div class="ps-sr-name">{{ t('Morning Shift', 'مناوبة صباحية') }}</div>
-                      <div class="ps-sr-time">09:00am – 05:00pm</div>
-                    </div>
-                    <div class="ps-sr-badge">{{ t('Scheduled', 'مجدولة') }}</div>
-                  </div>
-
-                  <div class="ps-shift-row off-row">
-                    <div class="ps-sr-day">
-                      <div class="ps-sr-d">{{ t('Sat', 'سبت') }}</div>
-                      <div class="ps-sr-n">3</div>
-                    </div>
-                    <div class="ps-sr-info">
-                      <div class="ps-sr-name">{{ t('Day Off', 'يوم إجازة') }}</div>
-                      <div class="ps-sr-time">—</div>
-                    </div>
-                    <div class="ps-sr-badge off-badge">{{ t('Off', 'إجازة') }}</div>
-                  </div>
-                </div>
-
               </div>
-            }
-
-          }
-        </div>
-
-        <!-- Progress dots -->
-        <div class="phone-dots">
-          @for (s of screens; track s.label; let i = $index) {
-            <button class="phone-dot" [class.is-active]="activeScreen() === i" (click)="switchTo(i)" [attr.aria-label]="t(s.label, s.labelAr)"></button>
-          }
+            </div>
+          </div>
         </div>
       </div>
+    }
 
-    </div><!-- /ess-phone-area -->
   </div>
 </section>

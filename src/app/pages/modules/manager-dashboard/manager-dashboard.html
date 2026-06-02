@@ -1,25 +1,244 @@
 <main class="page-mgr">
 
-  <!-- ── Hero ── -->
-  <section class="mod-hero">
-    <div class="container mod-hero-inner">
-      <div class="mod-hero-copy reveal-up">
-        <span class="eyebrow">Manager Dashboard</span>
-        <h1 class="mod-headline">A smarter dashboard<br><em>for every manager.</em></h1>
-        <p class="mod-sub">Give managers the visibility they need to approve faster, monitor team activity, track attendance, and support employees with confidence.</p>
+  <!-- ══ HERO ══════════════════════════════════════════════════ -->
+  <section class="mod-hero mgr-hero--dark">
+    <div class="mgr-hero-grid"   aria-hidden="true"></div>
+    <div class="mgr-hero-wm"     aria-hidden="true"></div>
+    <div class="mgr-hero-blob-l" aria-hidden="true"></div>
+    <div class="mgr-hero-blob-r" aria-hidden="true"></div>
+
+    <div class="container mgr-hero-inner">
+
+      <!-- LEFT: copy -->
+      <div class="mgr-hero-copy reveal-up">
+
+        <div class="mgr-badge">
+          <span class="mgr-badge-dot"></span>
+          NAS-HR Dashboard
+        </div>
+
+        <h1 class="mod-headline">
+          A complete HR command center<br>
+          <em>for your entire team.</em>
+        </h1>
+
+        <p class="mod-sub">
+          Give HR complete visibility — employees, payroll, requests, attendance,
+          and reports — all connected in one unified dashboard.
+        </p>
+
+        <!-- Feature tags -->
+        <div class="mgr-tags">
+          <span class="mgr-tag">Employee Records</span>
+          <span class="mgr-tag">Payroll Processing</span>
+          <span class="mgr-tag">Shift Planning</span>
+          <span class="mgr-tag">Live Reports</span>
+        </div>
+
         <div class="mod-actions">
           <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/modules/all-features" class="btn mgr-ghost-btn">
+            View All Features
+            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+              <path d="M3 8h10M9 4l4 4-4 4"/>
+            </svg>
+          </a>
         </div>
-      </div>
+
+        <!-- Trust strip -->
+        <div class="mgr-trust">
+          <div class="mgr-trust-stars">
+            @for (s of [1,2,3,4,5]; track s) {
+              <svg viewBox="0 0 14 13" width="12" height="12" fill="#F79008"><path d="M7 0l1.76 3.57 3.94.57-2.85 2.78.67 3.92L7 8.77l-3.52 2.07.67-3.92L1.3 4.14l3.94-.57L7 0z"/></svg>
+            }
+          </div>
+          <span>Trusted by 500+ HR teams across MENA</span>
+        </div>
+
+      </div><!-- /mgr-hero-copy -->
+
+      <!-- RIGHT: dashboard window preview -->
+      <div class="mgr-hero-visual reveal-right">
+
+        <!-- Floating live badge -->
+        <div class="mgr-hero-fc mgr-hero-fc--tl">
+          <div class="mgr-hfc-dot"></div>
+          <div>
+            <div class="mgr-hfc-val">98.2%</div>
+            <div class="mgr-hfc-lbl">Attendance Today</div>
+          </div>
+        </div>
+
+        <!-- Floating pending badge -->
+        <div class="mgr-hero-fc mgr-hero-fc--br">
+          <svg viewBox="0 0 24 24" fill="none" stroke="#F79008" stroke-width="2"
+               stroke-linecap="round" width="16" height="16">
+            <path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+          </svg>
+          <div>
+            <div class="mgr-hfc-val" style="color:#F79008">12</div>
+            <div class="mgr-hfc-lbl">Pending Approvals</div>
+          </div>
+        </div>
+
+        <!-- Dashboard window -->
+        <div class="mgr-win">
+          <!-- Chrome bar -->
+          <div class="mgr-win-chrome">
+            <div class="mgr-win-dots">
+              <span class="mgr-win-dot" style="background:#FF5F57"></span>
+              <span class="mgr-win-dot" style="background:#FEBC2E"></span>
+              <span class="mgr-win-dot" style="background:#28C840"></span>
+            </div>
+            <div class="mgr-win-url">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" width="9" height="9">
+                <rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0110 0v4"/>
+              </svg>
+              nashr.app/dashboard
+            </div>
+          </div>
+
+          <!-- Dashboard body -->
+          <div class="mgr-win-body">
+
+            <!-- Sidebar -->
+            <div class="mgrd-sidebar" style="width:110px">
+              <div class="mgrd-logo-wrap">
+                <img src="/logo-light.svg" alt="NAS HR" class="mgrd-logo-img" />
+              </div>
+              <nav class="mgrd-nav">
+                @for (item of navItems.slice(0,6); track item.label; let i = $index) {
+                  <div class="mgrd-nav-item" [class.mgrd-nav-item--active]="i === 0">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                         width="10" height="10">
+                      <path [attr.d]="item.icon"/>
+                    </svg>
+                    <span>{{ item.label }}</span>
+                  </div>
+                }
+              </nav>
+            </div>
+
+            <!-- Main -->
+            <div class="mgrd-main">
+              <!-- Topbar -->
+              <div class="mgrd-topbar">
+                <div class="mgrd-breadcrumb">
+                  <span class="mgrd-bc-dim">Dashboard</span>
+                  <span class="mgrd-bc-sep"> › </span>
+                  <span>Overview</span>
+                </div>
+                <div class="mgrd-topbar-right">
+                  <div class="mgrd-bell">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" width="11" height="11">
+                      <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+                    </svg>
+                  </div>
+                  <div class="mgrd-avatar-sm">AD</div>
+                  <span class="mgrd-admin-lbl">Admin</span>
+                </div>
+              </div>
+
+              <!-- Stats -->
+              <div class="mgrd-stats-row">
+                <div class="mgrd-stat-card">
+                  <div class="mgrd-stat-icon mgrd-stat-icon--teal">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0"/></svg>
+                  </div>
+                  <div class="mgrd-stat-info"><span class="mgrd-stat-num">152</span><span class="mgrd-stat-lbl">Employees</span></div>
+                </div>
+                <div class="mgrd-stat-card">
+                  <div class="mgrd-stat-icon mgrd-stat-icon--orange">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <div class="mgrd-stat-info"><span class="mgrd-stat-num">$2.4M</span><span class="mgrd-stat-lbl">Payroll</span></div>
+                </div>
+                <div class="mgrd-stat-card">
+                  <div class="mgrd-stat-icon mgrd-stat-icon--green">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                  </div>
+                  <div class="mgrd-stat-info"><span class="mgrd-stat-num">98.2%</span><span class="mgrd-stat-lbl">Attendance</span></div>
+                </div>
+                <div class="mgrd-stat-card">
+                  <div class="mgrd-stat-icon mgrd-stat-icon--red">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" width="12" height="12"><path d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/></svg>
+                  </div>
+                  <div class="mgrd-stat-info"><span class="mgrd-stat-num">12</span><span class="mgrd-stat-lbl">Pending</span></div>
+                </div>
+              </div>
+
+              <!-- Mini chart + table -->
+              <div class="mgr-win-lower">
+                <!-- Mini chart -->
+                <div class="mgr-mini-chart">
+                  <div class="mgr-mc-label">Headcount Trend</div>
+                  <div class="mgr-mc-bars">
+                    @for (h of [55,70,60,85,75,90,82]; track h) {
+                      <div class="mgr-mc-bar" [style.height.%]="h"></div>
+                    }
+                  </div>
+                </div>
+                <!-- Mini table -->
+                <div class="mgrd-table-wrap" style="margin:0;flex:1.2">
+                  <div class="mgrd-table-head">
+                    <span class="mgrd-table-title">Recent Employees</span>
+                  </div>
+                  <table class="mgrd-table">
+                    <tbody>
+                      @for (row of featureViews[0].rows.slice(0,3); track $index) {
+                        <tr>
+                          <td>{{ row[1] }}</td>
+                          <td>{{ row[2] }}</td>
+                        </tr>
+                      }
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+
+            </div><!-- /mgrd-main -->
+          </div><!-- /mgr-win-body -->
+        </div><!-- /mgr-win -->
+
+      </div><!-- /mgr-hero-visual -->
+    </div><!-- /container -->
+  </section>
+
+  <!-- ══ METRICS BAND ══════════════════════════════════════════ -->
+  <section class="mgr-metrics-band">
+    <div class="container mgr-metrics-row">
+      @for (m of metrics; track m.label; let i = $index) {
+        <div class="mgr-metric-item">
+          <div class="mgr-metric-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+                 stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+              <path [attr.d]="m.icon"/>
+            </svg>
+          </div>
+          <div>
+            <div class="mgr-metric-val">{{ m.val }}</div>
+            <div class="mgr-metric-lbl">{{ m.label }}</div>
+          </div>
+        </div>
+        @if (i < metrics.length - 1) {
+          <div class="mgr-metric-sep"></div>
+        }
+      }
     </div>
   </section>
 
-  <!-- ── Features ── -->
+  <!-- ══ FEATURES ══════════════════════════════════════════════ -->
   <section class="mgr-features-section">
     <div class="container">
       <div class="section-head-center reveal-up">
-        <span class="eyebrow">Manager Command Center</span>
-        <h2 class="section-title">Everything a manager needs in one view.</h2>
+        <span class="eyebrow">HR Command Center</span>
+        <h2 class="section-title">Everything HR needs in one view.</h2>
+        <p class="section-sub section-sub-center">
+          Click any module below to see it in the live dashboard preview.
+        </p>
       </div>
 
       <div class="mgr-layout">
@@ -29,7 +248,7 @@
           @for (f of features; track f.label; let i = $index) {
             <div class="mgr-feature-item"
                  [class.mgr-feature-item--active]="activeFeature() === i"
-                 (click)="activeFeature.set(i)">
+                 (click)="setFeature(i)">
               <div class="mgr-feature-icon">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
                      stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
@@ -48,39 +267,124 @@
 
         <!-- Dashboard preview panel -->
         <div class="mgr-preview reveal-right">
-          <div class="mgr-preview-chrome">
-            <span class="hv-dot" style="background:#F14437"></span>
-            <span class="hv-dot" style="background:#F79008"></span>
-            <span class="hv-dot" style="background:#0FB86A"></span>
-            <span class="mgr-preview-title">NAS HR — Manager View</span>
+          <div class="mgr-preview-chrome mgr-chrome-browser">
+            <div class="mgr-chrome-urlbar">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" width="10" height="10" aria-hidden="true">
+                <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+              </svg>
+              <span>nashr.com/dashboard</span>
+            </div>
           </div>
+
           <div class="mgr-preview-screen">
-            <img src="screenshots/desktop-employees.png"
-                 alt="Manager dashboard preview"
-                 class="mgr-screenshot" />
-            <!-- Placeholder -->
-            <div class="mgr-placeholder">
-              <div class="mgp-header">
-                <div class="mgp-bar mgp-w50"></div>
-                <div class="mgp-bar mgp-w20"></div>
-              </div>
-              <div class="mgp-row">
-                @for (c of [1,2,3]; track c) {
-                  <div class="mgp-stat-card"></div>
-                }
-              </div>
-              <div class="mgp-table">
-                @for (r of [1,2,3,4]; track r) {
-                  <div class="mgp-table-row">
-                    <div class="mgp-bar mgp-w30"></div>
-                    <div class="mgp-bar mgp-w40"></div>
-                    <div class="mgp-badge"></div>
+            <div class="mgrd-dashboard">
+
+              <!-- Sidebar -->
+              <aside class="mgrd-sidebar">
+                <div class="mgrd-logo-wrap">
+                  <img src="/logo-light.svg" alt="NAS HR" class="mgrd-logo-img" />
+                </div>
+                <div class="mgrd-search-bar">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                       width="10" height="10" aria-hidden="true">
+                    <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+                  </svg>
+                  <span>Quick Search</span>
+                </div>
+                <nav class="mgrd-nav">
+                  @for (item of navItems; track item.label; let i = $index) {
+                    <div class="mgrd-nav-item mgrd-nav-item--clickable"
+                         [class.mgrd-nav-item--active]="activeFeature() === i - 1"
+                         (click)="setFeatureFromNav(i)">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                           stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                           width="11" height="11" aria-hidden="true">
+                        <path [attr.d]="item.icon"/>
+                      </svg>
+                      <span>{{ item.label }}</span>
+                    </div>
+                  }
+                </nav>
+              </aside>
+
+              <!-- Main area -->
+              <div class="mgrd-main">
+                <div class="mgrd-topbar">
+                  <div class="mgrd-breadcrumb">
+                    <span class="mgrd-bc-dim">Dashboard</span>
+                    <span class="mgrd-bc-sep"> › </span>
+                    <span>{{ features[activeFeature()].label }}</span>
                   </div>
-                }
+                  <div class="mgrd-topbar-right">
+                    <div class="mgrd-bell">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                           width="12" height="12" aria-hidden="true">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                      </svg>
+                    </div>
+                    <div class="mgrd-avatar-sm">AD</div>
+                    <span class="mgrd-admin-lbl">Admin</span>
+                  </div>
+                </div>
+
+                <div class="mgrd-main-body">
+                  @if (isAnimating()) {
+                    <div class="mgrd-content-anim">
+
+                      <div class="mgrd-stats-row">
+                        @for (s of featureViews[activeFeature()].stats; track s.lbl) {
+                          <div class="mgrd-stat-card">
+                            <div class="mgrd-stat-icon" [class]="'mgrd-stat-icon--' + s.color">
+                              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                   stroke-width="1.5" width="13" height="13">
+                                <path [attr.d]="s.icon"/>
+                              </svg>
+                            </div>
+                            <div class="mgrd-stat-info">
+                              <span class="mgrd-stat-num">{{ s.num }}</span>
+                              <span class="mgrd-stat-lbl">{{ s.lbl }}</span>
+                            </div>
+                          </div>
+                        }
+                      </div>
+
+                      <div class="mgrd-table-wrap">
+                        <div class="mgrd-table-head">
+                          <span class="mgrd-table-title">{{ featureViews[activeFeature()].tableTitle }}</span>
+                          <button class="mgrd-add-btn">+ Add New</button>
+                        </div>
+                        <table class="mgrd-table">
+                          <thead>
+                            <tr>
+                              @for (col of featureViews[activeFeature()].cols; track col) {
+                                <th>{{ col }}</th>
+                              }
+                            </tr>
+                          </thead>
+                          <tbody>
+                            @for (row of featureViews[activeFeature()].rows; track $index; let ri = $index) {
+                              <tr class="mgrd-tr-click"
+                                  [class.mgrd-row-selected]="selectedRow() === ri"
+                                  (click)="selectedRow.set(ri)">
+                                @for (cell of row; track $index) {
+                                  <td>{{ cell }}</td>
+                                }
+                              </tr>
+                            }
+                          </tbody>
+                        </table>
+                      </div>
+
+                    </div>
+                  }
+                </div>
               </div>
             </div>
           </div>
-          <!-- Active feature floating card -->
+
           <div class="mgr-active-card">
             <svg class="mgr-active-icon" viewBox="0 0 24 24" fill="none"
                  stroke="currentColor" stroke-width="1.5" stroke-linecap="round"
@@ -92,26 +396,27 @@
               <div class="mgr-active-stat">{{ features[activeFeature()].stat }}</div>
             </div>
           </div>
-        </div>
 
+        </div><!-- /mgr-preview -->
       </div>
     </div>
   </section>
 
-  <!-- ── Business value ── -->
+  <!-- ══ BUSINESS VALUE ════════════════════════════════════════ -->
   <section class="mgr-value-section">
     <div class="container">
       <div class="section-head-center reveal-up">
         <span class="eyebrow">Business Impact</span>
-        <h2 class="section-title">What managers gain.</h2>
+        <h2 class="section-title">What your HR team gains.</h2>
       </div>
       <div class="mgr-value-grid reveal-stagger">
         @for (v of businessValue; track v.label) {
           <div class="mgr-value-card">
-            <div class="mgr-value-check">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8"
-                      stroke-linecap="round" stroke-linejoin="round"/>
+            <div class="mgr-value-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="20" height="20">
+                <path [attr.d]="v.icon"/>
               </svg>
             </div>
             <h4>{{ v.label }}</h4>
@@ -122,12 +427,15 @@
     </div>
   </section>
 
-  <!-- ── CTA ── -->
+  <!-- ══ CTA ══════════════════════════════════════════════════ -->
   <section class="mod-cta-band">
     <div class="container mod-cta-inner reveal-up">
-      <h2>Ready to give your managers better visibility?</h2>
-      <p>See the Manager Dashboard live in a personalized demo with your own team structure and workflows.</p>
-      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+      <h2>Ready to run HR smarter?</h2>
+      <p>See the HR Dashboard live in a personalized demo — configured for your industry and team size.</p>
+      <div class="mod-cta-btns">
+        <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        <a routerLink="/pricing" class="btn btn-secondary">View Pricing</a>
+      </div>
     </div>
   </section>
 

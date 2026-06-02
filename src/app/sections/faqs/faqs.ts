@@ -29,7 +29,7 @@ export class FaqsComponent {
     },
     {
       q_en: 'Can it integrate with our existing ERP or accounting software?',
-      q_ar: 'هل يمكن تكاملهمع برنامج ERP أو المحاسبة الحالي؟',
+      q_ar: 'هل يمكن تكامله مع برنامج ERP أو المحاسبة الحالي؟',
       a_en: 'Yes. NAS HR has native integrations with Oracle, SAP, Microsoft Dynamics, QuickBooks, and a REST API for custom integrations.',
       a_ar: 'نعم. يتكامل NAS HR بشكل أصلي مع Oracle وSAP وMicrosoft Dynamics وQuickBooks وواجهة REST API للتكاملات المخصصة.',
     },

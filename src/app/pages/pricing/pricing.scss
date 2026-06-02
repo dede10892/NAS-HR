@@ -142,6 +142,7 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   border-radius: 20px;
   padding: 40px 44px;
   box-shadow: 0 4px 6px rgba($dark, 0.03), 0 20px 56px rgba($dark, 0.06);
+  font-family: 'Fira Sans', sans-serif;
 }
 
 .pr-form {
@@ -185,6 +186,10 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   font-weight: 700;
   color: $dark;
   margin: 0;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 4px;
 }
 
 .pr-block-sub {
@@ -192,7 +197,7 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   color: rgba($dark, 0.5);
   margin-bottom: 18px;
   line-height: 1.5;
-  padding-left: 34px;
+  padding-left: 40px;
 }
 
 
@@ -239,7 +244,7 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   border: 1.5px solid var(--nas-grey-400);
   border-radius: 10px;
   background: var(--nas-grey-50, #fafafa);
-  font-family: inherit;
+  font-family: 'Fira Sans', sans-serif;
   font-size: 14px;
   color: $dark;
   outline: none;
@@ -260,6 +265,36 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   line-height: 1.6;
 }
 
+/* ── Custom select wrapper ────────────────────────── */
+
+.pr-select-wrap {
+  position: relative;
+
+  select.pr-select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+    padding-right: 36px;
+    cursor: pointer;
+  }
+}
+
+.pr-select-arrow {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 10px;
+  height: 6px;
+  pointer-events: none;
+  color: var(--nas-grey-600);
+  transition: transform 180ms $ease, color 180ms;
+}
+
+.pr-select-wrap:focus-within .pr-select-arrow {
+  color: $teal;
+}
+
 
 /* ── Industry grid ────────────────────────────────── */
 
@@ -270,6 +305,7 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .pr-ind-card {
+  position: relative;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -501,6 +537,248 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 
+// ── Hero split layout ──────────────────────────────
+.pricing-hero-inner {
+  max-width: 1160px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 72px;
+  align-items: center;
+}
+
+// ── Hero stats ─────────────────────────────────────
+.pr-hero-stats {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin-top: 32px;
+}
+.pr-hero-stat { display: flex; flex-direction: column; gap: 3px; }
+.pr-hs-n { font-size: 20px; font-weight: 800; color: $sky; line-height: 1; letter-spacing: -0.02em; }
+.pr-hs-l { font-size: 11px; color: rgba(255,255,255,0.4); font-weight: 500; }
+.pr-hs-sep { width: 1px; height: 30px; background: rgba(255,255,255,0.12); flex-shrink: 0; }
+
+// ── Hero right visual ──────────────────────────────
+@keyframes hvCardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.pr-hero-visual {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+.pr-hv-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(255,255,255,0.09);
+  border-radius: 16px;
+  padding: 18px 20px;
+  animation: hvCardIn 0.5s $ease both;
+  animation-delay: calc(var(--si, 0) * 0.12s + 0.3s);
+}
+.pr-hv-num {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: $teal;
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.pr-hv-icon {
+  width: 38px; height: 38px;
+  border-radius: 10px;
+  background: rgba($teal, 0.12);
+  border: 1px solid rgba($teal, 0.22);
+  color: $sky;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.pr-hv-title { font-size: 13.5px; font-weight: 700; color: #fff; margin-bottom: 4px; line-height: 1.2; }
+.pr-hv-desc  { font-size: 12px; color: rgba(255,255,255,0.44); line-height: 1.55; }
+
+// ── Aside progress ring ────────────────────────────
+.pr-aside-prog {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+.pr-prog-ring-wrap {
+  position: relative;
+  width: 80px; height: 80px;
+  flex-shrink: 0;
+}
+.pr-prog-ring {
+  width: 80px; height: 80px;
+  transform: rotate(-90deg);
+}
+.pr-ring-bg  { stroke: rgba(255,255,255,0.10); }
+.pr-ring-fg  {
+  stroke: $teal;
+  stroke-linecap: round;
+  transition: stroke-dashoffset 0.5s $ease;
+}
+.pr-ring-label {
+  position: absolute;
+  inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+}
+.pr-ring-pct { font-size: 16px; font-weight: 800; color: #fff; line-height: 1; }
+.pr-ring-sub { font-size: 10px; color: rgba(255,255,255,0.40); font-weight: 500; margin-top: 2px; }
+.pr-aside-prog-text {
+  flex: 1;
+  strong { display: block; font-size: 13px; font-weight: 700; color: #fff; margin-bottom: 4px; }
+  p { font-size: 11.5px; color: rgba(255,255,255,0.42); line-height: 1.5; margin: 0; }
+}
+
+// ── Form card header + progress ────────────────────
+.pr-form-header {
+  margin-bottom: 32px;
+  padding-bottom: 24px;
+  border-bottom: 1px solid var(--nas-grey-400);
+}
+.pr-form-header-top {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 14px;
+}
+.pr-form-title {
+  font-size: 18px; font-weight: 800; color: $dark; margin: 0 0 4px;
+}
+.pr-form-subtitle {
+  font-size: 12px; color: rgba($dark, 0.44); margin: 0;
+}
+.pr-form-pct-badge {
+  flex-shrink: 0;
+  font-size: 13px; font-weight: 800;
+  color: $teal;
+  background: rgba($teal, 0.10);
+  border: 1px solid rgba($teal, 0.22);
+  border-radius: 999px;
+  padding: 5px 14px;
+  transition: background 0.3s, color 0.3s;
+
+  &--done { background: rgba($teal, 0.18); color: $tealdk; }
+}
+.pr-form-prog-track {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba($dark, 0.08);
+  overflow: hidden;
+}
+.pr-form-prog-fill {
+  height: 100%;
+  border-radius: 2px;
+  background: linear-gradient(90deg, $tealdk 0%, $teal 100%);
+  transition: width 0.4s $ease;
+}
+
+// ── Block badges (replaces pr-block-num) ───────────
+.pr-block-badge {
+  width: 28px; height: 28px;
+  border-radius: 50%;
+  background: rgba($teal, 0.10);
+  border: 1.5px solid rgba($teal, 0.28);
+  color: $teal;
+  font-size: 11px; font-weight: 700; letter-spacing: 0.06em;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+  transition: background 0.2s, border-color 0.2s;
+
+  svg { width: 12px; height: 12px; }
+
+  &--done {
+    background: $teal;
+    border-color: $teal;
+    color: #fff;
+  }
+}
+
+// ── Section selection tag + count badge ────────────
+.pr-block-sel-tag {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 600;
+  color: $tealdk;
+  background: rgba($teal, 0.10);
+  border: 1px solid rgba($teal, 0.22);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-left: 8px;
+  text-transform: capitalize;
+}
+
+.pr-block-count-badge {
+  display: inline-flex;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 700;
+  color: $sky;
+  background: rgba($dark, 0.8);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-left: 8px;
+}
+
+// ── Industry card checkmark overlay ───────────────
+.pr-ind-check {
+  position: absolute;
+  top: 7px; right: 7px;
+  width: 18px; height: 18px;
+  border-radius: 50%;
+  background: $teal;
+  color: #fff;
+  display: flex; align-items: center; justify-content: center;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.18s $ease, transform 0.18s $ease;
+
+  svg { width: 10px; height: 10px; }
+}
+
+.pr-ind-card--sel .pr-ind-check {
+  opacity: 1;
+  transform: scale(1);
+}
+
+// ── FAQ entrance animation ─────────────────────────
+@keyframes prFaqIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.pricing-faq-item {
+  animation: prFaqIn 0.32s $ease both;
+
+  .pricing-faq-a {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.34s $ease, padding 0.34s $ease;
+    padding: 0 20px;
+    font-size: 13.5px;
+    color: var(--nas-grey-750);
+    line-height: 1.7;
+  }
+
+  &--open .pricing-faq-a {
+    max-height: 300px;
+    padding: 0 20px 16px;
+  }
+
+  &--open .pricing-faq-q svg {
+    transform: rotate(180deg);
+  }
+}
+
+
 /* ══ RESPONSIVE ══════════════════════════════════════ */
 
 @media (max-width: 1024px) {
@@ -511,6 +789,16 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   .pr-ind-grid {
     grid-template-columns: repeat(4, 1fr);
   }
+}
+
+@media (max-width: 960px) {
+  .pricing-hero-inner {
+    grid-template-columns: 1fr;
+    gap: 48px;
+    max-width: 640px;
+  }
+  .pr-hero-visual { flex-direction: row; flex-wrap: wrap; }
+  .pr-hv-card { flex: 1; min-width: 220px; }
 }
 
 @media (max-width: 860px) {
@@ -530,6 +818,8 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
 
   .pr-aside-badge { grid-column: 1 / -1; }
   .pr-aside-divider { display: none; }
+
+  .pr-aside-prog { grid-column: 1 / -1; }
 
   .pr-size-grid {
     grid-template-columns: repeat(3, 1fr);
@@ -561,6 +851,11 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   .pr-size-grid {
     grid-template-columns: repeat(3, 1fr);
   }
+
+  .pr-hero-visual { flex-direction: column; }
+  .pr-hv-card { min-width: auto; }
+  .pr-hero-stats { gap: 14px; }
+  .pr-hs-n { font-size: 17px; }
 }
 
 @media (max-width: 400px) {
@@ -573,4 +868,7 @@ $ease  : cubic-bezier(0.22, 1, 0.36, 1);
   .pr-size-card,
   .pr-module-chip,
   .pr-input { transition: none; }
+
+  .pr-hv-card { animation: none; }
+  .pricing-faq-item { animation: none; }
 }

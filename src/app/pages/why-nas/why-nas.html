@@ -5,21 +5,18 @@
     <div class="container why-hero-inner">
 
       <!-- Left: copy -->
-      <div class="why-hero-copy reveal-stagger">
+      <div class="why-hero-copy">
         <span class="wn-eyebrow">Why NAS HR</span>
         <h1 class="why-headline">
-          Simple to use.<br>
-          Smart by design.<br>
-          <em>Complete in one platform.</em>
+          The HR platform<br>built for <em>people</em>,<br>not paperwork.
         </h1>
-        <p class="why-sub">NAS HR brings every essential HR capability into one connected experience — helping companies manage people, requests, attendance, reports, learning, and more with ease.</p>
+        <p class="why-sub">One connected system for every HR task — from employee self-service and smart approvals to AI-powered insights and salary-ready reports. Built for companies that want HR to actually work.</p>
         <div class="why-actions">
           <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
           <a routerLink="/modules/all-features" class="btn btn-secondary">Explore Platform</a>
         </div>
 
-        <!-- Stats strip -->
-        <div class="wn-stats-strip reveal-stagger" style="--d:.2s">
+        <div class="wn-stats-strip">
           @for (s of stats; track s.label; let i = $index) {
             <div class="wn-stat"
                  [class.wn-stat--hovered]="hoveredStat() === i"
@@ -40,7 +37,6 @@
             <span class="whv-card-title">NAS HR Platform</span>
             <span class="whv-badge">8 Modules</span>
           </div>
-
           <div class="whv-groups">
             <div class="whv-group">
               <span class="whv-group-label">People & Time</span>
@@ -61,13 +57,12 @@
             <div class="whv-group">
               <span class="whv-group-label">Intelligence</span>
               <div class="whv-chips">
-                <span class="whv-chip whv-chip--sky">✦ Ask NAS AI</span>
+                <span class="whv-chip whv-chip--sky">Ask NAS AI</span>
                 <span class="whv-chip whv-chip--sky">Reports & Salary</span>
                 <span class="whv-chip">Internal Jobs</span>
               </div>
             </div>
           </div>
-
           <div class="whv-footer">
             <div class="whv-conn-line"></div>
             <span class="whv-conn-text">All modules share one live data layer</span>
@@ -84,7 +79,7 @@
       <div class="section-head-center reveal-up">
         <span class="eyebrow">What Makes NAS HR Different</span>
         <h2 class="section-title">Easy. Smart. Complete.</h2>
-        <p class="section-sub section-sub-center">Three principles behind every decision we make.</p>
+        <p class="section-sub section-sub-center">Three principles that shape every feature we build.</p>
       </div>
 
       <div class="wn-switcher reveal-up" style="--d:.1s">
@@ -95,23 +90,13 @@
             <button
               class="wn-tab"
               [class.wn-tab--active]="activePillar() === i"
-              (click)="activePillar.set(i)">
-              <div class="wn-tab-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                  <path [attr.d]="p.icon"/>
-                </svg>
-              </div>
+              (click)="switchPillar(i)">
+              <span class="wn-tab-num">0{{ i + 1 }}</span>
               <div class="wn-tab-text">
                 <span class="wn-tab-label">{{ p.label }}</span>
                 <span class="wn-tab-hint">{{ p.tagline }}</span>
               </div>
-              <div class="wn-tab-chevron" aria-hidden="true">
-                <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <polyline points="4 8 12 8"/><polyline points="8 4 12 8 8 12"/>
-                </svg>
-              </div>
+              <span class="wn-tab-chevron" aria-hidden="true">›</span>
             </button>
           }
         </div>
@@ -124,46 +109,35 @@
           <ul class="wn-panel-points">
             @for (pt of pillars[activePillar()].points; track pt) {
               <li>
-                <span class="wn-pt-check" aria-hidden="true">
-                  <svg viewBox="0 0 16 16" fill="none">
-                    <circle cx="8" cy="8" r="7" stroke="#4CB4B5" stroke-width="1.2"/>
-                    <path d="M5 8l2.5 2.5 3.5-4" stroke="#4CB4B5" stroke-width="1.5"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                <span class="wn-pt-dot" aria-hidden="true"></span>
                 {{ pt }}
               </li>
             }
           </ul>
 
-          <!-- Per-pillar visual -->
+          <!-- Per-pillar visual — no icons -->
           <div class="wn-panel-visual">
 
             @if (activePillar() === 0) {
-              <!-- Easy: 3-step flow -->
               <div class="wnpv-flow wn-panel-vis-anim">
                 <div class="wnpv-step">
                   <div class="wnpv-step-num">1</div>
-                  <div class="wnpv-step-icon">📱</div>
                   <div class="wnpv-step-lbl">Employee opens app</div>
                 </div>
                 <span class="wnpv-arrow">→</span>
                 <div class="wnpv-step">
                   <div class="wnpv-step-num">2</div>
-                  <div class="wnpv-step-icon">📋</div>
                   <div class="wnpv-step-lbl">Submits request</div>
                 </div>
                 <span class="wnpv-arrow">→</span>
                 <div class="wnpv-step wnpv-step--done">
                   <div class="wnpv-step-num wnpv-step-num--done">3</div>
-                  <div class="wnpv-step-icon">✅</div>
                   <div class="wnpv-step-lbl">Approved instantly</div>
                 </div>
               </div>
             }
 
             @if (activePillar() === 1) {
-              <!-- Smart: AI chat snippet -->
               <div class="wnpv-chat wn-panel-vis-anim">
                 <div class="wnpv-chat-header">
                   <span class="wnpv-ai-dot"></span>
@@ -178,13 +152,11 @@
             }
 
             @if (activePillar() === 2) {
-              <!-- Complete: module grid -->
               <div class="wnpv-modules wn-panel-vis-anim">
                 <div class="wnpv-modules-label">All 8 modules. One platform.</div>
                 <div class="wnpv-modules-grid">
                   @for (m of modules; track m.name) {
                     <div class="wnpv-module" [class.wnpv-module--sky]="m.sky">
-                      <span class="wnpv-module-icon">{{ m.icon }}</span>
                       <span class="wnpv-module-name">{{ m.name }}</span>
                     </div>
                   }
@@ -221,31 +193,14 @@
         @for (row of compareRows; track row.feature; let i = $index) {
           <div class="wn-compare-row" [class.wn-compare-row--alt]="i % 2 !== 0">
             <div class="wn-cmp-feat">{{ row.feature }}</div>
-
             <div class="wn-cmp-col wn-cmp-col--nas">
-              <span class="wn-check wn-check--yes">
-                <svg viewBox="0 0 20 20" fill="none">
-                  <circle cx="10" cy="10" r="9" fill="#4CB4B5" fill-opacity="0.15" stroke="#4CB4B5" stroke-width="1.3"/>
-                  <path d="M6 10l2.8 2.8 5-5.6" stroke="#4CB4B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </span>
+              <span class="wn-badge wn-badge--yes">Yes</span>
             </div>
-
             <div class="wn-cmp-col wn-cmp-col--trad">
               @if (row.trad) {
-                <span class="wn-check wn-check--yes">
-                  <svg viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="9" fill="#4CB4B5" fill-opacity="0.12" stroke="#4CB4B5" stroke-width="1.3"/>
-                    <path d="M6 10l2.8 2.8 5-5.6" stroke="#4CB4B5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
+                <span class="wn-badge wn-badge--yes">Yes</span>
               } @else {
-                <span class="wn-check wn-check--no">
-                  <svg viewBox="0 0 20 20" fill="none">
-                    <circle cx="10" cy="10" r="9" stroke="#E2E2E2" stroke-width="1.3"/>
-                    <path d="M7 13l6-6M13 13L7 7" stroke="#CCC" stroke-width="1.8" stroke-linecap="round"/>
-                  </svg>
-                </span>
+                <span class="wn-badge wn-badge--no">—</span>
               }
             </div>
           </div>
@@ -261,7 +216,6 @@
       <div class="wn-impact-grid reveal-stagger">
         @for (m of impactMetrics; track m.label) {
           <div class="wn-impact-card">
-            <span class="wn-impact-icon">{{ m.icon }}</span>
             <span class="wn-impact-num">{{ m.num }}</span>
             <span class="wn-impact-label">{{ m.label }}</span>
           </div>
@@ -277,39 +231,43 @@
       @for (sec of sections; track sec.eyebrow; let i = $index) {
         <div class="wn-feat reveal-up" [class.wn-feat--alt]="i % 2 !== 0">
 
-          <!-- Visual side -->
+          <!-- Visual side — no icons -->
           <div class="wn-feat-visual">
 
             @if (i === 0) {
-              <!-- Easy: mobile-style request flow -->
-              <div class="wnfv-mobile">
-                <div class="wnfv-mobile-bar">
-                  <span class="wnfv-dot" style="background:#FF5F57"></span>
-                  <span class="wnfv-dot" style="background:#FEBC2E"></span>
-                  <span class="wnfv-dot" style="background:#28C840"></span>
-                  <span class="wnfv-mobile-title">NAS HR</span>
-                </div>
-                <div class="wnfv-mobile-body">
-                  <div class="wnfv-step-card">
-                    <div class="wnfv-sc-num">1</div>
-                    <div class="wnfv-sc-text">Open app on mobile</div>
+              <!-- Easy: numbered step flow card -->
+              <div class="wnfv-flow-card">
+                <div class="wnfv-fc-label">Request in 3 steps</div>
+                <div class="wnfv-steps">
+                  <div class="wnfv-step-row">
+                    <span class="wnfv-sn">01</span>
+                    <div class="wnfv-st">
+                      <strong>Open the app</strong>
+                      <span>Available on web and mobile</span>
+                    </div>
                   </div>
-                  <div class="wnfv-step-arrow">↓</div>
-                  <div class="wnfv-step-card">
-                    <div class="wnfv-sc-num">2</div>
-                    <div class="wnfv-sc-text">Tap "Request Leave"</div>
+                  <div class="wnfv-divider"></div>
+                  <div class="wnfv-step-row">
+                    <span class="wnfv-sn">02</span>
+                    <div class="wnfv-st">
+                      <strong>Tap "Request Leave"</strong>
+                      <span>Fill one simple form</span>
+                    </div>
                   </div>
-                  <div class="wnfv-step-arrow">↓</div>
-                  <div class="wnfv-step-card wnfv-step-card--done">
-                    <div class="wnfv-sc-num wnfv-sc-num--done">✓</div>
-                    <div class="wnfv-sc-text">Request sent instantly</div>
+                  <div class="wnfv-divider"></div>
+                  <div class="wnfv-step-row wnfv-step-row--done">
+                    <span class="wnfv-sn wnfv-sn--done">03</span>
+                    <div class="wnfv-st">
+                      <strong>Request sent instantly</strong>
+                      <span>Manager notified in real time</span>
+                    </div>
                   </div>
                 </div>
               </div>
             }
 
             @if (i === 1) {
-              <!-- Smart: AI chat visual -->
+              <!-- Smart: AI chat -->
               <div class="wnfv-ai-card">
                 <div class="wnfv-ai-header">
                   <span class="wnfv-ai-dot"></span>
@@ -330,7 +288,7 @@
             }
 
             @if (i === 2) {
-              <!-- Complete: connected modules grid -->
+              <!-- Complete: module text grid -->
               <div class="wnfv-modules-card">
                 <div class="wnfv-mod-header">
                   <span class="wnfv-mod-title">All Modules Connected</span>
@@ -339,7 +297,6 @@
                 <div class="wnfv-mod-grid">
                   @for (m of modules; track m.name) {
                     <div class="wnfv-mod-item" [class.wnfv-mod-item--sky]="m.sky">
-                      <span>{{ m.icon }}</span>
                       <span>{{ m.name }}</span>
                     </div>
                   }
@@ -371,10 +328,10 @@
   <section class="mod-cta-band">
     <div class="container mod-cta-inner reveal-up">
       <h2>See how NAS HR can simplify your HR operations.</h2>
-      <p>Request a demo and we'll walk you through the full platform tailored to your company needs.</p>
+      <p>Request a demo and we'll walk you through the full platform tailored to your company's needs.</p>
       <div class="mod-cta-btns">
         <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
-        <a routerLink="/modules/all-features" class="btn btn-outline-dark">Explore All Modules</a>
+        <a routerLink="/modules/all-features" class="btn btn-secondary">Explore All Modules</a>
       </div>
     </div>
   </section>

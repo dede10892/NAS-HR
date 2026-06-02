@@ -100,246 +100,348 @@
           }
         </div>
 
-        <!-- Right: interactive mockup preview -->
+        <!-- Right: phone mockup preview -->
         <div class="jfl-preview reveal-scale" style="--d:.12s">
-          <div class="jfp-chrome">
-            <div class="jfp-dot" style="background:#F14437"></div>
-            <div class="jfp-dot" style="background:#F79008"></div>
-            <div class="jfp-dot" style="background:#0FB86A"></div>
-            <span class="jfp-title">NAS HR</span>
-            <span class="jfp-step-label">Step {{ activeStep() + 1 }} / {{ flow.length }}</span>
-          </div>
+          <div class="jfl-phone">
 
-          <div class="jfp-body">
+            <!-- Status bar -->
+            <div class="jfl-phone-status">
+              <span class="jfl-phone-time">09:41</span>
+              <div class="jfl-phone-status-icons">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" width="13" height="13" aria-hidden="true">
+                  <path d="M5 12.55a11 11 0 0114.08 0M1.42 9a16 16 0 0121.16 0M8.53 16.11a6 6 0 016.95 0M12 20h.01"/>
+                </svg>
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" width="16" height="13" aria-hidden="true">
+                  <rect x="2" y="7" width="16" height="11" rx="2"/>
+                  <path d="M22 11v3" stroke-linecap="round"/>
+                  <rect x="4" y="9" width="10" height="7" fill="currentColor" rx="1"/>
+                </svg>
+              </div>
+            </div>
 
-            <!-- ──────────────────────────────────────
-                 STEP 0: HR Publishes Vacancy
-            ────────────────────────────────────── -->
-            @if (activeStep() === 0) {
-              <div class="jfp-screen jfp-anim">
-                <div class="jfps-nav">
-                  <span class="jfps-back">← Back</span>
-                  <span class="jfps-page-title">New Vacancy</span>
-                </div>
-                <div class="jfps-form">
-                  <div class="jfps-field">
-                    <span class="jfps-label">Job Title</span>
-                    <div class="jfps-input jfps-input--interact">Senior UX Designer</div>
+            <!-- App header -->
+            <div class="jfl-phone-appbar">
+              <img src="logo-light.svg" class="jfl-phone-logo" alt="NAS HR"/>
+              <div class="jfl-phone-avatar">M</div>
+            </div>
+
+            <!-- Screen body (changes per step) -->
+            <div class="jfl-phone-body">
+
+              <!-- STEP 0: HR Publishes Vacancy -->
+              @if (activeStep() === 0) {
+                <div class="jfp-screen jfp-anim">
+                  <div class="jfps-nav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" width="16" height="16" style="cursor:default;color:#4CB4B5">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span class="jfps-page-title">New Vacancy</span>
                   </div>
-                  <div class="jfps-row">
+                  <div class="jfps-form">
                     <div class="jfps-field">
-                      <span class="jfps-label">Department</span>
-                      <div class="jfps-input jfps-input--interact">Product Design</div>
+                      <span class="jfps-label">Job Title</span>
+                      <div class="jfps-input jfps-input--interact">Senior UX Designer</div>
+                    </div>
+                    <div class="jfps-row">
+                      <div class="jfps-field">
+                        <span class="jfps-label">Department</span>
+                        <div class="jfps-input jfps-input--interact">Product Design</div>
+                      </div>
+                      <div class="jfps-field">
+                        <span class="jfps-label">Level</span>
+                        <div class="jfps-input jfps-input--interact">Senior</div>
+                      </div>
+                    </div>
+                    <div class="jfps-row">
+                      <div class="jfps-field">
+                        <span class="jfps-label">Location</span>
+                        <div class="jfps-input jfps-input--interact">Cairo HQ</div>
+                      </div>
+                      <div class="jfps-field">
+                        <span class="jfps-label">Deadline</span>
+                        <div class="jfps-input jfps-input--interact">Jun 30, 2025</div>
+                      </div>
                     </div>
                     <div class="jfps-field">
-                      <span class="jfps-label">Level</span>
-                      <div class="jfps-input jfps-input--interact">Senior</div>
+                      <span class="jfps-label">Visible to</span>
+                      <div class="jfps-chips">
+                        @for (c of chips; track c) {
+                          <span class="jfps-chip"
+                                [class.jfps-chip--on]="activeChip() === c"
+                                (click)="activeChip.set(c)">{{ c }}</span>
+                        }
+                      </div>
+                    </div>
+                    <button class="jfps-btn jfps-btn--next" (click)="goStep(1)">Publish Vacancy →</button>
+                  </div>
+                </div>
+              }
+
+              <!-- STEP 1: Employee Discovers Job (matches screenshot) -->
+              @if (activeStep() === 1) {
+                <div class="jfp-screen jfp-anim">
+                  <div class="jfps-nav jfps-nav--center">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" width="16" height="16" style="color:#4CB4B5;cursor:pointer"
+                         (click)="goStep(0)">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span class="jfps-page-title jfps-page-title--center">Internal Jobs</span>
+                    <span style="width:16px"></span>
+                  </div>
+                  <!-- Available / Applied toggle (matches screenshot) -->
+                  <div class="jfp-tab-row">
+                    <button class="jfp-tab" [class.jfp-tab--active]="activeFilter() !== 'Applied'"
+                            (click)="activeFilter.set('Available')">Available</button>
+                    <button class="jfp-tab" [class.jfp-tab--active]="activeFilter() === 'Applied'"
+                            (click)="activeFilter.set('Applied')">Applied</button>
+                  </div>
+                  <!-- Job rows (matches screenshot card style) -->
+                  <div class="jfp-job-rows">
+                    <div class="jfp-job-row" (click)="goStep(2)">
+                      <div class="jfp-job-logo">
+                        <img src="logo-dark.svg" style="height:18px;width:auto;display:block"/>
+                      </div>
+                      <div class="jfp-job-info">
+                        <span class="jfp-job-title">Senior UX Designer</span>
+                        <span class="jfp-job-date">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                               stroke-linecap="round" width="11" height="11">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                          </svg>
+                          19 Oct 2025
+                        </span>
+                      </div>
+                      <button class="jfp-view-btn" (click)="goStep(2)">View Vacancy</button>
+                    </div>
+                    <div class="jfp-job-row" (click)="goStep(2)">
+                      <div class="jfp-job-logo">
+                        <img src="logo-dark.svg" style="height:18px;width:auto;display:block"/>
+                      </div>
+                      <div class="jfp-job-info">
+                        <span class="jfp-job-title">HR Business Partner</span>
+                        <span class="jfp-job-date">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                               stroke-linecap="round" width="11" height="11">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                          </svg>
+                          24 Oct 2025
+                        </span>
+                      </div>
+                      <button class="jfp-view-btn" (click)="goStep(2)">View Vacancy</button>
+                    </div>
+                    <div class="jfp-job-row" (click)="goStep(2)">
+                      <div class="jfp-job-logo">
+                        <img src="logo-dark.svg" style="height:18px;width:auto;display:block"/>
+                      </div>
+                      <div class="jfp-job-info">
+                        <span class="jfp-job-title">Backend Engineer</span>
+                        <span class="jfp-job-date">
+                          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                               stroke-linecap="round" width="11" height="11">
+                            <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                          </svg>
+                          01 Nov 2025
+                        </span>
+                      </div>
+                      <button class="jfp-view-btn" (click)="goStep(2)">View Vacancy</button>
                     </div>
                   </div>
-                  <div class="jfps-row">
+                </div>
+              }
+
+              <!-- STEP 2: Employee Applies -->
+              @if (activeStep() === 2) {
+                <div class="jfp-screen jfp-anim">
+                  <div class="jfps-nav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" width="16" height="16" style="color:#4CB4B5;cursor:pointer"
+                         (click)="goStep(1)">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span class="jfps-page-title">Apply</span>
+                  </div>
+                  <div class="jfps-apply-header">
+                    <div class="jfps-apply-role">Senior UX Designer</div>
+                    <div class="jfps-apply-dept">Product Design · Cairo HQ</div>
+                  </div>
+                  <div class="jfps-form">
                     <div class="jfps-field">
-                      <span class="jfps-label">Location</span>
-                      <div class="jfps-input jfps-input--interact">Cairo HQ</div>
+                      <span class="jfps-label">Current Role</span>
+                      <div class="jfps-input jfps-input--filled jfps-input--interact">UX Designer</div>
                     </div>
                     <div class="jfps-field">
-                      <span class="jfps-label">Deadline</span>
-                      <div class="jfps-input jfps-input--interact">Jun 30, 2025</div>
+                      <span class="jfps-label">Years of Experience</span>
+                      <div class="jfps-input jfps-input--filled jfps-input--interact">4 years</div>
+                    </div>
+                    <div class="jfps-field">
+                      <span class="jfps-label">Why are you applying?</span>
+                      <div class="jfps-textarea jfps-textarea--interact">Ready to take on senior responsibilities and lead design sprints.</div>
+                    </div>
+                    <div class="jfps-submit-row">
+                      <button class="jfps-btn jfps-btn--next" (click)="goStep(3)">Submit Application →</button>
+                      <span class="jfps-note">Manager will be notified</span>
                     </div>
                   </div>
-                  <div class="jfps-field">
-                    <span class="jfps-label">Visible to — click to change</span>
-                    <div class="jfps-chips">
-                      @for (c of chips; track c) {
-                        <span class="jfps-chip"
-                              [class.jfps-chip--on]="activeChip() === c"
-                              (click)="activeChip.set(c)">{{ c }}</span>
-                      }
-                    </div>
-                  </div>
-                  <button class="jfps-btn jfps-btn--next" (click)="goStep(1)">Publish Vacancy →</button>
                 </div>
-              </div>
-            }
+              }
 
-            <!-- ──────────────────────────────────────
-                 STEP 1: Employee Discovers Job
-            ────────────────────────────────────── -->
-            @if (activeStep() === 1) {
-              <div class="jfp-screen jfp-anim">
-                <div class="jfps-nav">
-                  <span class="jfps-page-title">Open Positions</span>
-                  <span class="jfps-count-tag">3 matches</span>
-                </div>
-                <!-- clickable filter tabs -->
-                <div class="jfps-filter-row">
-                  @for (f of filters; track f) {
-                    <span class="jfps-filter"
-                          [class.jfps-filter--on]="activeFilter() === f"
-                          (click)="activeFilter.set(f)">{{ f }}</span>
-                  }
-                </div>
-                <div class="jfps-job-list">
-                  <!-- entire card clickable -->
-                  <div class="jfps-job-card jfps-job-card--featured jfps-job-card--click" (click)="goStep(2)">
-                    <div class="jfpjc-top">
-                      <span class="jfpjc-dept" style="color:#4CB4B5">Product Design</span>
-                      <span class="jfpjc-match">⭐ Matches you</span>
+              <!-- STEP 3: Manager / HR Reviews -->
+              @if (activeStep() === 3) {
+                <div class="jfp-screen jfp-anim">
+                  <div class="jfps-nav jfps-nav--center">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" width="16" height="16" style="color:#4CB4B5;cursor:pointer"
+                         (click)="goStep(2)">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span class="jfps-page-title jfps-page-title--center">Applicants</span>
+                    <span class="jfps-count-tag">8 total</span>
+                  </div>
+                  <div class="jfp-tab-row">
+                    <button class="jfp-tab jfp-tab--active">Shortlisted (2)</button>
+                    <button class="jfp-tab">Under Review</button>
+                    <button class="jfp-tab">All</button>
+                  </div>
+                  <div class="jfps-candidates">
+                    <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
+                      <div class="jfps-avatar jfps-avatar--teal">AH</div>
+                      <div class="jfps-cand-info">
+                        <span class="jfps-cand-name">Ahmed Hassan</span>
+                        <span class="jfps-cand-role">UX Designer · 4 yrs</span>
+                      </div>
+                      <span class="jfps-status jfps-status--green">Shortlisted →</span>
                     </div>
-                    <div class="jfpjc-title">Senior UX Designer</div>
-                    <div class="jfpjc-meta">Cairo HQ &middot; Senior &middot; Full-time</div>
-                    <div class="jfpjc-footer">
-                      <span class="jfpjc-deadline">Deadline: Jun 30</span>
-                      <button class="jfpjc-btn" (click)="goStep(2)">Apply →</button>
+                    <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
+                      <div class="jfps-avatar jfps-avatar--blue">SM</div>
+                      <div class="jfps-cand-info">
+                        <span class="jfps-cand-name">Sara Mahmoud</span>
+                        <span class="jfps-cand-role">Product Designer · 3 yrs</span>
+                      </div>
+                      <span class="jfps-status jfps-status--green">Shortlisted →</span>
+                    </div>
+                    <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
+                      <div class="jfps-avatar" style="background:rgba(191,170,224,0.18);color:#BFAAE0">KO</div>
+                      <div class="jfps-cand-info">
+                        <span class="jfps-cand-name">Khalid Omar</span>
+                        <span class="jfps-cand-role">UI Designer · 2 yrs</span>
+                      </div>
+                      <span class="jfps-status jfps-status--yellow">Reviewing →</span>
+                    </div>
+                    <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
+                      <div class="jfps-avatar" style="background:rgba(247,144,8,0.14);color:#F79008">NA</div>
+                      <div class="jfps-cand-info">
+                        <span class="jfps-cand-name">Nora Ali</span>
+                        <span class="jfps-cand-role">UX Researcher · 5 yrs</span>
+                      </div>
+                      <span class="jfps-status jfps-status--yellow">Reviewing →</span>
                     </div>
                   </div>
-                  <div class="jfps-job-card jfps-job-card--click" (click)="goStep(2)">
-                    <div class="jfpjc-top">
-                      <span class="jfpjc-dept" style="color:#75DEFF">Human Resources</span>
-                    </div>
-                    <div class="jfpjc-title">HR Business Partner</div>
-                    <div class="jfpjc-meta">Dubai HQ &middot; Mid &middot; Full-time</div>
-                  </div>
                 </div>
-              </div>
-            }
+              }
 
-            <!-- ──────────────────────────────────────
-                 STEP 2: Employee Applies
-            ────────────────────────────────────── -->
-            @if (activeStep() === 2) {
-              <div class="jfp-screen jfp-anim">
-                <div class="jfps-nav">
-                  <span class="jfps-back jfps-back--click" (click)="goStep(1)">← Jobs</span>
-                  <span class="jfps-page-title">Apply</span>
+              <!-- STEP 4: Application Status -->
+              @if (activeStep() === 4) {
+                <div class="jfp-screen jfp-anim">
+                  <div class="jfps-nav">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"
+                         stroke-linecap="round" width="16" height="16" style="color:#4CB4B5;cursor:pointer"
+                         (click)="goStep(3)">
+                      <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                    <span class="jfps-page-title">My Application</span>
+                  </div>
+                  <div class="jfps-app-card">
+                    <div class="jfps-app-role">Senior UX Designer</div>
+                    <div class="jfps-app-dept">Product Design · Cairo HQ</div>
+                    <span class="jfps-status jfps-status--green" style="margin-top:8px;display:inline-block">Shortlisted ✓</span>
+                  </div>
+                  <div class="jfps-timeline">
+                    <div class="jfpst-item jfpst-item--done">
+                      <div class="jfpst-dot jfpst-dot--done"></div>
+                      <div class="jfpst-line jfpst-line--done"></div>
+                      <div class="jfpst-content">
+                        <span class="jfpst-label">Application Submitted</span>
+                        <span class="jfpst-date">May 12, 2025</span>
+                      </div>
+                    </div>
+                    <div class="jfpst-item jfpst-item--done">
+                      <div class="jfpst-dot jfpst-dot--done"></div>
+                      <div class="jfpst-line jfpst-line--done"></div>
+                      <div class="jfpst-content">
+                        <span class="jfpst-label">Under Review</span>
+                        <span class="jfpst-date">May 14, 2025</span>
+                      </div>
+                    </div>
+                    <div class="jfpst-item jfpst-item--active">
+                      <div class="jfpst-dot jfpst-dot--active"></div>
+                      <div class="jfpst-line"></div>
+                      <div class="jfpst-content">
+                        <span class="jfpst-label jfpst-label--active">Shortlisted</span>
+                        <span class="jfpst-date">May 16, 2025</span>
+                      </div>
+                    </div>
+                    <div class="jfpst-item">
+                      <div class="jfpst-dot jfpst-dot--pending"></div>
+                      <div class="jfpst-content">
+                        <span class="jfpst-label jfpst-label--muted">Final Decision</span>
+                        <span class="jfpst-date">Pending</span>
+                      </div>
+                    </div>
+                  </div>
+                  <button class="jfps-btn jfps-btn--restart" (click)="goStep(0)">↺ Start Over</button>
                 </div>
-                <div class="jfps-apply-header">
-                  <div class="jfps-apply-role">Senior UX Designer</div>
-                  <div class="jfps-apply-dept">Product Design &middot; Cairo HQ</div>
-                </div>
-                <div class="jfps-form">
-                  <div class="jfps-field">
-                    <span class="jfps-label">Current Role</span>
-                    <div class="jfps-input jfps-input--filled jfps-input--interact">UX Designer</div>
-                  </div>
-                  <div class="jfps-field">
-                    <span class="jfps-label">Years of Experience</span>
-                    <div class="jfps-input jfps-input--filled jfps-input--interact">4 years</div>
-                  </div>
-                  <div class="jfps-field">
-                    <span class="jfps-label">Why are you applying?</span>
-                    <div class="jfps-textarea jfps-textarea--interact">Ready to take on senior responsibilities and lead design sprints.</div>
-                  </div>
-                  <div class="jfps-submit-row">
-                    <button class="jfps-btn jfps-btn--next" (click)="goStep(3)">Submit Application →</button>
-                    <span class="jfps-note">Manager will be notified</span>
-                  </div>
-                </div>
-              </div>
-            }
+              }
 
-            <!-- ──────────────────────────────────────
-                 STEP 3: Manager / HR Reviews
-            ────────────────────────────────────── -->
-            @if (activeStep() === 3) {
-              <div class="jfp-screen jfp-anim">
-                <div class="jfps-nav">
-                  <span class="jfps-page-title">Applicants</span>
-                  <span class="jfps-count-tag">8 total</span>
-                </div>
-                <div class="jfps-review-tabs">
-                  <span class="jfps-rtab jfps-rtab--on">Shortlisted (2)</span>
-                  <span class="jfps-rtab">Under Review (4)</span>
-                  <span class="jfps-rtab">All</span>
-                </div>
-                <div class="jfps-candidates">
-                  <!-- click any shortlisted row → step 4 -->
-                  <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
-                    <div class="jfps-avatar jfps-avatar--teal">AH</div>
-                    <div class="jfps-cand-info">
-                      <span class="jfps-cand-name">Ahmed Hassan</span>
-                      <span class="jfps-cand-role">UX Designer &middot; 4 yrs</span>
-                    </div>
-                    <span class="jfps-status jfps-status--green">Shortlisted →</span>
-                  </div>
-                  <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
-                    <div class="jfps-avatar jfps-avatar--blue">SM</div>
-                    <div class="jfps-cand-info">
-                      <span class="jfps-cand-name">Sara Mahmoud</span>
-                      <span class="jfps-cand-role">Product Designer &middot; 3 yrs</span>
-                    </div>
-                    <span class="jfps-status jfps-status--green">Shortlisted →</span>
-                  </div>
-                  <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
-                    <div class="jfps-avatar" style="background:rgba(191,170,224,0.2);color:#BFAAE0">KO</div>
-                    <div class="jfps-cand-info">
-                      <span class="jfps-cand-name">Khalid Omar</span>
-                      <span class="jfps-cand-role">UI Designer &middot; 2 yrs</span>
-                    </div>
-                    <span class="jfps-status jfps-status--yellow">Reviewing →</span>
-                  </div>
-                  <div class="jfps-candidate jfps-candidate--click" (click)="goStep(4)">
-                    <div class="jfps-avatar" style="background:rgba(247,144,8,0.15);color:#F79008">NA</div>
-                    <div class="jfps-cand-info">
-                      <span class="jfps-cand-name">Nora Ali</span>
-                      <span class="jfps-cand-role">UX Researcher &middot; 5 yrs</span>
-                    </div>
-                    <span class="jfps-status jfps-status--yellow">Reviewing →</span>
-                  </div>
-                </div>
-              </div>
-            }
+            </div><!-- /jfl-phone-body -->
 
-            <!-- ──────────────────────────────────────
-                 STEP 4: Application Status Updates
-            ────────────────────────────────────── -->
-            @if (activeStep() === 4) {
-              <div class="jfp-screen jfp-anim">
-                <div class="jfps-nav">
-                  <span class="jfps-page-title">My Application</span>
-                </div>
-                <div class="jfps-app-card">
-                  <div class="jfps-app-role">Senior UX Designer</div>
-                  <div class="jfps-app-dept">Product Design &middot; Cairo HQ</div>
-                  <span class="jfps-status jfps-status--green" style="margin-top:8px;display:inline-block">Shortlisted ✓</span>
-                </div>
-                <div class="jfps-timeline">
-                  <div class="jfpst-item jfpst-item--done">
-                    <div class="jfpst-dot jfpst-dot--done"></div>
-                    <div class="jfpst-line jfpst-line--done"></div>
-                    <div class="jfpst-content">
-                      <span class="jfpst-label">Application Submitted</span>
-                      <span class="jfpst-date">May 12, 2025</span>
-                    </div>
-                  </div>
-                  <div class="jfpst-item jfpst-item--done">
-                    <div class="jfpst-dot jfpst-dot--done"></div>
-                    <div class="jfpst-line jfpst-line--done"></div>
-                    <div class="jfpst-content">
-                      <span class="jfpst-label">Under Review</span>
-                      <span class="jfpst-date">May 14, 2025</span>
-                    </div>
-                  </div>
-                  <div class="jfpst-item jfpst-item--active">
-                    <div class="jfpst-dot jfpst-dot--active"></div>
-                    <div class="jfpst-line"></div>
-                    <div class="jfpst-content">
-                      <span class="jfpst-label jfpst-label--active">Shortlisted</span>
-                      <span class="jfpst-date">May 16, 2025</span>
-                    </div>
-                  </div>
-                  <div class="jfpst-item">
-                    <div class="jfpst-dot jfpst-dot--pending"></div>
-                    <div class="jfpst-content">
-                      <span class="jfpst-label jfpst-label--muted">Final Decision</span>
-                      <span class="jfpst-date">Pending</span>
-                    </div>
-                  </div>
-                </div>
-                <button class="jfps-btn jfps-btn--restart" (click)="goStep(0)">↺ Start Over</button>
+            <!-- Bottom navigation bar (matches screenshot) -->
+            <div class="jfl-phone-bottomnav">
+              <div class="jfl-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" width="20" height="20">
+                  <path d="M12 11c1.66 0 3-1.34 3-3S13.66 5 12 5s-3 1.34-3 3 1.34 3 3 3zm0 2c-3.31 0-6 .89-6 2v1h12v-1c0-1.11-2.69-2-6-2z"/>
+                  <ellipse cx="12" cy="12" rx="10" ry="10" stroke-dasharray="3 2"/>
+                </svg>
+                <span>Fingerprint</span>
               </div>
-            }
+              <div class="jfl-nav-item jfl-nav-item--active">
+                <svg viewBox="0 0 24 24" fill="currentColor" width="20" height="20">
+                  <path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z" opacity=".5"/>
+                  <circle cx="20" cy="6" r="3" fill="#4CB4B5"/>
+                </svg>
+                <span>Services</span>
+              </div>
+              <div class="jfl-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" width="20" height="20">
+                  <path d="M9 16H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-5l-5 5v-5z"/>
+                </svg>
+                <span>Ask NAS</span>
+              </div>
+              <div class="jfl-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" width="20" height="20">
+                  <path d="M18 8A6 6 0 006 8c0 7-3 9-3 9h18s-3-2-3-9M13.73 21a2 2 0 01-3.46 0"/>
+                </svg>
+                <span>Notifications</span>
+              </div>
+              <div class="jfl-nav-item">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" width="20" height="20">
+                  <path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4 4v2M12 11a4 4 0 100-8 4 4 0 000 8z"/>
+                </svg>
+                <span>Profile</span>
+              </div>
+            </div>
 
-          </div><!-- /jfp-body -->
+            <!-- Home indicator -->
+            <div class="jfl-phone-homebar"></div>
+
+          </div><!-- /jfl-phone -->
         </div><!-- /jfl-preview -->
 
       </div><!-- /jfl-layout -->
@@ -355,14 +457,7 @@
       </div>
       <div class="jobs-feature-pills reveal-stagger">
         @for (f of features; track f) {
-          <div class="jobs-feature-pill">
-            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
-              <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3"
-                    stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
-            {{ f }}
-          </div>
+          <div class="jobs-feature-pill">{{ f }}</div>
         }
       </div>
     </div>
@@ -378,11 +473,7 @@
       <div class="mgr-value-grid reveal-stagger">
         @for (v of value; track v.label) {
           <div class="mgr-value-card">
-            <div class="mgr-value-check">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </div>
+            <div class="mgr-value-check"></div>
             <h4>{{ v.label }}</h4>
             <p>{{ v.desc }}</p>
           </div>

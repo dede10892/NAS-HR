@@ -115,17 +115,12 @@
                   <polyline points="4.5 7 6 8.5 9.5 5"/>
                 </svg>
               </div>
-              <span>{{ t('NAS HR Helps With', 'كيف تساعد NAS HR') }}</span>
+              <span>{{ t('NAS HR Helps With', 'كيف تساعدك NAS HR') }}</span>
             </div>
             <div class="sbi-items">
               @for (item of lang === 'ar' ? current.solutionsAr : current.solutions; track $index; let i = $index) {
                 <div class="sbi-item sl-item" [style.animation-delay]="(i * 60 + 45) + 'ms'">
-                  <span class="sbi-check">
-                    <svg viewBox="0 0 10 10" fill="none" stroke="currentColor"
-                         stroke-width="2" stroke-linecap="round">
-                      <polyline points="2 5 4 7.5 8 2.5"/>
-                    </svg>
-                  </span>
+                  <span class="sbi-check"></span>
                   <p class="sbi-item-p">{{ item }}</p>
                 </div>
               }

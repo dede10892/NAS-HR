@@ -21,21 +21,6 @@
           <div class="mockup-notch"></div>
           <div class="mockup-screen">
 
-            <!-- Top bar -->
-            <div class="ms-topbar">
-              <div class="ms-back">
-                <svg width="7" height="12" viewBox="0 0 7 12" fill="none">
-                  <path d="M6 1L1 6l5 5" stroke="rgba(255,255,255,0.6)" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-              </div>
-              <span class="ms-title">{{ t(services[activeIndex].en, services[activeIndex].ar) }}</span>
-              <div class="ms-tag"
-                   [style.background]="services[activeIndex].color + '22'"
-                   [style.color]="services[activeIndex].color">
-                {{ t(services[activeIndex].tag_en, services[activeIndex].tag_ar) }}
-              </div>
-            </div>
-
             <!-- Dynamic art -->
             <div class="ms-art" [style.--art-color]="services[activeIndex].color">
 

@@ -1,5 +1,6 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { FormService } from '../../services/form.service';
 
 @Component({
   selector: 'app-contact',
@@ -8,7 +9,9 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './contact.scss',
 })
 export class ContactPage {
+  private formService = inject(FormService);
   submitted = signal(false);
+  sending   = signal(false);
 
   form = {
     company: '',
@@ -38,6 +41,8 @@ export class ContactPage {
     'Other',
   ];
 
+  trustIndustries = ['Aviation', 'Hospitality', 'Healthcare', 'Retail', 'Government'];
+
   perks = [
     { label: 'Personalized product walkthrough', icon: 'M15 10l4.553-2.069A1 1 0 0121 8.82V15.18a1 1 0 01-1.447.89L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z' },
     { label: 'Module recommendations for your needs', icon: 'M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z' },
@@ -46,8 +51,20 @@ export class ContactPage {
   ];
 
   submit() {
-    if (this.form.name && this.form.email && this.form.company) {
+    if (!this.form.name || !this.form.email || !this.form.company) return;
+    this.sending.set(true);
+    this.formService.send({
+      company:   this.form.company,
+      employees: this.form.employees,
+      industry:  this.form.industry,
+      name:      this.form.name,
+      job_title: this.form.jobTitle,
+      email:     this.form.email,
+      phone:     this.form.phone,
+      message:   this.form.message,
+    }, 'New NAS HR Demo Request').subscribe(() => {
+      this.sending.set(false);
       this.submitted.set(true);
-    }
+    });
   }
 }

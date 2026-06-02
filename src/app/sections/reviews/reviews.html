@@ -12,8 +12,10 @@
 
     <!-- Slider -->
     <div class="rv-slider-wrap">
-      <div class="rv-track" [style.transform]="offset">
-        @for (r of reviews; track r.name) {
+      <div class="rv-track"
+           [style.transform]="offset"
+           [class.no-transition]="noTransition()">
+        @for (r of doubledReviews; track r.name + $index) {
 
           <div class="rv-card">
             <div class="rv-inner">
@@ -68,8 +70,8 @@
         @for (r of reviews; track r.name; let i = $index) {
           <button
             class="rv-dot"
-            [class.rv-dot--active]="active() === i"
-            [style.background]="active() === i ? reviews[i].color : ''"
+            [class.rv-dot--active]="displayActive === i"
+            [style.background]="displayActive === i ? reviews[i].color : ''"
             (click)="goTo(i)"
             [attr.aria-label]="'Review ' + (i + 1)"
           ></button>

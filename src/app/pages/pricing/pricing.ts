@@ -1,6 +1,7 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { FormsModule } from '@angular/forms';
+import { FormService } from '../../services/form.service';
 
 @Component({
   selector: 'app-pricing',
@@ -9,17 +10,17 @@ import { FormsModule } from '@angular/forms';
   styleUrl: './pricing.scss',
 })
 export class PricingPage {
+  private formService = inject(FormService);
+  sending = signal(false);
 
   /* ── Form fields ─────────────────────────────────── */
-  form = {
-    firstName : '',
-    lastName  : '',
-    email     : '',
-    phone     : '',
-    jobTitle  : '',
-    company   : '',
-    message   : '',
-  };
+  firstName = signal('');
+  lastName  = signal('');
+  email     = signal('');
+  jobTitle  = signal('');
+  company   = signal('');
+
+  form = { phone: '', message: '' };
 
   selectedIndustry = signal<string>('');
   selectedSize     = signal<string>('');
@@ -103,7 +104,22 @@ export class PricingPage {
   }
 
   submitForm(): void {
-    this.submitted.set(true);
+    this.sending.set(true);
+    this.formService.send({
+      first_name: this.firstName(),
+      last_name:  this.lastName(),
+      email:      this.email(),
+      job_title:  this.jobTitle(),
+      company:    this.company(),
+      industry:   this.selectedIndustry(),
+      team_size:  this.selectedSize(),
+      modules:    this.selectedModules().join(', '),
+      phone:      this.form.phone,
+      message:    this.form.message,
+    }, 'New NAS HR Pricing Request').subscribe(() => {
+      this.sending.set(false);
+      this.submitted.set(true);
+    });
   }
 
   /* ── FAQs ────────────────────────────────────────── */
@@ -135,4 +151,36 @@ export class PricingPage {
   toggleFaq(i: number): void {
     this.openFaq.update(v => v === i ? null : i);
   }
+
+  /* ── Hero steps ──────────────────────────────────── */
+  heroSteps = [
+    {
+      icon: 'M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z',
+      title: 'Submit your details',
+      desc: 'Fill out the form with your company info, industry, and module needs.',
+    },
+    {
+      icon: 'M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-3 7h3m-3 4h3m-6-4h.01M9 16h.01',
+      title: 'We build your proposal',
+      desc: 'A tailored quote is assembled based on your size and selected modules.',
+    },
+    {
+      icon: 'M15 10l4.553-2.069A1 1 0 0121 8.868V15.13a1 1 0 01-1.447.898L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z',
+      title: 'We walk you through it',
+      desc: 'A live call to present the proposal and align on the next steps.',
+    },
+  ];
+
+  /* ── Progress computeds ──────────────────────────── */
+  readonly formProgress = computed(() => {
+    let done = 0;
+    if (this.firstName())        done++;
+    if (this.lastName())         done++;
+    if (this.email())            done++;
+    if (this.jobTitle())         done++;
+    if (this.company())          done++;
+    if (this.selectedIndustry()) done++;
+    if (this.selectedSize())     done++;
+    return Math.round((done / 7) * 100);
+  });
 }

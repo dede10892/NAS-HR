@@ -1,28 +1,52 @@
-import { Component, signal } from '@angular/core';
+import { Component, signal, computed } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { CommonModule } from '@angular/common';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-faqs',
-  imports: [RouterLink],
+  imports: [RouterLink, CommonModule, FormsModule],
   templateUrl: './faqs.html',
   styleUrl: './faqs.scss',
 })
 export class FaqsPage {
   openCategory = signal(0);
-  activeFaq = signal<string | null>(null);
+  activeFaq    = signal<string | null>(null);
+  searchQuery  = signal('');
 
   toggleCategory(i: number) {
     this.openCategory.set(i);
     this.activeFaq.set(null);
+    this.searchQuery.set('');
   }
 
   toggleQuestion(key: string) {
     this.activeFaq.update(v => v === key ? null : key);
   }
 
+  clearSearch() { this.searchQuery.set(''); }
+
+  readonly searchResults = computed(() => {
+    const q = this.searchQuery().trim().toLowerCase();
+    if (!q) return [];
+    const results: { catLabel: string; catIcon: string; q: string; a: string; key: string }[] = [];
+    this.categories.forEach((cat, ci) => {
+      cat.faqs.forEach((faq, fi) => {
+        if (faq.q.toLowerCase().includes(q) || faq.a.toLowerCase().includes(q)) {
+          results.push({ catLabel: cat.label, catIcon: cat.icon, q: faq.q, a: faq.a, key: `search-${ci}-${fi}` });
+        }
+      });
+    });
+    return results;
+  });
+
+  readonly isSearching  = computed(() => this.searchQuery().trim().length > 0);
+  readonly totalFaqs    = computed(() => this.categories.reduce((s, c) => s + c.faqs.length, 0));
+
   categories = [
     {
       label: 'General',
+      icon: 'M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z',
       faqs: [
         {
           q: 'What is NAS HR?',
@@ -44,6 +68,7 @@ export class FaqsPage {
     },
     {
       label: 'Modules',
+      icon: 'M4 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2V6zM14 6a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2V6zM4 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2H6a2 2 0 01-2-2v-2zM14 16a2 2 0 012-2h2a2 2 0 012 2v2a2 2 0 01-2 2h-2a2 2 0 01-2-2v-2z',
       faqs: [
         {
           q: 'What modules are included in NAS HR?',
@@ -69,6 +94,7 @@ export class FaqsPage {
     },
     {
       label: 'Mobile App',
+      icon: 'M12 18h.01M8 21h8a2 2 0 002-2V5a2 2 0 00-2-2H8a2 2 0 00-2 2v14a2 2 0 002 2z',
       faqs: [
         {
           q: 'What can employees do from the mobile app?',
@@ -90,6 +116,7 @@ export class FaqsPage {
     },
     {
       label: 'Reports & Salary',
+      icon: 'M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z',
       faqs: [
         {
           q: 'What reports does NAS HR provide?',
@@ -106,7 +133,8 @@ export class FaqsPage {
       ],
     },
     {
-      label: 'AI',
+      label: 'AI Assistant',
+      icon: 'M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z',
       faqs: [
         {
           q: 'What is Ask NAS AI?',
@@ -124,6 +152,7 @@ export class FaqsPage {
     },
     {
       label: 'Implementation',
+      icon: 'M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z M15 12a3 3 0 11-6 0 3 3 0 016 0z',
       faqs: [
         {
           q: 'How long does implementation take?',

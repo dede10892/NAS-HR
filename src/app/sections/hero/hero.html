@@ -1,76 +1,132 @@
 <section class="hero">
 
-  <!-- ── Video background ── -->
-  <video #heroVideo class="hero-video" autoplay muted playsinline>
-    <source src="nas-logo.mp4" type="video/mp4">
-  </video>
-
-  <!-- ── Dark gradient overlay ── -->
-  <div class="hero-overlay" aria-hidden="true"></div>
-
-  <!-- ── Ambient glow blobs ── -->
+  <!-- Layers -->
+  <div class="hero-overlay"   aria-hidden="true"></div>
+  <div class="hero-dot-grid"  aria-hidden="true"></div>
   <div class="hero-glow hero-glow--teal" aria-hidden="true"></div>
   <div class="hero-glow hero-glow--sky"  aria-hidden="true"></div>
 
-  <!-- ══ HERO COPY ══════════════════════════════════════ -->
-  <div class="hero-content">
+  <!-- Jitter-style floating particles -->
+  <div class="hero-particles" aria-hidden="true">
+    @for (p of particles; track p.left) {
+      <span class="hero-ptcl"
+            [style.left.%]="p.left"
+            [style.top.%]="p.top"
+            [style.width.px]="p.size"
+            [style.height.px]="p.size"
+            [style.opacity]="p.opacity"
+            [style.animation-duration.s]="p.dur"
+            [style.animation-delay.s]="p.delay">
+      </span>
+    }
+  </div>
 
-    <!-- Badge pill — appears before headline draws -->
-    <div class="hero-badge">
-      <span class="hero-badge__dot"></span>
-      HRMS Built for the GCC
+  <!-- ══ TWO-COLUMN LAYOUT ══ -->
+  <div class="hero-inner container">
+
+    <!-- ── LEFT: Copy ── -->
+    <div class="hero-copy">
+
+      <div class="hero-badge">
+        <span class="hero-badge__dot"></span>
+        Modern HRMS Platform
+      </div>
+
+      <h1 class="hero-headline">
+        <span class="hero-hl hero-hl--blur" style="--bdi:0">Intelligent</span>
+        <span class="hero-hl hero-hl--accent hero-hl--blur" style="--bdi:1">People Systems</span>
+        <span class="hero-hl hero-hl--3 hero-hl--blur" style="--bdi:2">for Growing Teams.</span>
+      </h1>
+
+      <p class="hero-sub">
+        A new-age platform for growing businesses to scale HR processes,
+        manage talent and control spend.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#contact" class="btn btn-primary hero-cta-glow">Request a Demo</a>
+        <a routerLink="/modules/smart-attendance" class="btn hero-cta-ghost">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+            <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
+            <path d="M10 8.5L15.5 12L10 15.5V8.5Z" fill="currentColor"/>
+          </svg>
+          Watch Overview
+        </a>
+      </div>
+
+      <div class="hero-stats">
+        <div class="hero-stat">
+          <span class="hero-stat__val"><span appCountUp="500">500</span><span class="hero-stat__sup">+</span></span>
+          <span class="hero-stat__lbl">Companies</span>
+        </div>
+        <div class="hero-stat-sep" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat__val"><span appCountUp="50">50</span><span class="hero-stat__sup">K+</span></span>
+          <span class="hero-stat__lbl">Employees Managed</span>
+        </div>
+        <div class="hero-stat-sep" aria-hidden="true"></div>
+        <div class="hero-stat">
+          <span class="hero-stat__val"><span appCountUp="6">6</span></span>
+          <span class="hero-stat__lbl">Countries</span>
+        </div>
+      </div>
+
     </div>
 
-    <!-- Write-on headline + pen cursor -->
-    <div class="hero-writeon">
-      <svg
-        class="hero-svg-title"
-        viewBox="0 0 1080 100"
-        xmlns="http://www.w3.org/2000/svg"
-        role="img"
-        aria-label="Intelligent People Systems">
-        <text
-          x="540" y="76"
-          text-anchor="middle"
-          class="svg-title-text">Intelligent People Systems</text>
-      </svg>
-      <span class="hero-pen-cursor" aria-hidden="true"></span>
-    </div>
+    <!-- ── RIGHT: App screenshots ── -->
+    <div class="hero-visual">
 
-    <!-- Subtitle — fades in after headline finishes -->
-    <p class="hero-sub">
-      A new-age platform for growing businesses to scale HR processes,
-      manage talent and control spend.
-    </p>
-
-    <!-- CTA buttons — appear after subtitle -->
-    <div class="hero-ctas">
-      <a href="#contact" class="btn btn-primary hero-cta-glow">Request a Demo</a>
-      <a href="#features" class="btn hero-cta-ghost">
-        <svg width="17" height="17" viewBox="0 0 24 24" fill="none" aria-hidden="true">
-          <circle cx="12" cy="12" r="10" stroke="currentColor" stroke-width="1.6"/>
-          <path d="M10 8.5L15.5 12L10 15.5V8.5Z" fill="currentColor"/>
+      <!-- Floating pills -->
+      <div class="hv-pill hv-pill--1">
+        <span class="hv-pill-dot hv-pill-dot--green"></span>
+        Leave Approved
+      </div>
+      <div class="hv-pill hv-pill--2">
+        <span class="hv-pill-dot hv-pill-dot--sky"></span>
+        Smart Attendance
+      </div>
+      <div class="hv-pill hv-pill--3">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+             stroke-linecap="round" stroke-linejoin="round" width="12" height="12" style="color:#75DEFF">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
         </svg>
-        Watch Overview
-      </a>
-    </div>
+        Ask NAS AI
+      </div>
 
-    <!-- Social proof stats -->
-    <div class="hero-stats">
-      <div class="hero-stat">
-        <span class="hero-stat__value">500<span class="hero-stat__sup">+</span></span>
-        <span class="hero-stat__label">Companies</span>
+      <!-- Main dashboard screenshot card -->
+      <div class="hv-card">
+        <div class="hv-card-header">
+          <div class="hv-header-left">
+            <span class="hv-live-dot"></span>
+            <span class="hv-card-title">HR Dashboard</span>
+          </div>
+          <span class="hv-live-badge">● Live</span>
+        </div>
+        <div class="hv-screenshot-wrap">
+          <img src="/attendence-reports/HR dashboard.png"
+               alt="NAS HR Dashboard"
+               class="hv-screenshot" />
+        </div>
       </div>
-      <div class="hero-stat-sep" aria-hidden="true"></div>
-      <div class="hero-stat">
-        <span class="hero-stat__value">50K<span class="hero-stat__sup">+</span></span>
-        <span class="hero-stat__label">Employees Managed</span>
+
+      <!-- Floating screenshot — Vacation Request -->
+      <div class="hv-float-img hv-float-img--1">
+        <div class="hv-float-img-label">Leave Request</div>
+        <img src="/attendence-reports/Vacation Request.png" alt="Leave Request" />
       </div>
-      <div class="hero-stat-sep" aria-hidden="true"></div>
-      <div class="hero-stat">
-        <span class="hero-stat__value">6</span>
-        <span class="hero-stat__label">GCC Countries</span>
+
+      <!-- Floating screenshot — Attendance Report -->
+      <div class="hv-float-img hv-float-img--2">
+        <div class="hv-float-img-label">Attendance</div>
+        <img src="/attendence-reports/Fingerprint (3).png" alt="Smart Attendance" />
       </div>
+
+      <!-- Floating screenshot — Internal Jobs -->
+      <div class="hv-float-img hv-float-img--3">
+        <div class="hv-float-img-label">Internal Jobs</div>
+        <img src="/attendence-reports/Internal Jobs.png" alt="Internal Jobs" />
+      </div>
+
     </div>
 
   </div>

@@ -36,7 +36,7 @@
   --nas-hold-50:     #FEF4E6; --nas-hold-500:    #F79008;
 
   /* Typography */
-  --nas-font-display: 'Playfair Display', Georgia, serif;
+  --nas-font-display: 'Fira Sans', sans-serif;
   --nas-font-en:      'Fira Sans', sans-serif;
   --nas-font-ar:      'Almarai', sans-serif;
   --nas-font-mono:    'Fira Code', monospace;
@@ -190,6 +190,13 @@ ul { list-style: none; }
   &:hover { background: var(--nas-teal-950); }
 }
 
+.btn-ghost-light {
+  background: transparent;
+  color: rgba(255,255,255,0.8);
+  border: 1.5px solid rgba(255,255,255,0.25);
+  &:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.45); color: #fff; }
+}
+
 .btn-outline-dark {
   background: transparent;
   color: var(--nas-cta);
@@ -231,6 +238,27 @@ ul { list-style: none; }
 /* ─── RTL support ────────────────────────────────────────── */
 [dir="rtl"] .section-sub { margin-right: 0; }
 [dir="rtl"] .btn { font-family: var(--nas-font-ar); }
+
+/* ─── Responsive global ──────────────────────────────────── */
+@media (max-width: 768px) {
+  :root {
+    --section-py: 72px;
+  }
+  .container { padding-inline: 20px; }
+  .section-head-center { margin-bottom: 36px; }
+  .section-sub { font-size: 15px; }
+}
+
+@media (max-width: 480px) {
+  :root {
+    --section-py: 56px;
+  }
+  .container { padding-inline: 16px; }
+  .section-title { font-size: clamp(26px, 7vw, 36px); }
+  .display-title { font-size: clamp(32px, 9vw, 52px); }
+  .btn { padding: 0 22px; min-height: 44px; font-size: 14px; }
+  .section-head-center { margin-bottom: 28px; }
+}
 
 /* ═══════════════════════════════════════════════════════════
    ANIMATION SYSTEM

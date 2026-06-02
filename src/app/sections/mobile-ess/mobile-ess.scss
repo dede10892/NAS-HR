@@ -18,7 +18,7 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   background: $dark;
   position: relative;
   overflow: hidden;
-  padding-block: 88px 104px;
+  padding-block: 52px 60px;
   font-family: 'Fira Sans', sans-serif;
 
   &::before {
@@ -81,23 +81,24 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   letter-spacing: 0.18em;
   text-transform: uppercase;
   color: $teal;
-  margin-bottom: 12px;
+  margin-bottom: 8px;
 }
 
 .ess-title {
-  font-size: clamp(28px, 3vw, 44px);
+  font-size: clamp(20px, 2vw, 30px);
   font-weight: 800;
   color: #fff;
-  letter-spacing: -0.6px;
-  line-height: 1.12;
-  margin: 0 0 14px;
+  letter-spacing: -0.4px;
+  line-height: 1.15;
+  margin: 0 0 10px;
+  white-space: nowrap;
 }
 
 .ess-sub {
-  font-size: 15px;
+  font-size: 13.5px;
   color: rgba(255, 255, 255, 0.52);
-  line-height: 1.72;
-  margin: 0 0 28px;
+  line-height: 1.65;
+  margin: 0 0 18px;
   max-width: 430px;
 }
 
@@ -105,10 +106,10 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
 .ess-features {
   list-style: none;
   padding: 0;
-  margin: 0 0 32px;
+  margin: 0 0 20px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 7px;
 }
 
 @keyframes featIn {
@@ -120,23 +121,18 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   display: flex;
   align-items: center;
   gap: 10px;
-  font-size: 14px;
+  font-size: 13px;
   color: rgba(255, 255, 255, 0.68);
-  line-height: 1.5;
+  line-height: 1.4;
   animation: featIn 0.45s $ease both;
 }
 
 .ess-feat-check {
   flex-shrink: 0;
-  width: 20px;
-  height: 20px;
+  width: 7px;
+  height: 7px;
   border-radius: 50%;
-  background: rgba($teal, 0.14);
-  border: 1px solid rgba($teal, 0.24);
-  color: $teal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  background: $teal;
 
   svg {
     width: 10px;
@@ -154,11 +150,11 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
 .store-btn {
   display: flex;
   align-items: center;
-  gap: 10px;
+  gap: 8px;
   background: rgba(255, 255, 255, 0.06);
   border: 1px solid rgba(255, 255, 255, 0.11);
-  border-radius: 12px;
-  padding: 10px 16px;
+  border-radius: 10px;
+  padding: 8px 13px;
   text-decoration: none;
   cursor: pointer;
   transition:
@@ -209,7 +205,7 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   justify-content: center;
   align-items: center;
   position: relative;
-  padding: 44px 32px;
+  padding: 22px 20px;
 }
 
 // ── Floating notification cards ──────────────────
@@ -242,6 +238,7 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   left: 0;
   animation-delay: 0.25s;
 }
+
 
 .ess-float-bot {
   bottom: 16px;
@@ -287,79 +284,150 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   margin-top: 2px;
 }
 
-// ── Phone frame ──────────────────────────────────
+// ═══════════════════════════════════════════════
+// PHONE FRAME — iPhone-style premium mockup
+// ═══════════════════════════════════════════════
+
 .ess-phone {
-  width: 252px;
-  background: $dark2;
-  border-radius: 42px;
-  padding: 12px 10px 14px;
+  width: 284px;
+  background: linear-gradient(160deg, #2a2a2c 0%, #1a1a1c 40%, #111113 100%);
+  border-radius: 54px;
+  padding: 5px;
   position: relative;
   z-index: 1;
+
+  // Bright titanium edge
   box-shadow:
-    0 0 0 1px rgba($teal, 0.14),
-    0 0 0 2.5px rgba(255, 255, 255, 0.04),
-    0 48px 96px rgba(0, 0, 0, 0.65),
-    0 0 70px rgba($teal, 0.07);
+    0 0 0 0.5px rgba(255,255,255,0.22),
+    0 0 0 1.5px rgba(255,255,255,0.06),
+    inset 0 0 0 0.5px rgba(255,255,255,0.08),
+    0 60px 120px rgba(0,0,0,0.75),
+    0 0 80px rgba($teal, 0.14);
+
+  // Volume buttons (left side)
+  &::before {
+    content: '';
+    position: absolute;
+    left: -3.5px;
+    top: 96px;
+    width: 3.5px;
+    height: 34px;
+    background: linear-gradient(to right, #222, #2e2e2e);
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 46px 0 #2a2a2a, 0 90px 0 #2a2a2a;
+  }
+
+  // Power button (right side)
+  &::after {
+    content: '';
+    position: absolute;
+    right: -3.5px;
+    top: 130px;
+    width: 3.5px;
+    height: 58px;
+    background: linear-gradient(to left, #222, #2e2e2e);
+    border-radius: 0 2px 2px 0;
+  }
+}
+
+// Subtle teal glow ring behind the phone
+.ess-phone-area {
+  position: relative;
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -40px;
+    border-radius: 50%;
+    background: radial-gradient(ellipse at center, rgba($teal, 0.12) 0%, transparent 65%);
+    pointer-events: none;
+    z-index: 0;
+  }
+}
+
+// Inner display (glass screen)
+.phone-display {
+  background: #080e10;
+  border-radius: 49px;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  // Subtle screen glare
+  &::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0;
+    width: 100%; height: 100%;
+    background: linear-gradient(135deg, rgba(255,255,255,0.03) 0%, transparent 50%);
+    pointer-events: none;
+    z-index: 5;
+    border-radius: 49px;
+  }
+}
+
+// ── Status bar ────────────────────────────────
+.phone-statusbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 22px 6px;
+  position: relative;
+  flex-shrink: 0;
+  z-index: 2;
+}
+
+.phone-time {
+  font-size: 12px;
+  font-weight: 700;
+  color: #fff;
+  letter-spacing: -0.02em;
+  font-family: 'Fira Sans', sans-serif;
 }
 
 .phone-island {
-  width: 82px;
-  height: 22px;
+  position: absolute;
+  left: 50%;
+  top: 10px;
+  transform: translateX(-50%);
+  width: 94px;
+  height: 26px;
   background: #000;
   border-radius: 20px;
-  margin: 0 auto 10px;
+  z-index: 10;
+  // Subtle inner glow
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.05);
 }
 
-.phone-tabs {
+.phone-signal {
   display: flex;
-  gap: 4px;
-  padding: 0 4px;
-  margin-bottom: 8px;
-  overflow-x: auto;
-  scrollbar-width: none;
-
-  &::-webkit-scrollbar { display: none; }
+  align-items: center;
+  gap: 5px;
 }
 
-.phone-tab {
-  flex: 1;
-  min-width: 0;
-  background: rgba(255, 255, 255, 0.05);
-  border: none;
-  border-radius: 8px;
-  color: rgba(255, 255, 255, 0.36);
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 10px;
-  font-weight: 500;
-  padding: 5px 3px;
-  cursor: pointer;
-  transition: background 0.18s $ease, color 0.18s;
-  white-space: nowrap;
-
-  &.is-active {
-    background: $teal;
-    color: #fff;
-    font-weight: 700;
-  }
-
-  &:not(.is-active):hover {
-    background: rgba(255, 255, 255, 0.09);
-    color: rgba(255, 255, 255, 0.60);
-  }
-}
-
-// ── Screen container ─────────────────────────────
+// ── Screen area ────────────────────────────────
 .phone-screen {
-  background: #0a1d21;
-  border-radius: 26px;
-  min-height: 384px;
+  height: 500px;
   overflow: hidden;
-  position: relative;
+  background: #000;
+  display: grid;
+  flex-shrink: 0;
 }
 
-@keyframes screenIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
+// Real screenshot fills the screen — stacked via grid
+.ps-screenshot {
+  grid-area: 1 / 1;
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  object-position: top center;
+  display: block;
+  opacity: 0;
+  transition: opacity 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+
+  &.ps-active {
+    opacity: 1;
+  }
 }
 
 // Base screen styles
@@ -803,28 +871,85 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   .ps-day-dot { background: $teal; box-shadow: 0 0 7px rgba($teal, 0.55); }
 }
 
-// ── Progress dots ─────────────────────────────────
-.phone-dots {
+// ── Bottom navigation bar ────────────────────────
+.phone-bottomnav {
   display: flex;
-  justify-content: center;
-  gap: 5px;
-  margin-top: 11px;
-  padding: 0 12px;
+  align-items: stretch;
+  background: rgba(8,14,16,0.95);
+  border-top: 1px solid rgba(255,255,255,0.07);
+  flex-shrink: 0;
+  z-index: 2;
 }
 
-.phone-dot {
-  height: 5px;
-  width: 5px;
-  border-radius: 3px;
-  background: rgba(255, 255, 255, 0.16);
+.phone-nav-item {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 3px;
+  background: none;
   border: none;
-  padding: 0;
   cursor: pointer;
-  transition: background 0.22s $ease, width 0.22s $ease;
+  padding: 8px 2px 6px;
+  position: relative;
+  transition: opacity 160ms;
 
-  &.is-active {
-    width: 18px;
+  // Active indicator dot above icon
+  &.is-active::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 50%;
+    transform: translateX(-50%);
+    width: 24px; height: 2px;
+    border-radius: 0 0 2px 2px;
     background: $teal;
+  }
+
+  &:not(.is-active):hover { opacity: 0.75; }
+}
+
+.phone-nav-icon {
+  width: 20px; height: 20px;
+  display: flex; align-items: center; justify-content: center;
+
+  svg {
+    color: rgba(255,255,255,0.32);
+    transition: color 180ms, transform 180ms;
+  }
+
+  .is-active & svg {
+    color: $teal;
+    transform: scale(1.08);
+  }
+}
+
+.phone-nav-label {
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 8.5px;
+  font-weight: 600;
+  color: rgba(255,255,255,0.30);
+  letter-spacing: 0.02em;
+  transition: color 180ms;
+  white-space: nowrap;
+
+  .is-active & { color: $teal; }
+}
+
+// ── Home gesture bar ──────────────────────────────
+.phone-home-bar {
+  height: 22px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(8,14,16,0.95);
+  flex-shrink: 0;
+
+  &::before {
+    content: '';
+    width: 90px; height: 4px;
+    background: rgba(255,255,255,0.18);
+    border-radius: 2px;
   }
 }
 
@@ -1410,6 +1535,310 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   }
 
   .store-btn-name { font-size: 12px; }
+}
+
+// ══ SHARED HEADER ════════════════════════════════
+
+.ess-head {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+// ── Tab switcher ──────────────────────────────────
+
+.ess-switcher {
+  display: inline-flex;
+  gap: 4px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.09);
+  border-radius: 40px;
+  padding: 4px;
+  margin-top: 14px;
+}
+
+.ess-sw-btn {
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  background: transparent;
+  border: none;
+  border-radius: 36px;
+  color: rgba(255, 255, 255, 0.48);
+  font-family: 'Fira Sans', sans-serif;
+  font-size: 13px;
+  font-weight: 600;
+  padding: 9px 22px;
+  cursor: pointer;
+  transition: background 0.2s $ease, color 0.2s;
+
+  svg { flex-shrink: 0; }
+
+  &.active {
+    background: $teal;
+    color: #fff;
+  }
+
+  &:not(.active):hover {
+    color: rgba(255, 255, 255, 0.80);
+    background: rgba(255, 255, 255, 0.07);
+  }
+}
+
+// ══ PLATFORM CAPABILITIES GRID ════════════════════
+
+.ess-pc-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+}
+
+@keyframes cardIn {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.ess-pc-card {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.07);
+  border-radius: 18px;
+  padding: 26px 24px;
+  transition:
+    background 0.22s $ease,
+    border-color 0.22s $ease,
+    transform 0.22s $ease,
+    box-shadow 0.22s $ease;
+  animation: cardIn 0.4s $ease both;
+
+  @for $i from 1 through 6 {
+    &:nth-child(#{$i}) { animation-delay: #{($i - 1) * 0.07}s; }
+  }
+
+  &:hover {
+    background: rgba(255, 255, 255, 0.07);
+    border-color: rgba($teal, 0.24);
+    transform: translateY(-3px);
+    box-shadow: 0 12px 36px rgba(0, 0, 0, 0.25);
+  }
+}
+
+.ess-pc-icon {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: rgba($teal, 0.12);
+  border: 1px solid rgba($teal, 0.22);
+  color: $teal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 16px;
+
+  svg { width: 20px; height: 20px; }
+}
+
+.ess-pc-title {
+  font-size: 15px;
+  font-weight: 700;
+  color: #fff;
+  margin: 0 0 8px;
+}
+
+.ess-pc-desc {
+  font-size: 13px;
+  color: rgba(255, 255, 255, 0.52);
+  line-height: 1.68;
+  margin: 0;
+}
+
+// Responsive for new elements
+@media (max-width: 960px) {
+  .ess-head { margin-bottom: 24px; }
+
+  .ess-pc-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 560px) {
+  .ess-pc-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+
+  .ess-switcher {
+    flex-direction: column;
+    border-radius: 16px;
+    width: 100%;
+  }
+
+  .ess-sw-btn {
+    justify-content: center;
+  }
+}
+
+// ══ HR ADMIN PANEL (Platform tab) ════════════════
+
+@keyframes dvPanelIn {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.dv-panels { position: relative; z-index: 1; }
+
+.dv-panel {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: 32px;
+  align-items: center;
+  animation: dvPanelIn 0.5s $ease both;
+
+  @media (max-width: 900px) {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+
+.dv-panel-copy { display: flex; flex-direction: column; gap: 10px; }
+
+.dv-tag {
+  display: inline-flex; align-items: center;
+  padding: 4px 14px; border-radius: 999px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 10px; font-weight: 700; letter-spacing: 0.08em;
+  text-transform: uppercase; color: rgba(255, 255, 255, 0.55);
+  width: fit-content;
+}
+
+.dv-panel-title {
+  font-size: clamp(18px, 1.9vw, 24px); font-weight: 800;
+  color: #fff; line-height: 1.2; letter-spacing: -0.02em; margin: 0;
+}
+
+.dv-panel-desc { font-size: 13.5px; line-height: 1.6; color: rgba(255, 255, 255, 0.55); margin: 0; }
+
+.dv-feature-list {
+  list-style: none; padding: 0;
+  display: flex; flex-direction: column; gap: 7px; margin: 2px 0 0;
+  li { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: rgba(255, 255, 255, 0.7); }
+}
+
+.dv-check { color: $teal; flex-shrink: 0; }
+.dv-cta   { width: fit-content; margin-top: 8px; }
+
+@keyframes dvMockFloat {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-8px); }
+}
+
+.dv-panel-mockup { animation: dvMockFloat 5s ease-in-out infinite; }
+
+.dv-mock-shell {
+  border-radius: 16px; overflow: hidden;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(255, 255, 255, 0.04);
+  background: #0a1e22;
+}
+
+.dv-topbar {
+  display: flex; align-items: center; gap: 6px;
+  padding: 8px 14px; background: rgba(255, 255, 255, 0.04);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.dv-dot {
+  width: 9px; height: 9px; border-radius: 50%;
+  &.r { background: #FF5F57; }
+  &.y { background: #FEBC2E; }
+  &.g { background: #28C840; }
+}
+
+.dv-url { font-size: 10px; color: rgba(255, 255, 255, 0.3); margin-left: 8px; }
+
+.dv-dash-body { display: flex; min-height: 240px; }
+
+.dv-dash-sidebar {
+  width: 110px; flex-shrink: 0; background: rgba(0, 0, 0, 0.25);
+  padding: 12px 10px; display: flex; flex-direction: column; gap: 2px;
+  border-right: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.dv-sidebar-logo {
+  width: 26px; height: 26px; background: #75DEFF; border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  font-weight: 800; font-size: 12px; color: #0C2427; margin-bottom: 12px;
+}
+
+.dv-sidebar-item {
+  padding: 5px 8px; border-radius: 6px; font-size: 10px; font-weight: 500;
+  color: rgba(255, 255, 255, 0.3);
+  &.active { background: rgba(117, 222, 255, 0.12); color: #75DEFF; }
+}
+
+.dv-dash-main {
+  flex: 1; padding: 12px; display: flex; flex-direction: column; gap: 10px; overflow: hidden;
+}
+
+.dv-greeting { font-size: 11px; font-weight: 600; color: rgba(255, 255, 255, 0.8); }
+
+.dv-kpi-row { display: flex; gap: 6px; }
+
+.dv-kpi {
+  flex: 1; background: rgba(255, 255, 255, 0.04); border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px; padding: 7px 10px;
+}
+
+.dv-kpi-sky   { border-color: rgba(117, 222, 255, 0.18); background: rgba(117, 222, 255, 0.06); }
+.dv-kpi-coral { border-color: rgba(249, 108, 77, 0.18);  background: rgba(249, 108, 77, 0.06); }
+
+.dv-kpi-v             { font-size: 13px; font-weight: 700; color: #fff; }
+.dv-kpi-sky .dv-kpi-v   { color: #75DEFF; }
+.dv-kpi-coral .dv-kpi-v { color: #f47920; }
+.dv-kpi-l { font-size: 9px; color: rgba(255, 255, 255, 0.35); margin-top: 2px; }
+
+.dv-chart {
+  background: rgba(255, 255, 255, 0.03); border: 1px solid rgba(255, 255, 255, 0.05);
+  border-radius: 8px; padding: 10px;
+}
+
+.dv-chart-label { font-size: 9px; color: rgba(255, 255, 255, 0.35); margin-bottom: 8px; }
+.dv-chart-bars  { display: flex; align-items: flex-end; gap: 4px; height: 40px; }
+
+@keyframes dvBarGrow {
+  from { transform: scaleY(0); }
+  to   { transform: scaleY(1); }
+}
+
+.dv-bar {
+  flex: 1; background: linear-gradient(to top, $teal, $sky);
+  border-radius: 2px 2px 0 0; transform-origin: bottom;
+  animation: dvBarGrow 1s cubic-bezier(0.16, 1, 0.3, 1) both;
+  @for $i from 1 through 7 { &:nth-child(#{$i}) { animation-delay: #{0.2 + ($i - 1) * 0.07}s; } }
+}
+
+.dv-emp-list { display: flex; flex-direction: column; gap: 3px; }
+
+.dv-emp-row {
+  display: flex; align-items: center; gap: 7px;
+  background: rgba(255, 255, 255, 0.03); border-radius: 6px; padding: 4px 7px;
+}
+
+.dv-emp-av {
+  width: 20px; height: 20px; background: #1a4a4f; border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 9px; font-weight: 700; color: #fff; flex-shrink: 0;
+}
+
+.dv-emp-info { flex: 1; min-width: 0; }
+.dv-emp-name {
+  font-size: 10px; font-weight: 600; color: rgba(255, 255, 255, 0.8);
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.dv-emp-dept { font-size: 9px; color: rgba(255, 255, 255, 0.3); }
+
+.dv-emp-status {
+  font-size: 9px; font-weight: 600; padding: 2px 6px; border-radius: 999px;
+  background: rgba(255, 255, 255, 0.08); color: rgba(255, 255, 255, 0.4); flex-shrink: 0;
+  &.active { background: rgba(15, 184, 106, 0.15); color: #0fb86a; }
 }
 
 @media (prefers-reduced-motion: reduce) {

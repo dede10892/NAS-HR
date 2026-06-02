@@ -3,11 +3,51 @@
   <!-- ══ HERO ══ -->
   <section class="pricing-hero">
     <div class="container pricing-hero-inner">
+
+      <!-- Left: copy + stats -->
       <div class="pricing-hero-copy">
         <span class="eyebrow eyebrow-light">Get a Custom Quote</span>
         <h1 class="pricing-headline">Pricing built around<br><em>your company, not a template.</em></h1>
         <p class="pricing-sub">Tell us about your team, industry, and needs — we'll put together a tailored proposal that fits your size and operations.</p>
+
+        <div class="pr-hero-stats">
+          <div class="pr-hero-stat">
+            <span class="pr-hs-n">3,000+</span>
+            <span class="pr-hs-l">Employees managed</span>
+          </div>
+          <div class="pr-hs-sep"></div>
+          <div class="pr-hero-stat">
+            <span class="pr-hs-n">5</span>
+            <span class="pr-hs-l">Industries served</span>
+          </div>
+          <div class="pr-hs-sep"></div>
+          <div class="pr-hero-stat">
+            <span class="pr-hs-n">&lt;&nbsp;24h</span>
+            <span class="pr-hs-l">Response time</span>
+          </div>
+        </div>
       </div>
+
+      <!-- Right: 3-step visual cards -->
+      <div class="pr-hero-visual" aria-hidden="true">
+        @for (s of heroSteps; track s.title; let i = $index) {
+          <div class="pr-hv-card" [style.--si]="i">
+            <div class="pr-hv-num">0{{ i + 1 }}</div>
+            <div class="pr-hv-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="20" height="20">
+                <path [attr.d]="s.icon"/>
+              </svg>
+            </div>
+            <div class="pr-hv-body">
+              <div class="pr-hv-title">{{ s.title }}</div>
+              <div class="pr-hv-desc">{{ s.desc }}</div>
+            </div>
+          </div>
+        }
+      </div>
+
     </div>
   </section>
 
@@ -18,6 +58,29 @@
       <!-- ── Left aside ── -->
       <aside class="pr-aside">
         <div class="pr-aside-card">
+
+          <!-- Progress ring -->
+          <div class="pr-aside-prog">
+            <div class="pr-prog-ring-wrap">
+              <svg class="pr-prog-ring" viewBox="0 0 80 80" fill="none">
+                <circle cx="40" cy="40" r="32" class="pr-ring-bg" stroke-width="5"/>
+                <circle cx="40" cy="40" r="32" class="pr-ring-fg" stroke-width="5"
+                        stroke-dasharray="201"
+                        [attr.stroke-dashoffset]="201 - (201 * formProgress() / 100)"/>
+              </svg>
+              <div class="pr-ring-label">
+                <span class="pr-ring-pct">{{ formProgress() }}%</span>
+                <span class="pr-ring-sub">done</span>
+              </div>
+            </div>
+            <div class="pr-aside-prog-text">
+              <strong>Form progress</strong>
+              <p>Fill in all required fields to complete the form.</p>
+            </div>
+          </div>
+
+          <div class="pr-aside-divider"></div>
+
           <span class="pr-aside-badge">What happens next?</span>
 
           <ol class="pr-next-steps">
@@ -80,6 +143,7 @@
               Full onboarding &amp; training included
             </li>
           </ul>
+
         </div>
       </aside>
 
@@ -105,25 +169,41 @@
 
         } @else {
 
+          <!-- Form progress header -->
+          <div class="pr-form-header">
+            <div class="pr-form-header-top">
+              <div>
+                <h2 class="pr-form-title">Request a custom quote</h2>
+                <p class="pr-form-subtitle">Takes about 3 minutes · Fields marked * are required</p>
+              </div>
+              <div class="pr-form-pct-badge" [class.pr-form-pct-badge--done]="formProgress() === 100">
+                {{ formProgress() }}%
+              </div>
+            </div>
+            <div class="pr-form-prog-track">
+              <div class="pr-form-prog-fill" [style.width]="formProgress() + '%'"></div>
+            </div>
+          </div>
+
           <form class="pr-form" (ngSubmit)="submitForm()">
 
             <!-- ── 1. Contact details ── -->
             <div class="pr-form-block">
               <div class="pr-block-head">
-                <span class="pr-block-num">01</span>
+                <div class="pr-block-badge">01</div>
                 <h3 class="pr-block-title">Your contact details</h3>
               </div>
 
               <div class="pr-input-row">
                 <div class="pr-input-group">
                   <label class="pr-label" for="firstName">First name <span class="pr-req">*</span></label>
-                  <input id="firstName" class="pr-input" type="text" placeholder="Sarah"
-                         [(ngModel)]="form.firstName" name="firstName" required/>
+                  <input id="firstName" class="pr-input" type="text" placeholder="Name"
+                         [ngModel]="firstName()" (ngModelChange)="firstName.set($event)" name="firstName" required/>
                 </div>
                 <div class="pr-input-group">
                   <label class="pr-label" for="lastName">Last name <span class="pr-req">*</span></label>
                   <input id="lastName" class="pr-input" type="text" placeholder="Al-Mansouri"
-                         [(ngModel)]="form.lastName" name="lastName" required/>
+                         [ngModel]="lastName()" (ngModelChange)="lastName.set($event)" name="lastName" required/>
                 </div>
               </div>
 
@@ -131,11 +211,11 @@
                 <div class="pr-input-group">
                   <label class="pr-label" for="email">Work email <span class="pr-req">*</span></label>
                   <input id="email" class="pr-input" type="email" placeholder="sarah@company.com"
-                         [(ngModel)]="form.email" name="email" required/>
+                         [ngModel]="email()" (ngModelChange)="email.set($event)" name="email" required/>
                 </div>
                 <div class="pr-input-group">
                   <label class="pr-label" for="phone">Phone number</label>
-                  <input id="phone" class="pr-input" type="tel" placeholder="+971 50 000 0000"
+                  <input id="phone" class="pr-input" type="tel" placeholder="010-222-111-000"
                          [(ngModel)]="form.phone" name="phone"/>
                 </div>
               </div>
@@ -144,100 +224,59 @@
                 <div class="pr-input-group">
                   <label class="pr-label" for="jobTitle">Job title <span class="pr-req">*</span></label>
                   <input id="jobTitle" class="pr-input" type="text" placeholder="HR Manager"
-                         [(ngModel)]="form.jobTitle" name="jobTitle" required/>
+                         [ngModel]="jobTitle()" (ngModelChange)="jobTitle.set($event)" name="jobTitle" required/>
                 </div>
                 <div class="pr-input-group">
                   <label class="pr-label" for="company">Company name <span class="pr-req">*</span></label>
                   <input id="company" class="pr-input" type="text" placeholder="Company name"
-                         [(ngModel)]="form.company" name="company" required/>
+                         [ngModel]="company()" (ngModelChange)="company.set($event)" name="company" required/>
+                </div>
+              </div>
+
+              <div class="pr-input-row">
+                <div class="pr-input-group">
+                  <label class="pr-label" for="industry">Your industry <span class="pr-req">*</span></label>
+                  <div class="pr-select-wrap">
+                    <select id="industry" class="pr-input pr-select"
+                            [ngModel]="selectedIndustry()"
+                            (ngModelChange)="selectedIndustry.set($event)"
+                            name="industry">
+                      <option value="" disabled>Select your industry</option>
+                      @for (ind of industries; track ind.value) {
+                        <option [value]="ind.value">{{ ind.label }}</option>
+                      }
+                    </select>
+                    <svg class="pr-select-arrow" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
+                </div>
+                <div class="pr-input-group">
+                  <label class="pr-label" for="companySize">Company size <span class="pr-req">*</span></label>
+                  <div class="pr-select-wrap">
+                    <select id="companySize" class="pr-input pr-select"
+                            [ngModel]="selectedSize()"
+                            (ngModelChange)="selectedSize.set($event)"
+                            name="companySize">
+                      <option value="" disabled>Select company size</option>
+                      @for (sz of companySizes; track sz.value) {
+                        <option [value]="sz.value">{{ sz.label }} — {{ sz.sub }}</option>
+                      }
+                    </select>
+                    <svg class="pr-select-arrow" viewBox="0 0 10 6" fill="none" aria-hidden="true">
+                      <path d="M1 1l4 4 4-4" stroke="currentColor" stroke-width="1.4"
+                            stroke-linecap="round" stroke-linejoin="round"/>
+                    </svg>
+                  </div>
                 </div>
               </div>
             </div>
 
-            <!-- ── 2. Industry ── -->
+            <!-- ── 2. Message ── -->
             <div class="pr-form-block">
               <div class="pr-block-head">
-                <span class="pr-block-num">02</span>
-                <h3 class="pr-block-title">Your industry</h3>
-              </div>
-              <p class="pr-block-sub">Select the sector that best describes your organization.</p>
-
-              <div class="pr-ind-grid">
-                @for (ind of industries; track ind.value) {
-                  <button
-                    type="button"
-                    class="pr-ind-card"
-                    [class.pr-ind-card--sel]="selectedIndustry() === ind.value"
-                    (click)="selectedIndustry.set(ind.value)"
-                  >
-                    <div class="pr-ind-icon">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                           stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
-                           aria-hidden="true">
-                        <path [attr.d]="ind.icon"/>
-                      </svg>
-                    </div>
-                    <span class="pr-ind-label">{{ ind.label }}</span>
-                  </button>
-                }
-              </div>
-            </div>
-
-            <!-- ── 3. Company size ── -->
-            <div class="pr-form-block">
-              <div class="pr-block-head">
-                <span class="pr-block-num">03</span>
-                <h3 class="pr-block-title">Company size</h3>
-              </div>
-              <p class="pr-block-sub">How many employees does your organization manage?</p>
-
-              <div class="pr-size-grid">
-                @for (sz of companySizes; track sz.value) {
-                  <button
-                    type="button"
-                    class="pr-size-card"
-                    [class.pr-size-card--sel]="selectedSize() === sz.value"
-                    (click)="selectedSize.set(sz.value)"
-                  >
-                    <span class="pr-size-val">{{ sz.label }}</span>
-                    <span class="pr-size-sub">{{ sz.sub }}</span>
-                  </button>
-                }
-              </div>
-            </div>
-
-            <!-- ── 4. Modules ── -->
-            <div class="pr-form-block">
-              <div class="pr-block-head">
-                <span class="pr-block-num">04</span>
-                <h3 class="pr-block-title">Modules you're interested in</h3>
-              </div>
-              <p class="pr-block-sub">Select all that apply — you can always add more later.</p>
-
-              <div class="pr-modules-grid">
-                @for (mod of modules; track mod) {
-                  <button
-                    type="button"
-                    class="pr-module-chip"
-                    [class.pr-module-chip--sel]="isModuleSelected(mod)"
-                    (click)="toggleModule(mod)"
-                  >
-                    <span class="pr-module-check" aria-hidden="true">
-                      <svg viewBox="0 0 12 12" fill="none">
-                        <path d="M2.5 6l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="1.5"
-                              stroke-linecap="round" stroke-linejoin="round"/>
-                      </svg>
-                    </span>
-                    {{ mod }}
-                  </button>
-                }
-              </div>
-            </div>
-
-            <!-- ── 5. Message ── -->
-            <div class="pr-form-block">
-              <div class="pr-block-head">
-                <span class="pr-block-num">05</span>
+                <div class="pr-block-badge">02</div>
                 <h3 class="pr-block-title">Anything else we should know?</h3>
               </div>
 
@@ -294,9 +333,7 @@
                 <path d="M19 9l-7 7-7-7"/>
               </svg>
             </button>
-            @if (openFaq() === i) {
-              <div class="pricing-faq-a"><div>{{ faq.a }}</div></div>
-            }
+            <div class="pricing-faq-a"><div>{{ faq.a }}</div></div>
           </div>
         }
       </div>

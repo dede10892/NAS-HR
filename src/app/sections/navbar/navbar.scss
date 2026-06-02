@@ -45,7 +45,7 @@
   margin-right: 4px;
 }
 .nav-logo-img {
-  height: 56px;
+  height: 32px;
   width: auto;
   display: block;
 }
@@ -97,7 +97,7 @@
 /* ── Dropdown base ────────────────────────────────── */
 .dropdown {
   position: absolute;
-  top: calc(100% + 10px);
+  top: 100%;
   left: 50%;
   transform: translateX(-50%) translateY(-6px);
   background: #fff;
@@ -111,10 +111,13 @@
   transition: opacity 180ms, transform 180ms cubic-bezier(0.16,1,0.3,1);
   z-index: 300;
 
-  &.open {
-    opacity: 1;
-    pointer-events: all;
-    transform: translateX(-50%) translateY(0);
+  /* Invisible bridge fills any gap so hover stays active */
+  &::before {
+    content: '';
+    position: absolute;
+    top: -12px;
+    left: 0; right: 0;
+    height: 12px;
   }
 }
 
@@ -124,9 +127,24 @@
   left: -60px;
   transform: translateX(0) translateY(-6px);
   padding: 16px;
-
-  &.open { transform: translateX(0) translateY(0); }
 }
+
+/* ── Show dropdown on CSS :hover — no JS needed ─────── */
+.has-dropdown:hover > .dropdown {
+  opacity: 1;
+  pointer-events: all;
+  transform: translateX(-50%) translateY(0);
+}
+
+.has-dropdown:hover > .dropdown-mega {
+  transform: translateX(0) translateY(0);
+}
+
+.has-dropdown:hover > a .chevron {
+  transform: rotate(180deg);
+}
+
+.has-dropdown:hover > a { color: var(--nas-cta, #0C2427); }
 
 .mega-header {
   display: flex;
@@ -462,6 +480,15 @@
 
 @media (max-width: 540px) {
   .navbar { width: calc(100% - 24px); top: 12px; }
-  .nav-logo-img { height: 30px; }
-  .nav-pill { height: 52px; padding: 0 8px 0 14px; }
+  .nav-logo-img { height: 28px; }
+  .nav-pill { height: 50px; padding: 0 8px 0 12px; }
+  .btn-lang span { display: none; }
+  .mobile-menu { border-radius: 16px; }
+  .mobile-menu ul { padding-inline: 4px; }
+  .mobile-link { font-size: 14px; padding: 10px 12px; }
+}
+
+@media (max-width: 360px) {
+  .navbar { width: calc(100% - 16px); top: 10px; }
+  .nav-pill { height: 46px; }
 }

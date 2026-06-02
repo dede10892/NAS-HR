@@ -1,24 +1,181 @@
 <main class="page-reports">
 
+  <!-- ══ HERO ══ -->
   <section class="mod-hero">
-    <div class="container mod-hero-inner">
+    <div class="container rs-hero-inner">
+
+      <!-- Left: Copy -->
       <div class="mod-hero-copy reveal-up">
-        <span class="eyebrow">Reports & Salary</span>
-        <h1 class="mod-headline">Turn HR data into<br><em>salary-ready insights.</em></h1>
-        <p class="mod-sub">Connect attendance, requests, employee records, and salary-related data into clear reports that support faster, more accurate HR and finance decisions.</p>
+        <span class="eyebrow">Reports &amp; Salary</span>
+        <h1 class="mod-headline">
+          Turn HR data into<br><em>salary-ready insights.</em>
+        </h1>
+        <p class="mod-sub">
+          Connect attendance, requests, and employee records into clear reports
+          that give HR and finance teams everything they need — instantly.
+        </p>
+        <ul class="rs-hero-features">
+          <li>Payroll-ready exports for finance</li>
+          <li>Real-time attendance &amp; leave data</li>
+          <li>Custom report builder &amp; saved templates</li>
+        </ul>
         <div class="mod-actions">
           <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+          <a routerLink="/pricing" class="btn btn-ghost-light">See Pricing</a>
         </div>
+      </div>
+
+      <!-- Right: Dashboard mockup -->
+      <div class="rs-hero-visual reveal-scale" style="--d:.1s">
+
+        <!-- Screenshot card -->
+        <div class="rs-screenshot-card">
+          <div class="rs-sc-chrome">
+            <div class="rs-sc-dots">
+              <span style="background:#FF5F57"></span>
+              <span style="background:#FEBC2E"></span>
+              <span style="background:#28C840"></span>
+            </div>
+            <span class="rs-sc-url">nashr.app/reports</span>
+          </div>
+          <img src="/attendence-reports/attendance report .jpeg" alt="Reports" class="rs-sc-img"/>
+        </div>
+
+        <!-- Floating badges -->
+        <div class="rs-float-badge rs-float-badge--top">
+          <span class="rs-live-dot"></span>
+          Live Data &nbsp;·&nbsp; 94% Attendance
+        </div>
+        <div class="rs-float-badge rs-float-badge--bot">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+            <path d="M12 10v6m0 0l-3-3m3 3l3-3M3 17a3 3 0 003 3h12a3 3 0 003-3V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10z"/>
+          </svg>
+          Export to Excel / CSV
+        </div>
+
+        <!-- Notify card -->
+        <div class="rs-notify-card">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+               stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+            <path d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10"/>
+          </svg>
+          <div class="rs-notify-text">
+            <span class="rs-notify-title">Report Ready</span>
+            <span class="rs-notify-sub">May Payroll — 248 employees</span>
+          </div>
+          <span class="rs-notify-badge">✓</span>
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ── Report tabs ── -->
+  <!-- ══ HOW IT WORKS ══ -->
+  <section class="rs-flow-section">
+    <div class="container">
+      <div class="section-head-center reveal-up">
+        <span class="eyebrow">How It Works</span>
+        <h2 class="section-title">From raw data to payroll-ready in seconds.</h2>
+      </div>
+
+      <div class="rs-flow-cards reveal-stagger">
+        @for (step of flowSteps; track step.num; let i = $index; let last = $last) {
+          <div class="rs-flow-card">
+
+            <!-- Front (default) -->
+            <div class="rs-flow-card-front">
+              <div class="rs-flow-num-badge">{{ step.num }}</div>
+              <div class="rs-flow-card-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                     width="28" height="28">
+                  <path [attr.d]="step.icon"/>
+                </svg>
+              </div>
+              <h4 class="rs-flow-card-title">{{ step.title }}</h4>
+              <span class="rs-flow-card-hint">Hover to see more</span>
+            </div>
+
+            <!-- Hover overlay -->
+            <div class="rs-flow-card-hover">
+              <img [src]="step.screenshot" [alt]="step.title" class="rs-flow-card-img"/>
+              <div class="rs-flow-card-overlay">
+                <span class="rs-flow-card-num-sm">{{ step.num }}</span>
+                <h4 class="rs-flow-card-title-sm">{{ step.title }}</h4>
+                <p class="rs-flow-card-desc">{{ step.desc }}</p>
+              </div>
+            </div>
+
+            @if (!last) {
+              <div class="rs-flow-connector" aria-hidden="true">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
+                     stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
+                  <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+              </div>
+            }
+
+          </div>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ STATS STRIP ══ -->
+  <section class="rs-stats-strip">
+    <div class="container">
+      <div class="rs-stats-row reveal-stagger">
+
+        <div class="rs-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/>
+            <rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/>
+          </svg>
+          <span class="rs-stat-val" appCountUp="6">6</span>
+          <span class="rs-stat-lbl">Report Categories</span>
+        </div>
+        <div class="rs-stat-sep"></div>
+        <div class="rs-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+          </svg>
+          <span class="rs-stat-val">Live</span>
+          <span class="rs-stat-lbl">Real-time Data</span>
+        </div>
+        <div class="rs-stat-sep"></div>
+        <div class="rs-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M12 10v6m0 0l-3-3m3 3l3-3M3 17a3 3 0 003 3h12a3 3 0 003-3V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10z"/>
+          </svg>
+          <span class="rs-stat-val">1-click</span>
+          <span class="rs-stat-lbl">Finance Export</span>
+        </div>
+        <div class="rs-stat-sep"></div>
+        <div class="rs-stat-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+               stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><path d="M22 4L12 14.01l-3-3"/>
+          </svg>
+          <span class="rs-stat-val" appCountUp="100%">100%</span>
+          <span class="rs-stat-lbl">Payroll Accuracy</span>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- ══ REPORT TABS ══ -->
   <section class="reports-section">
     <div class="container">
+
       <div class="section-head-center reveal-up">
         <span class="eyebrow">Report Categories</span>
         <h2 class="section-title">Reports That Connect HR and Finance</h2>
+        <p class="section-sub">Six built-in report types covering every HR and finance need — all connected to live data.</p>
       </div>
 
       <!-- Tab bar -->
@@ -26,74 +183,147 @@
         @for (tab of tabs; track tab.label; let i = $index) {
           <button class="reports-tab"
                   [class.reports-tab--active]="activeTab() === i"
-                  (click)="activeTab.set(i)">
+                  [style.--tab-color]="tab.color"
+                  (click)="setTab(i)">
             {{ tab.label }}
           </button>
         }
       </div>
 
-      <!-- Active tab content -->
-      <div class="reports-panel reveal-up" style="--d:.1s">
+      <!-- Active panel -->
+      <div class="reports-panel rs-panel reveal-up" style="--d:.1s">
+
+        <!-- Left: Copy -->
         <div class="reports-panel-copy">
-          <h3>{{ tabs[activeTab()].label }}</h3>
-          <p>{{ tabs[activeTab()].desc }}</p>
-          <ul class="reports-metrics">
-            @for (m of tabs[activeTab()].metrics; track m) {
-              <li>
-                <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                  <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
-                  <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3"
-                        stroke-linecap="round" stroke-linejoin="round"/>
-                </svg>
-                {{ m }}
-              </li>
-            }
-          </ul>
-        </div>
-        <div class="reports-panel-visual">
-          <!-- Chart placeholder -->
-          <div class="rp-chart">
-            <div class="rp-chart-bars">
-              @for (h of [60,80,45,90,70,55,85]; track h) {
-                <div class="rp-bar" [style.height.%]="h"></div>
-              }
+          @if (isAnimating()) {
+            <div class="rs-tab-anim">
+              <div class="rs-tab-accent"
+                   [style.background]="tabs[activeTab()].color + '22'"
+                   [style.color]="tabs[activeTab()].color">
+                {{ tabs[activeTab()].label }}
+              </div>
+              <h3>{{ tabs[activeTab()].label }}</h3>
+              <p>{{ tabs[activeTab()].desc }}</p>
+              <ul class="reports-metrics">
+                @for (m of tabs[activeTab()].metrics; track m) {
+                  <li>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         width="13" height="13">
+                      <path d="M3 8l3.5 3.5L13 4.5"/>
+                    </svg>
+                    {{ m }}
+                  </li>
+                }
+              </ul>
+              <a routerLink="/contact" class="btn btn-primary rs-tab-btn">Request a Demo</a>
             </div>
-            <div class="rp-chart-label">{{ tabs[activeTab()].label }}</div>
-          </div>
+          }
         </div>
+
+        <!-- Right: Screenshot -->
+        <div class="reports-panel-visual">
+          @if (isAnimating()) {
+            <div class="rs-tab-visual-anim">
+              <div class="rs-preview-frame">
+                <div class="rs-preview-chrome">
+                  <div class="rs-preview-dots">
+                    <span style="background:#FF5F57"></span>
+                    <span style="background:#FEBC2E"></span>
+                    <span style="background:#28C840"></span>
+                  </div>
+                  <span class="rs-preview-url">nashr.app/reports/{{ tabs[activeTab()].label.toLowerCase().replace(' ', '-') }}</span>
+                </div>
+                <img [src]="tabs[activeTab()].screenshot"
+                     [alt]="tabs[activeTab()].label"
+                     class="rs-preview-img"/>
+              </div>
+              <div class="rs-preview-badge" [style.border-color]="tabs[activeTab()].color + '44'">
+                <span class="rs-preview-badge-val" [style.color]="tabs[activeTab()].color">
+                  {{ tabs[activeTab()].badge.val }}
+                </span>
+                <span class="rs-preview-badge-lbl">{{ tabs[activeTab()].badge.lbl }}</span>
+              </div>
+            </div>
+          }
+        </div>
+
       </div>
     </div>
   </section>
 
-  <!-- ── Value ── -->
-  <section class="mgr-value-section">
+  <!-- ══ REPORT TYPE GRID ══ -->
+  <section class="rs-types-section">
     <div class="container">
       <div class="section-head-center reveal-up">
-        <span class="eyebrow">Business Impact</span>
-        <h2 class="section-title">What your HR and finance teams gain.</h2>
+        <span class="eyebrow">What's Included</span>
+        <h2 class="section-title">Every report your team needs, built in.</h2>
       </div>
-      <div class="mgr-value-grid reveal-stagger">
-        @for (v of value; track v.label) {
-          <div class="mgr-value-card">
-            <div class="mgr-value-check">
-              <svg viewBox="0 0 16 16" fill="none" aria-hidden="true">
-                <path d="M3 8l3.5 3.5L13 4.5" stroke="currentColor" stroke-width="1.8"
-                      stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
+
+      <div class="rs-types-grid reveal-stagger">
+        @for (rt of reportTypes; track rt.title) {
+          <div class="rs-type-card">
+            <div class="rs-type-icon">
+              @if (rt.icon === 'salary') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M12 1v22M17 5H9.5a3.5 3.5 0 000 7h5a3.5 3.5 0 010 7H6"/>
+                </svg>
+              }
+              @if (rt.icon === 'attendance') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/>
+                </svg>
+              }
+              @if (rt.icon === 'leave') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>
+                </svg>
+              }
+              @if (rt.icon === 'headcount') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2M9 11a4 4 0 100-8 4 4 0 000 8zM23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/>
+                </svg>
+              }
+              @if (rt.icon === 'payroll') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M12 10v6m0 0l-3-3m3 3l3-3M3 17a3 3 0 003 3h12a3 3 0 003-3V7a3 3 0 00-3-3H6a3 3 0 00-3 3v10z"/>
+                </svg>
+              }
+              @if (rt.icon === 'custom') {
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7"
+                     stroke-linecap="round" stroke-linejoin="round" width="20" height="20">
+                  <path d="M12 20h9M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/>
+                </svg>
+              }
             </div>
-            <h4>{{ v.label }}</h4>
-            <p>{{ v.desc }}</p>
+            <h3 class="rs-type-title">{{ rt.title }}</h3>
+            <p class="rs-type-desc">{{ rt.desc }}</p>
+            <div class="rs-type-tags">
+              @for (tag of rt.tags; track tag) {
+                <span class="rs-type-tag">{{ tag }}</span>
+              }
+            </div>
           </div>
         }
       </div>
     </div>
   </section>
 
+
+  <!-- ══ CTA ══ -->
   <section class="mod-cta-band">
     <div class="container mod-cta-inner reveal-up">
       <h2>Ready to connect your HR data with salary insights?</h2>
       <p>See how NAS HR reports give HR and finance teams the clarity they need.</p>
-      <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+      <div class="mod-cta-btns">
+        <a routerLink="/contact" class="btn btn-primary">Request a Demo</a>
+        <a routerLink="/pricing" class="btn btn-ghost-light">View Pricing</a>
+      </div>
     </div>
   </section>
 

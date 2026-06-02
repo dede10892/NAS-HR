@@ -3,11 +3,12 @@ $teal : #4CB4B5;
 $ease : cubic-bezier(0.22, 1, 0.36, 1);
 
 /*
-  Slider math (5 cards total):
-  ─ Desktop  (3 visible): track = 166.667% of container, card = 20% of track = 33.33% of container
-  ─ Tablet   (2 visible): track = 250%,                  card = 20% of track = 50% of container
-  ─ Mobile   (1 visible): track = 500%,                  card = 20% of track = 100% of container
-  Offset per step: -i × 20% of track  (always correct at every breakpoint)
+  Infinite slider (10 cards = 5 originals + 5 duplicates):
+  ─ Desktop  (3 visible): track = 10/3 × 100% = 333.333%, card = 10% of track = 33.33% container
+  ─ Tablet   (2 visible): track = 10/2 × 100% = 500%,     card = 10% of track = 50% container
+  ─ Mobile   (1 visible): track = 10/1 × 100% = 1000%,    card = 10% of track = 100% container
+  Offset per step: -i × (100%/10) = -i × 10% of track
+  Snap: when active=5 (shows duplicates 0-2 = same visual as active=0), reset silently to 0
 */
 
 /* ══ Section ═════════════════════════════════════════ */
@@ -57,18 +58,20 @@ $ease : cubic-bezier(0.22, 1, 0.36, 1);
 
 .rv-slider-wrap { overflow: hidden; }
 
-/* Desktop: 3 cards visible → track = 5/3 × 100% = 166.667% */
+/* Desktop: 3 visible → track = 10/3 × 100% = 333.333% */
 .rv-track {
   display: flex;
   align-items: stretch;
-  width: 166.667%;
+  width: 333.333%;
   transition: transform 550ms $ease;
+
+  &.no-transition { transition: none !important; }
 }
 
-/* Each card = 100% / 5 = 20% of track = 1/3 of container */
+/* Each card = 100% / 10 = 10% of track = 33.33% of container */
 .rv-card {
-  flex: 0 0 20%;
-  width: 20%;
+  flex: 0 0 10%;
+  width: 10%;
   box-sizing: border-box;
   padding: 0 10px;
 
@@ -99,9 +102,9 @@ $ease : cubic-bezier(0.22, 1, 0.36, 1);
 
 .rv-quote-mark {
   font-size: 56px;
-  font-weight: 900;
+  font-weight: 800;
   line-height: 0.8;
-  font-family: Georgia, serif;
+  font-family: 'Fira Sans', sans-serif;
   opacity: 0.25;
   flex-shrink: 0;
 }
@@ -244,15 +247,15 @@ $ease : cubic-bezier(0.22, 1, 0.36, 1);
 
 /* ══ Responsive ══════════════════════════════════════ */
 
-/* Tablet — 2 visible: track = 5/2 × 100% = 250% */
+/* Tablet — 2 visible: track = 10/2 × 100% = 500% */
 @media (max-width: 900px) {
-  .rv-track { width: 250%; }
+  .rv-track { width: 500%; }
 }
 
-/* Mobile — 1 visible: track = 5 × 100% = 500% */
+/* Mobile — 1 visible: track = 10 × 100% = 1000% */
 @media (max-width: 580px) {
   .rv-section { padding-block: 64px; }
-  .rv-track   { width: 500%; }
+  .rv-track   { width: 1000%; }
 }
 
 @media (prefers-reduced-motion: reduce) {

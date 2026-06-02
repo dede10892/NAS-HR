@@ -1,0 +1,102 @@
+<section class="bridge-section reveal">
+  <div class="container">
+
+    <!-- ═══ Header ═══ -->
+    <div class="bridge-head">
+      <span class="bridge-eyebrow">How NAS-HR Works</span>
+      <h2 class="bridge-title">
+        <strong>One platform connecting <em>HR</em>, employees, and every team.</strong>
+      </h2>
+      <p class="bridge-sub">
+        See what changes when HR, employees, and management finally work as one.
+      </p>
+    </div>
+
+    <!-- ═══ Toggle ═══ -->
+    <div class="bridge-toggle-wrap">
+      <div class="bridge-toggle">
+        <button class="btg-btn btg-before"
+                [class.active]="mode() === 'before'"
+                (click)="setMode('before')">
+          <span class="btg-dot btg-dot--red"></span>
+          Without NAS-HR
+        </button>
+        <button class="btg-btn btg-after"
+                [class.active]="mode() === 'after'"
+                (click)="setMode('after')">
+          <span class="btg-dot btg-dot--teal"></span>
+          With NAS-HR
+        </button>
+      </div>
+    </div>
+
+    <!-- ═══ Main card ═══ -->
+    <div class="bridge-card" [class.is-after]="mode() === 'after'">
+
+      <!-- ── Personas far apart ── -->
+      <div class="bridge-personas">
+
+        <!-- Employee — photo card -->
+        <div class="persona">
+          <div class="persona-card persona-card--emp">
+            <img src="/attendence-reports/human.jpg" alt="Employee" class="persona-photo" />
+          </div>
+          <span class="persona-label">EMPLOYEE</span>
+        </div>
+
+        <!-- Long dashed line + badge in center -->
+        <div class="bridge-connect">
+          <div class="bc-line bc-line--left"></div>
+          <div class="bc-badge">
+            @if (mode() === 'after') {
+              <svg viewBox="0 0 24 24" fill="none" class="bc-icon bc-icon--check">
+                <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            } @else {
+              <svg viewBox="0 0 24 24" fill="none" class="bc-icon bc-icon--cross">
+                <path d="M6 18L18 6M6 6l12 12" stroke="currentColor" stroke-width="2.5"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            }
+          </div>
+          <div class="bc-line bc-line--right"></div>
+        </div>
+
+        <!-- HR & Management — logo card -->
+        <div class="persona">
+          <div class="persona-card persona-card--hr">
+            <img src="/logo-light.svg" alt="NAS HR" class="persona-logo" />
+          </div>
+          <span class="persona-label">HR &amp; MANAGEMENT</span>
+        </div>
+
+      </div><!-- end personas -->
+
+      <!-- ── Rows — equal width both sides ── -->
+      <div class="bridge-rows">
+        @for (row of rows; track row.left; let i = $index) {
+          <div class="bridge-row" [class.is-row-active]="activeRow() === i">
+
+            <div class="br-item">{{ row.left }}</div>
+
+            <div class="br-center">
+              <div class="br-connector"></div>
+              <div class="br-status-pill">
+                <span class="brs-text">
+                  {{ mode() === 'after' ? row.afterStatus : row.beforeStatus }}
+                </span>
+              </div>
+              <div class="br-connector"></div>
+            </div>
+
+            <div class="br-item">{{ row.right }}</div>
+
+          </div>
+        }
+      </div>
+
+    </div><!-- end bridge-card -->
+
+  </div>
+</section>

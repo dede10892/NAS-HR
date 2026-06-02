@@ -28,56 +28,56 @@ export class FeaturesComponent implements OnInit {
     {
       en: 'Payroll Management', ar: 'إدارة الرواتب',
       desc_en: 'Automated payroll with WPS compliance, deductions, and multi-currency support.',
-      desc_ar: 'رواتب آلية متوافقة مع WPS مع دعم متعدد العملات.',
+      desc_ar: 'معالجة آلية للرواتب متوافقة مع WPS مع دعم الاستقطاعات وتعدد العملات.',
       color: '#0f766e', light: '#ccfbf1', tag_en: 'Finance', tag_ar: 'المالية',
       art: 'payroll'
     },
     {
       en: 'Leave & Attendance', ar: 'الإجازات والحضور',
       desc_en: 'Smart leave tracking, shift scheduling, and biometric attendance integration.',
-      desc_ar: 'تتبع الإجازات وجدولة المناوبات وتكامل البصمة.',
+      desc_ar: 'تتبع ذكي للإجازات وجدولة الورديات وتكامل مع أجهزة البصمة.',
       color: '#0369a1', light: '#e0f2fe', tag_en: 'Time', tag_ar: 'الوقت',
       art: 'attendance'
     },
     {
       en: 'Recruitment', ar: 'التوظيف',
       desc_en: 'End-to-end hiring pipeline — post, screen, interview, and onboard talent.',
-      desc_ar: 'دورة توظيف متكاملة من النشر حتى الإعداد.',
+      desc_ar: 'دورة توظيف متكاملة من نشر الإعلان حتى استقبال الموظف الجديد.',
       color: '#7c3aed', light: '#ede9fe', tag_en: 'Talent', tag_ar: 'المواهب',
       art: 'recruitment'
     },
     {
       en: 'Performance Reviews', ar: 'تقييم الأداء',
       desc_en: 'Set OKRs, run appraisals, and track employee growth with visual dashboards.',
-      desc_ar: 'ضع أهدافاً وأجرِ تقييمات وتابع النمو بلوحات مرئية.',
+      desc_ar: 'حدد الأهداف وأجرِ تقييمات الأداء وتابع نمو الموظفين بلوحات بيانات مرئية.',
       color: '#b45309', light: '#fef3c7', tag_en: 'Growth', tag_ar: 'النمو',
       art: 'performance'
     },
     {
-      en: 'Employee Self-Service', ar: 'الخدمة الذاتية',
+      en: 'Employee Self-Service', ar: 'الخدمة الذاتية للموظفين',
       desc_en: 'Mobile app for payslips, leave requests, approvals, and HR updates on the go.',
-      desc_ar: 'تطبيق موبايل لكشوف الراتب والإجازات والموافقات.',
+      desc_ar: 'تطبيق جوال لاستعراض كشوف الراتب وطلبات الإجازة والموافقات في أي وقت.',
       color: '#0c4a6e', light: '#e0f2fe', tag_en: 'Mobile', tag_ar: 'الجوال',
       art: 'mobile'
     },
     {
       en: 'HR Analytics', ar: 'تحليلات الموارد البشرية',
       desc_en: 'Real-time workforce insights, headcount trends, and custom report builder.',
-      desc_ar: 'تحليلات فورية للقوى العاملة وبناء تقارير مخصصة.',
+      desc_ar: 'تحليلات فورية للقوى العاملة وتتبع أعداد الموظفين وبناء تقارير مخصصة.',
       color: '#065f46', light: '#d1fae5', tag_en: 'Insights', tag_ar: 'التحليل',
       art: 'analytics'
     },
     {
       en: 'Onboarding', ar: 'الإعداد الوظيفي',
       desc_en: 'Digital onboarding checklists, document collection, and first-day workflows.',
-      desc_ar: 'قوائم تأهيل رقمية وجمع وثائق وسير عمل اليوم الأول.',
+      desc_ar: 'قوائم تأهيل رقمية وجمع المستندات وسير عمل منظم لليوم الأول.',
       color: '#be185d', light: '#fce7f3', tag_en: 'People', tag_ar: 'الموظفون',
       art: 'onboarding'
     },
     {
-      en: 'Compliance & Legal', ar: 'الامتثال والقانون',
+      en: 'Compliance & Legal', ar: 'الامتثال والالتزام القانوني',
       desc_en: 'Support structured approvals, end-of-service workflows, audit trails, and role-based access.',
-      desc_ar: 'دعم الموافقات المنظمة وسير عمل نهاية الخدمة ومسارات التدقيق والوصول المخصص.',
+      desc_ar: 'دعم الموافقات المنظمة وسير عمل نهاية الخدمة ومسارات التدقيق والصلاحيات القائمة على الأدوار.',
       color: '#1e3a5f', light: '#dbeafe', tag_en: 'Legal', tag_ar: 'القانون',
       art: 'compliance'
     },

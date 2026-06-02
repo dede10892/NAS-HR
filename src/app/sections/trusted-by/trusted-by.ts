@@ -1,5 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { CountUpDirective } from '../../directives/count-up.directive';
 
 interface Company {
   name: string;
@@ -10,7 +11,7 @@ interface Company {
 @Component({
   selector: 'app-trusted-by',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, CountUpDirective],
   templateUrl: './trusted-by.html',
   styleUrl: './trusted-by.scss',
 })

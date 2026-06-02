@@ -11,12 +11,72 @@
   padding-bottom: 100px;
 }
 
+/* Dark variant — premium feel */
+.module-hero--dark {
+  background: linear-gradient(140deg, #0C2427 0%, #081619 55%, #0d2a2e 100%);
+
+  /* Update breadcrumb for dark bg */
+  .bc-link, .bc-sep, .bc-current {
+    color: rgba(255,255,255,0.38);
+    &:hover { color: #4CB4B5; }
+  }
+  .bc-current { color: rgba(255,255,255,0.65); font-weight: 600; }
+
+  /* Update text for dark bg */
+  .mh-title { color: #fff; }
+  .mh-title-accent { color: #75DEFF; }
+  .mh-sub   { color: rgba(255,255,255,0.55); }
+
+  /* Badge */
+  .mh-badge {
+    background: rgba(76,180,181,0.12);
+    border: 1px solid rgba(76,180,181,0.28);
+    color: #75DEFF;
+  }
+  .mh-badge-dot { background: #75DEFF; box-shadow: 0 0 8px rgba(117,222,255,0.65); }
+
+  /* Pills */
+  .mh-pill {
+    background: rgba(255,255,255,0.06);
+    border-color: rgba(255,255,255,0.12);
+    color: rgba(255,255,255,0.65);
+    &:hover { background: rgba(76,180,181,0.14); border-color: rgba(76,180,181,0.35); color: #75DEFF; }
+  }
+
+  /* Ghost CTA */
+  .mh-ghost-btn {
+    border-color: rgba(255,255,255,0.18);
+    color: rgba(255,255,255,0.75);
+    &:hover { background: rgba(255,255,255,0.08); border-color: rgba(255,255,255,0.3); color: #fff; }
+  }
+
+  /* Trust */
+  .mh-trust-text { color: rgba(255,255,255,0.40); }
+
+  /* Stats */
+  .mh-stats { border-color: rgba(255,255,255,0.08); }
+  .mh-stat-num   { color: #75DEFF; }
+  .mh-stat-label { color: rgba(255,255,255,0.35); }
+  .mh-stat-sep   { background: rgba(255,255,255,0.10); }
+}
+
+.sa-hero-brandmark {
+  position: absolute;
+  top: 50%;
+  right: 40px;
+  transform: translateY(-50%);
+  width: 320px;
+  height: 320px;
+  color: rgba(255,255,255,0.04);
+  pointer-events: none;
+  z-index: 0;
+}
+
 .mh-bg-grid {
   position: absolute; inset: 0; z-index: 0;
-  background-image:
-    linear-gradient(rgba(76,180,181,0.05) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(76,180,181,0.05) 1px, transparent 1px);
-  background-size: 40px 40px;
+  background-image: radial-gradient(circle, rgba(117,222,255,0.06) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 0%, transparent 100%);
 }
 
 .blob {
@@ -25,13 +85,27 @@
 }
 .blob-tl {
   width: 640px; height: 640px;
-  background: radial-gradient(circle, rgba(76,180,181,0.1) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(76,180,181,0.13) 0%, transparent 70%);
   top: -240px; left: -200px;
 }
 .blob-br {
   width: 420px; height: 420px;
-  background: radial-gradient(circle, rgba(117,222,255,0.08) 0%, transparent 70%);
+  background: radial-gradient(circle, rgba(117,222,255,0.09) 0%, transparent 70%);
   bottom: -120px; right: 8%;
+}
+
+/* Phone glow ring */
+.mh-phone-glow {
+  position: absolute;
+  right: 10%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 500px; height: 500px;
+  border-radius: 50%;
+  background: radial-gradient(ellipse, rgba(76,180,181,0.12) 0%, transparent 65%);
+  pointer-events: none;
+  z-index: 0;
+  filter: blur(40px);
 }
 
 /* Container */
@@ -95,6 +169,64 @@
 @keyframes iconPing {
   0%   { transform: scale(1);   opacity: 0.7; }
   100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ── Badge (replaces mh-tag) ── */
+.mh-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: 9999px;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  width: fit-content;
+}
+
+.mh-badge-dot {
+  width: 7px; height: 7px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  animation: iconPing 2s ease-out infinite;
+}
+
+/* Ghost CTA button */
+.mh-ghost-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 22px;
+  min-height: 48px;
+  border-radius: 9999px;
+  border: 1.5px solid rgba(0,0,0,0.15);
+  background: transparent;
+  font-size: 15px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.6);
+  text-decoration: none;
+  cursor: pointer;
+  transition: background 160ms, border-color 160ms, color 160ms;
+  &:hover { background: rgba(0,0,0,0.04); color: var(--nas-cta); }
+}
+
+/* Trust strip */
+.mh-trust {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.mh-trust-stars {
+  display: flex;
+  gap: 2px;
+}
+
+.mh-trust-text {
+  font-size: 13px;
+  font-weight: 500;
+  color: rgba(0,0,0,0.42);
 }
 
 .mh-tag {
@@ -233,6 +365,13 @@
   animation-delay: 2s;
 }
 
+.fc-approval {
+  bottom: 0; right: -8px;
+  padding: 10px 14px;
+  display: flex; align-items: center; gap: 10px;
+  animation-delay: 1.5s;
+}
+
 .fc-icon-svg {
   width: 32px; height: 32px; border-radius: 8px;
   background: rgba(76,180,181,0.08);
@@ -253,39 +392,75 @@
 }
 
 /* ═══════════════════════════════════════════════
-   PHONE FRAME
+   PHONE FRAME — Premium titanium style
 ══════════════════════════════════════════════ */
 .sa-phone {
-  width: 272px;
-  background: var(--nas-cta, #0c2427);
-  border-radius: 44px;
-  border: 2px solid rgba(255,255,255,0.09);
-  box-shadow:
-    0 0 0 8px rgba(12,36,39,0.06),
-    0 36px 90px rgba(12,36,39,0.30),
-    inset 0 1px 0 rgba(255,255,255,0.06);
+  width: 280px;
+  background: linear-gradient(160deg, #1e2a2d 0%, #0e1a1d 50%, #0a1518 100%);
+  border-radius: 52px;
+  padding: 5px;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
+  overflow: visible;
   position: relative; z-index: 5;
   transition: transform 400ms cubic-bezier(0.16,1,0.3,1), box-shadow 400ms;
+
+  /* Titanium edge highlight */
+  box-shadow:
+    0 0 0 0.5px rgba(255,255,255,0.20),
+    0 0 0 1.5px rgba(255,255,255,0.06),
+    inset 0 0 0 0.5px rgba(255,255,255,0.06),
+    0 60px 120px rgba(0,0,0,0.70),
+    0 0 80px rgba(76,180,181,0.16);
+
+  /* Volume buttons */
+  &::before {
+    content: '';
+    position: absolute;
+    left: -3.5px; top: 90px;
+    width: 3.5px; height: 32px;
+    background: linear-gradient(to right, #1a1a1a, #252525);
+    border-radius: 2px 0 0 2px;
+    box-shadow: 0 44px 0 #222, 0 86px 0 #222;
+  }
+
+  /* Power button */
+  &::after {
+    content: '';
+    position: absolute;
+    right: -3.5px; top: 130px;
+    width: 3.5px; height: 56px;
+    background: linear-gradient(to left, #1a1a1a, #252525);
+    border-radius: 0 2px 2px 0;
+  }
+
   &:hover {
-    transform: translateY(-8px) rotate(-0.8deg);
+    transform: translateY(-8px) rotate(-0.6deg);
     box-shadow:
-      0 0 0 8px rgba(12,36,39,0.06),
-      0 52px 110px rgba(12,36,39,0.38),
-      inset 0 1px 0 rgba(255,255,255,0.06);
+      0 0 0 0.5px rgba(255,255,255,0.24),
+      0 0 0 1.5px rgba(255,255,255,0.08),
+      inset 0 0 0 0.5px rgba(255,255,255,0.08),
+      0 72px 140px rgba(0,0,0,0.75),
+      0 0 100px rgba(76,180,181,0.25);
   }
 }
 
+/* Inner display */
+.sa-phone > .sa-notch,
+.sa-phone > .sa-statusbar,
+.sa-phone > .sa-screen,
+.sa-phone > .sa-tabbar,
+.sa-phone > .sa-home-bar {
+  border-radius: 0;
+}
+
 .sa-notch {
-  width: 88px; height: 22px;
-  background: var(--nas-cta, #0c2427);
-  border-radius: 0 0 14px 14px;
+  width: 94px; height: 26px;
+  background: #000;
+  border-radius: 20px !important;
   align-self: center;
-  margin-top: 10px; flex-shrink: 0;
-  border: 1.5px solid rgba(255,255,255,0.07);
-  border-top: none;
+  margin-top: 12px; flex-shrink: 0;
+  box-shadow: inset 0 1px 2px rgba(255,255,255,0.04);
 }
 
 .sa-statusbar {
@@ -609,19 +784,47 @@
 }
 
 @media (max-width: 860px) {
-  .mh-body { grid-template-columns: 1fr; gap: 56px; }
-  .mh-visual { padding: 48px 0 24px; }
-  .fc-count { right: -4px; }
-  .fc-gps   { left: -4px; }
+  .mh-body   { grid-template-columns: 1fr; gap: 48px; }
+
+  /* Give the visual enough horizontal room for the floating cards */
+  .mh-visual {
+    padding: 64px 80px 52px;
+    justify-content: center;
+  }
+
+  /* Floating cards: pin to edges of the padded visual zone */
+  .fc-live  { top: 20px; left: 0; }
+  .fc-count { top: 20px; right: 0; }
+  .fc-gps   { bottom: 48px; left: 0; }
+
+  /* Brand mark: move to bottom-right corner, smaller */
+  .sa-hero-brandmark {
+    width: 200px; height: 200px;
+    right: 0; top: auto; bottom: 0;
+    transform: none;
+  }
 }
 
 @media (max-width: 640px) {
   .module-hero { padding-top: 96px; padding-bottom: 64px; }
-  .mh-title { font-size: 36px; }
-  .mh-sub   { font-size: 15px; }
-  .sa-phone { width: 256px; }
-  .sa-screen { min-height: 390px; }
-  .mh-stats { gap: 0; }
-  .mh-stat  { padding: 0 16px; }
+  .mh-title    { font-size: 36px; }
+  .mh-sub      { font-size: 15px; }
+  .mh-visual   { padding: 60px 70px 48px; }
+  .sa-phone    { width: 252px; }
+  .sa-screen   { min-height: 390px; }
+  .mh-stats    { gap: 0; }
+  .mh-stat     { padding: 0 16px; }
   .mh-stat-num { font-size: 20px; }
+}
+
+@media (max-width: 460px) {
+  .mh-visual   { padding: 52px 56px 44px; }
+  .sa-phone    { width: 236px; }
+  .sa-screen   { min-height: 365px; }
+
+  /* Slightly compact floating cards on very small phones */
+  .fc-count, .fc-gps { padding: 10px 12px; gap: 8px; }
+  .fc-val      { font-size: 16px; }
+  .fc-icon-svg { width: 28px; height: 28px; }
+  .fc-live     { padding: 6px 12px; }
 }

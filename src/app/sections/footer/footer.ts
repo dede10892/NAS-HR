@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, AfterViewInit, OnDestroy, ViewChild, ElementRef, ChangeDetectorRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
@@ -8,11 +8,34 @@ import { RouterLink } from '@angular/router';
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
-export class FooterComponent {
-  @Input() lang: 'en' | 'ar' = 'en';
-  t(en: string, ar: string) { return this.lang === 'ar' ? ar : en; }
+export class FooterComponent implements AfterViewInit, OnDestroy {
+  @ViewChild('wordmarkRow') wordmarkRow!: ElementRef<HTMLElement>;
+
+  private observer?: IntersectionObserver;
+  wordmarkVisible = false;
+  readonly wmChars = 'NAS HR'.split('').map(c => c === ' ' ? ' ' : c);
+
+  constructor(private cdr: ChangeDetectorRef) {}
 
   year = new Date().getFullYear();
+
+  ngAfterViewInit() {
+    this.observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          this.wordmarkVisible = true;
+          this.cdr.detectChanges();
+          this.observer?.disconnect();
+        }
+      },
+      { threshold: 0.1 }
+    );
+    this.observer.observe(this.wordmarkRow.nativeElement);
+  }
+
+  ngOnDestroy() {
+    this.observer?.disconnect();
+  }
 
   cols = [
     {
@@ -20,14 +43,13 @@ export class FooterComponent {
       links: [
         { en: 'All Modules', ar: 'جميع الوحدات', route: '/modules/all-features' },
         { en: 'Pricing', ar: 'الأسعار', route: '/pricing' },
-        { en: 'Why NAS HR', ar: 'لماذا ناس HR', route: '/why-nas' },
-        { en: 'Ask NAS AI', ar: 'اسأل ناس AI', route: '/modules/ask-nas-ai' },
+        { en: 'Why NAS HR', ar: 'لماذا NAS HR', route: '/why-nas' },
+        { en: 'Ask NAS AI', ar: 'مساعد NAS AI', route: '/modules/ask-nas-ai' },
       ],
     },
     {
       head_en: 'Solutions', head_ar: 'الحلول',
       links: [
-        { en: 'Aviation', ar: 'الطيران', route: '/solutions/aviation' },
         { en: 'Hospitality', ar: 'الضيافة', route: '/solutions/hospitality' },
         { en: 'Healthcare', ar: 'الرعاية الصحية', route: '/solutions/healthcare' },
         { en: 'Retail & FMCG', ar: 'التجزئة', route: '/solutions/retail-fmcg' },
@@ -40,14 +62,6 @@ export class FooterComponent {
         { en: 'Contact Us', ar: 'تواصل معنا', route: '/contact' },
         { en: 'FAQs', ar: 'الأسئلة الشائعة', route: '/faqs' },
         { en: 'Request a Demo', ar: 'احجز عرضاً', route: '/contact' },
-      ],
-    },
-    {
-      head_en: 'Legal', head_ar: 'القانونية',
-      links: [
-        { en: 'Privacy Policy', ar: 'سياسة الخصوصية', route: null },
-        { en: 'Terms of Service', ar: 'شروط الخدمة', route: null },
-        { en: 'Cookie Policy', ar: 'سياسة الكوكيز', route: null },
       ],
     },
   ];

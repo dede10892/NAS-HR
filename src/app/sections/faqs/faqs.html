@@ -11,15 +11,18 @@
 
     <div class="faqs-list">
       @for (faq of faqs; track faq.q_en; let i = $index) {
-        <div class="faq-item" [class.open]="openIndex === i" (click)="toggle(i)">
+        <div class="faq-item">
           <div class="faq-q">
             <span class="faq-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
             <span class="faq-text">{{ t(faq.q_en, faq.q_ar) }}</span>
-            <span class="faq-icon">{{ openIndex === i ? '−' : '+' }}</span>
+            <span class="faq-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="2.2" stroke-linecap="round" width="16" height="16">
+                <path d="M19 9l-7 7-7-7"/>
+              </svg>
+            </span>
           </div>
-          @if (openIndex === i) {
-            <div class="faq-a">{{ t(faq.a_en, faq.a_ar) }}</div>
-          }
+          <div class="faq-a">{{ t(faq.a_en, faq.a_ar) }}</div>
         </div>
       }
     </div>

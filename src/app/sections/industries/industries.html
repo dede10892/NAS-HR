@@ -1,167 +1,150 @@
-<section id="solutions-by-industry" class="ind-section">
-  <div class="ind-outer">
+<section class="ind-section">
+  <div class="container">
 
-    <!-- ── Section header ── -->
-    <div class="ind-head">
-      <span class="ind-eyebrow">{{ t('Solutions by Industry', 'حلول حسب القطاع') }}</span>
-      <h2 class="ind-title">
-        {{ t('One intelligent people system,', 'نظام ذكي واحد للأفراد،') }}<br>
-        <em>{{ t('adapted to the way your industry works.', 'يتكيّف مع طريقة عمل قطاعك.') }}</em>
-      </h2>
-      <p class="ind-sub">
-        {{ t(
-          'NAS HR adapts to every workforce model — helping teams manage people, attendance, approvals, learning, and payroll-ready data with ease.',
-          'يتكيّف NAS HR مع كل نموذج عمل — لمساعدة الفرق في إدارة الأفراد والحضور والموافقات والتعلم والبيانات الجاهزة للرواتب بسهولة.'
-        ) }}
+    <!-- Header -->
+    <div class="section-head-center reveal-up">
+      <span class="eyebrow">Industry Solutions</span>
+      <h2 class="section-title">HR Closer to Every Employee, in Every Industry</h2>
+      <p class="section-sub section-sub-center">
+        NAS HR connects HR teams, managers, and employees through one smart platform —
+        reducing delays, manual follow-ups, and disconnected communication across every industry.
       </p>
     </div>
 
-    <!-- ── Tabs ── -->
+    <!-- Industry tabs -->
     <div class="ind-tabs" role="tablist">
-      @for (item of industries; track item.key; let i = $index) {
-        <button
-          class="ind-tab"
-          role="tab"
-          [class.is-active]="active() === i"
-          [attr.aria-selected]="active() === i"
-          (click)="switchTo(i)"
-        >
-          {{ t(item.en, item.ar) }}
+      @for (industry of industries; track industry.key; let i = $index) {
+        <button class="ind-tab"
+                role="tab"
+                [class.ind-tab--active]="active() === i"
+                [style.--ic]="industry.color"
+                (click)="switchTo(i)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+               width="14" height="14" aria-hidden="true">
+            <path [attr.d]="industry.tabIcon"/>
+          </svg>
+          <span>{{ industry.label }}</span>
         </button>
       }
     </div>
 
-    <!-- ── Main card ── -->
-    <div class="ind-card" [class.is-switching]="animating()">
+    <!-- Main content -->
+    <div class="ind-body" [class.ind-body--out]="switching()" [style.--ic]="ind.color">
 
-      <!-- Left: numbered list -->
-      <div class="ind-left">
-        @for (item of industries; track item.key; let i = $index) {
-          <button
-            class="ind-list-item"
-            [class.is-active]="active() === i"
-            (click)="switchTo(i)"
-          >
-            <span class="ind-list-num">{{ (i + 1).toString().padStart(2, '0') }}</span>
-            <span class="ind-list-label">{{ t(item.en, item.ar) }}</span>
-          </button>
-        }
-      </div>
-
-      <!-- Centre: diagram -->
-      <div class="ind-center">
-        <!-- Industry name + description -->
-        <div class="ind-center-hd">
-          <h3 class="ind-center-name">{{ t(ind.en, ind.ar) }}</h3>
-          <p class="ind-center-desc">{{ t(ind.desc_en, ind.desc_ar) }}</p>
-        </div>
-
-        <!-- Diagram -->
-        <div class="ind-diagram">
-
-          <!-- Top: workforce cards -->
-          <div class="ind-workforce">
-            @for (wf of ind.workforce; track wf.label_en) {
-              <div class="ind-wf-card">
-                <span class="ind-wf-label">{{ t(wf.label_en, wf.label_ar) }}</span>
+      <!-- LEFT: challenges -->
+      <div class="ind-col ind-col-left">
+        <div class="ind-group">
+          <div class="ind-group-head ind-group-head--challenges">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/>
+            </svg>
+            <span>HR Challenges Solved</span>
+          </div>
+          <div class="ind-list">
+            @for (c of ind.challenges; track c.title; let i = $index) {
+              <div class="ind-item ind-item--challenge" [style.--d]="(i * 0.06) + 's'">
+                <div class="ind-item-dot ind-item-dot--red"></div>
+                <div class="ind-item-body">
+                  <div class="ind-item-title">{{ c.title }}</div>
+                  <div class="ind-item-desc">{{ c.desc }}</div>
+                </div>
               </div>
             }
           </div>
+        </div>
+      </div>
 
-          <!-- Connecting lines (top) -->
-          <div class="ind-lines ind-lines--top" aria-hidden="true">
-            <div class="ind-line-group">
-              @for (wf of ind.workforce; track wf.label_en) {
-                <div class="ind-line-v"></div>
-              }
+      <!-- MIDDLE: diagram -->
+      <div class="ind-col ind-col-center">
+        <div class="ind-industry-label">
+<h3 class="ind-name">{{ ind.label }}</h3>
+          <p class="ind-sentence">{{ ind.sentence }}</p>
+        </div>
+
+        <div class="ind-diagram-wrap">
+          <svg class="ind-svg" viewBox="0 0 440 420" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+
+            <!-- Ambient glow -->
+            <circle cx="220" cy="210" r="72" class="ind-glow"/>
+
+            <!-- Lines -->
+            @for (node of nodePositions(); track node.label; let i = $index) {
+              <line class="ind-line"
+                    x1="220" y1="210"
+                    [attr.x2]="node.x" [attr.y2]="node.y"
+                    [style.animation-delay]="node.delay + 's'"/>
+            }
+
+            <!-- Moving dots -->
+            @for (node of nodePositions(); track node.label; let i = $index) {
+              <circle class="ind-dot" r="4">
+                <animate attributeName="cx"
+                         [attr.values]="'220;' + node.x + ';220'"
+                         dur="2.8s"
+                         [attr.begin]="(i * 0.45) + 's'"
+                         repeatCount="indefinite"
+                         calcMode="ease-in-out"/>
+                <animate attributeName="cy"
+                         [attr.values]="'210;' + node.y + ';210'"
+                         dur="2.8s"
+                         [attr.begin]="(i * 0.45) + 's'"
+                         repeatCount="indefinite"
+                         calcMode="ease-in-out"/>
+              </circle>
+            }
+
+            <!-- Spinning ring around centre -->
+            <circle cx="220" cy="210" r="52" class="ind-hr-ring"/>
+
+          </svg>
+
+          <!-- Node cards (HTML, positioned by % so they scale with the container) -->
+          @for (node of nodePositions(); track node.label; let i = $index) {
+            <div class="ind-node-card"
+                 [style.left.%]="node.leftPct"
+                 [style.top.%]="node.topPct"
+                 [style.animation-delay]="(node.delay + 0.15) + 's'">
+              <svg viewBox="0 0 24 24" fill="currentColor" width="13" height="13" aria-hidden="true">
+                <path [attr.d]="node.icon"/>
+              </svg>
+              <span>{{ node.label }}</span>
             </div>
-            <div class="ind-line-h"></div>
-            <div class="ind-line-drop"></div>
-          </div>
+          }
 
-          <!-- NAS HR hub card -->
-          <div class="ind-hub">
-            <div class="ind-hub-inner">
-              <img src="logo-light.svg" alt="NAS HR" class="ind-hub-logo" />
-              <span class="ind-hub-sub">Intelligent People Systems</span>
-            </div>
+          <!-- Center HR card -->
+          <div class="ind-center-card">
+            <img src="/logo-dark.svg" class="ind-center-logo" alt="NAS HR" />
           </div>
+        </div>
+      </div>
 
-          <!-- Connecting lines (bottom) -->
-          <div class="ind-lines ind-lines--bottom" aria-hidden="true">
-            <div class="ind-line-drop"></div>
-            <div class="ind-line-h"></div>
-            <div class="ind-line-group">
-              @for (mod of ind.modules; track mod.label_en) {
-                <div class="ind-line-v"></div>
-              }
-            </div>
+      <!-- RIGHT: helps -->
+      <div class="ind-col ind-col-right">
+        <div class="ind-group">
+          <div class="ind-group-head ind-group-head--helps">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" stroke-linejoin="round" width="16" height="16" aria-hidden="true">
+              <path d="M22 11.08V12a10 10 0 11-5.93-9.14"/>
+              <polyline points="22 4 12 14.01 9 11.01"/>
+            </svg>
+            <span>How NAS HR Helps</span>
           </div>
-
-          <!-- Bottom: module cards -->
-          <div class="ind-modules">
-            @for (mod of ind.modules; track mod.label_en) {
-              <div class="ind-mod-card">
-                <span class="ind-mod-label">{{ t(mod.label_en, mod.label_ar) }}</span>
+          <div class="ind-list">
+            @for (h of ind.helps; track h.title; let i = $index) {
+              <div class="ind-item ind-item--help" [style.--d]="(i * 0.06 + 0.35) + 's'">
+                <div class="ind-item-dot ind-item-dot--green"></div>
+                <div class="ind-item-body">
+                  <div class="ind-item-title">{{ h.title }}</div>
+                  <div class="ind-item-desc">{{ h.desc }}</div>
+                </div>
               </div>
             }
           </div>
-
-        </div><!-- /ind-diagram -->
+        </div>
       </div>
 
-      <!-- Right: challenges, helps, outcome -->
-      <div class="ind-right">
-
-        <div class="ind-right-block">
-          <p class="ind-right-heading ind-right-heading--red">
-            {{ t('Challenges', 'التحديات') }}
-          </p>
-          <ul class="ind-right-list">
-            @for (c of ind.challenges; track c.en) {
-              <li class="ind-right-item ind-right-item--red">
-                <span class="ind-right-dot ind-right-dot--red" aria-hidden="true">✕</span>
-                {{ t(c.en, c.ar) }}
-              </li>
-            }
-          </ul>
-        </div>
-
-        <div class="ind-right-block">
-          <p class="ind-right-heading ind-right-heading--teal">
-            {{ t('NAS HR Helps With', 'NAS HR يساعد في') }}
-          </p>
-          <ul class="ind-right-list">
-            @for (h of ind.helps; track h.en) {
-              <li class="ind-right-item ind-right-item--teal">
-                <span class="ind-right-dot ind-right-dot--teal" aria-hidden="true">✓</span>
-                {{ t(h.en, h.ar) }}
-              </li>
-            }
-          </ul>
-        </div>
-
-        <div class="ind-outcome">
-          <div>
-            <p class="ind-outcome-label">{{ t('Outcome', 'النتيجة') }}</p>
-            <p class="ind-outcome-text">{{ t(ind.outcome_en, ind.outcome_ar) }}</p>
-          </div>
-        </div>
-
-      </div><!-- /ind-right -->
-    </div><!-- /ind-card -->
-
-    <!-- ── Benefit strip ── -->
-    <div class="ind-benefits">
-      @for (b of benefits; track b.en) {
-        <div class="ind-benefit">
-          <div>
-            <p class="ind-benefit-title">{{ t(b.en, b.ar) }}</p>
-            <p class="ind-benefit-sub">{{ t(b.sub_en, b.sub_ar) }}</p>
-          </div>
-        </div>
-      }
-    </div>
-
-  </div><!-- /ind-outer -->
+    </div><!-- /ind-body -->
+  </div>
 </section>

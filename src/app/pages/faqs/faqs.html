@@ -1,67 +1,218 @@
-<main class="page-faqs">
+<section class="faqs-home">
 
-  <!-- ── Hero ── -->
-  <section class="faqs-hero">
-    <div class="container faqs-hero-inner">
-      <div class="faqs-hero-copy reveal-up">
-        <span class="eyebrow eyebrow-light">FAQs</span>
-        <h1 class="faqs-headline">Answers to your<br><em>most common questions.</em></h1>
-        <p class="faqs-sub">Can't find what you're looking for? Reach out to our team directly.</p>
-        <a routerLink="/contact" class="btn btn-primary">Contact Us</a>
-      </div>
-    </div>
-  </section>
+  <div class="faqs-bg-blob faqs-bg-blob--l" aria-hidden="true"></div>
+  <div class="faqs-bg-blob faqs-bg-blob--r" aria-hidden="true"></div>
+  <div class="faqs-bg-mark" aria-hidden="true"></div>
 
-  <!-- ── FAQ Content ── -->
-  <section class="faqs-section">
-    <div class="container faqs-layout">
+  <div class="container">
 
-      <!-- Left: category nav -->
-      <nav class="faqs-nav reveal-up">
-        @for (cat of categories; track cat.label; let i = $index) {
-          <button class="faqs-nav-item"
-                  [class.faqs-nav-item--active]="openCategory() === i"
-                  (click)="toggleCategory(i)">
-            {{ cat.label }}
-          </button>
-        }
-      </nav>
+    <!-- ── Header ── -->
+    <div class="faqs-head reveal-up">
+      <span class="faqs-eyebrow">Help Center</span>
+      <h2 class="faqs-title">Frequently asked <em>questions.</em></h2>
+      <p class="faqs-sub">Browse by category or search for a specific topic.</p>
 
-      <!-- Right: questions -->
-      <div class="faqs-content reveal-up" style="--d:.1s">
-        <h3 class="faqs-cat-title">{{ categories[openCategory()].label }}</h3>
-        <div class="faqs-list">
-          @for (faq of categories[openCategory()].faqs; track faq.q; let i = $index) {
-            <div class="faqs-item"
-                 [class.faqs-item--open]="activeFaq() === openCategory() + '-' + i">
-              <button class="faqs-q"
-                      (click)="toggleQuestion(openCategory() + '-' + i)">
-                {{ faq.q }}
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="2" stroke-linecap="round" aria-hidden="true">
-                  <path d="M19 9l-7 7-7-7"/>
-                </svg>
-              </button>
-              @if (activeFaq() === openCategory() + '-' + i) {
-                <div class="faqs-a">{{ faq.a }}</div>
-              }
-            </div>
-          }
+      <!-- Stats row -->
+      <div class="faqs-stats">
+        <div class="faqs-stat">
+          <span class="faqs-stat-n">{{ totalFaqs() }}</span>
+          <span class="faqs-stat-l">Questions answered</span>
+        </div>
+        <div class="faqs-stat-sep"></div>
+        <div class="faqs-stat">
+          <span class="faqs-stat-n">{{ categories.length }}</span>
+          <span class="faqs-stat-l">Topic categories</span>
+        </div>
+        <div class="faqs-stat-sep"></div>
+        <div class="faqs-stat">
+          <span class="faqs-stat-n">&lt;&nbsp;24h</span>
+          <span class="faqs-stat-l">Support response</span>
         </div>
       </div>
 
+      <!-- Search bar -->
+      <div class="faqs-search-wrap">
+        <svg class="faqs-search-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/>
+        </svg>
+        <input class="faqs-search" type="text" placeholder="Search questions…"
+               [value]="searchQuery()"
+               (input)="searchQuery.set($any($event.target).value)"
+               autocomplete="off"/>
+        @if (isSearching()) {
+          <button class="faqs-search-clear" (click)="clearSearch()" aria-label="Clear search">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                 stroke-linecap="round" aria-hidden="true">
+              <path d="M18 6L6 18M6 6l12 12"/>
+            </svg>
+          </button>
+        }
+      </div>
     </div>
-  </section>
 
-  <!-- ── Still have questions ── -->
-  <section class="faqs-contact-band">
-    <div class="container faqs-contact-inner reveal-up">
+    <!-- ── Search results ── -->
+    @if (isSearching()) {
+      <div class="faqs-results-wrap">
+        <div class="faqs-results-header">
+          @if (searchResults().length > 0) {
+            <span class="faqs-results-count">
+              <strong>{{ searchResults().length }}</strong> result{{ searchResults().length === 1 ? '' : 's' }} for
+              "<strong>{{ searchQuery() }}</strong>"
+            </span>
+          } @else {
+            <span class="faqs-results-count faqs-results-count--empty">
+              No results for "<strong>{{ searchQuery() }}</strong>"
+            </span>
+          }
+        </div>
+
+        <div class="faqs-list">
+          @for (r of searchResults(); track r.key; let i = $index) {
+            <div class="faqs-item" [class.faqs-item--open]="activeFaq() === r.key"
+                 [style.--fi]="i">
+              <button class="faqs-q" (click)="toggleQuestion(r.key)">
+                <span class="faqs-q-inner">
+                  <span class="faqs-q-cat">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                         stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                         width="12" height="12" aria-hidden="true">
+                      <path [attr.d]="r.catIcon"/>
+                    </svg>
+                    {{ r.catLabel }}
+                  </span>
+                  <span class="faqs-q-text">{{ r.q }}</span>
+                </span>
+                <span class="faqs-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2.2" stroke-linecap="round">
+                    <path d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faqs-a">{{ r.a }}</div>
+            </div>
+          }
+        </div>
+
+        @if (searchResults().length === 0) {
+          <div class="faqs-empty">
+            <div class="faqs-empty-icon">
+              <svg viewBox="0 0 64 64" fill="none" stroke="currentColor" stroke-width="1.5"
+                   stroke-linecap="round" width="48" height="48" aria-hidden="true">
+                <circle cx="28" cy="28" r="18"/><path d="m42 42 10 10M28 21v7M28 35h.01"/>
+              </svg>
+            </div>
+            <h4 class="faqs-empty-title">Question not found</h4>
+            <p class="faqs-empty-sub">
+              We don't have an answer for
+              <em>"{{ searchQuery() }}"</em> yet.
+            </p>
+            <div class="faqs-empty-actions">
+              <a routerLink="/contact" class="btn btn-primary faqs-empty-btn">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                  <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                  <polyline points="22,6 12,13 2,6"/>
+                </svg>
+                Ask our team
+              </a>
+              <button class="faqs-empty-btn faqs-empty-btn--ghost" (click)="clearSearch()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                     stroke-linecap="round" stroke-linejoin="round" width="14" height="14">
+                  <path d="M3 12a9 9 0 109 9M3 12V6M3 12H9"/>
+                </svg>
+                Browse all questions
+              </button>
+            </div>
+          </div>
+        }
+      </div>
+    }
+
+    <!-- ── Category pills + accordion ── -->
+    @if (!isSearching()) {
+
+      <div class="faqs-cats reveal-up">
+        @for (cat of categories; track cat.label; let i = $index) {
+          <button class="faqs-cat-pill"
+                  [class.faqs-cat-pill--active]="openCategory() === i"
+                  (click)="toggleCategory(i)"
+                  [style.--pi]="i">
+            <span class="faqs-pill-icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+                   width="15" height="15" aria-hidden="true">
+                <path [attr.d]="cat.icon"/>
+              </svg>
+            </span>
+            <span>{{ cat.label }}</span>
+            <span class="faqs-pill-count">{{ cat.faqs.length }}</span>
+          </button>
+        }
+      </div>
+
+      <!-- Active category header -->
+      <div class="faqs-cat-hd">
+        <div class="faqs-cat-hd-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"
+               width="18" height="18" aria-hidden="true">
+            <path [attr.d]="categories[openCategory()].icon"/>
+          </svg>
+        </div>
+        <div class="faqs-cat-hd-meta">
+          <div class="faqs-cat-hd-name">{{ categories[openCategory()].label }}</div>
+          <div class="faqs-cat-hd-count">{{ categories[openCategory()].faqs.length }} questions</div>
+        </div>
+        <div class="faqs-cat-hd-line"></div>
+      </div>
+
+      <div class="faqs-body">
+        <div class="faqs-list">
+          @for (faq of categories[openCategory()].faqs; track faq.q; let i = $index) {
+            <div class="faqs-item"
+                 [class.faqs-item--open]="activeFaq() === openCategory() + '-' + i"
+                 [style.--fi]="i">
+              <button class="faqs-q"
+                      (click)="toggleQuestion(openCategory() + '-' + i)"
+                      [attr.aria-expanded]="activeFaq() === openCategory() + '-' + i">
+                <span class="faqs-q-num">{{ i + 1 < 10 ? '0' + (i + 1) : i + 1 }}</span>
+                <span class="faqs-q-text">{{ faq.q }}</span>
+                <span class="faqs-chevron" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="2.2" stroke-linecap="round">
+                    <path d="M19 9l-7 7-7-7"/>
+                  </svg>
+                </span>
+              </button>
+              <div class="faqs-a">{{ faq.a }}</div>
+            </div>
+          }
+        </div>
+
+      </div>
+
+    }
+
+  </div>
+
+  <!-- ── Contact band ── -->
+  <div class="faqs-contact-band">
+    <div class="faqs-contact-blob" aria-hidden="true"></div>
+    <div class="container faqs-contact-inner">
+      <div class="faqs-contact-icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="1.6" stroke-linecap="round" width="28" height="28">
+          <path d="M21 15a2 2 0 01-2 2H7l-4 4V5a2 2 0 012-2h14a2 2 0 012 2z"/>
+        </svg>
+      </div>
       <div class="faqs-contact-copy">
         <h2>Still have questions?</h2>
         <p>Our team is happy to answer anything about the platform, pricing, or implementation.</p>
       </div>
       <a routerLink="/contact" class="btn btn-primary">Get in Touch</a>
     </div>
-  </section>
+  </div>
 
-</main>
+</section>

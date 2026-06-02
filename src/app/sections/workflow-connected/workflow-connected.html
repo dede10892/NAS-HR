@@ -1,0 +1,95 @@
+<section class="wfc-section reveal">
+
+  <!-- Soft watermark behind everything -->
+  <div class="wfc-bg" aria-hidden="true">
+    <img src="/logo-dark.svg" alt="" class="wfc-watermark" />
+  </div>
+
+  <div class="container">
+
+    <!-- ── Header ── -->
+    <div class="wfc-head">
+      <span class="wfc-eyebrow">HR Workflows Connected</span>
+      <h2 class="wfc-title">Every HR Action, Connected in One Flow</h2>
+      <p class="wfc-sub">
+        From employee requests to approvals, HR action, and payroll-ready data —
+        NAS HR keeps every workflow moving.
+      </p>
+    </div>
+
+    <!-- ── Two hero cards leaning toward each other ── -->
+    <div class="wfc-stage">
+
+      <!-- Employee card (photo) — leans right toward center -->
+      <div class="wfc-card wfc-card--emp">
+        <div class="wfc-card-visual">
+          <img src="/attendence-reports/human.jpg" alt="Employee" class="wfc-card-photo" />
+          <div class="wfc-card-overlay"></div>
+        </div>
+        <div class="wfc-card-label">
+          <span class="wfc-cl-name">Employee</span>
+          <span class="wfc-cl-role">HR Team</span>
+        </div>
+      </div>
+
+      <!-- Center connection badge -->
+      <div class="wfc-connect-badge">
+        <div class="wfc-badge-ring wfc-badge-ring--1"></div>
+        <div class="wfc-badge-ring wfc-badge-ring--2"></div>
+        <div class="wfc-badge-core">
+          <svg viewBox="0 0 24 24" fill="none">
+            <path d="M5 13l4 4L19 7" stroke="currentColor" stroke-width="2.5"
+                  stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+      </div>
+
+      <!-- NAS HR card (logo) — leans left toward center -->
+      <div class="wfc-card wfc-card--hr">
+        <div class="wfc-card-visual wfc-card-visual--dark">
+          <img src="/logo-light.svg" alt="NAS HR" class="wfc-card-logo" />
+        </div>
+        <div class="wfc-card-label wfc-card-label--dark">
+          <span class="wfc-cl-name">NAS HR</span>
+          <span class="wfc-cl-role">HR System</span>
+        </div>
+      </div>
+
+    </div><!-- end stage -->
+
+    <!-- ── Animated workflow rows ── -->
+    <div class="wfc-rows-wrap" [class.is-hidden]="!visible()">
+
+      @for (row of currentRows; track row.left; let i = $index) {
+        <div class="wfc-row">
+
+          <div class="wfc-label wfc-label--left">{{ row.left }}</div>
+
+          <!-- Left flow line -->
+          <div class="wfc-flow wfc-flow--left"></div>
+
+          <!-- Status pill -->
+          <div class="wfc-pill">
+            <span class="wfc-pill-dot"></span>
+            <span class="wfc-pill-text">{{ row.pill }}</span>
+          </div>
+
+          <!-- Right flow line -->
+          <div class="wfc-flow wfc-flow--right"></div>
+
+          <div class="wfc-label wfc-label--right">{{ row.right }}</div>
+
+        </div>
+      }
+
+    </div><!-- end rows-wrap -->
+
+    <!-- Cycle indicator -->
+    <div class="wfc-dots">
+      @for (c of cycles; track $index; let i = $index) {
+        <span class="wfc-dot" [class.active]="activeCycle() === i"></span>
+      }
+    </div>
+
+  </div>
+</section>

@@ -1,6 +1,5 @@
 <section id="testimonials" class="tm-section">
 
-  <!-- subtle top glow -->
   <div class="tm-glow" aria-hidden="true"></div>
 
   <div class="container tm-inner">
@@ -11,7 +10,6 @@
       <h2 class="tm-title">{{ t('Hear Why Companies Trust NAS HR', 'لماذا تثق الشركات في NAS HR') }}</h2>
       <p class="tm-sub">{{ t('Used by 3,000+ employees across different industries.', 'يستخدمه أكثر من 3,000 موظف في مختلف القطاعات.') }}</p>
 
-      <!-- Stats strip -->
       <div class="tm-stats">
         <div class="tm-stat">
           <span class="tm-stat-n">3,000+</span>
@@ -33,63 +31,74 @@
     <!-- ══ CAROUSEL ══ -->
     <div class="tm-carousel" (mouseenter)="pauseCycle()" (mouseleave)="resumeCycle()">
 
-      <!-- Prev -->
+      <!-- Prev arrow -->
       <button class="tm-arrow tm-arrow-prev" (click)="prev()" aria-label="Previous testimonial">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"
+             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="12 4 6 10 12 16"/>
         </svg>
       </button>
 
-      <!-- Card viewport -->
-      <div class="tm-viewport">
-        @if (ready()) {
-          <div class="tm-card" [class.slide-next]="dir() === 'next'" [class.slide-prev]="dir() === 'prev'">
+      <!-- Track: overflow hidden wrapper -->
+      <div class="tm-track-wrap">
+        <div class="tm-track"
+             [class.tm-no-transition]="!animated()"
+             [style.--n]="displayItems.length"
+             [style.transform]="trackTranslate">
 
-            <!-- Top row: industry tag + stars -->
-            <div class="tm-card-top">
-              <span class="tm-industry">{{ t(items[active()].industry_en, items[active()].industry_ar) }}</span>
-              <div class="tm-stars" aria-label="5 stars">
-                @for (s of stars; track s) {
-                  <svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
-                    <path d="M7 1l1.76 3.57L13 5.35l-3 2.92.71 4.12L7 10.4l-3.71 2 .71-4.12L1 5.35l4.24-.78z"/>
-                  </svg>
-                }
-              </div>
-            </div>
+          @for (item of displayItems; track $index; let i = $index) {
+            <div class="tm-card" [class.is-active]="i === trackIndex()">
+              <div class="tm-card-inner">
 
-            <!-- Decorative quote mark -->
-            <div class="tm-deco-quote" aria-hidden="true">"</div>
-
-            <!-- Quote body -->
-            <blockquote class="tm-quote">
-              {{ t(items[active()].quote_en, items[active()].quote_ar) }}
-            </blockquote>
-
-            <!-- Author row -->
-            <div class="tm-author">
-              <div class="tm-av">{{ items[active()].initials }}</div>
-              <div class="tm-author-info">
-                <div class="tm-author-name">{{ items[active()].name }}</div>
-                <div class="tm-author-role">
-                  {{ t(items[active()].title_en, items[active()].title_ar) }}
-                  <span class="tm-dot-sep">·</span>
-                  {{ items[active()].company }}
+                <!-- Top row: industry tag + stars -->
+                <div class="tm-card-top">
+                  <span class="tm-industry">{{ t(item.industry_en, item.industry_ar) }}</span>
+                  <div class="tm-stars" aria-label="5 stars">
+                    @for (s of stars; track s) {
+                      <svg viewBox="0 0 14 14" fill="currentColor" aria-hidden="true">
+                        <path d="M7 1l1.76 3.57L13 5.35l-3 2.92.71 4.12L7 10.4l-3.71 2 .71-4.12L1 5.35l4.24-.78z"/>
+                      </svg>
+                    }
+                  </div>
                 </div>
-              </div>
-              <div class="tm-counter" aria-label="Slide {{ active() + 1 }} of {{ items.length }}">
-                <span class="tm-cnt-cur">{{ (active() + 1).toString().padStart(2, '0') }}</span>
-                <span class="tm-cnt-sep">/</span>
-                <span class="tm-cnt-tot">{{ items.length.toString().padStart(2, '0') }}</span>
+
+                <!-- Quote mark -->
+                <div class="tm-deco-quote" aria-hidden="true">"</div>
+
+                <!-- Quote -->
+                <blockquote class="tm-quote">
+                  {{ t(item.quote_en, item.quote_ar) }}
+                </blockquote>
+
+                <!-- Author row -->
+                <div class="tm-author">
+                  <div class="tm-av">{{ item.initials }}</div>
+                  <div class="tm-author-info">
+                    <div class="tm-author-name">{{ item.name }}</div>
+                    <div class="tm-author-role">
+                      {{ t(item.title_en, item.title_ar) }}
+                      <span class="tm-dot-sep">·</span>
+                      {{ item.company }}
+                    </div>
+                  </div>
+                  <div class="tm-counter" aria-label="Slide {{ active() + 1 }} of {{ items.length }}">
+                    <span class="tm-cnt-cur">{{ (active() + 1).toString().padStart(2, '0') }}</span>
+                    <span class="tm-cnt-sep">/</span>
+                    <span class="tm-cnt-tot">{{ items.length.toString().padStart(2, '0') }}</span>
+                  </div>
+                </div>
+
               </div>
             </div>
+          }
 
-          </div>
-        }
+        </div>
       </div>
 
-      <!-- Next -->
+      <!-- Next arrow -->
       <button class="tm-arrow tm-arrow-next" (click)="next()" aria-label="Next testimonial">
-        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+        <svg viewBox="0 0 20 20" fill="none" stroke="currentColor"
+             stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
           <polyline points="8 4 14 10 8 16"/>
         </svg>
       </button>
@@ -103,7 +112,7 @@
           class="tm-dot"
           role="tab"
           [class.is-active]="active() === i"
-          (click)="goTo(i, i > active() ? 'next' : 'prev')"
+          (click)="goTo(i)"
           [attr.aria-label]="'Go to testimonial ' + (i + 1)"
           [attr.aria-selected]="active() === i"
         ></button>

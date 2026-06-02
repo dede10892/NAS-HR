@@ -1,10 +1,11 @@
 <main class="page-all-features">
 
   <!-- ── Hero ── -->
-  <section class="mod-hero">
-    <div class="container mod-hero-inner">
-      <div class="mod-hero-copy reveal-up">
-        <span class="eyebrow">Platform Overview</span>
+  <section class="af-hero">
+    <div class="af-hero-grid" aria-hidden="true"></div>
+    <div class="container af-hero-inner">
+      <div class="af-hero-copy reveal-up">
+        <span class="eyebrow eyebrow-light">Platform Overview</span>
         <h1 class="mod-headline">All HR workflows.<br><em>One connected platform.</em></h1>
         <p class="mod-sub">Explore the complete NAS HR ecosystem — employee records, attendance, requests, reports, salary-ready data, learning, AI assistance, and manager visibility, all working together.</p>
         <div class="mod-actions">
@@ -12,8 +13,7 @@
           <a routerLink="/modules/ask-nas-ai" class="btn btn-outline-dark">See Ask NAS AI</a>
         </div>
       </div>
-      <!-- Connected workflow strip -->
-      <div class="mod-workflow reveal-up" style="--d:.15s">
+      <div class="af-hero-flow reveal-up" style="--d:.15s">
         @for (s of ['Employee Request','Manager Approval','HR Action','Reports & Salary','Employee Notified']; track s; let last = $last) {
           <div class="wf-step">
             <span class="wf-label">{{ s }}</span>
@@ -24,44 +24,108 @@
     </div>
   </section>
 
-  <!-- ── Module grid ── -->
-  <section class="mod-grid-section">
+  <!-- ── Stats band ── -->
+  <div class="af-stats-band">
+    <div class="container af-stats-row">
+      @for (s of stats; track s.label) {
+        <div class="af-stat-item">
+          <span class="af-stat-num">{{ s.num }}</span>
+          <span class="af-stat-lbl">{{ s.label }}</span>
+        </div>
+      }
+    </div>
+  </div>
+
+  <!-- ── Interactive module explorer ── -->
+  <section class="af-explorer">
     <div class="container">
       <div class="section-head-center reveal-up">
         <span class="eyebrow">Connected HR Ecosystem</span>
         <h2 class="section-title">Every module. Every workflow.</h2>
-        <p class="section-sub section-sub-center">Click any module to see what it does and how it connects.</p>
+        <p class="section-sub section-sub-center">Click any module to explore what it does and how it works.</p>
       </div>
 
-      <div class="mod-cards reveal-stagger">
-        @for (m of modules; track m.label; let i = $index) {
-          <div class="mod-card"
-               [class.mod-card--active]="activeModule() === i"
-               (click)="activeModule.set(i)"
-               #moduleCard>
-            <div class="mod-card-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                   stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                   aria-hidden="true">
-                <path [attr.d]="m.icon"/>
-              </svg>
-            </div>
-            <h3 class="mod-card-title">{{ m.label }}</h3>
-            <p class="mod-card-desc">{{ m.desc }}</p>
-            <ul class="mod-card-benefits">
-              @for (b of m.benefits; track b) {
-                <li>
-                  <svg width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-                    <circle cx="7" cy="7" r="6" stroke="currentColor" stroke-width="1.2"/>
-                    <path d="M4.5 7l2 2 3-3" stroke="currentColor" stroke-width="1.3"
-                          stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  {{ b }}
-                </li>
+      <div class="af-explorer-layout reveal-up" style="--d:.1s">
+
+        <!-- Left: module list -->
+        <div class="af-list">
+          @for (m of modules; track m.label; let i = $index) {
+            <button class="af-list-item" [class.af-list-item--active]="activeModule() === i"
+                    (click)="setModule(i)">
+              <div class="af-li-icon af-li-icon--{{ m.color }}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                     width="16" height="16" aria-hidden="true">
+                  <path [attr.d]="m.icon"/>
+                </svg>
+              </div>
+              <div class="af-li-body">
+                <span class="af-li-label">{{ m.label }}</span>
+                <span class="af-li-cat af-cat--{{ m.color }}">{{ m.category }}</span>
+              </div>
+              @if (m.live) {
+                <span class="af-live-dot" title="Live"></span>
               }
-            </ul>
-          </div>
-        }
+            </button>
+          }
+        </div>
+
+        <!-- Right: detail panel -->
+        <div class="af-detail">
+          @if (isAnimating()) {
+            <div class="af-detail-anim">
+              <div class="af-detail-header">
+                <div class="af-detail-icon af-li-icon--{{ modules[activeModule()].color }}">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                       stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
+                       width="22" height="22" aria-hidden="true">
+                    <path [attr.d]="modules[activeModule()].icon"/>
+                  </svg>
+                </div>
+                <div>
+                  <h3 class="af-detail-title">{{ modules[activeModule()].label }}</h3>
+                  <span class="af-li-cat af-cat--{{ modules[activeModule()].color }}">
+                    {{ modules[activeModule()].category }}
+                  </span>
+                </div>
+              </div>
+
+              <p class="af-detail-desc">{{ modules[activeModule()].desc }}</p>
+
+              <div class="af-benefits-grid">
+                @for (b of modules[activeModule()].benefits; track b) {
+                  <div class="af-benefit">
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
+                         stroke-width="2" stroke-linecap="round" stroke-linejoin="round"
+                         width="13" height="13" aria-hidden="true">
+                      <path d="M3 8l3.5 3.5L13 4.5"/>
+                    </svg>
+                    <span>{{ b }}</span>
+                  </div>
+                }
+              </div>
+
+              @if (modules[activeModule()].screenshot) {
+                <div class="af-screenshot-wrap">
+                  <img [src]="modules[activeModule()].screenshot"
+                       [alt]="modules[activeModule()].label"
+                       class="af-screenshot" />
+                </div>
+              }
+
+              @if (modules[activeModule()].route) {
+                <a [routerLink]="modules[activeModule()].route" class="af-explore-btn">
+                  Explore {{ modules[activeModule()].label }}
+                  <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2"
+                       stroke-linecap="round" stroke-linejoin="round" width="13" height="13">
+                    <path d="M3 8h10M9 4l4 4-4 4"/>
+                  </svg>
+                </a>
+              }
+            </div>
+          }
+        </div>
+
       </div>
     </div>
   </section>

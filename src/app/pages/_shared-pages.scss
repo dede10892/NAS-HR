@@ -37,7 +37,7 @@ $spring: cubic-bezier(0.16, 1, 0.3, 1);
     background-repeat: no-repeat;
     background-size: contain;
     pointer-events: none;
-    opacity: 0.05;
+    opacity: 0.25;
     filter: brightness(10);
   }
 }
@@ -467,21 +467,29 @@ $spring: cubic-bezier(0.16, 1, 0.3, 1);
 
 .mgr-value-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
   gap: 16px;
   margin-top: 48px;
+
+  @media (max-width: 900px) { grid-template-columns: repeat(2, 1fr); }
+  @media (max-width: 520px) { grid-template-columns: 1fr; }
 }
+
 
 .mgr-value-card {
   background: var(--nas-grey-0);
   border-radius: var(--r-xl);
   border: 1px solid var(--nas-grey-400);
-  padding: 20px;
-  transition: transform 220ms $spring, box-shadow 220ms $spring;
+  padding: 22px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  transition: transform 220ms $spring, box-shadow 220ms $spring, border-color 220ms;
 
   &:hover {
-    transform: translateY(-3px);
-    box-shadow: 0 10px 28px rgba(0,0,0,0.07);
+    transform: translateY(-4px);
+    box-shadow: 0 12px 36px rgba(0,0,0,0.08);
+    border-color: var(--nas-teal-300);
   }
 
   h4 {
@@ -500,15 +508,12 @@ $spring: cubic-bezier(0.16, 1, 0.3, 1);
 }
 
 .mgr-value-check {
-  width: 28px; height: 28px;
+  width: 10px; height: 10px;
   border-radius: 50%;
-  background: var(--nas-teal-100);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  color: var(--nas-teal-600);
+  background: var(--nas-teal-500);
+  flex-shrink: 0;
 
-  svg { width: 14px; height: 14px; }
+  svg { display: none; }
 }
 
 /* ─── Reports tabs ───────────────────────────────── */
@@ -1705,7 +1710,7 @@ $spring: cubic-bezier(0.16, 1, 0.3, 1);
     background-repeat: no-repeat;
     background-size: contain;
     pointer-events: none;
-    opacity: 0.05;
+    opacity: 0.25;
     filter: brightness(10);
   }
 }
@@ -2428,4 +2433,57 @@ $spring: cubic-bezier(0.16, 1, 0.3, 1);
 
   .sol-challenges-grid,
   .sol-helps-grid { grid-template-columns: 1fr; }
+
+  .mod-cta-band { padding-block: 56px; }
+  .lms-steps { flex-direction: column; align-items: center; }
+  .lms-step-connector { transform: rotate(90deg); padding-inline: 40px; padding-top: 0; }
+}
+
+/* ── 480px — small phones ─────────────────────────── */
+@media (max-width: 480px) {
+  .mod-hero,
+  .svc-hero,
+  .ai-hero,
+  .sol-hero,
+  .why-hero,
+  .pricing-hero,
+  .faqs-hero,
+  .standalone-hero { padding-block: 96px 48px; }
+
+  .mod-headline,
+  .ai-headline,
+  .svc-headline,
+  .sol-headline,
+  .standalone-headline { font-size: clamp(24px, 8vw, 34px); }
+
+  .mod-sub,
+  .ai-sub,
+  .svc-sub,
+  .sol-sub { font-size: 14px; }
+
+  .mod-actions,
+  .ai-actions,
+  .svc-actions { flex-direction: column; }
+
+  .mod-actions .btn,
+  .ai-actions .btn,
+  .svc-actions .btn { width: 100%; justify-content: center; }
+
+  .mod-cta-inner h2 { font-size: clamp(20px, 6vw, 26px); }
+  .mod-cta-band { padding-block: 48px; }
+  .mod-cta-btns { flex-direction: column; align-items: stretch; }
+  .mod-cta-btns .btn { justify-content: center; }
+
+  .why-headline,
+  .pricing-headline,
+  .faqs-headline { font-size: clamp(24px, 8vw, 34px); }
+
+  .why-pillars,
+  .why-pillars-grid { grid-template-columns: 1fr; }
+
+  .pricing-cards { max-width: 100%; }
+
+  .sol-hero-inner { grid-template-columns: 1fr; }
+
+  .section-head-center { padding-inline: 4px; }
 }

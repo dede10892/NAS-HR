@@ -24,7 +24,7 @@ export const routes: Routes = [
       import('./pages/modules/ask-nas-ai/ask-nas-ai').then(m => m.AskNasAiPage),
   },
   {
-    path: 'modules/manager-dashboard',
+    path: 'modules/hr-dashboard',
     loadComponent: () =>
       import('./pages/modules/manager-dashboard/manager-dashboard').then(m => m.ManagerDashboardPage),
   },
@@ -44,6 +44,11 @@ export const routes: Routes = [
       import('./pages/modules/lms/lms').then(m => m.LmsPage),
   },
   // ── Solution pages ──
+  {
+    path: 'solutions',
+    loadComponent: () =>
+      import('./pages/solutions/solutions-overview/solutions-overview').then(m => m.SolutionsOverviewPage),
+  },
   {
     path: 'solutions/aviation',
     loadComponent: () =>

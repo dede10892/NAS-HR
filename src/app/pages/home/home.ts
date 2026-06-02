@@ -1,7 +1,6 @@
 import { Component, signal, afterNextRender, inject } from '@angular/core';
 import { RevealService } from '../../services/reveal.service';
 import { HeroComponent } from '../../sections/hero/hero';
-import { MobileEssComponent } from '../../sections/mobile-ess/mobile-ess';
 import { DashboardComponent } from '../../sections/dashboard/dashboard';
 import { DualViewComponent } from '../../sections/dual-view/dual-view';
 import { TestimonialsComponent } from '../../sections/testimonials/testimonials';
@@ -9,8 +8,10 @@ import { FaqsComponent } from '../../sections/faqs/faqs';
 import { ContactComponent } from '../../sections/contact/contact';
 import { TrustedByComponent } from '../../sections/trusted-by/trusted-by';
 import { FeatureStepsComponent } from '../../sections/feature-steps/feature-steps';
-import { SolutionsByIndustryComponent } from '../../sections/solutions-by-industry/solutions-by-industry';
+import { MobileEssComponent } from '../../sections/mobile-ess/mobile-ess';
 import { ReviewsComponent } from '../../sections/reviews/reviews';
+import { IndustriesHubComponent } from '../../sections/industries-hub/industries-hub';
+import { WorkflowConnectedComponent } from '../../sections/workflow-connected/workflow-connected';
 
 @Component({
   selector: 'app-home-page',
@@ -19,9 +20,10 @@ import { ReviewsComponent } from '../../sections/reviews/reviews';
     HeroComponent,
     TrustedByComponent,
     FeatureStepsComponent,
-    SolutionsByIndustryComponent,
-    MobileEssComponent,
+    IndustriesHubComponent,
+    WorkflowConnectedComponent,
     DashboardComponent,
+    MobileEssComponent,
     DualViewComponent,
     TestimonialsComponent,
     ReviewsComponent,

@@ -16,9 +16,6 @@
       <div class="contact-perks">
         @for (perk of perks; track perk.en) {
           <div class="contact-perk">
-            <svg class="perk-check" width="14" height="14" viewBox="0 0 14 14" fill="none" aria-hidden="true">
-              <path d="M2.5 7l3 3 6-6" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
-            </svg>
             <span>{{ t(perk.en, perk.ar) }}</span>
           </div>
         }
@@ -46,7 +43,7 @@
             </div>
             <div class="form-field">
               <label>{{ t('Phone', 'الهاتف') }}</label>
-              <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="+971 50 000 0000" />
+              <input type="tel" [(ngModel)]="form.phone" name="phone" placeholder="010-222-111-000" />
             </div>
           </div>
           <div class="form-field">

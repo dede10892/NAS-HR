@@ -1,0 +1,436 @@
+/* ══════════════════════════════════════════════════
+   WORKFLOW CONNECTED
+══════════════════════════════════════════════════ */
+
+$teal:   #4CB4B5;
+$dark:   #0C2427;
+$spring: cubic-bezier(0.16, 1, 0.3, 1);
+
+/* ── Section ── */
+.wfc-section {
+  background: #f8fafa;
+  padding: 80px 0 64px;
+  position: relative;
+  overflow: hidden;
+}
+
+/* ── Background watermark ── */
+.wfc-bg {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wfc-watermark {
+  width: 380px;
+  opacity: 0.04;
+  filter: saturate(0) brightness(0);
+  user-select: none;
+}
+
+/* ── All content above watermark ── */
+.container { position: relative; z-index: 1; }
+
+/* ════════════════════════════════════════════════
+   HEADER
+════════════════════════════════════════════════ */
+
+.wfc-head {
+  text-align: center;
+  max-width: 580px;
+  margin: 0 auto 40px;
+}
+
+.wfc-eyebrow {
+  display: inline-block;
+  font-size: 11px; font-weight: 600;
+  text-transform: uppercase; letter-spacing: 0.12em;
+  color: $teal;
+  padding: 4px 14px;
+  border: 1px solid rgba($teal, 0.3);
+  border-radius: 9999px;
+  background: rgba($teal, 0.06);
+  margin-bottom: 12px;
+}
+
+.wfc-title {
+  font-family: var(--nas-font-display, inherit);
+  font-size: clamp(22px, 2.8vw, 38px);
+  font-weight: 700; color: $dark;
+  letter-spacing: -0.025em; line-height: 1.2;
+  margin: 0 0 10px;
+}
+
+.wfc-sub {
+  font-size: 14px; color: #6b7280;
+  line-height: 1.7; margin: 0;
+  font-weight: 400;
+}
+
+/* ════════════════════════════════════════════════
+   STAGE — two cards + badge
+════════════════════════════════════════════════ */
+
+.wfc-stage {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 0;
+  margin-bottom: 44px;
+  position: relative;
+}
+
+/* Ambient glow behind stage */
+.wfc-stage::before {
+  content: '';
+  position: absolute;
+  top: 10%; left: 50%;
+  transform: translateX(-50%);
+  width: 320px; height: 200px;
+  background: radial-gradient(ellipse, rgba($teal, 0.08) 0%, transparent 70%);
+  pointer-events: none;
+}
+
+/* ════════════════════════════════════════════════
+   CARDS
+════════════════════════════════════════════════ */
+
+.wfc-card {
+  width: 144px;
+  border-radius: 18px;
+  overflow: hidden;
+  box-shadow:
+    0 8px 32px rgba(0,0,0,0.12),
+    0 2px 8px rgba(0,0,0,0.06);
+  position: relative;
+  transition: box-shadow 300ms;
+}
+
+/* Employee card — tilts inward (clockwise = right) */
+.wfc-card--emp {
+  transform-origin: bottom right;
+  animation: floatEmp 4s ease-in-out infinite;
+  margin-right: -14px;
+  z-index: 1;
+}
+
+/* NAS HR card — tilts inward (counter-clockwise = left) */
+.wfc-card--hr {
+  transform-origin: bottom left;
+  animation: floatHr 4s ease-in-out infinite;
+  animation-delay: -2s;
+  margin-left: -14px;
+  z-index: 1;
+}
+
+@keyframes floatEmp {
+  0%, 100% { transform: rotate(5deg) translateY(0px); }
+  50%       { transform: rotate(5deg) translateY(-8px); }
+}
+
+@keyframes floatHr {
+  0%, 100% { transform: rotate(-5deg) translateY(0px); }
+  50%       { transform: rotate(-5deg) translateY(-8px); }
+}
+
+/* ── Card visual area (photo / logo) ── */
+.wfc-card-visual {
+  width: 100%;
+  height: 158px;
+  position: relative;
+  background: #e5e7eb;
+  overflow: hidden;
+}
+
+.wfc-card-visual--dark {
+  background: $dark;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.wfc-card-photo {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+}
+
+.wfc-card-logo {
+  width: 80px;
+  height: auto;
+  display: block;
+  filter: brightness(10); /* ensures logo appears white */
+  opacity: 0.9;
+}
+
+/* Gradient overlay at bottom of photo */
+.wfc-card-overlay {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  height: 56px;
+  background: linear-gradient(to top, rgba($dark, 0.55), transparent);
+}
+
+/* ── Card label bar ── */
+.wfc-card-label {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  padding: 10px 12px;
+  background: #fff;
+}
+
+.wfc-card-label--dark {
+  background: lighten($dark, 8%);
+}
+
+.wfc-cl-name {
+  font-size: 12.5px; font-weight: 700;
+  color: $dark; line-height: 1;
+}
+
+.wfc-card-label--dark .wfc-cl-name {
+  color: #fff;
+}
+
+.wfc-cl-role {
+  font-size: 10px; color: #9ca3af;
+  font-weight: 500; letter-spacing: 0.05em;
+}
+
+.wfc-card-label--dark .wfc-cl-role {
+  color: rgba($teal, 0.8);
+}
+
+/* ════════════════════════════════════════════════
+   CENTER CONNECTION BADGE
+════════════════════════════════════════════════ */
+
+.wfc-connect-badge {
+  position: relative;
+  width: 52px; height: 52px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  align-self: center;
+  margin: 0 -4px;
+  z-index: 2;
+}
+
+.wfc-badge-ring {
+  position: absolute;
+  border-radius: 50%;
+  border: 1.5px solid rgba($teal, 0.3);
+  pointer-events: none;
+
+  &--1 { width: 44px; height: 44px; animation: badgeRing 2.4s ease-out infinite; }
+  &--2 { width: 56px; height: 56px; animation: badgeRing 2.4s ease-out 0.8s infinite; }
+}
+
+@keyframes badgeRing {
+  0%   { transform: scale(0.85); opacity: 0.8; }
+  100% { transform: scale(1.25); opacity: 0; }
+}
+
+.wfc-badge-core {
+  position: relative; z-index: 2;
+  width: 38px; height: 38px;
+  border-radius: 50%;
+  background: $teal;
+  display: flex; align-items: center; justify-content: center;
+  color: #fff;
+  box-shadow: 0 4px 18px rgba($teal, 0.45);
+  animation: badgePulse 3s ease-in-out infinite;
+
+  svg { width: 16px; height: 16px; }
+}
+
+@keyframes badgePulse {
+  0%, 100% { box-shadow: 0 4px 18px rgba($teal, 0.40); }
+  50%       { box-shadow: 0 4px 28px rgba($teal, 0.65); }
+}
+
+/* ════════════════════════════════════════════════
+   WORKFLOW ROWS
+════════════════════════════════════════════════ */
+
+.wfc-rows-wrap {
+  max-width: 780px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Stagger fade-out (fast, top → bottom) */
+.wfc-rows-wrap.is-hidden .wfc-row {
+  opacity: 0;
+  transform: translateY(5px);
+
+  &:nth-child(1) { transition-delay: 0ms; }
+  &:nth-child(2) { transition-delay: 40ms; }
+  &:nth-child(3) { transition-delay: 80ms; }
+}
+
+/* Stagger fade-in (slower, cascades down) */
+.wfc-row {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1fr auto;
+  align-items: center;
+  gap: 8px;
+  opacity: 1;
+  transform: translateY(0);
+  transition: opacity 0.36s ease, transform 0.36s ease;
+
+  &:nth-child(1) { transition-delay: 0ms; }
+  &:nth-child(2) { transition-delay: 90ms; }
+  &:nth-child(3) { transition-delay: 180ms; }
+}
+
+/* ── Label pills (left / right) ── */
+.wfc-label {
+  font-size: 12.5px; font-weight: 600; color: $dark;
+  padding: 8px 14px;
+  border-radius: 9px;
+  border: 1px solid #e5e7eb;
+  background: #fff;
+  white-space: nowrap;
+  text-align: center;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.05);
+}
+
+/* ── Animated flow lines ── */
+.wfc-flow {
+  height: 3px;
+  position: relative;
+  border-radius: 2px;
+  background: rgba($teal, 0.12);
+  overflow: hidden;
+
+  /* Traveling data-packet highlight */
+  &::after {
+    content: '';
+    position: absolute;
+    top: -1px; bottom: -1px;
+    width: 35%;
+    border-radius: 2px;
+    background: linear-gradient(90deg, transparent 0%, $teal 50%, transparent 100%);
+    animation: dataFlow 2s linear infinite;
+  }
+
+  &--right::after {
+    animation-delay: 0.55s;
+  }
+}
+
+@keyframes dataFlow {
+  from { left: -35%; }
+  to   { left: 110%; }
+}
+
+/* ── Center status pill ── */
+.wfc-pill {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 9999px;
+  background: $teal;
+  white-space: nowrap;
+  flex-shrink: 0;
+  box-shadow: 0 3px 14px rgba($teal, 0.35);
+  animation: pillGlow 3.4s ease-in-out infinite;
+}
+
+.wfc-pill-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: rgba(#fff, 0.75);
+  flex-shrink: 0;
+  animation: dotBlink 1.2s ease-in-out infinite;
+}
+
+.wfc-pill-text {
+  font-size: 10.5px; font-weight: 700;
+  letter-spacing: 0.07em; text-transform: uppercase;
+  color: #fff;
+}
+
+@keyframes pillGlow {
+  0%, 100% { box-shadow: 0 3px 14px rgba($teal, 0.32); }
+  50%       { box-shadow: 0 4px 22px rgba($teal, 0.55); }
+}
+
+@keyframes dotBlink {
+  0%, 100% { opacity: 0.6; transform: scale(1); }
+  50%       { opacity: 1;   transform: scale(1.3); }
+}
+
+/* ════════════════════════════════════════════════
+   CYCLE INDICATOR DOTS
+════════════════════════════════════════════════ */
+
+.wfc-dots {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 24px;
+}
+
+.wfc-dot {
+  width: 6px; height: 6px;
+  border-radius: 50%;
+  background: #d1d5db;
+  transition: background 300ms $spring, transform 300ms $spring, width 300ms $spring;
+  cursor: default;
+
+  &.active {
+    background: $teal;
+    width: 20px;
+    border-radius: 3px;
+    transform: none;
+  }
+}
+
+/* ════════════════════════════════════════════════
+   RESPONSIVE
+════════════════════════════════════════════════ */
+
+@media (max-width: 700px) {
+  .wfc-card { width: 124px; }
+  .wfc-card-visual { height: 136px; }
+  .wfc-card-logo { width: 64px; }
+
+  .wfc-label { font-size: 11px; padding: 7px 10px; }
+  .wfc-pill  { padding: 6px 10px; }
+  .wfc-pill-text { font-size: 9.5px; }
+}
+
+@media (max-width: 500px) {
+  .wfc-section { padding: 60px 0 48px; }
+
+  .wfc-stage {
+    gap: 0;
+    margin-bottom: 32px;
+  }
+
+  .wfc-card { width: 110px; }
+  .wfc-card-visual { height: 118px; }
+
+  .wfc-row {
+    grid-template-columns: auto 1fr auto 1fr auto;
+  }
+
+  .wfc-label { font-size: 10px; padding: 6px 8px; }
+  .wfc-pill  { padding: 5px 8px; gap: 3px; }
+  .wfc-pill-text { font-size: 8.5px; letter-spacing: 0.05em; }
+  .wfc-pill-dot  { width: 5px; height: 5px; }
+
+  .wfc-title { font-size: 22px; }
+}

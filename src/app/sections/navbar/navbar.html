@@ -10,24 +10,18 @@
     <ul class="navbar-links">
 
       <!-- Modules (mega dropdown) -->
-      <li class="has-dropdown"
-          (mouseenter)="openDropdown('modules')"
-          (mouseleave)="closeDropdown()">
-        <a class="nav-link" [class.active]="activeDropdown === 'modules'">
-          {{ t('Modules', 'الوحدات') }}
-          <svg class="chevron" [class.flip]="activeDropdown === 'modules'"
-               viewBox="0 0 12 12" fill="none">
+      <li class="has-dropdown">
+        <a class="nav-link">
+          Modules
+          <svg class="chevron" viewBox="0 0 12 12" fill="none">
             <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5"
                   stroke-linecap="round" stroke-linejoin="round"/>
           </svg>
         </a>
-        <div class="dropdown dropdown-mega"
-             [class.open]="activeDropdown === 'modules'"
-             (mouseenter)="keepDropdown()"
-             (mouseleave)="closeDropdown()">
+        <div class="dropdown dropdown-mega">
           <div class="mega-header">
-            <span class="mega-label">{{ t('Platform Modules', 'وحدات المنصة') }}</span>
-            <span class="mega-sub">{{ t('8 integrated modules · one platform', '٨ وحدات متكاملة · منصة واحدة') }}</span>
+            <span class="mega-label">Platform Modules</span>
+            <span class="mega-sub">8 integrated modules · one platform</span>
           </div>
           <div class="mega-grid">
             @for (m of modules; track m.en) {
@@ -39,8 +33,8 @@
                     <path [attr.d]="m.svgD"/>
                   </svg>
                   <div class="mega-text">
-                    <span class="mega-name">{{ t(m.en, m.ar) }}</span>
-                    <span class="mega-desc">{{ t(m.desc_en, m.desc_ar) }}</span>
+                    <span class="mega-name">{{ m.en }}</span>
+                    <span class="mega-desc">{{ m.desc_en }}</span>
                   </div>
                   <svg class="mega-arrow" width="12" height="12" viewBox="0 0 12 12" fill="none">
                     <path d="M2.5 6h7M6.5 3l3 3-3 3" stroke="currentColor" stroke-width="1.4"
@@ -54,10 +48,10 @@
                     <path [attr.d]="m.svgD"/>
                   </svg>
                   <div class="mega-text">
-                    <span class="mega-name">{{ t(m.en, m.ar) }}</span>
-                    <span class="mega-desc">{{ t(m.desc_en, m.desc_ar) }}</span>
+                    <span class="mega-name">{{ m.en }}</span>
+                    <span class="mega-desc">{{ m.desc_en }}</span>
                   </div>
-                  <span class="mega-soon">{{ t('Soon', 'قريباً') }}</span>
+                  <span class="mega-soon">Soon</span>
                 </div>
               }
             }
@@ -66,46 +60,17 @@
       </li>
 
       <!-- Solutions -->
-      <li class="has-dropdown"
-          (mouseenter)="openDropdown('solutions')"
-          (mouseleave)="closeDropdown()">
-        <a class="nav-link" [class.active]="activeDropdown === 'solutions'">
-          {{ t('Solutions', 'الحلول') }}
-          <svg class="chevron" [class.flip]="activeDropdown === 'solutions'"
-               viewBox="0 0 12 12" fill="none">
-            <path d="M2.5 4.5L6 8L9.5 4.5" stroke="currentColor" stroke-width="1.5"
-                  stroke-linecap="round" stroke-linejoin="round"/>
-          </svg>
-        </a>
-        <div class="dropdown dropdown-sm"
-             [class.open]="activeDropdown === 'solutions'"
-             (mouseenter)="keepDropdown()"
-             (mouseleave)="closeDropdown()">
-          @for (s of solutions; track s.en) {
-            <a [routerLink]="s.route" class="dropdown-item" (click)="activeDropdown = null; menuOpen = false">
-              <span class="di-label">{{ t(s.en, s.ar) }}</span>
-            </a>
-          }
-        </div>
-      </li>
+      <li><a routerLink="/solutions" class="nav-link">Solutions</a></li>
 
-      <li><a routerLink="/why-nas" class="nav-link">{{ t('Why NAS', 'لماذا ناس') }}</a></li>
-      <li><a routerLink="/pricing" class="nav-link">{{ t('Pricing', 'الأسعار') }}</a></li>
-      <li><a routerLink="/faqs" class="nav-link">{{ t('FAQs', 'الأسئلة الشائعة') }}</a></li>
+      <li><a routerLink="/why-nas" class="nav-link">Why NAS</a></li>
+      <li><a routerLink="/pricing" class="nav-link">Pricing</a></li>
+      <li><a routerLink="/faqs" class="nav-link">FAQs</a></li>
 
     </ul>
 
     <!-- Right actions -->
     <div class="navbar-actions">
-      <button class="btn-lang" (click)="langToggle.emit()">
-        <svg class="lang-globe" viewBox="0 0 18 18" fill="none">
-          <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.2"/>
-          <ellipse cx="9" cy="9" rx="3" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M1.5 9h15M2.5 5.5h13M2.5 12.5h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
-        <span>{{ lang === 'en' ? 'عربي' : 'EN' }}</span>
-      </button>
-      <a routerLink="/contact" class="btn-cta">{{ t('REQUEST A DEMO', 'احجز عرضاً') }}</a>
+      <a routerLink="/contact" class="btn-cta">REQUEST A DEMO</a>
       <button class="burger" (click)="menuOpen = !menuOpen" aria-label="Toggle menu">
         <span [class.open]="menuOpen"></span>
         <span [class.open]="menuOpen"></span>
@@ -117,7 +82,7 @@
 
   <!-- Mobile menu -->
   <div class="mobile-menu" [class.open]="menuOpen">
-    <div class="mobile-section-label">{{ t('Modules', 'الوحدات') }}</div>
+    <div class="mobile-section-label">Modules</div>
     <ul>
       @for (m of modules; track m.en) {
         <li>
@@ -127,8 +92,8 @@
                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path [attr.d]="m.svgD"/>
               </svg>
-              {{ t(m.en, m.ar) }}
-              <span class="ml-badge live">{{ t('Live', 'متاح') }}</span>
+              {{ m.en }}
+              <span class="ml-badge live">Live</span>
             </a>
           } @else {
             <span class="mobile-link disabled">
@@ -136,38 +101,23 @@
                    stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
                 <path [attr.d]="m.svgD"/>
               </svg>
-              {{ t(m.en, m.ar) }}
-              <span class="ml-badge">{{ t('Soon', 'قريباً') }}</span>
+              {{ m.en }}
+              <span class="ml-badge">Soon</span>
             </span>
           }
         </li>
       }
     </ul>
-    <div class="mobile-section-label" style="margin-top:8px;">{{ t('Solutions', 'الحلول') }}</div>
-    <ul>
-      @for (s of solutions; track s.en) {
-        <li>
-          <a [routerLink]="s.route" class="mobile-link" (click)="menuOpen = false">
-            {{ t(s.en, s.ar) }}
-          </a>
-        </li>
-      }
+    <ul style="margin-top:8px;">
+      <li><a routerLink="/solutions" class="mobile-link" (click)="menuOpen = false">Solutions</a></li>
     </ul>
     <ul style="margin-top:8px;">
-      <li><a routerLink="/why-nas" class="mobile-link" (click)="menuOpen = false">{{ t('Why NAS', 'لماذا ناس') }}</a></li>
-      <li><a routerLink="/pricing" class="mobile-link" (click)="menuOpen = false">{{ t('Pricing', 'الأسعار') }}</a></li>
-      <li><a routerLink="/faqs" class="mobile-link" (click)="menuOpen = false">{{ t('FAQs', 'الأسئلة الشائعة') }}</a></li>
+      <li><a routerLink="/why-nas" class="mobile-link" (click)="menuOpen = false">Why NAS</a></li>
+      <li><a routerLink="/pricing" class="mobile-link" (click)="menuOpen = false">Pricing</a></li>
+      <li><a routerLink="/faqs" class="mobile-link" (click)="menuOpen = false">FAQs</a></li>
     </ul>
     <div class="mobile-footer">
-      <button class="btn-lang mobile-lang" (click)="langToggle.emit(); menuOpen = false">
-        <svg class="lang-globe" viewBox="0 0 18 18" fill="none">
-          <circle cx="9" cy="9" r="7.5" stroke="currentColor" stroke-width="1.2"/>
-          <ellipse cx="9" cy="9" rx="3" ry="7.5" stroke="currentColor" stroke-width="1.2"/>
-          <path d="M1.5 9h15M2.5 5.5h13M2.5 12.5h13" stroke="currentColor" stroke-width="1.2" stroke-linecap="round"/>
-        </svg>
-        {{ lang === 'en' ? 'عربي' : 'EN' }}
-      </button>
-      <a routerLink="/contact" class="btn-cta" (click)="menuOpen = false">{{ t('REQUEST A DEMO', 'احجز عرضاً') }}</a>
+      <a routerLink="/contact" class="btn-cta" (click)="menuOpen = false">REQUEST A DEMO</a>
     </div>
   </div>
 </nav>

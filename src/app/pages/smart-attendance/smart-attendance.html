@@ -1,10 +1,30 @@
 <main class="module-page">
 
   <!-- ══ PAGE HERO ══════════════════════════════════════════════════ -->
-  <section class="module-hero">
+  <section class="module-hero module-hero--dark">
     <div class="mh-bg-grid"></div>
     <div class="blob blob-tl"></div>
     <div class="blob blob-br"></div>
+    <div class="mh-phone-glow" aria-hidden="true"></div>
+
+    <svg class="sa-hero-brandmark" viewBox="56 191 132 132" fill="currentColor" aria-hidden="true">
+      <path d="M109.693 311.866C107.595 313.964 107.595 317.365 109.693 319.463C111.791 321.561 115.192 321.561 117.29 319.463L133.434 303.319C135.532 301.221 135.532 297.82 133.434 295.722C131.336 293.624 127.935 293.624 125.837 295.722L109.693 311.866Z"/>
+      <path d="M107.033 297.229C107.033 300.196 109.438 302.601 112.404 302.601C115.371 302.601 117.776 300.196 117.776 297.229V274.398C117.776 271.432 115.371 269.026 112.404 269.026C109.438 269.026 107.033 271.432 107.033 274.398V297.229Z"/>
+      <path d="M73.5257 287.492C70.5589 287.492 68.1538 289.897 68.1538 292.864C68.1538 295.831 70.5589 298.236 73.5257 298.236H96.3563C99.3231 298.236 101.728 295.831 101.728 292.864C101.728 289.897 99.3231 287.492 96.3563 287.492H73.5257Z"/>
+      <path d="M81.9583 275.249C79.8605 277.347 79.8605 280.748 81.9583 282.846C84.0562 284.944 87.4575 284.944 89.5553 282.846L105.699 266.702C107.797 264.604 107.797 261.203 105.699 259.105C103.601 257.007 100.2 257.007 98.102 259.105L81.9583 275.249Z"/>
+      <path d="M65.1262 244.715C63.0284 242.618 59.6271 242.618 57.5292 244.715C55.4314 246.813 55.4314 250.215 57.5292 252.312L73.6729 268.456C75.7707 270.554 79.172 270.554 81.2699 268.456C83.3677 266.358 83.3677 262.957 81.2699 260.859L65.1262 244.715Z"/>
+      <path d="M79.8372 242.034C76.8704 242.034 74.4653 244.439 74.4653 247.406C74.4653 250.373 76.8704 252.778 79.8372 252.778H102.668C105.635 252.778 108.04 250.373 108.04 247.406C108.04 244.439 105.635 242.034 102.668 242.034H79.8372Z"/>
+      <path d="M89.5739 208.525C89.5739 205.559 87.1688 203.154 84.202 203.154C81.2352 203.154 78.8301 205.559 78.8301 208.525V231.356C78.8301 234.323 81.2352 236.728 84.202 236.728C87.1688 236.728 89.5739 234.323 89.5739 231.356V208.525Z"/>
+      <path d="M101.745 216.955C99.6473 214.857 96.246 214.857 94.1481 216.955C92.0503 219.053 92.0503 222.454 94.1481 224.552L110.292 240.695C112.39 242.793 115.791 242.793 117.889 240.695C119.987 238.597 119.987 235.196 117.889 233.098L101.745 216.955Z"/>
+      <path d="M132.36 200.173C134.458 198.075 134.458 194.673 132.36 192.576C130.262 190.478 126.861 190.478 124.763 192.576L108.619 208.719C106.522 210.817 106.522 214.218 108.619 216.316C110.717 218.414 114.119 218.414 116.216 216.316L132.36 200.173Z"/>
+      <path d="M135.034 214.77C135.034 211.804 132.629 209.398 129.662 209.398C126.695 209.398 124.29 211.804 124.29 214.77V237.601C124.29 240.568 126.695 242.973 129.662 242.973C132.629 242.973 135.034 240.568 135.034 237.601V214.77Z"/>
+      <path d="M168.541 224.574C171.508 224.574 173.913 222.169 173.913 219.202C173.913 216.235 171.508 213.83 168.541 213.83H145.711C142.744 213.83 140.339 216.235 140.339 219.202C140.339 222.169 142.744 224.574 145.711 224.574H168.541Z"/>
+      <path d="M160.07 236.796C162.167 234.698 162.167 231.297 160.07 229.199C157.972 227.101 154.57 227.101 152.472 229.199L136.329 245.342C134.231 247.44 134.231 250.841 136.329 252.939C138.427 255.037 141.828 255.037 143.926 252.939L160.07 236.796Z"/>
+      <path d="M176.886 267.381C178.984 269.479 182.385 269.479 184.483 267.381C186.581 265.283 186.581 261.882 184.483 259.784L168.34 243.64C166.242 241.542 162.84 241.542 160.743 243.64C158.645 245.738 158.645 249.14 160.743 251.237L176.886 267.381Z"/>
+      <path d="M162.296 270.034C165.263 270.034 167.668 267.629 167.668 264.662C167.668 261.695 165.263 259.29 162.296 259.29H139.466C136.499 259.29 134.094 261.695 134.094 264.662C134.094 267.629 136.499 270.034 139.466 270.034H162.296Z"/>
+      <path d="M152.493 303.541C152.493 306.508 154.898 308.913 157.865 308.913C160.831 308.913 163.237 306.508 163.237 303.541V280.711C163.237 277.744 160.831 275.339 157.865 275.339C154.898 275.339 152.493 277.744 152.493 280.711V303.541Z"/>
+      <path d="M140.246 295.019C142.344 297.117 145.745 297.117 147.843 295.019C149.941 292.921 149.941 289.52 147.843 287.422L131.699 271.278C129.602 269.18 126.2 269.18 124.102 271.278C122.005 273.376 122.005 276.777 124.102 278.875L140.246 295.019Z"/>
+    </svg>
 
     <div class="container mh-container">
 
@@ -23,16 +43,11 @@
         <!-- ── LEFT: text ───────────────────────────── -->
         <div class="mh-content reveal-stagger">
 
-          <div class="mh-icon-wrap">
-            <svg class="mh-icon-svg" width="26" height="26" viewBox="0 0 24 24" fill="none"
-                 stroke="var(--nas-teal-600)" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M21 10c0 7-9 13-9 13S3 17 3 10a9 9 0 0118 0z"/>
-              <circle cx="12" cy="10" r="3"/>
-            </svg>
-            <div class="mh-icon-ping"></div>
+          <!-- Badge -->
+          <div class="mh-badge">
+            <span class="mh-badge-dot"></span>
+            {{ t('Smart Attendance Module', 'وحدة الحضور الذكي') }}
           </div>
-
-          <div class="mh-tag">{{ t('Module', 'وحدة') }}</div>
 
           <h1 class="mh-title">
             {{ t('Smart Mobile', 'الحضور الذكي') }}<br>
@@ -56,26 +71,44 @@
 
           <!-- CTAs -->
           <div class="mh-ctas">
-            <a routerLink="/" fragment="contact" class="btn btn-outline-dark">
+            <a routerLink="/" fragment="contact" class="btn btn-primary">
               {{ t('Book a Demo', 'احجز عرضاً') }}
             </a>
+            <a routerLink="/modules/smart-attendance" class="btn mh-ghost-btn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                   stroke-linecap="round" stroke-linejoin="round" width="15" height="15">
+                <circle cx="12" cy="12" r="10"/>
+                <path d="M10 8.5L15.5 12L10 15.5V8.5Z" fill="currentColor" stroke="none"/>
+              </svg>
+              {{ t('Watch Overview', 'شاهد نظرة عامة') }}
+            </a>
+          </div>
+
+          <!-- Trust strip -->
+          <div class="mh-trust">
+            <div class="mh-trust-stars" aria-hidden="true">
+              @for (s of [1,2,3,4,5]; track s) {
+                <svg viewBox="0 0 14 13" width="13" height="13" fill="#F79008"><path d="M7 0l1.76 3.57 3.94.57-2.85 2.78.67 3.92L7 8.77l-3.52 2.07.67-3.92L1.3 4.14l3.94-.57L7 0z"/></svg>
+              }
+            </div>
+            <span class="mh-trust-text">{{ t('Trusted by 500+ HR teams across MENA', 'موثوق من أكثر من ٥٠٠ فريق موارد بشرية') }}</span>
           </div>
 
           <!-- Live stats strip -->
           <div class="mh-stats">
             <div class="mh-stat">
               <span class="mh-stat-num">{{ checkedIn() }}</span>
-              <span class="mh-stat-label">{{ t('employees checked in today', 'موظف حاضر اليوم') }}</span>
+              <span class="mh-stat-label">{{ t('employees checked in today', 'موظف سجّل حضوره اليوم') }}</span>
             </div>
             <div class="mh-stat-sep"></div>
             <div class="mh-stat">
               <span class="mh-stat-num">99.8%</span>
-              <span class="mh-stat-label">{{ t('GPS accuracy', 'دقة الموقع') }}</span>
+              <span class="mh-stat-label">{{ t('GPS accuracy', 'دقة تحديد الموقع') }}</span>
             </div>
             <div class="mh-stat-sep"></div>
             <div class="mh-stat">
               <span class="mh-stat-num">0</span>
-              <span class="mh-stat-label">{{ t('hardware needed', 'أجهزة مطلوبة') }}</span>
+              <span class="mh-stat-label">{{ t('hardware needed', 'لا حاجة لأجهزة خارجية') }}</span>
             </div>
           </div>
 
@@ -101,6 +134,17 @@
             </div>
           </div>
 
+          <!-- Floating card: approval -->
+          <div class="fc fc-approval">
+            <div class="fc-icon-svg">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4CB4B5" stroke-width="2" stroke-linecap="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+            </div>
+            <div class="fc-info">
+              <span class="fc-val" style="font-size:12px;font-weight:700">{{ t('Approved','موافق') }}</span>
+              <span class="fc-lbl">{{ t('instantly by manager','فورياً من المدير') }}</span>
+            </div>
+          </div>
+
           <!-- Floating card: accuracy -->
           <div class="fc fc-gps">
             <div class="fc-icon-svg">
@@ -120,19 +164,6 @@
             <!-- Status bar -->
             <div class="sa-statusbar">
               <span class="sa-time">9:41</span>
-              <span class="sa-icons">
-                <svg width="12" height="10" viewBox="0 0 12 10" fill="rgba(255,255,255,0.6)">
-                  <rect x="0" y="4" width="2" height="6" rx="1"/>
-                  <rect x="3" y="2" width="2" height="8" rx="1"/>
-                  <rect x="6" y="0" width="2" height="10" rx="1"/>
-                  <rect x="9" y="1" width="2" height="9" rx="1" opacity="0.3"/>
-                </svg>
-                <svg width="14" height="10" viewBox="0 0 14 10" fill="none" stroke="rgba(255,255,255,0.6)" stroke-width="1.2">
-                  <rect x="0.5" y="1.5" width="11" height="7" rx="1.5"/>
-                  <rect x="12" y="3.5" width="1.5" height="3" rx="0.75" fill="rgba(255,255,255,0.6)" stroke="none"/>
-                  <rect x="1.5" y="2.5" width="7" height="5" rx="0.8" fill="rgba(255,255,255,0.6)" stroke="none"/>
-                </svg>
-              </span>
             </div>
 
             <!-- Screen content -->
