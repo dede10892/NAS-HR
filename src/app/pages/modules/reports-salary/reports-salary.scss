@@ -567,12 +567,7 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   padding: 3px 10px;
 }
 
-// ── Flow section ──────────────────────────────────────────
-
-.rs-flow-section {
-  background: #fff;
-  padding-block: 96px;
-}
+// ── Flow section (replaced by flow-diagram above) ─────────
 
 .rs-flow {
   display: flex;
@@ -794,6 +789,164 @@ $ease    : cubic-bezier(.22, 1, .36, 1);
   font-size: 11px;
   color: #6b7280;
   font-weight: 500;
+}
+
+// ── Lucien-style flow diagram ────────────────────────────
+
+.rs-flow-section {
+  background: #fff;
+  padding-block: 96px;
+}
+
+.flow-diagram {
+  position: relative;
+  display: grid;
+  grid-template-columns: 220px 1fr 220px;
+  align-items: center;
+  min-height: 360px;
+  margin-top: 64px;
+}
+
+// Central glow blob
+.flow-glow {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 480px;
+  height: 320px;
+  background: radial-gradient(ellipse, rgba(76,180,181,0.12) 0%, rgba(76,180,181,0.04) 45%, transparent 70%);
+  pointer-events: none;
+  filter: blur(16px);
+  z-index: 0;
+}
+
+// Left & right node columns
+.flow-col {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  position: relative;
+  z-index: 2;
+}
+
+.flow-col--right {
+  align-items: flex-end;
+}
+
+// Individual nodes (pill shape)
+.flow-node {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 10px 18px;
+  border-radius: 999px;
+  background: #f8fafb;
+  border: 1px solid rgba(76,180,181,0.25);
+  color: #0C2427;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  transition: background 0.2s, border-color 0.2s, box-shadow 0.2s;
+  cursor: default;
+  box-shadow: 0 2px 8px rgba(76,180,181,0.08);
+
+  svg { color: $teal; flex-shrink: 0; }
+
+  &:hover {
+    background: rgba(76,180,181,0.08);
+    border-color: rgba(76,180,181,0.45);
+    box-shadow: 0 4px 16px rgba(76,180,181,0.15);
+  }
+
+  &--out {
+    border-color: rgba(117,222,255,0.30);
+    svg { color: #3a9ab5; }
+
+    &:hover {
+      background: rgba(117,222,255,0.08);
+      border-color: rgba(117,222,255,0.50);
+      box-shadow: 0 4px 16px rgba(117,222,255,0.15);
+    }
+  }
+}
+
+// SVG curves overlay
+.flow-svg {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1;
+  overflow: visible;
+}
+
+.flow-path {
+  stroke: rgba(76,180,181,0.35);
+  stroke-width: 1.5;
+  stroke-dasharray: 4 3;
+  fill: none;
+  animation: flowDash 3s linear infinite;
+}
+
+@keyframes flowDash {
+  to { stroke-dashoffset: -28; }
+}
+
+.flow-dot {
+  fill: rgba(76,180,181,0.60);
+}
+
+// Center NAS HR box
+.flow-center {
+  position: relative;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  width: 120px;
+  height: 120px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #0C2427 0%, #0e3538 100%);
+  border: 1.5px solid rgba(76,180,181,0.45);
+  border-radius: 24px;
+  box-shadow:
+    0 0 0 8px rgba(76,180,181,0.07),
+    0 8px 40px rgba(76,180,181,0.22);
+}
+
+.flow-center-ring {
+  position: absolute;
+  inset: -12px;
+  border-radius: 30px;
+  border: 1px solid rgba(76,180,181,0.15);
+  animation: ringPulse 3s ease-in-out infinite;
+}
+
+@keyframes ringPulse {
+  0%, 100% { opacity: 0.4; transform: scale(1); }
+  50%       { opacity: 0.8; transform: scale(1.04); }
+}
+
+.flow-center-mark {
+  width: 88px;
+  height: auto;
+  display: block;
+}
+
+.flow-center-label { display: none; }
+
+@media (max-width: 800px) {
+  .flow-diagram {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    min-height: unset;
+  }
+  .flow-svg { display: none; }
+  .flow-col--right { align-items: flex-start; }
+  .flow-center { margin: 16px auto; }
 }
 
 // ── Metrics list (improved) ──────────────────────────────

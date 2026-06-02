@@ -1,530 +1,396 @@
 /* ═══════════════════════════════════════════════════
    SOLUTIONS BY INDUSTRY
-   Tab selector · Auto-cycle · Dark showcase card
-   Font: Fira Sans · #0C2427 · #26787B · #4CB4B5
+   Sticky copy · Sliding card track · Brand palette
+   Font: Fira Sans · #0C2427 · #4CB4B5 · #75DEFF
 ═══════════════════════════════════════════════════ */
 
 $dark    : #0C2427;
 $teal    : #4CB4B5;
-$teal-dk : #26787B;
-$ease    : cubic-bezier(.22, 1, .36, 1);
+$sky     : #75DEFF;
+$bg      : #f8fafb;
+$ease    : cubic-bezier(0.4, 0, 0.2, 1);
 
 // ── Section ───────────────────────────────────────
 .sbi-section {
-  background: #ffffff;
-  padding-block: 80px 88px;
-  font-family: 'Fira Sans', sans-serif;
+  background: $bg;
+  padding: 96px 0;
   position: relative;
-  overflow: hidden;
-
-  &::before {
-    content: '';
-    position: absolute;
-    top: 50%; right: -160px;
-    transform: translateY(-50%);
-    width: 580px; height: 580px;
-    background-image: url('/brand-mark.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    pointer-events: none;
-    opacity: 0.04;
-  }
+  z-index: 2;
+  font-family: var(--nas-font-en, 'Fira Sans'), sans-serif;
 }
 
-.sbi-inner {
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 24px;
+// ── Watermark ────────────────────────────────────
+.sbi-watermark {
+  position: absolute;
+  bottom: -60px;
+  right: -60px;
+  width: 500px;
+  height: 500px;
+  background-image: url('/brand-mark.svg');
+  background-repeat: no-repeat;
+  background-size: contain;
+  opacity: 0.04;
+  pointer-events: none;
+  z-index: 0;
 }
 
-// ── Head ──────────────────────────────────────────
-.sbi-head {
-  text-align: center;
-  margin-bottom: 40px;
-}
-
-.sbi-eyebrow {
-  display: inline-block;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.18em;
-  text-transform: uppercase;
-  color: $teal-dk;
-  margin-bottom: 10px;
-}
-
-.sbi-title {
-  font-size: clamp(24px, 2.6vw, 36px);
-  font-weight: 700;
-  color: $dark;
-  letter-spacing: -0.5px;
-  line-height: 1.15;
-  margin: 0 0 10px;
-}
-
-.sbi-sub {
-  font-size: 15px;
-  color: rgba(0,0,0,0.42);
-  line-height: 1.65;
-  margin: 0 auto;
-  max-width: 420px;
-}
-
-// ══ INDUSTRY TABS ═════════════════════════════════
-.sbi-tabs {
+// ── Layout ────────────────────────────────────────
+.sbi-layout {
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  gap: 8px;
-  margin-bottom: 28px;
+  grid-template-columns: 380px 1fr;
+  gap: 64px;
+  align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-.sbi-tab {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 8px;
-  padding: 13px 16px;
-  border-radius: 12px;
-  border: 1.5px solid rgba(0,0,0,0.07);
-  background: #fff;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 13px;
-  font-weight: 500;
-  color: rgba(0,0,0,0.48);
-  cursor: pointer;
-  overflow: hidden;
-  transition:
-    background 0.22s $ease,
-    border-color 0.22s $ease,
-    color 0.22s $ease,
-    box-shadow 0.22s $ease,
-    transform 0.18s $ease;
+// ── Copy (sticky panel) ───────────────────────────
+.sbi-copy {
+  position: sticky;
+  top: 80px;
+}
 
-  &:hover {
-    border-color: rgba($teal, 0.35);
-    color: $dark;
-    background: rgba($teal, 0.04);
-    transform: translateY(-2px);
-    box-shadow: 0 4px 16px rgba($teal, 0.10);
+// ── Headline ──────────────────────────────────────
+.sbi-headline {
+  font-size: clamp(22px, 2.2vw, 32px);
+  font-weight: 600;
+  color: $dark;
+  line-height: 1.3;
+  letter-spacing: -0.02em;
+  margin-bottom: 16px;
+  margin-top: 0;
+}
+
+// ── Description ───────────────────────────────────
+.sbi-desc {
+  font-size: 14px;
+  color: rgba(12, 36, 39, 0.55);
+  line-height: 1.7;
+  max-width: 340px;
+  margin: 0;
+}
+
+// ── Progress Dots ─────────────────────────────────
+.sbi-dots {
+  display: flex;
+  gap: 8px;
+  margin-top: 32px;
+  align-items: center;
+}
+
+.sbi-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(12, 36, 39, 0.15);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.3s $ease;
+  flex-shrink: 0;
+
+  &:focus-visible {
+    outline: 2px solid $teal;
+    outline-offset: 2px;
   }
 
   &--active {
-    background: $dark;
-    border-color: $dark;
-    color: #fff;
-    font-weight: 600;
-    box-shadow: 0 8px 24px rgba($dark, 0.18);
-    transform: translateY(-2px);
-
-    .sbi-tab-icon { color: $teal; }
+    width: 24px;
+    border-radius: 4px;
+    background: $teal;
   }
 }
 
-.sbi-tab-icon {
+// ── Active Label ──────────────────────────────────
+.sbi-active-label {
   display: flex;
   align-items: center;
-  color: rgba(0,0,0,0.30);
-  transition: color 0.22s;
-  flex-shrink: 0;
-
-  svg { width: 16px; height: 16px; }
+  gap: 12px;
+  margin-top: 16px;
 }
 
-.sbi-tab-label {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
-// Progress fill along the bottom of the active tab
-.sbi-tab-bar {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 3px;
-  background: $teal;
-  border-radius: 2px 2px 0 0;
-  transition: width 80ms linear;
-  min-width: 0;
-  pointer-events: none;
-}
-
-[dir="rtl"] .sbi-tab-bar {
-  left: auto;
-  right: 0;
-}
-
-// ══ SHOWCASE CARD ═════════════════════════════════
-.sbi-showcase {
-  background: #fff;
-  border-radius: 20px;
-  border: 1px solid rgba(0,0,0,0.07);
-  overflow: hidden;
-  box-shadow:
-    0 2px 4px rgba(0,0,0,0.04),
-    0 12px 40px rgba(0,0,0,0.08);
-  transition: box-shadow 0.22s $ease;
-
-  &:hover {
-    box-shadow:
-      0 2px 4px rgba(0,0,0,0.04),
-      0 20px 60px rgba(0,0,0,0.12);
-  }
-}
-
-// ── Banner ────────────────────────────────────────
-.sbi-banner {
-  position: relative;
-  overflow: hidden;
-  padding: 32px 36px;
-  display: flex;
-  align-items: center;
-  gap: 24px;
-  min-height: 120px;
-}
-
-.sbi-banner-bg {
-  position: absolute;
-  inset: 0;
-  background: linear-gradient(135deg, $dark 0%, #143338 55%, #1a4548 100%);
-
-  &::after {
-    content: '';
-    position: absolute;
-    top: -40%; right: -5%;
-    width: 340px; height: 340px;
-    border-radius: 50%;
-    background: radial-gradient(circle, rgba($teal, 0.20) 0%, transparent 65%);
-  }
-}
-
-.sbi-banner-num {
-  position: absolute;
-  right: 28px; bottom: -16px;
-  font-size: 110px;
-  font-weight: 900;
-  color: rgba(255,255,255,0.04);
-  line-height: 1;
-  letter-spacing: -4px;
-  pointer-events: none;
-  user-select: none;
-}
-
-.sbi-banner-content {
-  position: relative;
-  z-index: 1;
-  display: flex;
-  align-items: center;
-  gap: 20px;
-  width: 100%;
-}
-
-.sbi-banner-icon {
-  width: 52px; height: 52px;
-  border-radius: 14px;
-  background: rgba($teal, 0.16);
-  border: 1px solid rgba($teal, 0.28);
-  color: $teal;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-
-  svg { width: 24px; height: 24px; }
-}
-
-.sbi-banner-text { flex: 1; min-width: 0; }
-
-.sbi-banner-name {
-  font-size: 20px;
-  font-weight: 700;
-  color: #fff;
-  letter-spacing: -0.3px;
-  margin: 0 0 4px;
-}
-
-.sbi-banner-tagline {
-  font-size: 13px;
-  color: rgba(255,255,255,0.45);
-  margin: 0;
-  line-height: 1.5;
-}
-
-.sbi-banner-metrics {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  flex-shrink: 0;
-  background: rgba(255,255,255,0.06);
-  border: 1px solid rgba(255,255,255,0.10);
-  border-radius: 14px;
-  padding: 14px 20px;
-}
-
-.sbi-metric {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 2px;
-}
-
-.sbi-metric-n {
-  font-size: 26px;
-  font-weight: 800;
-  color: rgba(255,255,255,0.75);
-  line-height: 1;
-
-  &.teal { color: $teal; }
-}
-
-.sbi-metric-l {
-  font-size: 9px;
-  font-weight: 600;
-  color: rgba(255,255,255,0.30);
-  text-transform: uppercase;
-  letter-spacing: 0.1em;
-  white-space: nowrap;
-}
-
-.sbi-metric-sep {
-  width: 1px; height: 30px;
-  background: rgba(255,255,255,0.12);
-}
-
-// ── Body grid ─────────────────────────────────────
-.sbi-body {
-  display: grid;
-  grid-template-columns: 1fr 1px 1fr;
-  align-items: start;
-  animation: sbiBodyIn 0.28s $ease both;
-}
-
-@keyframes sbiBodyIn {
-  from { opacity: 0; transform: translateY(10px); }
-  to   { opacity: 1; transform: translateY(0); }
-}
-
-.sbi-divider {
-  background: rgba(0,0,0,0.06);
-  align-self: stretch;
-}
-
-// ── Column ────────────────────────────────────────
-.sbi-column { padding: 24px 28px 28px; }
-
-.challenge-col { background: #fdfefe; }
-.solution-col  { background: #f9fefe; }
-
-.sbi-col-header {
-  display: flex;
-  align-items: center;
-  gap: 9px;
+.sbi-active-num {
   font-size: 11px;
   font-weight: 700;
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  margin-bottom: 16px;
-  padding-bottom: 14px;
-  border-bottom: 1px solid rgba(0,0,0,0.06);
+  color: $teal;
+  letter-spacing: 0.1em;
 }
 
-.sbi-col-badge {
-  width: 22px; height: 22px;
-  border-radius: 6px;
+.sbi-active-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: $dark;
+}
+
+// ── Navigation Buttons ────────────────────────────
+.sbi-nav {
+  display: flex;
+  gap: 8px;
+  margin-top: 20px;
+}
+
+.sbi-nav-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  border: 1px solid rgba(12, 36, 39, 0.12);
+  background: #ffffff;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s $ease;
+  color: $dark;
+  padding: 0;
+  flex-shrink: 0;
+
+  svg {
+    width: 16px;
+    height: 16px;
+  }
+
+  &:hover {
+    background: $teal;
+    color: #ffffff;
+    border-color: $teal;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $teal;
+    outline-offset: 2px;
+  }
+}
+
+// ── CTA ───────────────────────────────────────────
+.sbi-cta {
+  margin-top: 28px;
+  display: inline-flex;
+}
+
+// ── Track Wrapper ─────────────────────────────────
+.sbi-track-wrap {
+  overflow: hidden;
+  padding: 20px 0;
+}
+
+// ── Track ─────────────────────────────────────────
+.sbi-track {
+  display: flex;
+  gap: 20px;
+  transition: transform 0.65s cubic-bezier(0.4, 0, 0.2, 1);
+  will-change: transform;
+}
+
+// ── Card ──────────────────────────────────────────
+.sbi-card {
+  flex-shrink: 0;
+  width: 300px;
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid rgba(12, 36, 39, 0.07);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  cursor: pointer;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  opacity: 0.5;
+  transform: scale(0.93);
+  filter: blur(1.5px);
+
+  &--active {
+    opacity: 1;
+    transform: scale(1);
+    filter: none;
+    box-shadow: 0 12px 48px rgba(12, 36, 39, 0.12);
+    border-color: rgba(76, 180, 181, 0.25);
+  }
+
+  &--prev {
+    opacity: 0.35;
+    transform: scale(0.88);
+    filter: blur(1.5px);
+  }
+}
+
+// ── Card Header ───────────────────────────────────
+.sbi-card-header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 12px 14px;
+  border-radius: 12px;
+  border: 1px solid;
+}
+
+// ── Card Icon ─────────────────────────────────────
+.sbi-card-icon {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
   display: flex;
   align-items: center;
   justify-content: center;
 
-  svg { width: 13px; height: 13px; }
-
-  &.amber-badge {
-    background: rgba(245,158,11,0.12);
-    color: #d97706;
-    ~ span { color: #b45309; }
-  }
-
-  &.teal-badge {
-    background: rgba($teal, 0.10);
-    color: $teal-dk;
-    ~ span { color: $teal-dk; }
+  svg {
+    width: 20px;
+    height: 20px;
   }
 }
 
-// ── Items ─────────────────────────────────────────
-.sbi-items {
+// ── Card Industry Name ────────────────────────────
+.sbi-card-industry {
+  font-size: 13px;
+  font-weight: 600;
+}
+
+// ── Card Challenge ────────────────────────────────
+.sbi-card-challenge {
   display: flex;
   flex-direction: column;
-  gap: 7px;
+  gap: 4px;
 }
 
-@keyframes slideUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to   { opacity: 1; transform: translateY(0); }
+.sbi-card-challenge-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(12, 36, 39, 0.35);
 }
 
-.sbi-item {
-  display: flex;
-  align-items: flex-start;
-  gap: 10px;
-  padding: 11px 13px;
-  border-radius: 10px;
-  border: 1px solid transparent;
-  animation: slideUp 0.38s $ease both;
-  transition: background 0.18s $ease, border-color 0.18s, transform 0.18s $ease;
-  cursor: default;
-
-  &:hover { transform: translateX(3px); }
-}
-
-.ch-item {
-  background: rgba(0,0,0,0.02);
-  border-color: rgba(0,0,0,0.04);
-
-  &:hover {
-    background: rgba(245,158,11,0.05);
-    border-color: rgba(245,158,11,0.18);
-  }
-}
-
-.sbi-item-n {
-  font-size: 10px;
-  font-weight: 800;
-  letter-spacing: 0.04em;
-  flex-shrink: 0;
-  padding-top: 3px;
-  min-width: 18px;
-
-  &.amber-n { color: #d97706; }
-}
-
-.sl-item {
-  background: rgba($teal, 0.03);
-  border-color: rgba($teal, 0.06);
-
-  &:hover {
-    background: rgba($teal, 0.08);
-    border-color: rgba($teal, 0.20);
-  }
-}
-
-.sbi-check {
-  flex-shrink: 0;
-  width: 6px; height: 6px;
-  border-radius: 50%;
-  background: $teal;
-  margin-top: 6px;
-}
-
-.sbi-item-p {
-  font-size: 12.5px;
-  color: rgba(0,0,0,0.60);
-  line-height: 1.6;
+.sbi-card-challenge-text {
+  font-size: 13px;
+  color: $dark;
+  line-height: 1.5;
+  font-weight: 500;
   margin: 0;
 }
 
-// ── CTA row ───────────────────────────────────────
-.sbi-cta-row {
-  padding: 14px 24px 18px;
-  border-top: 1px solid rgba(0,0,0,0.05);
+// ── Card Helps ────────────────────────────────────
+.sbi-card-helps {
   display: flex;
-  justify-content: flex-end;
-  background: #fff;
-  animation: sbiBodyIn 0.28s $ease both;
-  animation-delay: 0.12s;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.sbi-cta-link {
+.sbi-card-helps-label {
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: rgba(12, 36, 39, 0.35);
+}
+
+.sbi-card-helps-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    color: rgba(12, 36, 39, 0.65);
+  }
+}
+
+// ── Card Link ─────────────────────────────────────
+.sbi-card-link {
   display: inline-flex;
   align-items: center;
-  gap: 8px;
-  font-family: 'Fira Sans', sans-serif;
-  font-size: 13px;
+  gap: 6px;
+  font-size: 12px;
   font-weight: 600;
-  color: $teal-dk;
   text-decoration: none;
-  padding: 9px 18px;
-  border-radius: 8px;
-  border: 1.5px solid rgba($teal, 0.30);
-  transition: all 0.22s $ease;
+  margin-top: auto;
+  transition: opacity 0.2s $ease;
 
   svg {
-    width: 14px; height: 14px;
-    transition: transform 0.22s $ease;
+    width: 14px;
+    height: 14px;
   }
 
   &:hover {
-    background: $dark;
-    border-color: $dark;
-    color: #fff;
+    opacity: 0.8;
+  }
+}
 
-    svg { transform: translateX(3px); }
+// ── Reveal animation ──────────────────────────────
+.sbi-copy {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s $ease, transform 0.6s $ease;
+
+  &.is-visible {
+    opacity: 1;
+    transform: translateY(0);
   }
 }
 
 // ══ RESPONSIVE ════════════════════════════════════
-@media (max-width: 860px) {
-  .sbi-banner-metrics { display: none; }
-  .sbi-banner-num     { display: none; }
-  .sbi-banner         { padding: 24px 24px; }
-}
+@media (max-width: 900px) {
+  .sbi-layout {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
 
-@media (max-width: 720px) {
-  // Switch to horizontal scroll on narrow viewports
-  .sbi-tabs {
-    grid-template-columns: repeat(5, auto);
+  .sbi-copy {
+    position: static;
+    transform: none;
+    opacity: 1;
+
+    &.is-visible {
+      transform: none;
+    }
+  }
+
+  .sbi-track-wrap {
     overflow-x: auto;
-    padding-bottom: 4px;
+    -webkit-overflow-scrolling: touch;
+    padding: 20px 0;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
-    &::-webkit-scrollbar { display: none; }
+    &::-webkit-scrollbar {
+      display: none;
+    }
   }
 
-  .sbi-tab {
-    padding: 10px 14px;
-    font-size: 12px;
-    min-width: 88px;
-  }
-}
-
-@media (max-width: 680px) {
-  .sbi-body {
-    grid-template-columns: 1fr;
+  .sbi-track {
+    padding-left: 20px;
+    padding-right: 20px;
   }
 
-  .sbi-divider {
-    height: 1px;
-    width: auto;
-    background: rgba(0,0,0,0.06);
+  .sbi-card {
+    width: 280px;
   }
-
-  .sbi-column { padding: 20px 20px 24px; }
-}
-
-@media (max-width: 480px) {
-  .sbi-section { padding-block: 56px 64px; }
-
-  .sbi-tab {
-    min-width: 64px;
-    padding: 10px 12px;
-    gap: 0;
-  }
-
-  // Icon only on very small screens
-  .sbi-tab-label {
-    display: none;
-  }
-
-  .sbi-tab-icon svg {
-    width: 20px;
-    height: 20px;
-  }
-
-  .sbi-cta-row { justify-content: center; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .sbi-item, .sbi-body, .sbi-cta-row { animation: none; transition: none; }
-  .sbi-tab, .sbi-tab-bar, .sbi-cta-link { transition: none; }
+  .sbi-track {
+    transition: none;
+  }
+
+  .sbi-card {
+    transition: none;
+    filter: none;
+  }
+
+  .sbi-dot,
+  .sbi-nav-btn,
+  .sbi-card-link {
+    transition: none;
+  }
+
+  .sbi-copy {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
 }

@@ -12,6 +12,7 @@ import { MobileEssComponent } from '../../sections/mobile-ess/mobile-ess';
 import { ReviewsComponent } from '../../sections/reviews/reviews';
 import { IndustriesHubComponent } from '../../sections/industries-hub/industries-hub';
 import { WorkflowConnectedComponent } from '../../sections/workflow-connected/workflow-connected';
+import { SolutionsByIndustryComponent } from '../../sections/solutions-by-industry/solutions-by-industry';
 
 @Component({
   selector: 'app-home-page',
@@ -20,6 +21,7 @@ import { WorkflowConnectedComponent } from '../../sections/workflow-connected/wo
     HeroComponent,
     TrustedByComponent,
     FeatureStepsComponent,
+    SolutionsByIndustryComponent,
     IndustriesHubComponent,
     WorkflowConnectedComponent,
     DashboardComponent,

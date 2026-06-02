@@ -1,10 +1,11 @@
 import { Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { IndustriesComponent } from '../../../sections/industries/industries';
+import { CountUpDirective } from '../../../directives/count-up.directive';
 
 @Component({
   selector: 'app-solutions-overview',
-  imports: [RouterLink, IndustriesComponent],
+  imports: [RouterLink, IndustriesComponent, CountUpDirective],
   templateUrl: './solutions-overview.html',
   styleUrl: './solutions-overview.scss',
 })

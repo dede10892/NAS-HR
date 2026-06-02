@@ -1,147 +1,93 @@
-<section class="sbi-section reveal">
-  <div class="sbi-inner">
+<section class="sbi-section">
+  <!-- Background brand-mark watermark -->
+  <div class="sbi-watermark" aria-hidden="true"></div>
 
-    <!-- ── Head ── -->
-    <div class="sbi-head">
-      <span class="sbi-eyebrow">{{ t('Solutions', 'الحلول') }}</span>
-      <h2 class="sbi-title">{{ t('Solutions by Industry', 'حلول حسب القطاع') }}</h2>
-      <p class="sbi-sub">{{ t('Purpose-built for the industries that never stop.', 'مصمم للقطاعات التي لا تتوقف.') }}</p>
-    </div>
+  <div class="container sbi-layout">
 
-    <!-- ── Industry Tabs ── -->
-    <div class="sbi-tabs" (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
-      @for (ind of industries; track ind.id; let i = $index) {
-        <button
-          class="sbi-tab"
-          [class.sbi-tab--active]="active() === i"
-          (click)="select(i)"
-          [attr.aria-selected]="active() === i"
-          [attr.aria-label]="t(ind.name, ind.nameAr)">
+    <!-- LEFT: sticky copy -->
+    <div class="sbi-copy">
+      <span class="eyebrow">Solutions by Industry</span>
+      <h2 class="sbi-headline">One intelligent people system, adapted to the way your industry works.</h2>
+      <p class="sbi-desc">NAS HR adapts to every workforce model — helping teams manage people, attendance, approvals, learning, and payroll-ready data with ease.</p>
 
-          <span class="sbi-tab-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
-              @for (d of iconPaths[ind.id]; track d) {
-                <path [attr.d]="d"/>
-              }
-            </svg>
-          </span>
-
-          <span class="sbi-tab-label">{{ t(ind.shortName, ind.shortNameAr) }}</span>
-
-          <!-- Progress bar fills along the bottom of the active tab -->
-          @if (active() === i) {
-            <span class="sbi-tab-bar" [style.width.%]="progress()"></span>
-          }
-        </button>
-      }
-    </div>
-
-    <!-- ── Showcase Card ── -->
-    <div class="sbi-showcase" (mouseenter)="pauseAuto()" (mouseleave)="resumeAuto()">
-
-      <!-- Gradient hero banner -->
-      <div class="sbi-banner">
-        <div class="sbi-banner-bg"></div>
-        <div class="sbi-banner-num">{{ (active() + 1).toString().padStart(2,'0') }}</div>
-        <div class="sbi-banner-content">
-
-          <div class="sbi-banner-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                 stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-              @for (d of iconPaths[current.id]; track d) {
-                <path [attr.d]="d"/>
-              }
-            </svg>
-          </div>
-
-          <div class="sbi-banner-text">
-            <h3 class="sbi-banner-name">{{ t(current.name, current.nameAr) }}</h3>
-            <p class="sbi-banner-tagline">{{ t(current.tagline, current.taglineAr) }}</p>
-          </div>
-
-          <div class="sbi-banner-metrics">
-            <div class="sbi-metric">
-              <span class="sbi-metric-n">{{ current.challenges.length }}</span>
-              <span class="sbi-metric-l">{{ t('Pain Points', 'تحديات') }}</span>
-            </div>
-            <div class="sbi-metric-sep"></div>
-            <div class="sbi-metric">
-              <span class="sbi-metric-n teal">{{ current.solutions.length }}</span>
-              <span class="sbi-metric-l">{{ t('Solutions', 'حلول') }}</span>
-            </div>
-          </div>
-
-        </div>
+      <!-- Pagination dots -->
+      <div class="sbi-dots">
+        @for (ind of industries; track ind.name; let i = $index) {
+          <button class="sbi-dot" [class.sbi-dot--active]="activeIndex() === i" (click)="setActive(i)" [attr.aria-label]="ind.name"></button>
+        }
       </div>
 
-      <!-- Content grid + CTA (fade in/out on industry switch) -->
-      @if (contentReady()) {
-        <div class="sbi-body">
+      <!-- Active industry name -->
+      <div class="sbi-active-label">
+        <span class="sbi-active-num">{{ (activeIndex() + 1).toString().padStart(2, '0') }}</span>
+        <span class="sbi-active-name">{{ industries[activeIndex()].name }}</span>
+      </div>
 
-          <!-- Challenges column -->
-          <div class="sbi-column challenge-col">
-            <div class="sbi-col-header">
-              <div class="sbi-col-badge amber-badge">
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
-                     stroke-width="1.8" stroke-linecap="round">
-                  <circle cx="7" cy="7" r="5.5"/>
-                  <line x1="7" y1="4.5" x2="7" y2="7.5"/>
-                  <circle cx="7" cy="9.5" r=".4" fill="currentColor"/>
+      <!-- Nav arrows -->
+      <div class="sbi-nav">
+        <button class="sbi-nav-btn" (click)="prev()" aria-label="Previous">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18"><path d="M15 18l-6-6 6-6"/></svg>
+        </button>
+        <button class="sbi-nav-btn" (click)="next()" aria-label="Next">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="18" height="18"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
+      </div>
+
+      <a routerLink="/solutions" class="btn btn-primary sbi-cta">Explore Solutions</a>
+    </div>
+
+    <!-- RIGHT: cards track -->
+    <div class="sbi-track-wrap">
+      <div class="sbi-track" [style.transform]="'translateX(calc(-' + activeIndex() + ' * (320px + 20px)))'">
+        @for (ind of industries; track ind.name; let i = $index) {
+          <div class="sbi-card"
+               [class.sbi-card--active]="activeIndex() === i"
+               [class.sbi-card--prev]="activeIndex() > i"
+               (click)="setActive(i)">
+
+            <!-- Card top: icon + industry -->
+            <div class="sbi-card-header" [style.background]="ind.color + '14'" [style.border-color]="ind.color + '33'">
+              <div class="sbi-card-icon" [style.color]="ind.color">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" width="22" height="22">
+                  @for (p of ind.iconPaths; track p) {
+                    <path [attr.d]="p"/>
+                  }
                 </svg>
               </div>
-              <span>{{ t('Challenges', 'التحديات') }}</span>
+              <span class="sbi-card-industry" [style.color]="ind.color">{{ ind.name }}</span>
             </div>
-            <div class="sbi-items">
-              @for (item of lang === 'ar' ? current.challengesAr : current.challenges; track $index; let i = $index) {
-                <div class="sbi-item ch-item" [style.animation-delay]="(i * 60) + 'ms'">
-                  <span class="sbi-item-n amber-n">{{ (i+1).toString().padStart(2,'0') }}</span>
-                  <p class="sbi-item-p">{{ item }}</p>
-                </div>
-              }
+
+            <!-- Challenge -->
+            <div class="sbi-card-challenge">
+              <span class="sbi-card-challenge-label">Challenge</span>
+              <p class="sbi-card-challenge-text">{{ ind.challenge }}</p>
             </div>
+
+            <!-- NAS HR Helps With -->
+            <div class="sbi-card-helps">
+              <span class="sbi-card-helps-label">NAS HR Helps With</span>
+              <ul class="sbi-card-helps-list">
+                @for (h of ind.helps; track h) {
+                  <li>
+                    <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="11" height="11" [style.color]="ind.color">
+                      <path d="M3 8l3.5 3.5L13 4.5"/>
+                    </svg>
+                    {{ h }}
+                  </li>
+                }
+              </ul>
+            </div>
+
+            <!-- Bottom CTA -->
+            <a routerLink="/solutions" class="sbi-card-link" [style.color]="ind.color">
+              Learn more
+              <svg viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" width="13" height="13"><path d="M3 8h10M9 4l4 4-4 4"/></svg>
+            </a>
+
           </div>
-
-          <!-- Column divider -->
-          <div class="sbi-divider" aria-hidden="true"></div>
-
-          <!-- Solutions column -->
-          <div class="sbi-column solution-col">
-            <div class="sbi-col-header">
-              <div class="sbi-col-badge teal-badge">
-                <svg viewBox="0 0 14 14" fill="none" stroke="currentColor"
-                     stroke-width="1.8" stroke-linecap="round">
-                  <circle cx="7" cy="7" r="5.5"/>
-                  <polyline points="4.5 7 6 8.5 9.5 5"/>
-                </svg>
-              </div>
-              <span>{{ t('NAS HR Helps With', 'كيف تساعدك NAS HR') }}</span>
-            </div>
-            <div class="sbi-items">
-              @for (item of lang === 'ar' ? current.solutionsAr : current.solutions; track $index; let i = $index) {
-                <div class="sbi-item sl-item" [style.animation-delay]="(i * 60 + 45) + 'ms'">
-                  <span class="sbi-check"></span>
-                  <p class="sbi-item-p">{{ item }}</p>
-                </div>
-              }
-            </div>
-          </div>
-
-        </div>
-
-        <!-- CTA row -->
-        <div class="sbi-cta-row">
-          <a [routerLink]="current.route" class="sbi-cta-link">
-            <span>{{ t('Explore Full Solution', 'استكشاف الحل الكامل') }}</span>
-            <svg viewBox="0 0 16 16" fill="none" stroke="currentColor"
-                 stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M3 8h10M9 4l4 4-4 4"/>
-            </svg>
-          </a>
-        </div>
-      }
-
-    </div><!-- /sbi-showcase -->
+        }
+      </div>
+    </div>
 
   </div>
 </section>

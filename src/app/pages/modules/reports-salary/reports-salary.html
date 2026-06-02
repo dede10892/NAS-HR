@@ -38,7 +38,7 @@
             </div>
             <span class="rs-sc-url">nashr.app/reports</span>
           </div>
-          <img src="/attendence-reports/attendance report .jpeg" alt="Reports" class="rs-sc-img"/>
+          <img src="/attendence-reports/HR dashboard.png" alt="Reports" class="rs-sc-img"/>
         </div>
 
         <!-- Floating badges -->
@@ -79,45 +79,70 @@
         <h2 class="section-title">From raw data to payroll-ready in seconds.</h2>
       </div>
 
-      <div class="rs-flow-cards reveal-stagger">
-        @for (step of flowSteps; track step.num; let i = $index; let last = $last) {
-          <div class="rs-flow-card">
+      <div class="flow-diagram reveal-up" style="--d:.12s">
 
-            <!-- Front (default) -->
-            <div class="rs-flow-card-front">
-              <div class="rs-flow-num-badge">{{ step.num }}</div>
-              <div class="rs-flow-card-icon">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                     stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"
-                     width="28" height="28">
-                  <path [attr.d]="step.icon"/>
-                </svg>
-              </div>
-              <h4 class="rs-flow-card-title">{{ step.title }}</h4>
-              <span class="rs-flow-card-hint">Hover to see more</span>
+        <!-- Central glow -->
+        <div class="flow-glow" aria-hidden="true"></div>
+
+        <!-- Left: inputs -->
+        <div class="flow-col flow-col--left">
+          @for (n of flowInputs; track n.label) {
+            <div class="flow-node">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="14" height="14" aria-hidden="true">
+                <path [attr.d]="n.icon"/>
+              </svg>
+              <span>{{ n.label }}</span>
             </div>
+          }
+        </div>
 
-            <!-- Hover overlay -->
-            <div class="rs-flow-card-hover">
-              <img [src]="step.screenshot" [alt]="step.title" class="rs-flow-card-img"/>
-              <div class="rs-flow-card-overlay">
-                <span class="rs-flow-card-num-sm">{{ step.num }}</span>
-                <h4 class="rs-flow-card-title-sm">{{ step.title }}</h4>
-                <p class="rs-flow-card-desc">{{ step.desc }}</p>
-              </div>
+        <!-- SVG curves overlay -->
+        <svg class="flow-svg" viewBox="0 0 1000 360" preserveAspectRatio="none"
+             fill="none" aria-hidden="true">
+          <!-- Left → center curves -->
+          <path d="M 195,45  C 380,45  490,175 490,180"  class="flow-path"/>
+          <path d="M 195,125 C 380,125 490,175 490,180" class="flow-path"/>
+          <path d="M 195,235 C 380,235 490,185 490,180" class="flow-path"/>
+          <path d="M 195,315 C 380,315 490,185 490,180" class="flow-path"/>
+          <!-- Center → right curves -->
+          <path d="M 510,180 C 620,175 805,45  805,45"  class="flow-path"/>
+          <path d="M 510,180 C 620,175 805,125 805,125" class="flow-path"/>
+          <path d="M 510,180 C 620,185 805,235 805,235" class="flow-path"/>
+          <path d="M 510,180 C 620,185 805,315 805,315" class="flow-path"/>
+          <!-- Endpoint dots -->
+          <circle cx="195" cy="45"  r="3" class="flow-dot"/>
+          <circle cx="195" cy="125" r="3" class="flow-dot"/>
+          <circle cx="195" cy="235" r="3" class="flow-dot"/>
+          <circle cx="195" cy="315" r="3" class="flow-dot"/>
+          <circle cx="805" cy="45"  r="3" class="flow-dot"/>
+          <circle cx="805" cy="125" r="3" class="flow-dot"/>
+          <circle cx="805" cy="235" r="3" class="flow-dot"/>
+          <circle cx="805" cy="315" r="3" class="flow-dot"/>
+        </svg>
+
+        <!-- Center: NAS HR engine -->
+        <div class="flow-center">
+          <div class="flow-center-ring" aria-hidden="true"></div>
+          <img src="/logo-light.svg" class="flow-center-mark" alt="NAS HR"/>
+          <span class="flow-center-label">NAS HR</span>
+        </div>
+
+        <!-- Right: outputs -->
+        <div class="flow-col flow-col--right">
+          @for (n of flowOutputs; track n.label) {
+            <div class="flow-node flow-node--out">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                   stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"
+                   width="14" height="14" aria-hidden="true">
+                <path [attr.d]="n.icon"/>
+              </svg>
+              <span>{{ n.label }}</span>
             </div>
+          }
+        </div>
 
-            @if (!last) {
-              <div class="rs-flow-connector" aria-hidden="true">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"
-                     stroke-linecap="round" stroke-linejoin="round" width="16" height="16">
-                  <path d="M5 12h14M12 5l7 7-7 7"/>
-                </svg>
-              </div>
-            }
-
-          </div>
-        }
       </div>
     </div>
   </section>

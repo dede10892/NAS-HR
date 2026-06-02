@@ -79,7 +79,7 @@
     <div class="container sol-stats-inner">
       @for (s of platformStats; track s.lbl; let i = $index) {
         <div class="sol-stat-block">
-          <span class="sol-stat-val">{{ s.val }}</span>
+          <span class="sol-stat-val" [appCountUp]="s.val">{{ s.val }}</span>
           <span class="sol-stat-lbl">{{ s.lbl }}</span>
         </div>
         @if (i < platformStats.length - 1) {

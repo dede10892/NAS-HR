@@ -38,6 +38,8 @@
 
         <!-- Left: Copy -->
         <div class="ess-copy">
+          <span class="dv-tag">For Employees</span>
+          <h3 class="dv-panel-title">HR in Your Pocket</h3>
           <p class="ess-sub">
             Give every employee instant access to their HR data — anywhere, anytime.
           </p>
@@ -148,44 +150,12 @@
             <a href="#contact" class="btn btn-primary dv-cta">Request a Demo →</a>
           </div>
           <div class="dv-panel-mockup">
-            <div class="dv-mock-shell">
-              <div class="dv-topbar">
+            <div class="dv-ss-frame">
+              <div class="dv-ss-chrome">
                 <span class="dv-dot r"></span><span class="dv-dot y"></span><span class="dv-dot g"></span>
-                <span class="dv-url">nashr.app/admin</span>
+                <span class="dv-url">nashr.app/employees</span>
               </div>
-              <div class="dv-dash-body">
-                <div class="dv-dash-sidebar">
-                  <div class="dv-sidebar-logo">N</div>
-                  @for (item of ['Dashboard','Employees','Payroll','Attendance','Reports']; track item) {
-                    <div class="dv-sidebar-item" [class.active]="item === 'Dashboard'">{{ item }}</div>
-                  }
-                </div>
-                <div class="dv-dash-main">
-                  <div class="dv-greeting">Good morning, Sarah 👋</div>
-                  <div class="dv-kpi-row">
-                    <div class="dv-kpi"><div class="dv-kpi-v">1,248</div><div class="dv-kpi-l">Employees</div></div>
-                    <div class="dv-kpi dv-kpi-sky"><div class="dv-kpi-v">98.2%</div><div class="dv-kpi-l">Attendance</div></div>
-                    <div class="dv-kpi dv-kpi-coral"><div class="dv-kpi-v">2.4M</div><div class="dv-kpi-l">Payroll</div></div>
-                  </div>
-                  <div class="dv-chart">
-                    <div class="dv-chart-label">Headcount Trend</div>
-                    <div class="dv-chart-bars">
-                      @for (h of [50,65,58,80,72,90,84]; track h) {
-                        <div class="dv-bar" [style.height.%]="h"></div>
-                      }
-                    </div>
-                  </div>
-                  <div class="dv-emp-list">
-                    @for (e of [{n:'Sarah Al-Mansouri',d:'HR Director',s:'Active'},{n:'Ahmed Al-Rashidi',d:'Operations',s:'On Leave'},{n:'Fatima Al-Zahrawi',d:'Finance',s:'Active'}]; track e.n) {
-                      <div class="dv-emp-row">
-                        <div class="dv-emp-av">{{ e.n[0] }}</div>
-                        <div class="dv-emp-info"><div class="dv-emp-name">{{ e.n }}</div><div class="dv-emp-dept">{{ e.d }}</div></div>
-                        <span class="dv-emp-status" [class.active]="e.s === 'Active'">{{ e.s }}</span>
-                      </div>
-                    }
-                  </div>
-                </div>
-              </div>
+              <img src="/attendence-reports/ss.png" alt="NAS HR Dashboard" class="dv-ss-img"/>
             </div>
           </div>
         </div>
